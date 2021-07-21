@@ -13,9 +13,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-      Schema::disableForeignKeyConstraints(); // For Forgen Key Checks Disable
+      Schema::disableForeignKeyConstraints();
         Schema::create('users', function (Blueprint $table) {
+          $table->engine = 'InnoDB';
+            // $table->increments('id');
             $table->id();
+            // $table->ipAddress('visitor');
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('phone')->nullable(); // For mobile Phone
@@ -23,10 +26,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('type', ['user', 'admin'])->default('user');
+            $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });
-        Schema::enableForeignKeyConstraints(); // For Forgen Key Checks Enable
+      Schema::enableForeignKeyConstraints();
     }
 
     /**

@@ -45,6 +45,7 @@ return [
     'country-code'        => 'Country Code',
     'show_website'        => 'Show On Website',
     'status'              => 'Status',
+    'status_choose'       => 'Choose Status',
     'show'                => 'Show',
     'hide'                => 'Hide',
     'hidden'              => 'Hide',

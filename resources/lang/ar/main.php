@@ -45,6 +45,7 @@ return [
     'country-code'                      => 'كود الدولة',
     'show_website'                      => 'عرض على الموقع',
     'status'                            => 'الحالة',
+    'status_choose'                     => 'اختر الخالة',
     'show'                              => 'عرض',
     'hide'                              => 'اخفاء',
     'hidden'                            => 'اخفاء',

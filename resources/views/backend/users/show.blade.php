@@ -64,7 +64,12 @@
                             {{ trans( $show->phone) }}
                             <br><hr>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <strong>{{trans('main.active')}} : </strong>
+                            {{ trans( $show->active) }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
                             <strong>{{trans('main.image')}} : </strong>
                             <img style="width: 200px; height: 150px;" src="{{ ShowImage($show->image) }}" alt="">
                             <br><hr>

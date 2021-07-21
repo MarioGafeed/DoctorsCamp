@@ -28,4 +28,33 @@ Route::middleware(\App\Http\Middleware\LangMiddleware::class)->group(function ()
     Route::resource('permissions', 'PermissionController');
     Route::post('permissions/multi_delete', 'PermissionController@multi_delete')->name('permissions.multi_delete');
 
+    // Posts
+    Route::resource('posts', 'PostController');
+    Route::post('posts/multi_delete', 'PostController@multi_delete')->name('posts.multi_delete');
+
+    // Video Posts
+    Route::resource('vposts', 'VpostController');
+    Route::post('vposts/multi_delete', 'VpostController@multi_delete')->name('vposts.multi_delete');
+
+    // Post taqs_
+    Route::resource('ptaqs', 'PtaqController');
+    Route::post('ptaqs/multi_delete', 'PtaqController@multi_delete')->name('ptaqs.multi_delete');
+
+    // Video taqs_
+    Route::resource('vtaqs', 'VtaqController');
+    Route::post('vtaqs/multi_delete', 'VtaqController@multi_delete')->name('vtaqs.multi_delete');
+
+    // Post Categories
+    Route::resource('pcategories', 'PcategoryController');
+    Route::post('pcategories/multi_delete', 'PcategoryController@multi_delete')->name('pcategories.multi_delete');
+
+    // Video Post Categories
+    Route::resource('vcategories', 'VcategoryController');
+    Route::post('vcategories/multi_delete', 'VcategoryController@multi_delete')->name('vcategories.multi_delete');
+
+    // Video Post Categories
+    Route::resource('messages', 'MessageController');
+    Route::post('messages/multi_delete', 'MessageController@multi_delete')->name('messages.multi_delete');
+    Route::post('messages/response', [App\Http\Controllers\MessageController::class, 'response'])->name('messages.response');;    
+
 });

@@ -30,6 +30,7 @@ class UsersRequest extends FormRequest
             'password' => 'required|confirmed',
             'type'     => 'required|in:user,admin',
             'image'    => 'nullable|mimes:jpg',
+            'active'   => 'required|in:0,1',
         ];
 
         if (in_array($this->method(), ['POST', 'PATCH'])) {

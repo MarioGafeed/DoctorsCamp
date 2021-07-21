@@ -49,6 +49,22 @@
         </div>
     </div>
 
+    <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
+        <label class="col-md-2 control-label">{{ trans('main.status') }} </span> </label>
+        <div class="col-md-6">
+            <select class="form-control select2" id="active" name="active">
+                <option value="">{{ trans('main.status_choose') }}</option>
+                <option value="1" {{ getData($data, 'active') == '1' ? ' selected' : '' }}>{{trans('main.active')}}</option>
+                <option value="0" {{ getData($data, 'active') == '0' ? ' selected' : '' }}>{{trans('main.inactive')}}</option>
+            </select>
+            @if ($errors->has('active'))
+                <span class="help-block">
+                    <strong class="help-block">{{ $errors->first('active') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
     <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
         <label class="col-md-2 control-label">{{ trans('main.type') }} <span class="required"></span> </label>
         <div class="col-md-10">

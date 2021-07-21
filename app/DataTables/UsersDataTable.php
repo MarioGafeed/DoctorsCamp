@@ -31,10 +31,22 @@ class UsersDataTable extends DataTable
             }
         })
 
+        ->addColumn('active', function ($model) {
+            if ($model->active == '1') {
+                return '
+                    <span style="padding: 1px 6px;" class="label lable-sm label-success">' . trans("main.yes") . '</span>
+                ';
+            } else {
+                return '
+                    <span style="padding: 1px 6px;" class="label lable-sm label-danger">' . trans("main.no") . '</span>
+                ';
+            }
+        })
+
         ->addColumn('show', 'backend.users.buttons.show')
         ->addColumn('edit', 'backend.users.buttons.edit')
         ->addColumn('delete', 'backend.users.buttons.delete')
-        ->rawColumns(['checkbox','show','edit', 'delete', 'type'])
+        ->rawColumns(['checkbox','show','edit', 'delete', 'type', 'active'])
         ;
     }
 
@@ -61,7 +73,7 @@ class UsersDataTable extends DataTable
         $html =  $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
-        ->parameters($this->getCustomBuilderParameters([1,2,3,4], [], GetLanguage() == 'ar'));
+        ->parameters($this->getCustomBuilderParameters([1,2,3,4,5], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -113,6 +125,14 @@ class UsersDataTable extends DataTable
                 'name' => "users.type",
                 'data'    => 'type',
                 'title'   => trans('main.type'),
+                'searchable' => true,
+                'orderable'  => true,
+                'width'          => '100px',
+            ],
+            [
+                'name' => "users.active",
+                'data'    => 'active',
+                'title'   => trans('main.active'),
                 'searchable' => true,
                 'orderable'  => true,
                 'width'          => '100px',

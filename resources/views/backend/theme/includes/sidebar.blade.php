@@ -82,13 +82,141 @@
                 </ul>
             </li>
 
-             <!-- Add Post  (Mario Added) -->
+            <!-- Add Post  (Mario Added) -->
+            <li class="heading">
+                <h3 class="uppercase">{{ trans('main.posts') }}</h3>
+            </li>
+
+            <li class="nav-item  {{ active_route('posts.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">{{ trans('main.posts') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('posts.create') }}">
+                        <a href="{{ route('posts.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.post') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('posts.index') }}">
+                        <a href="{{ route('posts.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.posts') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('vposts.create') }}">
+                        <a href="{{ route('vposts.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.vpost') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('vposts.index') }}">
+                        <a href="{{ route('vposts.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.vposts') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Add Post Taq  (Mario Added) -->
+            <li class="heading">
+                <h3 class="uppercase">{{ trans('main.taqs') }}</h3>
+            </li>
+
+            <li class="nav-item  {{ active_route('ptaq.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">{{ trans('main.taqs') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('ptaqs.create') }}">
+                        <a href="{{ route('ptaqs.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.ptaq') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('ptaqs.index') }}">
+                        <a href="{{ route('ptaqs.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.ptaqs') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('vtaqs.create') }}">
+                        <a href="{{ route('vtaqs.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.vtaq') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('vtaqs.index') }}">
+                        <a href="{{ route('vtaqs.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.vtaqs') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Add Post category  (Mario Added) -->
+            <li class="heading">
+                <h3 class="uppercase">{{ trans('main.categories') }}</h3>
+            </li>
+
+            <li class="nav-item  {{ active_route('pcategories.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">{{ trans('main.categories') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('pcategories.create') }}">
+                        <a href="{{ route('pcategories.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.pcategory') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('pcategories.index') }}">
+                        <a href="{{ route('pcategories.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.pcategories') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('vcategories.create') }}">
+                        <a href="{{ route('vcategories.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.vcategory') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('vcategories.index') }}">
+                        <a href="{{ route('vcategories.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.vcategories') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+             <!-- Add Message By Mario -->
+            <li class="heading">
+                <h3 class="uppercase">{{ trans('main.messages') }}</h3>
+            </li>
+
+            <li class="nav-item  {{ active_route('messages.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">{{ trans('main.messages') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('messages.create') }}">
+                        <a href="{{ route('messages.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.message') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('messages.index') }}">
+                        <a href="{{ route('messages.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.messages') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
 
-             <!-- Add Site Seeting   (Mario Added)
+            <!-- Add Site Seeting   (Mario Added)
 
-        </ul>
-        <!-- END SIDEBAR MENU -->
+       </ul>
+       <!-- END SIDEBAR MENU -->
     </div>
     <!-- END SIDEBAR -->
 </div>

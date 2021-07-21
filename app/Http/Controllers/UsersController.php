@@ -52,7 +52,6 @@ class UsersController extends Controller
     public function store(UsersRequest $request)
     {
         $requestAll = $request->all();
-
         $requestAll['image'] = Helper::Upload('users', $request->file('image'), 'checkImages');
         $requestAll['password'] = Hash::make($request->password);
 
@@ -122,6 +121,7 @@ class UsersController extends Controller
 
         $user->type = $request->type;
         $user->phone = $request->phone;
+        $user->active = $request->active;
 
         if ($request->hasFile('image')) {
             $user->image = Helper::UploadUpdate($user->image ?? "", 'users', $request->file('image'), 'checkImages');
