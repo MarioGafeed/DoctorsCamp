@@ -29,7 +29,7 @@ class UsersRequest extends FormRequest
             'phone'    => 'required|unique:users',
             'password' => 'required|confirmed',
             'type'     => 'required|in:user,admin',
-            'image'    => 'required|mimes:jpg',
+            'image'    => 'nullable|mimes:jpg',
         ];
 
         if (in_array($this->method(), ['POST', 'PATCH'])) {
