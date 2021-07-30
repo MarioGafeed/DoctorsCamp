@@ -212,6 +212,97 @@
                 </ul>
             </li>
 
+            <!-- Add Courses -->
+            <li class="heading">
+                <h3 class="uppercase">{{ trans('main.e_learning') }}</h3>
+            </li>
+
+            <li class="nav-item  {{ active_route('lessons.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">{{ trans('main.lessons') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('lessons.create') }}">
+                        <a href="{{ route('lessons.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.lesson') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('lessons.index') }}">
+                        <a href="{{ route('lessons.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.lessons') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Add Questions -->
+
+            <li class="nav-item  {{ active_route('questions.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">{{ trans('main.questions') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('questions.create') }}">
+                        <a href="{{ route('questions.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.question') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('questions.index') }}">
+                        <a href="{{ route('questions.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.questions') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Add Answers -->
+            <li class="nav-item  {{ active_route('answers.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">{{ trans('main.answers') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('answers.create') }}">
+                        <a href="{{ route('answers.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.answer') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('answers.index') }}">
+                        <a href="{{ route('answers.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.answers') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Add Courses -->
+
+            <li class="nav-item  {{ active_route('courses.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">{{ trans('main.courses') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('courses.create') }}">
+                        <a href="{{ route('courses.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.course') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('courses.index') }}">
+                        <a href="{{ route('courses.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.courses') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
 
             <!-- Add Site Seeting   (Mario Added)
 

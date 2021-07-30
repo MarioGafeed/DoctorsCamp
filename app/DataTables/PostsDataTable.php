@@ -25,6 +25,7 @@ class PostsDataTable extends DataTable
         ->addColumn('posts.title_ar', function($model){
                       return json_decode($model->title)->ar ?? trans('main.n_a');
                   })
+      
 
       ->addColumn('active', function ($model) {
               if ($model->active == '1') {
@@ -103,6 +104,14 @@ class PostsDataTable extends DataTable
                  'name'       => "posts.title",
                  'data'       => 'posts.title_ar',
                  'title'      => trans('main.titlepcat')." ar",
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'      => '200px',
+             ],
+             [
+                 'name'       => "pcategory.title",
+                 'data'       => 'pcategory.title',
+                 'title'      => trans('main.pcategory')." ar",
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',

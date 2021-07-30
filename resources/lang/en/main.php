@@ -734,7 +734,7 @@ return [
     'game'                          => 'Game',
     'text'                          => 'Text',
 
-    'ordernumber'                   => 'This Order of lesson is Taken in Same Day',
+    'ordernumber'                   => 'This Order of lesson is Taken in Same Course',
     'imei'                          => 'IMEI',
     'slug'                          => 'Slug',
     'class'                         => 'Class',
@@ -1145,11 +1145,6 @@ return [
     'work_life16'                          =>'',
     'work_life_desc16'                     =>'',
 
-    'book1'                                =>'Christian Mercy',
-    'book2'                                =>'Doctor’s Life Support2',
-    'book3'                                =>'The Desert Rat (Aileen Coleman)',
-    'book4'                                =>'On call',
-    'bookname'                             =>'Book Name',
 
     // register create account
       'createacc'                          =>'Create account',
@@ -1168,6 +1163,10 @@ return [
       'verify_problem'                     =>'Problem in Verification',
       'resend_mail'                        =>'Resend Mail',
       'verify_succ'                        =>'A verification email sent successfully, please check your inbox..',
+
+      // E- e_learning
+      'e_learning'                          =>'E-Learning',
+      'vcontent'                            =>'Video Content',
 
 
 

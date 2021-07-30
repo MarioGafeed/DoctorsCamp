@@ -55,6 +55,25 @@ Route::middleware(\App\Http\Middleware\LangMiddleware::class)->group(function ()
     // Video Post Categories
     Route::resource('messages', 'MessageController');
     Route::post('messages/multi_delete', 'MessageController@multi_delete')->name('messages.multi_delete');
-    Route::post('messages/response', [App\Http\Controllers\MessageController::class, 'response'])->name('messages.response');;    
+    Route::post('messages/response', [App\Http\Controllers\MessageController::class, 'response'])->name('messages.response');;
+
+    // Start E-learning
+
+   // Courses
+   Route::resource('courses', 'CourseController');
+   Route::post('courses/multi_delete', 'CourseController@multi_delete')->name('courses.multi_delete');
+
+   // Lessons
+   Route::resource('lessons', 'LessonController');
+   Route::post('lessons/multi_delete', 'LessonController@multi_delete')->name('lessons.multi_delete');
+
+   // Questions
+   Route::resource('questions', 'QuestionController');
+   Route::post('questions/multi_delete', 'QuestionController@multi_delete')->name('questions.multi_delete');
+
+   // Answers
+   Route::resource('answers', 'AnswerController');
+   Route::post('answers/multi_delete', 'AnswerController@multi_delete')->name('answers.multi_delete');
+
 
 });

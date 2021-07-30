@@ -59,7 +59,7 @@ class UsersDataTable extends DataTable
     public function query()
     {
         // $query = User::query()->with('class')->select('users.*');
-        $query = User::query()->select('users.*');
+        $query = User::query()->with('roles')->select('users.*');
         return $this->applyScopes($query);
     }
 
@@ -133,6 +133,14 @@ class UsersDataTable extends DataTable
                 'name' => "users.active",
                 'data'    => 'active',
                 'title'   => trans('main.active'),
+                'searchable' => true,
+                'orderable'  => true,
+                'width'          => '100px',
+            ],
+            [
+                'name' => "role.name",
+                'data'    => 'role.name',
+                'title'   => trans('main.role_name'),
                 'searchable' => true,
                 'orderable'  => true,
                 'width'          => '100px',

@@ -23,7 +23,7 @@ class User extends Authenticatable Implements MustVerifyEmail
         'password',
          'type',
          'image',
-         'phone',
+         'phone',    
          'active'
     ];
 
@@ -36,6 +36,11 @@ class User extends Authenticatable Implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role', 'role_id');
+    }
 
     /**
      * The attributes that should be cast to native types.
