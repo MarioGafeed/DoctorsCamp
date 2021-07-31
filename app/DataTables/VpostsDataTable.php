@@ -107,6 +107,14 @@ class VpostsDataTable extends DataTable
                  'width'      => '200px',
              ],
              [
+                 'name'       => "vcategory.title",
+                 'data'       => 'vcategory.title',
+                 'title'      => trans('main.vcategory'),
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'      => '200px',
+             ],
+             [
                  'name' => "vposts.active",
                  'data'    => 'active',
                  'title'   => trans('main.status'),
