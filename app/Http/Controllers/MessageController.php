@@ -12,7 +12,7 @@ use App\Authorizable;
 
 class MessageController extends Controller
 {
-    // use Authorizable;
+    use Authorizable;
   private $viewPath = 'backend.messages';
 
   /**

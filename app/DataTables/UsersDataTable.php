@@ -137,14 +137,14 @@ class UsersDataTable extends DataTable
                 'orderable'  => true,
                 'width'          => '100px',
             ],
-            [
-                'name' => "role.name",
-                'data'    => 'role.name',
-                'title'   => trans('main.role_name'),
-                'searchable' => true,
-                'orderable'  => true,
-                'width'          => '100px',
-            ],
+            // [
+            //     'name' => "role.name",
+            //     'data'    => 'role.name',
+            //     'title'   => trans('main.role_name'),
+            //     'searchable' => true,
+            //     'orderable'  => true,
+            //     'width'          => '100px',
+            // ],
             [
                 'name' => 'show',
                 'data' => 'show',

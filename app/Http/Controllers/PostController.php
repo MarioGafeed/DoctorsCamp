@@ -14,7 +14,7 @@ use App\Authorizable;
 
 class PostController extends Controller
 {
-    // use Authorizable;
+    use Authorizable;
    private $viewPath = 'backend.posts';
 
    /**

@@ -15,7 +15,7 @@ use App\Authorizable;
 
 class UsersController extends Controller
 {
-  // use Authorizable;
+  use Authorizable;
     private $viewPath = 'backend.users';
 
     /**
