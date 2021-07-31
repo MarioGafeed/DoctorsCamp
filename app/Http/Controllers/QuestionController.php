@@ -8,6 +8,7 @@ use App\DataTables\QuestionsDataTable;
 use App\Models\Question;
 use App\Models\Lesson;
 use App\Helpers\Helper;
+use Spatie\Permission\Models\Role;
 use App\Authorizable;
 
 

@@ -8,6 +8,8 @@ use App\DataTables\LessonsDataTable;
 use App\Models\Lesson;
 use App\Models\Course;
 use App\Helpers\Helper;
+use Spatie\Permission\Models\Role;
+use App\Authorizable;
 
 class LessonController extends Controller
 {
