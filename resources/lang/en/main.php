@@ -1165,7 +1165,7 @@ return [
       'verify_succ'                        =>'A verification email sent successfully, please check your inbox..',
 
       // E- e_learning
-      'e_learning'                          =>'E-Learning',
+      'e_learning'                          =>'E Learning',
       'vcontent'                            =>'Video Content',
 
 
