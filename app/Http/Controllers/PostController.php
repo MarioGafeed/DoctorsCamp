@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostsRequest;
+use App\Http\Interfaces\PostInterface;
 use App\DataTables\PostsDataTable;
-use App\Models\Post;
-use App\Models\Pcategory;
-use App\Models\Ptaq;
-use Hash;
 use App\Helpers\Helper;
 use App\Authorizable;
 
 class PostController extends Controller
 {
-    use Authorizable;
-   private $viewPath = 'backend.posts';
+  // use Authorizable;
+  private $PostInterface;
+  public function __construct(PostInterface $PostInterface)
+  {
+      $this->PostInterface = $PostInterface;
+  }
 
    /**
     * Display a listing of the resource.
@@ -27,9 +28,7 @@ class PostController extends Controller
 
    public function index(PostsDataTable $dataTable)
    {
-       return $dataTable->render("{$this->viewPath}.index", [
-           'title' => trans('main.show-all') . ' ' . trans('main.posts')
-       ]);
+       return $this->PostInterface->index($dataTable);
    }
 
    /**
@@ -39,13 +38,7 @@ class PostController extends Controller
     */
    public function create()
    {
-       $pcats = Pcategory::all();
-       $ptaq  = Ptaq::all();
-       return view("{$this->viewPath}.create", [
-           'title' => trans('main.add') . ' ' . trans('main.posts'),
-           'pcats' => $pcats,
-           'ptaq'  => $ptaq,
-       ]);
+      return $this->PostInterface->create();
    }
 
 
@@ -58,34 +51,7 @@ class PostController extends Controller
     */
    public function store(PostsRequest $request)
    {
-       $requestAll = $request->all();
-       $requestAll['title'] = json_encode([
-         'en' => $request->title_en,
-         'ar' => $request->title_ar,
-       ]);
-       $requestAll['desc'] = json_encode([
-         'en' => $request->desc_en,
-         'ar' => $request->desc_ar,
-       ]);
-       $requestAll['content'] = json_encode([
-         'en' => $request->content_en,
-         'ar' => $request->content_ar,
-       ]);
-
-       if ($request->hasFile('image')) {
-         $requestAll['image'] = Helper::Upload('posts', $request->file('image'), 'checkImages');
-       }else {
-         $requestAll['image'] = "posts/default.jpg";
-       }
-       $requestAll['user_id'] = auth()->user()->id;
-       // dd($requestAll);
-       $pos = Post::create($requestAll);
-       if ($requestAll['ptaq_id'])
-       {
-         $pos->ptaqs()->attach($requestAll['ptaq_id']);
-       }
-       session()->flash('success', trans('main.added-message'));
-       return redirect()->route('posts.index');
+       return $this->PostInterface->store($request);
    }
 
    /**
@@ -96,18 +62,7 @@ class PostController extends Controller
     */
    public function show($id)
    {
-       $pos = Post::where('id', $id)->with('pcategory')->first();
-
-       $pos['title_en'] = json_decode($pos->title)->en;
-       $pos['title_ar'] = json_decode($pos->title)->ar;
-       $pos['desc_en'] = json_decode($pos->desc)->en;
-       $pos['desc_ar'] = json_decode($pos->desc)->ar;
-       $pos['content_en'] = json_decode($pos->content)->en;
-       $pos['content_ar'] = json_decode($pos->content)->ar;
-       return view("{$this->viewPath}.show", [
-           'title' => trans('main.show') . ' ' . trans('main.post') . ' : ' . $pos->title,
-           'show' => $pos,
-       ]);
+       return $this->PostInterface->show($id);
    }
 
    /**
@@ -118,21 +73,7 @@ class PostController extends Controller
     */
    public function edit($id)
    {
-       $pos = Post::where('id', $id)->with('pcategory', 'user', 'ptaqs')->first();
-       $pcats = Pcategory::all();
-       $ptaq = Ptaq::all();
-       $pos['title_en'] = json_decode($pos->title)->en;
-       $pos['title_ar'] = json_decode($pos->title)->ar;
-       $pos['desc_en'] = json_decode($pos->desc)->en;
-       $pos['desc_ar'] = json_decode($pos->desc)->ar;
-       $pos['content_en'] = json_decode($pos->content)->en;
-       $pos['content_ar'] = json_decode($pos->content)->ar;
-       return view("{$this->viewPath}.edit", [
-           'title' => trans('main.edit') . ' ' . trans('main.post') . ' : ' . $pos->title,
-           'edit' => $pos,
-           'pcats' => $pcats,
-           'ptaq' => $ptaq,
-       ]);
+       return $this->PostInterface->edit($id);
    }
 
    /**
@@ -144,39 +85,7 @@ class PostController extends Controller
     */
    public function update(PostsRequest $request, $id)
    {
-       $pos = Post::find($id);
-       if (!$pos) {
-         return back();
-       }
-       $pos->title = json_encode([
-         'en' => $request->title_en,
-         'ar' => $request->title_ar,
-       ]);
-       $pos->desc = json_encode([
-         'en' => $request->desc_en,
-         'ar' => $request->desc_ar,
-       ]);
-       $pos->content = json_encode([
-         'en' => $request->content_en,
-         'ar' => $request->content_ar,
-       ]);
-       $pos->pcat_id  = $request->pcat_id;
-       $pos->keyword   = $request->keyword;
-       $pos->active = $request->active;
-       $pos->user_id = auth()->user()->id;
-
-       if ($request->hasFile('image')) {
-           $pos->image = Helper::UploadUpdate($pos->image ?? "", 'posts', $request->file('image'), 'checkImages');
-       }else {
-         $pos->image = $request->image;
-       }
-
-       $pos->save();
-      if ($request->ptaq_id) {
-       $pos->ptaqs()->sync($request->ptaq_id);
-        }
-       session()->flash('success', trans('main.updated'));
-       return redirect()->route('posts.show', [$pos->id]);
+       return $this->PostInterface->update($request, $id);
    }
 
    /**
@@ -186,18 +95,9 @@ class PostController extends Controller
     * @param  bool  $redirect
     * @return \Illuminate\Http\Response
     */
-   public function destroy($id, $redirect = true)
+   public function destroy($id)
    {
-       $pos = Post::findOrFail($id);
-       if (file_exists(public_path('uploads/' . $pos->image))) {
-           @unlink(public_path('uploads/' . $pos->image));
-       }
-       $pos->delete();
-
-       if ($redirect) {
-           session()->flash('success', trans('main.deleted-message'));
-           return redirect()->route('posts.index');
-       }
+       return $this->PostInterface->destroy($id);
    }
 
 
@@ -209,12 +109,6 @@ class PostController extends Controller
     */
    public function multi_delete(Request $request)
    {
-       if (count($request->selected_data)) {
-           foreach ($request->selected_data as $id) {
-               $this->destroy($id, false);
-           }
-           session()->flash('success', trans('main.deleted-message'));
-           return redirect()->route('posts.index');
-       }
+        return $this->PostInterface->multi_delete($request);
    }
 }

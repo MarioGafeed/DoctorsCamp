@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\VpostsRequest;
+use App\Http\Interfaces\VpostInterface;
 use App\DataTables\VpostsDataTable;
-use App\Models\Vpost;
-use App\Models\Vcategory;
-use App\Models\Vtaq;
-use Hash;
 use App\Helpers\Helper;
 use App\Authorizable;
 
 class VpostController extends Controller
 {
-  use Authorizable;
-  private $viewPath = 'backend.vposts';
+  // use Authorizable;
+  private $VpostInterface;
+  public function __construct(VpostInterface $VpostInterface)
+  {
+      $this->VpostInterface = $VpostInterface;
+  }
 
   /**
    * Display a listing of the resource.
@@ -24,10 +25,8 @@ class VpostController extends Controller
    */
 
   public function index(VpostsDataTable $dataTable)
-  {
-      return $dataTable->render("{$this->viewPath}.index", [
-          'title' => trans('main.show-all') . ' ' . trans('main.vposts')
-      ]);
+  {    
+      return $this->VpostInterface->index($dataTable);
   }
 
   /**
@@ -37,13 +36,7 @@ class VpostController extends Controller
    */
   public function create()
   {
-      $vcat = Vcategory::select('id', 'title')->get();
-      $vtaq = Vtaq::all();
-      return view("{$this->viewPath}.create", [
-          'title' => trans('main.add') . ' ' . trans('main.vposts'),
-          'vcat'  => $vcat,
-          'vtaq'  => $vtaq,
-      ]);
+      return $this->VpostInterface->create();
   }
 
   /**
@@ -54,32 +47,7 @@ class VpostController extends Controller
    */
   public function store(VpostsRequest $request)
   {
-      $requestAll = $request->all();
-
-      $requestAll['title'] = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
-      $requestAll['desc'] = json_encode([
-        'en' => $request->desc_en,
-        'ar' => $request->desc_ar,
-      ]);
-      if ($request->hasFile('image')) {
-        $requestAll['image'] = Helper::Upload('vposts', $request->file('image'), 'checkImages');
-      }else {
-        $requestAll['image'] = "vposts/default.jpg";
-      }
-      $requestAll['user_id'] = auth()->user()->id;
-      $vpos = Vpost::create($requestAll);
-    // dd($requestAll['vtaq_id']);
-
-      if ($requestAll['vtaq_id'])
-      {
-        $vpos->vtaqs()->attach($requestAll['vtaq_id']);
-      }
-
-      session()->flash('success', trans('main.added-message'));
-      return redirect()->route('vposts.index');
+      return $this->VpostInterface->store($request);
   }
 
   /**
@@ -90,15 +58,7 @@ class VpostController extends Controller
    */
   public function show($id)
   {
-      $vpos = Vpost::where('id', $id)->with('vcategory')->first();
-      $vpos['title_en'] = json_decode($vpos->title)->en;
-      $vpos['title_ar'] = json_decode($vpos->title)->ar;
-      $vpos['desc_en']  = json_decode($vpos->desc)->en;
-      $vpos['desc_ar']  = json_decode($vpos->desc)->ar;
-      return view("{$this->viewPath}.show", [
-          'title' => trans('main.show') . ' ' . trans('main.post') . ' : ' . $vpos->title,
-          'show' => $vpos,
-      ]);
+      return $this->VpostInterface->show($id);
   }
 
   /**
@@ -109,20 +69,7 @@ class VpostController extends Controller
    */
   public function edit($id)
   {
-     // With relationship
-      $vpos = Vpost::where('id', $id)->with('vcategory', 'user', 'vtaqs')->first();
-      $vcat = Vcategory::all();
-      $vtaq = Vtaq::all();
-      $vpos['title_en'] = json_decode($vpos->title)->en;
-      $vpos['title_ar'] = json_decode($vpos->title)->ar;
-      $vpos['desc_en'] = json_decode($vpos->desc)->en;
-      $vpos['desc_ar'] = json_decode($vpos->desc)->ar;
-      return view("{$this->viewPath}.edit", [
-          'title' => trans('main.edit') . ' ' . trans('main.post') . ' : ' . $vpos->title,
-          'edit' => $vpos,
-          'vcat' => $vcat,
-          'vtaq' => $vtaq,
-      ]);
+     return $this->VpostInterface->edit($id);
   }
 
   /**
@@ -134,34 +81,7 @@ class VpostController extends Controller
    */
   public function update(VpostsRequest $request, $id)
   {
-      $vpos = Vpost::find($id);
-      if (!$vpos) {
-        return back();
-      }
-      $vpos->title = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
-      $vpos->desc = json_encode([
-        'en' => $request->desc_en,
-        'ar' => $request->desc_ar,
-      ]);
-      $vpos->content  = $request->content;
-      $vpos->vcat_id  = $request->vcat_id;
-      $vpos->keyword   = $request->keyword;
-      $vpos->active = $request->active;
-      $vpos->user_id = auth()->user()->id;
-
-      if ($request->hasFile('image')) {
-          $vpos->image = Helper::UploadUpdate($vpos->image ?? "", 'vposts', $request->file('image'), 'checkImages');
-      }
-
-      $vpos->save();
-     if ($request->vtaq_id) {
-      $vpos->vtaqs()->sync($request->vtaq_id);
-       }
-      session()->flash('success', trans('main.updated'));
-      return redirect()->route('vposts.show', [$vpos->id]);
+     return $this->VpostInterface->update($request, $id);
   }
 
   /**
@@ -171,18 +91,9 @@ class VpostController extends Controller
    * @param  bool  $redirect
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id, $redirect = true)
+  public function destroy($id)
   {
-      $vpos = Vpost::findOrFail($id);
-      if (file_exists(public_path('uploads/' . $vpos->image))) {
-          @unlink(public_path('uploads/' . $vpos->image));
-      }
-      $vpos->delete();
-
-      if ($redirect) {
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('vposts.index');
-      }
+    return $this->VpostInterface->destroy($id);
   }
 
 
@@ -194,12 +105,6 @@ class VpostController extends Controller
    */
   public function multi_delete(Request $request)
   {
-      if (count($request->selected_data)) {
-          foreach ($request->selected_data as $id) {
-              $this->destroy($id, false);
-          }
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('vposts.index');
-      }
+      return $this->VpostInterface->multi_delete($request);
   }
 }

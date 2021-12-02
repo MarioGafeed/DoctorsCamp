@@ -33,6 +33,14 @@ class RepositoryServiceProvider extends ServiceProvider
           'App\Http\Interfaces\VtaqInterface',
           'App\Http\Repositories\VtaqRepository'
       );
+      $this->app->bind(
+          'App\Http\Interfaces\PostInterface',
+          'App\Http\Repositories\PostRepository'
+      );
+      $this->app->bind(
+          'App\Http\Interfaces\VpostInterface',
+          'App\Http\Repositories\VpostRepository'
+      );
     }
 
     /**
