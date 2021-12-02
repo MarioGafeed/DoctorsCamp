@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PtaqsRequest;
+use App\Http\Interfaces\PtaqInterface;
 use App\DataTables\PtaqsDataTable;
-use App\Models\Ptaq;
 use App\Helpers\Helper;
 use App\Authorizable;
 
 class PtaqController extends Controller
 {
-  use Authorizable;
-  private $viewPath = 'backend.ptaqs';
+
+  // use Authorizable;
+  private $PtaqInterface;
+  public function __construct(PtaqInterface $PtaqInterface)
+  {
+      $this->PtaqInterface = $PtaqInterface;
+  }
 
   /**
    * Display a listing of the resource.
@@ -20,9 +25,7 @@ class PtaqController extends Controller
    */
   public function index(PtaqsDataTable $dataTable)
   {
-      return $dataTable->render("{$this->viewPath}.index", [
-          'title' => trans('main.show-all') . ' ' . trans('main.ptaqs')
-      ]);
+    return $this->PtaqInterface->index($dataTable);
   }
 
   /**
@@ -32,9 +35,7 @@ class PtaqController extends Controller
    */
   public function create()
   {
-      return view("{$this->viewPath}.create", [
-          'title' => trans('main.add') . ' ' . trans('main.ptaqs'),
-      ]);
+    return $this->PtaqInterface->create();
   }
 
   /**
@@ -45,11 +46,7 @@ class PtaqController extends Controller
    */
   public function store(PtaqsRequest $request)
   {
-      $requestAll = $request->all();
-      $ptaq = Ptaq::create($requestAll);
-
-      session()->flash('success', trans('main.added-message'));
-      return redirect()->route('ptaqs.index');
+        return $this->PtaqInterface->store($request);
   }
 
   /**
@@ -60,12 +57,7 @@ class PtaqController extends Controller
    */
   public function show($id)
   {
-      $ptaq = Ptaq::findOrFail($id);
-
-      return view("{$this->viewPath}.show", [
-          'title' => trans('main.show') . ' ' . trans('main.ptaq') . ' : ' . $ptaq->name,
-          'show' => $ptaq,
-      ]);
+      return $this->PtaqInterface->show($id);
   }
 
   /**
@@ -76,11 +68,7 @@ class PtaqController extends Controller
    */
   public function edit($id)
   {
-      $ptaq = Ptaq::findOrFail($id);
-      return view("{$this->viewPath}.edit", [
-          'title' => trans('main.edit') . ' ' . trans('main.ptaq') . ' : ' . $ptaq->name,
-          'edit' => $ptaq
-      ]);
+      return $this->PtaqInterface->edit($id);
   }
 
   /**
@@ -92,12 +80,7 @@ class PtaqController extends Controller
    */
   public function update(PtaqsRequest $request, $id)
   {
-      $ptaq = Ptaq::find($id);
-      $ptaq->name = $request->name;
-      $ptaq->save();
-
-      session()->flash('success', trans('main.updated'));
-      return redirect()->route('ptaqs.show', [$ptaq->id]);
+      return $this->PtaqInterface->update($request, $id);
   }
 
   /**
@@ -107,15 +90,9 @@ class PtaqController extends Controller
    * @param  bool  $redirect
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id, $redirect = true)
-  {
-      $ptaq = Ptaq::findOrFail($id);
-      $ptaq->delete();
-
-      if ($redirect) {
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('ptaqs.index');
-      }
+  public function destroy($id)
+  {      
+      return $this->PtaqInterface->destroy($id);
   }
 
 
@@ -127,12 +104,6 @@ class PtaqController extends Controller
    */
   public function multi_delete(Request $request)
   {
-      if (count($request->selected_data)) {
-          foreach ($request->selected_data as $id) {
-              $this->destroy($id, false);
-          }
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('ptaqs.index');
-      }
+      return $this->PtaqInterface->multi_delete($request);
   }
 }

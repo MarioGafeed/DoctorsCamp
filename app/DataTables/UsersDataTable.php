@@ -7,6 +7,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
 {
+
     use BuilderParameters;
 
     /**
@@ -17,6 +18,7 @@ class UsersDataTable extends DataTable
      */
     public function dataTable($query)
     {
+
         return datatables($query)
         ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
         ->addColumn('type', function ($model) {

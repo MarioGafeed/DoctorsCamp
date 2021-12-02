@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\VcategoriesRequest;
+use App\Http\Interfaces\VcategoryInterface;
 use App\DataTables\VcategoriesDataTable;
-use App\Models\Vcategory;
 use App\Helpers\Helper;
 use App\Authorizable;
 
 class VcategoryController extends Controller
 {
-  use Authorizable;
-  private $viewPath = 'backend.vcategories';
+  // use Authorizable;
+  private $VcategoryInterface;
+  public function __construct(VcategoryInterface $VcategoryInterface)
+  {
+      $this->VcategoryInterface = $VcategoryInterface;
+  }
 
   /**
    * Display a listing of the resource.
@@ -21,9 +25,7 @@ class VcategoryController extends Controller
    */
   public function index(VcategoriesDataTable $dataTable)
   {
-      return $dataTable->render("{$this->viewPath}.index", [
-          'title' => trans('main.show-all') . ' ' . trans('main.vcategories')
-      ]);
+      return $this->VcategoryInterface->index($dataTable);
   }
 
   /**
@@ -33,9 +35,7 @@ class VcategoryController extends Controller
    */
   public function create()
   {
-      return view("{$this->viewPath}.create", [
-          'title' => trans('main.add') . ' ' . trans('main.vcategories'),
-      ]);
+      return $this->VcategoryInterface->create();
   }
 
   /**
@@ -46,31 +46,7 @@ class VcategoryController extends Controller
    */
   public function store(VcategoriesRequest $request)
   {
-      $requestAll = $request->all();
-
-      $requestAll['title'] = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
-      $requestAll['desc'] = json_encode([
-        'en' => $request->desc_en,
-        'ar' => $request->desc_ar,
-      ]);
-      $requestAll['summary'] = json_encode([
-        'en' => $request->summary_en,
-        'ar' => $request->summary_ar,
-      ]);
-
-      if ($request->hasFile('image')) {
-        $requestAll['image'] = Helper::Upload('vcategories', $request->file('image'), 'checkImages');
-      }else {
-        $requestAll['image'] = "vcategories/default.jpg";
-      }
-
-      $vcat = Vcategory::create($requestAll);
-
-      session()->flash('success', trans('main.added-message'));
-      return redirect()->route('vcategories.index');
+      return $this->VcategoryInterface->store($request);
   }
 
   /**
@@ -81,19 +57,7 @@ class VcategoryController extends Controller
    */
   public function show($id)
   {
-      // $vcat = Vcategory::where('id', $id)->with('class')->first();
-      $vcat = Vcategory::findOrFail($id);
-      $vcat['title_en']   = json_decode($vcat->title)->en;
-      $vcat['title_ar']   = json_decode($vcat->title)->ar;
-      $vcat['desc_en']    = json_decode($vcat->desc)->en;
-      $vcat['desc_ar']    = json_decode($vcat->desc)->ar;
-      $vcat['summary_en'] = json_decode($vcat->summary)->en;
-      $vcat['summary_ar'] = json_decode($vcat->summary)->ar;
-
-      return view("{$this->viewPath}.show", [
-          'title' => trans('main.show') . ' ' . trans('main.vcategory') . ' : ' . $vcat->title_en . ' : ' . $vcat->title_ar,
-          'show' => $vcat,
-      ]);
+      return $this->VcategoryInterface->show($id);
   }
 
   /**
@@ -104,18 +68,7 @@ class VcategoryController extends Controller
    */
   public function edit($id)
   {
-      $vcat = Vcategory::findOrFail($id);
-      $vcat['title_en'] = json_decode($vcat->title)->en;
-      $vcat['title_ar'] = json_decode($vcat->title)->ar;
-      $vcat['desc_en'] = json_decode($vcat->desc)->en;
-      $vcat['desc_ar'] = json_decode($vcat->desc)->ar;
-      $vcat['summary_en'] = json_decode($vcat->summary)->en;
-      $vcat['summary_ar'] = json_decode($vcat->summary)->ar;
-
-      return view("{$this->viewPath}.edit", [
-          'title' => trans('main.edit') . ' ' . trans('main.vcategory') . ' : ' . $vcat->title_en . ' : ' . $vcat->title_ar,
-          'edit' => $vcat
-      ]);
+      return $this->VcategoryInterface->edit($id);
   }
 
   /**
@@ -127,27 +80,7 @@ class VcategoryController extends Controller
    */
   public function update(VcategoriesRequest $request, $id)
   {
-      $vcat = Vcategory::find($id);
-      $vcat->title = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
-      $vcat->desc = json_encode([
-        'en' => $request->desc_en,
-        'ar' => $request->desc_ar,
-      ]);
-      $vcat->summary = json_encode([
-        'en' => $request->summary_en,
-        'ar' => $request->summary_ar,
-      ]);
-      $vcat->keyword = $request->keyword;
-
-      if ($request->hasFile('image')) {
-          $vcat->image = Helper::UploadUpdate($vcat->image ?? "", 'vcategories', $request->file('image'), 'checkImages');
-      }
-      $vcat->save();
-      session()->flash('success', trans('main.updated'));
-      return redirect()->route('vcategories.show', [$vcat->id]);
+      return $this->VcategoryInterface->update($request, $id);
   }
 
   /**
@@ -157,18 +90,9 @@ class VcategoryController extends Controller
    * @param  bool  $redirect
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id, $redirect = true)
+  public function destroy($id)
   {
-      $vcat = Vcategory::findOrFail($id);
-      if (file_exists(public_path('uploads/' . $vcat->image))) {
-          @unlink(public_path('uploads/' . $vcat->image));
-      }
-      $vcat->delete();
-
-      if ($redirect) {
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('vcategories.index');
-      }
+     return $this->VcategoryInterface->destroy($id);
   }
 
 
@@ -180,12 +104,6 @@ class VcategoryController extends Controller
    */
   public function multi_delete(Request $request)
   {
-      if (count($request->selected_data)) {
-          foreach ($request->selected_data as $id) {
-              $this->destroy($id, false);
-          }
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('vcategories.index');
-      }
+      return $this->VcategoryInterface->multi_delete($id);
   }
 }

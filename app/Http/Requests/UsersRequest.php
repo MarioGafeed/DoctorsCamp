@@ -45,10 +45,13 @@ class UsersRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name'     => trans('main.name'),
-            'email'    => trans('main.email'),
-            'password' => trans('main.password'),
-            'type'     => trans('main.type'),
+            'name'       => trans('main.name'),
+            'email'      => trans('main.email'),
+            'password'   => trans('main.password'),
+            'type'       => trans('main.type'),
+            'phone'      => trans('main.phone'),
+            'image'      => trans('main.image'),
+            'active'     => trans('main.active'),
         ];
     }
 }

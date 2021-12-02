@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\VtaqsRequest;
+use App\Http\Interfaces\VtaqInterface;
 use App\DataTables\VtaqsDataTable;
-use App\Models\Vtaq;
 use App\Helpers\Helper;
 use App\Authorizable;
 
 class VtaqController extends Controller
 {
-  use Authorizable;
-  private $viewPath = 'backend.vtaqs';
+  // use Authorizable;
+  private $VtaqInterface;
+  public function __construct(VtaqInterface $VtaqInterface)
+  {
+      $this->VtaqInterface = $VtaqInterface;
+  }
 
   /**
    * Display a listing of the resource.
@@ -21,9 +25,7 @@ class VtaqController extends Controller
    */
   public function index(VtaqsDataTable $dataTable)
   {
-      return $dataTable->render("{$this->viewPath}.index", [
-          'title' => trans('main.show-all') . ' ' . trans('main.vtaqs')
-      ]);
+      return $this->VtaqInterface->index($dataTable);
   }
 
   /**
@@ -33,9 +35,7 @@ class VtaqController extends Controller
    */
   public function create()
   {
-      return view("{$this->viewPath}.create", [
-          'title' => trans('main.add') . ' ' . trans('main.vtaqs'),
-      ]);
+      return $this->VtaqInterface->create();
   }
 
   /**
@@ -46,11 +46,7 @@ class VtaqController extends Controller
    */
   public function store(VtaqsRequest $request)
   {
-      $requestAll = $request->all();
-      $vtaq = Vtaq::create($requestAll);
-
-      session()->flash('success', trans('main.added-message'));
-      return redirect()->route('vtaqs.index');
+      return $this->VtaqInterface->store($request);
   }
 
   /**
@@ -61,12 +57,7 @@ class VtaqController extends Controller
    */
   public function show($id)
   {
-      $vtaq = Vtaq::findOrFail($id);
-
-      return view("{$this->viewPath}.show", [
-          'title' => trans('main.show') . ' ' . trans('main.vtaq') . ' : ' . $vtaq->name,
-          'show' => $vtaq,
-      ]);
+     return $this->VtaqInterface->show($id);
   }
 
   /**
@@ -77,11 +68,7 @@ class VtaqController extends Controller
    */
   public function edit($id)
   {
-      $vtaq = Vtaq::findOrFail($id);
-      return view("{$this->viewPath}.edit", [
-          'title' => trans('main.edit') . ' ' . trans('main.vtaq') . ' : ' . $vtaq->name,
-          'edit' => $vtaq
-      ]);
+      return $this->VtaqInterface->edit($id);
   }
 
   /**
@@ -93,12 +80,7 @@ class VtaqController extends Controller
    */
   public function update(VtaqsRequest $request, $id)
   {
-      $vtaq = Vtaq::find($id);
-      $vtaq->name = $request->name;
-      $vtaq->save();
-
-      session()->flash('success', trans('main.updated'));
-      return redirect()->route('vtaqs.show', [$vtaq->id]);
+      return $this->VtaqInterface->update($request, $id);
   }
 
   /**
@@ -108,14 +90,9 @@ class VtaqController extends Controller
    * @param  bool  $redirect
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id, $redirect = true)
-  {
-      $vtaq = Vtaq::findOrFail($id);
-      $vtaq->delete();
-      if ($redirect) {
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('vtaqs.index');
-      }
+  public function destroy($id)
+  {    
+    return $this->VtaqInterface->destroy($id);
   }
 
 
@@ -127,12 +104,6 @@ class VtaqController extends Controller
    */
   public function multi_delete(Request $request)
   {
-      if (count($request->selected_data)) {
-          foreach ($request->selected_data as $id) {
-              $this->destroy($id, false);
-          }
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('vtaqs.index');
-      }
+      return $this->VtaqInterface->multi_delete($request);
   }
 }
