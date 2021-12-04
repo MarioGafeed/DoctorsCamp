@@ -18,8 +18,7 @@ class CreatepostsTable extends Migration
           $table->engine = 'InnoDB';
             // $table->increments('id');
             $table->id();
-            $table->text('title');
-            $table->string('image');
+            $table->text('title');          
             $table->longtext('content');
             $table->text('desc');
             $table->text('keyword');

@@ -18,8 +18,7 @@ class CreateVpostsTable extends Migration
           $table->engine = 'InnoDB';
             // $table->increments('id');
             $table->id();
-            $table->text('title');
-            $table->string('image');
+            $table->text('title');          
             $table->longtext('content');
             $table->longtext('desc');
             $table->text('keyword');

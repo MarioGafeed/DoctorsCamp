@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 class Pcategory extends Model
 {
   protected $fillable = [
-      'title','image', 'keyword', 'summary', 'desc'
+      'title', 'keyword', 'summary', 'desc'
   ];
 
   public function posts()

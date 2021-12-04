@@ -30,7 +30,6 @@ class LessonsRequest extends FormRequest
             'vcontent'    => 'required',
             'myorder'    => 'required|integer',
             'active'     => 'required|in:0,1',
-            'image'      => 'required|image',
         ];
     }
 
@@ -43,8 +42,7 @@ class LessonsRequest extends FormRequest
             'content'     => trans('main.content'),
             'vcontent'    => trans('main.vcontent'),
             'myorder'     => trans('main.myorder'),
-            'active'      => trans('main.active'),
-            'image'       => trans('main.image'),
+            'active'      => trans('main.active'),            
         ];
     }
 }

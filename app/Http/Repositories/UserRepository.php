@@ -46,7 +46,7 @@ class UserRepository implements UserInterface
     public function store($request)
     {
         $requestAll = $request->all();
-        $requestAll['image'] = Helper::Upload('users', $request->file('image'), 'checkImages');
+        // $requestAll['image'] = Helper::Upload('users', $request->file('image'), 'checkImages');
         $requestAll['password'] = Hash::make($request->password);
 
         $user = User::create($requestAll);
@@ -91,7 +91,7 @@ class UserRepository implements UserInterface
 
     public function update($request, $id)
     {
-        $user = $this->getById($id);        
+        $user = $this->getById($id);
         $user->name = $request->name;
         $user->email = $request->email;
 
@@ -103,9 +103,9 @@ class UserRepository implements UserInterface
         $user->phone = $request->phone;
         $user->active = $request->active;
 
-        if ($request->hasFile('image')) {
-            $user->image = Helper::UploadUpdate($user->image ?? "", 'users', $request->file('image'), 'checkImages');
-        }
+        // if ($request->hasFile('image')) {
+        //     $user->image = Helper::UploadUpdate($user->image ?? "", 'users', $request->file('image'), 'checkImages');
+        // }
         $user->save();
 
         $roles = $request['roles']; //Retreive all roles
@@ -124,9 +124,9 @@ class UserRepository implements UserInterface
     {
       $redirect = true;
       $user = $this->getById($id );
-      if (file_exists(public_path('uploads/' . $user->image))) {
-          @unlink(public_path('uploads/' . $user->image));
-      }
+      // if (file_exists(public_path('uploads/' . $user->image))) {
+      //     @unlink(public_path('uploads/' . $user->image));
+      // }
       $user->delete();
 
       if ($redirect) {

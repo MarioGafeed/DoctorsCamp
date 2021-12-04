@@ -27,7 +27,6 @@ class CoursesRequest extends FormRequest
             'name'     => 'required',
             'slug'     => 'sometimes|nullable',
             'desc'     => 'required',
-            'image'    => 'nullable|mimes:jpg',
             'active'   => 'required|in:0,1',
             'price'    => 'sometimes|nullable|numeric',
         ];
@@ -42,8 +41,7 @@ class CoursesRequest extends FormRequest
         return [
             'name'     => trans('main.name'),
             'slug'     => trans('main.slug'),
-            'desc'     => trans('main.desc'),
-            'image'    => trans('main.image'),
+            'desc'     => trans('main.desc'),        
             'active'   => trans('main.active'),
             'price'    => trans('main.price'),
         ];

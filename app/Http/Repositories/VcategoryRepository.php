@@ -11,8 +11,10 @@ use App\Helpers\Helper;
 
 class VcategoryRepository implements VcategoryInterface
 {
-    private $viewPath = 'backend.vcategories';
     use VcategoryTrait;
+
+    private $viewPath = 'backend.vcategories';
+
     private $vcategoryModel;
     public function __construct(Vcategory $vcat)
     {
@@ -56,11 +58,11 @@ class VcategoryRepository implements VcategoryInterface
       ]);
 
 
-      if ($request->hasFile('image')) {
-        $requestAll['image'] = Helper::Upload('vcategories', $request->file('image'), 'checkImages');
-      }else {
-        $requestAll['image'] = "vcategories/default.jpg";
-      }
+      // if ($request->hasFile('image')) {
+      //   $requestAll['image'] = Helper::Upload('vcategories', $request->file('image'), 'checkImages');
+      // }else {
+      //   $requestAll['image'] = "vcategories/default.jpg";
+      // }
 
       $vcat = Vcategory::create($requestAll);
 
@@ -123,9 +125,9 @@ class VcategoryRepository implements VcategoryInterface
         'ar' => $request->summary_ar,
       ]);
       $vcat->keyword = $request->keyword;
-      if ($request->hasFile('image')) {
-          $vcat->image = Helper::UploadUpdate($vcat->image ?? "", 'vcategories', $request->file('image'), 'checkImages');
-      }
+      // if ($request->hasFile('image')) {
+      //     $vcat->image = Helper::UploadUpdate($vcat->image ?? "", 'vcategories', $request->file('image'), 'checkImages');
+      // }
       $vcat->save();
 
       session()->flash('success', trans('main.updated'));
@@ -136,9 +138,9 @@ class VcategoryRepository implements VcategoryInterface
     {
       $redirect = true;
       $vcat = $this->getById($id);
-      if (file_exists(public_path('uploads/' . $vcat->image))) {
-          @unlink(public_path('uploads/' . $vcat->image));
-      }
+      // if (file_exists(public_path('uploads/' . $vcat->image))) {
+      //     @unlink(public_path('uploads/' . $vcat->image));
+      // }
       $vcat->delete();
 
       if ($redirect) {

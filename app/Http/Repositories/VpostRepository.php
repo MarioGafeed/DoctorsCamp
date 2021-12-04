@@ -62,11 +62,11 @@ class VpostRepository implements VpostInterface
         'en' => $request->desc_en,
         'ar' => $request->desc_ar,
       ]);
-      if ($request->hasFile('image')) {
-        $requestAll['image'] = Helper::Upload('vposts', $request->file('image'), 'checkImages');
-      }else {
-        $requestAll['image'] = "vposts/default.jpg";
-      }
+      // if ($request->hasFile('image')) {
+      //   $requestAll['image'] = Helper::Upload('vposts', $request->file('image'), 'checkImages');
+      // }else {
+      //   $requestAll['image'] = "vposts/default.jpg";
+      // }
       $requestAll['user_id'] = auth()->user()->id;
       $vpos = Vpost::create($requestAll);
     // dd($requestAll['vtaq_id']);
@@ -137,9 +137,9 @@ class VpostRepository implements VpostInterface
       $vpos->active = $request->active;
       $vpos->user_id = auth()->user()->id;
 
-      if ($request->hasFile('image')) {
-          $vpos->image = Helper::UploadUpdate($vpos->image ?? "", 'vposts', $request->file('image'), 'checkImages');
-      }
+      // if ($request->hasFile('image')) {
+      //     $vpos->image = Helper::UploadUpdate($vpos->image ?? "", 'vposts', $request->file('image'), 'checkImages');
+      // }
 
       $vpos->save();
      if ($request->vtaq_id) {
@@ -153,9 +153,9 @@ class VpostRepository implements VpostInterface
     {
       $redirect = true;
       $vpos = $this->getById($id);
-      if (file_exists(public_path('uploads/' . $vpos->image))) {
-          @unlink(public_path('uploads/' . $vpos->image));
-      }
+      // if (file_exists(public_path('uploads/' . $vpos->image))) {
+      //     @unlink(public_path('uploads/' . $vpos->image));
+      // }
       $vpos->delete();
 
       if ($redirect) {

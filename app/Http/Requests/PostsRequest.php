@@ -36,12 +36,11 @@ class PostsRequest extends FormRequest
            'desc_ar'         => 'required',
            'desc_en'         => 'nullable',
            'active'          => 'required|in:0,1',
-           'image'           => 'required|mimes:jpg|dimensions:width=350,height=299',
         ];
 
-        if ($this->method() == 'PATCH') {
-          $rules['image'] = 'sometimes|nullable|mimes:jpg|dimensions:width=350,height=299';
-        }
+        // if ($this->method() == 'PATCH') {
+        //   $rules['image'] = 'sometimes|nullable|mimes:jpg|dimensions:width=350,height=299';
+        // }
         return $rules;
     }
 
@@ -54,8 +53,7 @@ class PostsRequest extends FormRequest
             'content'     => trans('main.content'),
             'keyword'     => trans('main.keyword'),
             'desc'        => trans('main.description'),
-            'active'      => trans('main.status'),
-            'image'       => trans('main.image'),
+            'active'      => trans('main.status'),        
         ];
     }
 }

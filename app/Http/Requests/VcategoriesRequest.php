@@ -25,8 +25,7 @@ class VcategoriesRequest extends FormRequest
     {
         return [
             'title_en'        => 'required|string|max:50',
-            'title_ar'        => 'required|string|max:50',
-            'image'           => 'required|mimes:jpg|dimensions:width=900,height=600',
+            'title_ar'        => 'required|string|max:50',          
             'keyword'         => 'nullable',
             'summary_en'      => 'required',
             'summary_ar'      => 'required',
