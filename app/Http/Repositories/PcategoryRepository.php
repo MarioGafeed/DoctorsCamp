@@ -96,7 +96,7 @@ class PcategoryRepository implements PcategoryInterface
 
     public function edit($id)
     {
-      $pcat = $this->getById(id);
+      $pcat = $this->getById($id);
       $pcat['title_en'] = json_decode($pcat->title)->en;
       $pcat['title_ar'] = json_decode($pcat->title)->ar;
       $pcat['desc_en'] = json_decode($pcat->desc)->en;
