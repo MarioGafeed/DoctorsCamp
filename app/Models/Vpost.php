@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 class Vpost extends Model
 {
     protected $fillable = [
-       'vcat_id', 'title', 'image', 'keyword', 'content', 'desc', 'active', 'user_id',
+       'vcat_id', 'title', 'keyword', 'content', 'desc', 'active', 'user_id',
   ];
 
     public function vcategory()

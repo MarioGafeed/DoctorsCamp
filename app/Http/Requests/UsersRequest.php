@@ -29,7 +29,6 @@ class UsersRequest extends FormRequest
             'phone'    => 'required|unique:users',
             'password' => 'required|confirmed',
             'type'     => 'required|in:user,admin',
-            'image'    => 'nullable|mimes:jpg',
             'active'   => 'required|in:0,1',
         ];
 
@@ -49,8 +48,7 @@ class UsersRequest extends FormRequest
             'email'      => trans('main.email'),
             'password'   => trans('main.password'),
             'type'       => trans('main.type'),
-            'phone'      => trans('main.phone'),
-            'image'      => trans('main.image'),
+            'phone'      => trans('main.phone'),            
             'active'     => trans('main.active'),
         ];
     }

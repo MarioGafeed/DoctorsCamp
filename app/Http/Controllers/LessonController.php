@@ -60,7 +60,7 @@ class LessonController extends Controller
 
       $requestAll = $request->all();
 
-      $requestAll['image'] = Helper::Upload('lessons', $request->file('image'), 'checkImages');
+      // $requestAll['image'] = Helper::Upload('lessons', $request->file('image'), 'checkImages');
 
       $lesson = Lesson::create($requestAll);
 
@@ -124,9 +124,9 @@ class LessonController extends Controller
       $lesson->active    = $request->active;
 
 
-      if ($request->hasFile('image')) {
-          $lesson->image = Helper::UploadUpdate($lesson->image ?? null, 'lessons', $request->file('image'), 'checkImages');
-      }
+      // if ($request->hasFile('image')) {
+      //     $lesson->image = Helper::UploadUpdate($lesson->image ?? null, 'lessons', $request->file('image'), 'checkImages');
+      // }
       $lesson->save();
 
       session()->flash('success', trans('main.updated'));
@@ -143,9 +143,9 @@ class LessonController extends Controller
   public function destroy($id, $redirect = true)
   {
       $lesson = Lesson::findOrFail($id);
-      if (file_exists(public_path('uploads/' . $lesson->image))) {
-          @unlink(public_path('uploads/' . $lesson->image));
-      }
+      // if (file_exists(public_path('uploads/' . $lesson->image))) {
+      //     @unlink(public_path('uploads/' . $lesson->image));
+      // }
       $lesson->delete();
 
       if ($redirect) {

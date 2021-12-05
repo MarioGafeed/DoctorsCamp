@@ -22,32 +22,7 @@
             @endif
         </div>
     </div>
-
-    <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
-        <label class="control-label col-md-2">{{ trans('main.image') }}</label>
-        <div class="col-md-6">
-            <div class="fileinput fileinput-new" data-provides="fileinput">
-                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
-                    @if (checkValue(getData($data, 'image')))
-                        <img src="{{ ShowImage(getData($data, 'image')) }}" alt="" />
-                    @endif
-                </div>
-                <div>
-                    <span class="btn red btn-outline btn-file">
-                        <span class="fileinput-new"> {{ trans('main.select_image') }} 350*299</span>
-                        <span class="fileinput-exists"> {{ trans('main.change') }} 350*299</span>
-                        <input type="file" name="image">
-                    </span>
-                    <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> {{ trans('main.remove') }} </a>
-                </div>
-            </div>
-            @if ($errors->has('image'))
-                <span class="help-block">
-                    <strong class="help-block">{{ $errors->first('image') }}</strong>
-                </span>
-            @endif
-        </div>
-    </div>
+    
 
 
     <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">

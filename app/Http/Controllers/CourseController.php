@@ -49,7 +49,6 @@ class CourseController extends Controller
   public function store(CoursesRequest $request)
   {
       $requestAll = $request->all();
-      $requestAll['image'] = Helper::Upload('courses', $request->file('image'), 'checkImages');
       $course =  Course::create($requestAll);
 
       session()->flash('success', trans('main.added-message'));
@@ -101,9 +100,9 @@ class CourseController extends Controller
       $course->desc   = $request->desc;
       $course->price  = $request->price;
       $course->active = $request->active;
-      if ($request->hasFile('image')) {
-          $course->image = Helper::UploadUpdate($course->image ?? "", 'users', $request->file('image'), 'checkImages');
-      }
+      // if ($request->hasFile('image')) {
+      //     $course->image = Helper::UploadUpdate($course->image ?? "", 'users', $request->file('image'), 'checkImages');
+      // }
       $course->save();
 
       session()->flash('success', trans('main.updated'));

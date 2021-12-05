@@ -17,8 +17,7 @@ class CreatePcategoriesTable extends Migration
           $table->engine = 'InnoDB';
             // $table->increments('id');
             $table->id();
-            $table->text('title');
-            $table->string('image')->nullable();
+            $table->text('title');            
             $table->longtext('summary');
             $table->text('keyword');
             $table->longtext('desc');

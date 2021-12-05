@@ -19,8 +19,7 @@ class CreateUsersTable extends Migration
             // $table->increments('id');
             $table->id();
             // $table->ipAddress('visitor');
-            $table->string('name');            
-            $table->string('image')->nullable();
+            $table->string('name');                        
             $table->string('phone')->nullable(); // For mobile Phone
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

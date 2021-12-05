@@ -38,7 +38,6 @@ class VpostsRequest extends FormRequest
             'desc_ar'       => 'nullable',
             'active'        => 'required|in:0,1',
             // 'image'         => 'required|mimes:jpg|dimensions:min_width=255,min_height=336',
-            'image'         => 'required|mimes:jpg|dimensions:width=900,height=600',
         ];
     }
 
@@ -51,8 +50,7 @@ class VpostsRequest extends FormRequest
             'content'     => trans('main.content'),
             'keyword'     => trans('main.keyword'),
             'desc'        => trans('main.description'),
-            'active'      => trans('main.status'),
-            'image'       => trans('main.image'),
+            'active'      => trans('main.status'),            
         ];
     }
 }

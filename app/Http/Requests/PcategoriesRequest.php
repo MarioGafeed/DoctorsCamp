@@ -26,7 +26,6 @@ class PcategoriesRequest extends FormRequest
         return [
             'title_en'        => 'nullable|string|max:50',
             'title_ar'        => 'required|string|max:50',
-            'image'           => 'required|mimes:jpg|dimensions:width=350,height=299',
             'keyword'         => 'nullable',
             'summary_en'      => 'nullable',
             'summary_ar'      => 'required',
@@ -42,8 +41,7 @@ class PcategoriesRequest extends FormRequest
             'title'         => trans('main.title'),
             'keyword'       => trans('main.keyword'),
             'summary'       => trans('main.summary'),
-            'desc'          => trans('main.desc'),
-            'img'           => trans('main.image'),
+            'desc'          => trans('main.desc'),            
         ];
     }
 }

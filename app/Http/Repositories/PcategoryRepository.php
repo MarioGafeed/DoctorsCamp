@@ -43,6 +43,7 @@ class PcategoryRepository implements PcategoryInterface
     public function store($request)
     {
       $requestAll = $request->all();
+
       $requestAll['title'] = json_encode([
         'en' => $request->title_en,
         'ar' => $request->title_ar,
@@ -57,11 +58,11 @@ class PcategoryRepository implements PcategoryInterface
       ]);
 
 
-      if ($request->hasFile('image')) {
-        $requestAll['image'] = Helper::Upload('pcategories', $request->file('image'), 'checkImages');
-      }else {
-        $requestAll['image'] = "pcategories/default.jpg";
-      }
+      // if ($request->hasFile('image')) {
+      //   $requestAll['image'] = Helper::Upload('pcategories', $request->file('image'), 'checkImages');
+      // }else {
+      //   $requestAll['image'] = "pcategories/default.jpg";
+      // }
 
       $pcat = Pcategory::create($requestAll);
 
@@ -95,7 +96,7 @@ class PcategoryRepository implements PcategoryInterface
 
     public function edit($id)
     {
-      $pcat = $this->getById(id);
+      $pcat = $this->getById($id);
       $pcat['title_en'] = json_decode($pcat->title)->en;
       $pcat['title_ar'] = json_decode($pcat->title)->ar;
       $pcat['desc_en'] = json_decode($pcat->desc)->en;
@@ -124,9 +125,6 @@ class PcategoryRepository implements PcategoryInterface
         'ar' => $request->summary_ar,
       ]);
       $pcat->keyword = $request->keyword;
-      if ($request->hasFile('image')) {
-          $pcat->image = Helper::UploadUpdate($pcat->image ?? "", 'pcategories', $request->file('image'), 'checkImages');
-      }
       $pcat->save();
 
       session()->flash('success', trans('main.updated'));
@@ -137,9 +135,9 @@ class PcategoryRepository implements PcategoryInterface
     {
       $redirect = true;
       $pcat = $this->getById($id);
-      if (file_exists(public_path('uploads/' . $pcat->image))) {
-          @unlink(public_path('uploads/' . $pcat->image));
-      }
+      // if (file_exists(public_path('uploads/' . $pcat->image))) {
+      //     @unlink(public_path('uploads/' . $pcat->image));
+      // }
       $pcat->delete();
 
       if ($redirect) {
