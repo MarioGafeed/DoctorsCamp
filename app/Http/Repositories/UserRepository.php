@@ -52,7 +52,7 @@ class UserRepository implements UserInterface
         $user = User::create($requestAll);
 
         $user
-          ->addMediaFromRequest('image')
+          ->addMediaFromRequest('image')          
           ->toMediaCollection();
 
         $roles = $request['roles']; //Retrieving the roles field
@@ -76,6 +76,7 @@ class UserRepository implements UserInterface
     public function show($id)
     {
        $user = $this->getById($id);
+
         return view("{$this->viewPath}.show", [
             'title' => trans('main.show') . ' ' . trans('main.user') . ' : ' . $user->name,
             'show' => $user,
