@@ -16,8 +16,8 @@
        <div class="col-md-10">
            <div class="fileinput fileinput-new" data-provides="fileinput">
                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
-                   @if (checkValue(getData($data, 'image')))
-                       <img src="{{ $data->getFirstMedia()->getUrl() }}" alt="" />
+                   @if (checkValue( $edit->getFirstMediaUrl() )
+                       <img src="{{ $edit->getFirstMediaUrl() }}" alt="" />
                    @endif
                </div>
                <div>
