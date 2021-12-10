@@ -57,14 +57,13 @@ class VcategoryRepository implements VcategoryInterface
         'ar' => $request->summary_ar,
       ]);
 
-
-      // if ($request->hasFile('image')) {
-      //   $requestAll['image'] = Helper::Upload('vcategories', $request->file('image'), 'checkImages');
-      // }else {
-      //   $requestAll['image'] = "vcategories/default.jpg";
-      // }
-
       $vcat = Vcategory::create($requestAll);
+      
+      if ($request->hasFile('image')) {
+        $vcat->addMediaFromRequest('image')->toMediaCollection();
+      }
+
+
 
       session()->flash('success', trans('main.added-message'));
       return redirect()->route('vcategories.index');
@@ -125,9 +124,12 @@ class VcategoryRepository implements VcategoryInterface
         'ar' => $request->summary_ar,
       ]);
       $vcat->keyword = $request->keyword;
-      // if ($request->hasFile('image')) {
-      //     $vcat->image = Helper::UploadUpdate($vcat->image ?? "", 'vcategories', $request->file('image'), 'checkImages');
-      // }
+      if ($request->hasFile('image')) {
+        $vcat->clearMediaCollection();
+        $vcat
+          ->addMediaFromRequest('image')
+          ->toMediaCollection();
+      }
       $vcat->save();
 
       session()->flash('success', trans('main.updated'));
@@ -138,9 +140,7 @@ class VcategoryRepository implements VcategoryInterface
     {
       $redirect = true;
       $vcat = $this->getById($id);
-      // if (file_exists(public_path('uploads/' . $vcat->image))) {
-      //     @unlink(public_path('uploads/' . $vcat->image));
-      // }
+      $vcat->clearMediaCollection();
       $vcat->delete();
 
       if ($redirect) {

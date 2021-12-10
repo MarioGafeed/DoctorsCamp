@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
 
-class Pcategory extends Model
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+
+class Pcategory extends Model Implements HasMedia
 {
+  use InteractsWithMedia;
+  
   protected $fillable = [
       'title', 'keyword', 'summary', 'desc'
   ];

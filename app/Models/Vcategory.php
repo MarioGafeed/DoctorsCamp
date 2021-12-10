@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Vcategory extends Model
+
+class Vcategory extends Model Implements HasMedia
 {
+  use InteractsWithMedia;
+
   protected $fillable = [
       'title', 'keyword', 'summary', 'desc'
   ];

@@ -58,7 +58,7 @@
                             <strong>{{trans('main.myorder')}} : </strong>
                             {{ trans( $show->myorder) }}
                             <br><hr>
-                        </div>                        
+                        </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.status')}} : </strong>
                             {{ $show->active }}
@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.image')}} : </strong>
-                            <img style="width: 200px; height: 150px;" src="{{ ShowImage($show->image) }}" alt="">
+                            <img style="width: 200px; height: 150px;" src="{{ $show->getFirstMediaUrl() }}" alt="">
                             <br><hr>
                         </div>
                         <div class="col-md-12">

@@ -51,9 +51,11 @@ class UserRepository implements UserInterface
 
         $user = User::create($requestAll);
 
+        if ($request->hasFile('image')) {
         $user
-          ->addMediaFromRequest('image')          
+          ->addMediaFromRequest('image')
           ->toMediaCollection();
+        }
 
         $roles = $request['roles']; //Retrieving the roles field
         //Checking if a role was selected
@@ -132,9 +134,9 @@ class UserRepository implements UserInterface
     {
       $redirect = true;
       $user = $this->getById($id );
-      if (file_exists(public_path($user->getFirstMedia()->getUrl()))) {
-          $user->clearMediaCollection();
-      }
+
+      $user->clearMediaCollection();
+
       $user->delete();
 
       if ($redirect) {

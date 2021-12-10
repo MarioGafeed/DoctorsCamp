@@ -66,14 +66,14 @@ class PostRepository implements PostInterface
         'ar' => $request->content_ar,
       ]);
 
-      // if ($request->hasFile('image')) {
-      //   $requestAll['image'] = Helper::Upload('posts', $request->file('image'), 'checkImages');
-      // }else {
-      //   $requestAll['image'] = "posts/default.jpg";
-      // }
+
       $requestAll['user_id'] = auth()->user()->id;
       // dd($requestAll);
       $pos = Post::create($requestAll);
+      if ($request->hasFile('image')) {
+        $pos->addMediaFromRequest('image')->toMediaCollection();
+      }
+      
       if ($requestAll['ptaq_id'])
       {
         $pos->ptaqs()->attach($requestAll['ptaq_id']);
@@ -146,6 +146,13 @@ class PostRepository implements PostInterface
       $pos->active = $request->active;
       $pos->user_id = auth()->user()->id;
 
+      if ($request->hasFile('image')) {
+        $pos->clearMediaCollection();
+        $pos
+          ->addMediaFromRequest('image')
+          ->toMediaCollection();
+      }
+
 
       $pos->save();
      if ($request->ptaq_id) {
@@ -159,9 +166,7 @@ class PostRepository implements PostInterface
     {
       $redirect = true;
       $pos = $this->getById($id);
-      // if (file_exists(public_path('uploads/' . $pos->image))) {
-      //     @unlink(public_path('uploads/' . $pos->image));
-      // }
+      $pos->clearMediaCollection();
       $pos->delete();
 
       if ($redirect) {

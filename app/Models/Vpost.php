@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 
-class Vpost extends Model
+
+class Vpost extends Model Implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $fillable = [
        'vcat_id', 'title', 'keyword', 'content', 'desc', 'active', 'user_id',
   ];
