@@ -31,7 +31,7 @@ class VpostsRequest extends FormRequest
             'title_en'      => 'required',
             'title_ar'      => 'nullable',
             'vcat_id'       => 'required|exists:vcategories,id',
-            'vtaq_id'       => 'required|exists:vtaqs,id',
+            // 'vtaq_id'       => 'required|exists:vtaqs,id',
             'content'       => 'required',
             'keyword'       => 'required',
             'desc_en'       => 'required',
@@ -50,7 +50,7 @@ class VpostsRequest extends FormRequest
             'content'     => trans('main.content'),
             'keyword'     => trans('main.keyword'),
             'desc'        => trans('main.description'),
-            'active'      => trans('main.status'),            
+            'active'      => trans('main.status'),
         ];
     }
 }

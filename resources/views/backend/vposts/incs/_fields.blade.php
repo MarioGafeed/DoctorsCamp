@@ -76,23 +76,7 @@
         </div>
     </div>
 
-    {{-- Add Post's Taq --}}
-    <div class="form-group{{ $errors->has('vtaq_id') ? ' has-error' : '' }}">
-        <label class="col-md-2 control-label">{{ trans('main.vtaqs') }} <span class="required"></span> </label>
-          <option value="">{{ trans('main.selectTaqsPost') }}</option>
-        <div class="col-md-6">
-            <select class="form-control select2" name="vtaq_id[]" id="vtaq_id" multiple>
-              @foreach ($vtaq as $pt)
-                  <option value="{{ $pt->id }}" {{ getData($data, 'vtaq_id') == $pt->id ? 'selected' : '' }}>{{ $pt->name }}</option>
-              @endforeach
-            </select>
-            @if ($errors->has('vtaq_id'))
-                <span class="help-block">
-                    <strong class="help-block">{{ $errors->first('vtaq_id') }}</strong>
-                </span>
-            @endif
-        </div>
-    </div>
+  
 
 
 

@@ -20,7 +20,7 @@ trait VpostTrait
 
     private function getVpostFirst($id)
     {
-        return $this->vpostModel::where('id', $id)->with('vcategory', 'user', 'vtaqs')->first();
+        return $this->vpostModel::where('id', $id)->with('vcategory', 'user')->first();
     }
     private function getvPostWithvCat($id)
     {

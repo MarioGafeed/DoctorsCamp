@@ -29,9 +29,5 @@ class Vpost extends Model Implements HasMedia
     {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
-
-    public function vtaqs()
-    {
-        return $this->belongsToMany('App\Models\Vtaq', 'vposts_taqs', 'vpost_id', 'vtaq_id');
-    }
+    
 }

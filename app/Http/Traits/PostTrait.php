@@ -20,7 +20,7 @@ trait PostTrait
 
     private function getPostFirst($id)
     {
-        return $this->postModel::where('id', $id)->with('pcategory', 'user', 'ptaqs')->first();
+        return $this->postModel::where('id', $id)->with('pcategory', 'user')->first();
     }
     private function getPostWithCat($id)
     {

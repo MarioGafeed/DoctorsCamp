@@ -116,41 +116,7 @@
                     </li>
                 </ul>
             </li>
-
-            <!-- Add Post Taq  (Mario Added) -->
-            <li class="heading">
-                <h3 class="uppercase">{{ trans('main.taqs') }}</h3>
-            </li>
-
-            <li class="nav-item  {{ active_route('ptaq.*') }}">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
-                    <span class="title">{{ trans('main.taqs') }}</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item {{ active_route('ptaqs.create') }}">
-                        <a href="{{ route('ptaqs.create') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.add') }} {{ trans('main.ptaq') }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ active_route('ptaqs.index') }}">
-                        <a href="{{ route('ptaqs.index') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.ptaqs') }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ active_route('vtaqs.create') }}">
-                        <a href="{{ route('vtaqs.create') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.add') }} {{ trans('main.vtaq') }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ active_route('vtaqs.index') }}">
-                        <a href="{{ route('vtaqs.index') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.vtaqs') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+          
 
             <!-- Add Post category  (Mario Added) -->
             <li class="heading">

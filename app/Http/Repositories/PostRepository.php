@@ -6,7 +6,7 @@ use App\Http\Interfaces\PostInterface;
 use App\Http\Traits\PostTrait;
 use App\Models\Post;
 use App\Models\Pcategory;
-use App\Models\Ptaq;
+// use App\Models\Ptaq;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
@@ -18,12 +18,11 @@ class PostRepository implements PostInterface
     use PostTrait;
     private $postModel;
     private $catModel;
-    private $taqModel;
+    // private $taqModel;
     public function __construct(Post $post, Pcategory $cat, Ptaq $taq)
     {
         $this->postModel = $post;
         $this->catModel  = $cat;
-        $this->taqModel  = $taq;
     }
 
     /**
@@ -42,11 +41,9 @@ class PostRepository implements PostInterface
     public function create()
     {
       $pcats = $this->getAllpcategory();
-      $ptaq  = $this->getAlltaqs();
       return view("{$this->viewPath}.create", [
           'title' => trans('main.add') . ' ' . trans('main.posts'),
           'pcats' => $pcats,
-          'ptaq'  => $ptaq,
       ]);
     }
 
@@ -73,11 +70,11 @@ class PostRepository implements PostInterface
       if ($request->hasFile('image')) {
         $pos->addMediaFromRequest('image')->toMediaCollection();
       }
-      
-      if ($requestAll['ptaq_id'])
-      {
-        $pos->ptaqs()->attach($requestAll['ptaq_id']);
-      }
+
+      // if ($requestAll['ptaq_id'])
+      // {
+      //   $pos->ptaqs()->attach($requestAll['ptaq_id']);
+      // }
       session()->flash('success', trans('main.added-message'));
       return redirect()->route('posts.index');
     }
@@ -108,7 +105,7 @@ class PostRepository implements PostInterface
     {
       $pos = $this->getPostFirst($id);
       $pcats = $this->getAllpcategory();
-      $ptaq = $this->getAlltaqs();
+      // $ptaq = $this->getAlltaqs();
       $pos['title_en'] = json_decode($pos->title)->en;
       $pos['title_ar'] = json_decode($pos->title)->ar;
       $pos['desc_en'] = json_decode($pos->desc)->en;
@@ -119,7 +116,6 @@ class PostRepository implements PostInterface
           'title' => trans('main.edit') . ' ' . trans('main.post') . ' : ' . $pos->title,
           'edit' => $pos,
           'pcats' => $pcats,
-          'ptaq' => $ptaq,
       ]);
     }
 
@@ -155,9 +151,9 @@ class PostRepository implements PostInterface
 
 
       $pos->save();
-     if ($request->ptaq_id) {
-      $pos->ptaqs()->sync($request->ptaq_id);
-       }
+     // if ($request->ptaq_id) {
+     //  $pos->ptaqs()->sync($request->ptaq_id);
+     //   }
       session()->flash('success', trans('main.updated'));
       return redirect()->route('posts.show', [$pos->id]);
     }
