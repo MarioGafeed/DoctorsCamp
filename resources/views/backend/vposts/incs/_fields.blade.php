@@ -76,8 +76,19 @@
         </div>
     </div>
 
-  
 
+    {{-- Add vPost's Taq --}}
+    <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+        <label class="col-md-2 control-label">{{ trans('main.tags') }} <span class="required"></span> </label>
+        <div class="col-md-6">
+            <input type="text" name="tags" value="{{ $tags }}" class="form-control" placeholder="{{ trans('main.tags') }}" required>
+            @if ($errors->has('tags'))
+                <span class="help-block">
+                    <strong class="help-block">{{ $errors->first('tags') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
 
 
     <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">

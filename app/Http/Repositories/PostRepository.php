@@ -19,7 +19,7 @@ class PostRepository implements PostInterface
     private $postModel;
     private $catModel;
     // private $taqModel;
-    public function __construct(Post $post, Pcategory $cat, Ptaq $taq)
+    public function __construct(Post $post, Pcategory $cat)
     {
         $this->postModel = $post;
         $this->catModel  = $cat;
@@ -49,6 +49,7 @@ class PostRepository implements PostInterface
 
     public function store($request)
     {
+
       $requestAll = $request->all();
       $requestAll['title'] = json_encode([
         'en' => $request->title_en,
@@ -71,10 +72,9 @@ class PostRepository implements PostInterface
         $pos->addMediaFromRequest('image')->toMediaCollection();
       }
 
-      // if ($requestAll['ptaq_id'])
-      // {
-      //   $pos->ptaqs()->attach($requestAll['ptaq_id']);
-      // }
+      $tags = explode(',' ,$request->tags);
+      $vpos->attachTags($tags);
+
       session()->flash('success', trans('main.added-message'));
       return redirect()->route('posts.index');
     }
@@ -105,7 +105,13 @@ class PostRepository implements PostInterface
     {
       $pos = $this->getPostFirst($id);
       $pcats = $this->getAllpcategory();
-      // $ptaq = $this->getAlltaqs();
+
+      $tagNames = $pos->tags->pluck('name');
+      foreach ($tagNames as $key => $tagName) {
+        $results[] = $tagName;
+      }
+      $tags = implode(',', $results);
+
       $pos['title_en'] = json_decode($pos->title)->en;
       $pos['title_ar'] = json_decode($pos->title)->ar;
       $pos['desc_en'] = json_decode($pos->desc)->en;
@@ -151,9 +157,8 @@ class PostRepository implements PostInterface
 
 
       $pos->save();
-     // if ($request->ptaq_id) {
-     //  $pos->ptaqs()->sync($request->ptaq_id);
-     //   }
+      $tags = explode(',' ,$request->tags);
+      $pos->attachTags($tags);
       session()->flash('success', trans('main.updated'));
       return redirect()->route('posts.show', [$pos->id]);
     }

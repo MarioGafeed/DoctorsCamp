@@ -6,7 +6,6 @@ use App\Http\Interfaces\VpostInterface;
 use App\Http\Traits\VpostTrait;
 use App\Models\Vpost;
 use App\Models\Vcategory;
-// use App\Models\Vtaq;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
@@ -18,7 +17,6 @@ class VpostRepository implements VpostInterface
     use VpostTrait;
     private $vpostModel;
     private $vcatModel;
-    // private $vtaqModel;
     public function __construct(Vpost $vpost, Vcategory $vcat)
     {
         $this->vpostModel = $vpost;
@@ -41,11 +39,9 @@ class VpostRepository implements VpostInterface
     public function create()
     {
       $vcat = $this->getAllvcategory();
-      // $vtaq = $this->getAlltaqs();
       return view("{$this->viewPath}.create", [
           'title' => trans('main.add') . ' ' . trans('main.vposts'),
           'vcat'  => $vcat,
-          // 'vtaq'  => $vtaq,
       ]);
     }
 
@@ -68,10 +64,8 @@ class VpostRepository implements VpostInterface
         $vpos->addMediaFromRequest('image')->toMediaCollection();
       }
 
-      // if ($requestAll['vtaq_id'])
-      // {
-      //   $vpos->vtaqs()->attach($requestAll['vtaq_id']);
-      // }
+       $tags = explode(',' ,$request->tags);
+       $vpos->attachTags($tags);
 
       session()->flash('success', trans('main.added-message'));
       return redirect()->route('vposts.index');
@@ -101,16 +95,22 @@ class VpostRepository implements VpostInterface
     {
       $vpos = $this->getVpostFirst($id);
       $vcat = $this->getAllvcategory();
-      // $vtaq = $this->getAlltaqs();
+
+      $tagNames = $vpos->tags->pluck('name');
+      foreach ($tagNames as $key => $tagName) {
+        $results[] = $tagName;
+      }
+      $tags = implode(',', $results);
+      
       $vpos['title_en'] = json_decode($vpos->title)->en;
       $vpos['title_ar'] = json_decode($vpos->title)->ar;
       $vpos['desc_en'] = json_decode($vpos->desc)->en;
       $vpos['desc_ar'] = json_decode($vpos->desc)->ar;
       return view("{$this->viewPath}.edit", [
-          'title' => trans('main.edit') . ' ' . trans('main.post') . ' : ' . $vpos->title,
+          'title' => trans('main.edit') . ' ' . trans('main.vpost') . ' : ' . $vpos->title,
           'edit' => $vpos,
           'vcat' => $vcat,
-          // 'vtaq' => $vtaq,
+          'tags' => $tags,
       ]);
     }
 
@@ -142,9 +142,8 @@ class VpostRepository implements VpostInterface
       }
 
       $vpos->save();
-     // if ($request->vtaq_id) {
-     //  $vpos->vtaqs()->sync($request->vtaq_id);
-     //   }
+      $tags = explode(',' ,$request->tags);
+      $vpos->attachTags($tags);
       session()->flash('success', trans('main.updated'));
       return redirect()->route('vposts.show', [$vpos->id]);
     }

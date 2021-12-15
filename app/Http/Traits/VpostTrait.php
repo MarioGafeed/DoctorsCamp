@@ -12,11 +12,7 @@ trait VpostTrait
     {
         return $this->vcatModel::select('id', 'title')->get();
     }
-
-    private function getAlltaqs()
-    {
-        return $this->vtaqModel::all();
-    }
+  
 
     private function getVpostFirst($id)
     {

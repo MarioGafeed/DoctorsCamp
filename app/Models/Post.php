@@ -9,11 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-
+use Spatie\Tags\HasTags;
 
 class Post extends Model Implements HasMedia
 {
-  use InteractsWithMedia;
+  use InteractsWithMedia, HasTags;
 
   protected $fillable = [
        'pcat_id', 'title', 'keyword', 'content', 'desc', 'active', 'user_id',
