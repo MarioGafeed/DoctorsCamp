@@ -104,6 +104,6 @@ class VcategoryController extends Controller
    */
   public function multi_delete(Request $request)
   {
-      return $this->VcategoryInterface->multi_delete($id);
+      return $this->VcategoryInterface->multi_delete($request);
   }
 }

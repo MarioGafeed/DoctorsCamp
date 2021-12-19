@@ -57,14 +57,12 @@ class PcategoryRepository implements PcategoryInterface
         'ar' => $request->summary_ar,
       ]);
 
-
-      // if ($request->hasFile('image')) {
-      //   $requestAll['image'] = Helper::Upload('pcategories', $request->file('image'), 'checkImages');
-      // }else {
-      //   $requestAll['image'] = "pcategories/default.jpg";
-      // }
-
       $pcat = Pcategory::create($requestAll);
+
+      if ($request->hasFile('image')) {
+        $pcat->addMediaFromRequest('image')->toMediaCollection();
+      }
+
 
       session()->flash('success', trans('main.added-message'));
       return redirect()->route('pcategories.index');
@@ -125,6 +123,14 @@ class PcategoryRepository implements PcategoryInterface
         'ar' => $request->summary_ar,
       ]);
       $pcat->keyword = $request->keyword;
+
+      if ($request->hasFile('image')) {
+        $pcat->clearMediaCollection();
+        $pcat
+          ->addMediaFromRequest('image')
+          ->toMediaCollection();
+      }
+
       $pcat->save();
 
       session()->flash('success', trans('main.updated'));
@@ -135,9 +141,7 @@ class PcategoryRepository implements PcategoryInterface
     {
       $redirect = true;
       $pcat = $this->getById($id);
-      // if (file_exists(public_path('uploads/' . $pcat->image))) {
-      //     @unlink(public_path('uploads/' . $pcat->image));
-      // }
+      $pcat->clearMediaCollection();
       $pcat->delete();
 
       if ($redirect) {
