@@ -6,7 +6,6 @@ use App\Http\Interfaces\PostInterface;
 use App\Http\Traits\PostTrait;
 use App\Models\Post;
 use App\Models\Pcategory;
-// use App\Models\Ptaq;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
@@ -18,7 +17,7 @@ class PostRepository implements PostInterface
     use PostTrait;
     private $postModel;
     private $catModel;
-    // private $taqModel;
+
     public function __construct(Post $post, Pcategory $cat)
     {
         $this->postModel = $post;
@@ -66,14 +65,14 @@ class PostRepository implements PostInterface
 
 
       $requestAll['user_id'] = auth()->user()->id;
-      // dd($requestAll);
+
       $pos = Post::create($requestAll);
       if ($request->hasFile('image')) {
         $pos->addMediaFromRequest('image')->toMediaCollection();
       }
 
       $tags = explode(',' ,$request->tags);
-      $vpos->attachTags($tags);
+      $pos->attachTags($tags);
 
       session()->flash('success', trans('main.added-message'));
       return redirect()->route('posts.index');
@@ -106,11 +105,7 @@ class PostRepository implements PostInterface
       $pos = $this->getPostFirst($id);
       $pcats = $this->getAllpcategory();
 
-      $tagNames = $pos->tags->pluck('name');
-      foreach ($tagNames as $key => $tagName) {
-        $results[] = $tagName;
-      }
-      $tags = implode(',', $results);
+      $tags = $pos->tags->pluck('name')->implode(', ')->toArray();
 
       $pos['title_en'] = json_decode($pos->title)->en;
       $pos['title_ar'] = json_decode($pos->title)->ar;

@@ -30,8 +30,7 @@ class VpostsRequest extends FormRequest
         return [
             'title_en'      => 'required',
             'title_ar'      => 'nullable',
-            'vcat_id'       => 'required|exists:vcategories,id',
-            // 'vtaq_id'       => 'required|exists:vtaqs,id',
+            'vcat_id'       => 'required|exists:vcategories,id',          
             'content'       => 'required',
             'keyword'       => 'required',
             'desc_en'       => 'required',

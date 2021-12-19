@@ -96,12 +96,8 @@ class VpostRepository implements VpostInterface
       $vpos = $this->getVpostFirst($id);
       $vcat = $this->getAllvcategory();
 
-      $tagNames = $vpos->tags->pluck('name');
-      foreach ($tagNames as $key => $tagName) {
-        $results[] = $tagName;
-      }
-      $tags = implode(',', $results);
-      
+      $tags = $pos->tags->pluck('name')->implode(', ')->toArray();
+
       $vpos['title_en'] = json_decode($vpos->title)->en;
       $vpos['title_ar'] = json_decode($vpos->title)->ar;
       $vpos['desc_en'] = json_decode($vpos->desc)->en;
