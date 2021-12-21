@@ -96,7 +96,7 @@ class VpostRepository implements VpostInterface
       $vpos = $this->getVpostFirst($id);
       $vcat = $this->getAllvcategory();
 
-      $tags = $pos->tags->pluck('name')->implode(', ')->toArray();
+      $tags = $vpos->tags->pluck('name')->implode(', ');
 
       $vpos['title_en'] = json_decode($vpos->title)->en;
       $vpos['title_ar'] = json_decode($vpos->title)->ar;
@@ -139,7 +139,7 @@ class VpostRepository implements VpostInterface
 
       $vpos->save();
       $tags = explode(',' ,$request->tags);
-      $vpos->attachTags($tags);
+      $vpos->syncTags($tags);
       session()->flash('success', trans('main.updated'));
       return redirect()->route('vposts.show', [$vpos->id]);
     }

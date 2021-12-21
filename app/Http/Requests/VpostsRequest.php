@@ -30,13 +30,12 @@ class VpostsRequest extends FormRequest
         return [
             'title_en'      => 'required',
             'title_ar'      => 'nullable',
-            'vcat_id'       => 'required|exists:vcategories,id',          
+            'vcat_id'       => 'required|exists:vcategories,id',
             'content'       => 'required',
             'keyword'       => 'required',
             'desc_en'       => 'required',
             'desc_ar'       => 'nullable',
-            'active'        => 'required|in:0,1',
-            // 'image'         => 'required|mimes:jpg|dimensions:min_width=255,min_height=336',
+            'active'        => 'required|in:0,1',        
         ];
     }
 

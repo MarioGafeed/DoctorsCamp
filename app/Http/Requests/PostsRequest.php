@@ -28,8 +28,7 @@ class PostsRequest extends FormRequest
         $rules = [
           'title_en'         => 'nullable|string|max:50',
           'title_ar'         => 'required|string|max:50',
-          'pcat_id'          => 'required|exists:pcategories,id',
-          'ptaq_id'          => 'required|exists:ptaqs,id',
+          'pcat_id'          => 'required|exists:pcategories,id',        
           'content_en'       => 'required',
           'content_ar'       => 'nullable',
           'keyword'          => 'required',
@@ -53,7 +52,7 @@ class PostsRequest extends FormRequest
             'content'     => trans('main.content'),
             'keyword'     => trans('main.keyword'),
             'desc'        => trans('main.description'),
-            'active'      => trans('main.status'),        
+            'active'      => trans('main.status'),
         ];
     }
 }

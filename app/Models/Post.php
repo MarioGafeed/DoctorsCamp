@@ -16,7 +16,7 @@ class Post extends Model Implements HasMedia
   use InteractsWithMedia, HasTags;
 
   protected $fillable = [
-       'pcat_id', 'title', 'keyword', 'content', 'desc', 'active', 'user_id',
+    'pcat_id', 'title', 'keyword', 'content', 'desc', 'active', 'user_id',
   ];
 
   public function pcategory()
@@ -29,10 +29,6 @@ class Post extends Model Implements HasMedia
       return $this->belongsTo('App\Models\User', 'user_id');
   }
 
-  public function ptaqs()
-  {
-      return $this->belongsToMany('App\Models\Ptaq', 'posts_tags', 'post_id', 'ptaq_id');
-  }
 
   public function title($lang = null)
   {

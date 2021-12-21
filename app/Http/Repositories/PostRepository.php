@@ -105,7 +105,7 @@ class PostRepository implements PostInterface
       $pos = $this->getPostFirst($id);
       $pcats = $this->getAllpcategory();
 
-      $tags = $pos->tags->pluck('name')->implode(', ')->toArray();
+      $tags = $pos->tags->pluck('name')->implode(', ');
 
       $pos['title_en'] = json_decode($pos->title)->en;
       $pos['title_ar'] = json_decode($pos->title)->ar;
@@ -117,6 +117,7 @@ class PostRepository implements PostInterface
           'title' => trans('main.edit') . ' ' . trans('main.post') . ' : ' . $pos->title,
           'edit' => $pos,
           'pcats' => $pcats,
+          'tags' => $tags,
       ]);
     }
 
@@ -150,10 +151,9 @@ class PostRepository implements PostInterface
           ->toMediaCollection();
       }
 
-
       $pos->save();
       $tags = explode(',' ,$request->tags);
-      $pos->attachTags($tags);
+      $pos->syncTags($tags);
       session()->flash('success', trans('main.updated'));
       return redirect()->route('posts.show', [$pos->id]);
     }

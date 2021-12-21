@@ -51,7 +51,7 @@
 
     {{-- Add Post's Category --}}
     <div class="form-group{{ $errors->has('pcat_id') ? ' has-error' : '' }}">
-        <label class="col-md-2 control-label">{{ trans('main.epcategory') }} <span class="required"></span> </label>
+        <label class="col-md-2 control-label">{{ trans('main.pcategory') }} <span class="required"></span> </label>
         <div class="col-md-6">
             <select class="form-control select2" id="pcat_id" name="pcat_id">
               <option value="">{{ trans('main.select Category') }}</option>
@@ -77,7 +77,11 @@
     <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
         <label class="col-md-2 control-label">{{ trans('main.tags') }} <span class="required"></span> </label>
         <div class="col-md-6">
-            <input type="text" name="tags" value="{{ $tags }}" class="form-control" placeholder="{{ trans('main.tags') }}" required>
+          @if( isset($edit) )
+          <input type="text" name="tags" value="{{ $tags }}" class="form-control" placeholder="{{ trans('main.tags') }}" required>
+          @else
+          <input type="text" name="tags" value="{{ getData($data, 'tags') }}" class="form-control" placeholder="{{ trans('main.tags') }}" required>
+          @endif
             @if ($errors->has('tags'))
                 <span class="help-block">
                     <strong class="help-block">{{ $errors->first('tags') }}</strong>
