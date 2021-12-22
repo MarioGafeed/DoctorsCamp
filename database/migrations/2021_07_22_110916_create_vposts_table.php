@@ -15,10 +15,9 @@ class CreateVpostsTable extends Migration
     {
       Schema::disableForeignKeyConstraints(); // For Forgen Key Checks Disable
         Schema::create('vposts', function (Blueprint $table) {
-          $table->engine = 'InnoDB';
-            // $table->increments('id');
-            $table->id();
-            $table->text('title');          
+          $table->engine = 'InnoDB';            
+            $table->bigIncrements();
+            $table->text('title');
             $table->longtext('content');
             $table->longtext('desc');
             $table->text('keyword');

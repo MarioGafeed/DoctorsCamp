@@ -15,10 +15,9 @@ class CreatepostsTable extends Migration
     {
       Schema::disableForeignKeyConstraints();
         Schema::create('posts', function (Blueprint $table) {
-          $table->engine = 'InnoDB';
-            // $table->increments('id');
-            $table->id();
-            $table->text('title');          
+          $table->engine = 'InnoDB';            
+            $table->bigIncrements();
+            $table->text('title');
             $table->longtext('content');
             $table->text('desc');
             $table->text('keyword');
