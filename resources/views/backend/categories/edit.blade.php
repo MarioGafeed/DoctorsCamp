@@ -1,7 +1,7 @@
 @extends('backend.theme.layout.app')
 
 @section('styles')
-    @include('backend.pcategories.incs._styles')
+    @include('backend.categories.incs._styles')
 @endsection
 
 
@@ -14,23 +14,23 @@
                         <span class="caption-subject bold uppercase font-blue">{{$title}}</span>
                     </div>
                     <div class="actions">
-                        <a class="btn btn-circle btn-icon-only btn-default" href="{{route('pcategories.index')}}" data-toggle="tooltip" title="{{trans('main.show-all')}}   {{trans('main.pcategories')}}"> <i class="fa fa-list"></i> </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="{{route('categories.index')}}" data-toggle="tooltip" title="{{trans('main.show-all')}}   {{trans('main.categories')}}"> <i class="fa fa-list"></i> </a>
                     </div>
                 </div>
                 <div class="portlet-body form">
-                    <form method="post" action="{{ route('pcategories.update', [$edit->id]) }}" class="form-horizontal" role="form" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('categories.update', [$edit->id]) }}" class="form-horizontal" role="form" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
 
-                        @include('backend.pcategories.incs._fields', [
+                        @include('backend.categories.incs._fields', [
                             'data' => collect($edit),
                             'action' => 'edit'
                         ])
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-2 col-md-10">
-                                    <button type="submit" class="btn green">{{ trans('main.edit') }} {{ trans('main.pcategories') }}</button>
-                                    <a href="{{ route('pcategories.index') }}" class="btn default">{{ trans('main.cancel') }}</a>
+                                    <button type="submit" class="btn green">{{ trans('main.edit') }} {{ trans('main.categories') }}</button>
+                                    <a href="{{ route('categories.index') }}" class="btn default">{{ trans('main.cancel') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
 
 
 @section('scripts')
-    @include('backend.pcategories.incs._scripts', [
+    @include('backend.categories.incs._scripts', [
         'data' => collect($edit)
     ])
 @endsection

@@ -20,9 +20,9 @@ class Vpost extends Model Implements HasMedia
        'vcat_id', 'title', 'keyword', 'content', 'desc', 'active', 'user_id',
   ];
 
-    public function vcategory()
+    public function category()
     {
-        return $this->belongsTo('App\Models\Vcategory', 'vcat_id');
+        return $this->belongsTo('App\Models\category', 'category_id');
     }
 
     public function user()

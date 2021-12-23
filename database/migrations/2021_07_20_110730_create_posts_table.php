@@ -15,14 +15,14 @@ class CreatepostsTable extends Migration
     {
       Schema::disableForeignKeyConstraints();
         Schema::create('posts', function (Blueprint $table) {
-          $table->engine = 'InnoDB';            
-            $table->bigIncrements();
+          $table->engine = 'InnoDB';
+            $table->bigIncrements('id');
             $table->text('title');
             $table->longtext('content');
             $table->text('desc');
             $table->text('keyword');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('pcat_id')->constrained('pcategories');
+            $table->foreignId('category_id')->constrained('categories');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

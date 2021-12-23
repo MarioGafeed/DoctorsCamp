@@ -9,8 +9,8 @@
                         <span class="caption-subject bold uppercase font-blue">{{$title}}</span>
                     </div>
                     <div class="actions">
-                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('pcategories.create') }}" data-toggle="tooltip" title="{{trans('main.add')}}  {{trans('main.pcategories')}}"> <i class="fa fa-plus"></i> </a>
-                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('pcategories.edit', [$show->id]) }}" data-toggle="tooltip" title="{{ trans('main.edit') }}  {{ trans('main.job') }}"> <i class="fa fa-edit"></i> </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('categories.create') }}" data-toggle="tooltip" title="{{trans('main.add')}}  {{trans('main.categories')}}"> <i class="fa fa-plus"></i> </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('categories.edit', [$show->id]) }}" data-toggle="tooltip" title="{{ trans('main.edit') }}  {{ trans('main.job') }}"> <i class="fa fa-edit"></i> </a>
                         <span data-toggle="tooltip" title="{{ trans('main.delete') }}  {{ trans('main.job') }}">
                             <a data-toggle="modal" data-target="#myModal{{ $show->id }}" class="btn btn-circle btn-icon-only btn-default" href=""> <i class="fa fa-trash"></i> </a>
                         </span>
@@ -27,7 +27,7 @@
                                         {{trans('main.ask-delete')}} {{ $show->title }} !
                                     </div>
                                     <div class="modal-footer">
-                                        {!! Form::open([ 'method' => 'DELETE', 'route' => ['pcategories.destroy', $show->id] ]) !!}
+                                        {!! Form::open([ 'method' => 'DELETE', 'route' => ['categories.destroy', $show->id] ]) !!}
                                         {!! Form::submit(trans('main.approval'), ['class' => 'btn btn-danger']) !!}
                                         <a class="btn btn-default" data-dismiss="modal">
                                             {{ trans('main.cancel') }}
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('pcategories.index') }}" data-toggle="tooltip" title="{{trans('main.show-all')}}  {{trans('main.pcategories')}}"> <i class="fa fa-list"></i> </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('categories.index') }}" data-toggle="tooltip" title="{{trans('main.show-all')}}  {{trans('main.categories')}}"> <i class="fa fa-list"></i> </a>
                         <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#" data-original-title="{{trans('main.full-screen')}}" title="{{trans('main.full-screen')}}"> </a>
                     </div>
                 </div>
@@ -46,12 +46,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <strong>{{trans('main.title')}} : (en)</strong>
-                            {{  json_decode($show->title)->en }}
+                            {{  $show->title_en }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.title')}} : (ar)</strong>
-                            {{  json_decode($show->title)->ar }}
+                            {{  $show->title_ar }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">

@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\Pcategory;
+use App\Models\Category;
 use Yajra\DataTables\Services\DataTable;
 
-class PcategoriesDataTable extends DataTable
+class CategoriesDataTable extends DataTable
 {
     use BuilderParameters;
 
@@ -19,22 +19,17 @@ class PcategoriesDataTable extends DataTable
      {
        return datatables($query)
        ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
-       ->addColumn('pcategories.title_en', function($model){
-                return json_decode($model->title)->en;
-            })
-       ->addColumn('pcategories.title_ar', function($model){
-                     return json_decode($model->title)->ar ?? trans('main.n_a');
-                 })
-       ->addColumn('pcategories.summary_en', function($model){
+
+       ->addColumn('categories.summary_en', function($model){
                           return json_decode($model->summary)->en;
                  })
-       ->addColumn('pcategories.summary_ar', function($model){
+       ->addColumn('categories.summary_ar', function($model){
                           return json_decode($model->summary)->ar ?? trans('main.n_a');
                  })
-       ->addColumn('show', 'backend.pcategories.buttons.show')
-       ->addColumn('edit', 'backend.pcategories.buttons.edit')
-       ->addColumn('delete', 'backend.pcategories.buttons.delete')
-       ->rawColumns(['checkbox','title','title_en','title_ar','show','edit', 'delete'])
+       ->addColumn('show', 'backend.categories.buttons.show')
+       ->addColumn('edit', 'backend.categories.buttons.edit')
+       ->addColumn('delete', 'backend.categories.buttons.delete')
+       ->rawColumns(['checkbox','title_ar','title_en','show','edit', 'delete'])
        ;
      }
 
@@ -46,7 +41,7 @@ class PcategoriesDataTable extends DataTable
      */
     public function query()
     {
-        $query = Pcategory::query()->select('pcategories.*');
+        $query = category::query()->select('categories.*');
         return $this->applyScopes($query);
     }
 
@@ -83,33 +78,18 @@ class PcategoriesDataTable extends DataTable
                 'width'          => '10px',
                 'aaSorting'      => 'none'
             ],
+            
             [
-                'name'       => "pcategories.title",
-                'data'       => 'pcategories.title_en',
-                'title'      => trans('main.titlepcat')." en",
-                'searchable' => true,
-                'orderable'  => true,
-                'width'      => '200px',
-            ],
-            [
-                'name'       => "pcategories.title",
-                'data'       => 'pcategories.title_ar',
-                'title'      => trans('main.titlepcat')." ar",
-                'searchable' => true,
-                'orderable'  => true,
-                'width'      => '200px',
-            ],
-            [
-                'name'       => "pcategories.summary",
-                'data'       => 'pcategories.summary_en',
+                'name'       => "categories.summary",
+                'data'       => 'categories.summary_en',
                 'title'      => trans('main.summary')." en",
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
             ],
             [
-                'name'       => "pcategories.summary",
-                'data'       => 'pcategories.summary_ar',
+                'name'       => "categories.summary",
+                'data'       => 'categories.summary_ar',
                 'title'      => trans('main.summary')." ar",
                 'searchable' => true,
                 'orderable'  => true,

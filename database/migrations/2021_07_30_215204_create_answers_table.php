@@ -14,7 +14,7 @@ class CreateAnswersTable extends Migration
     public function up()
     {
         Schema::create('answers', function (Blueprint $table) {
-            $table->bigIncrements();
+            $table->bigIncrements('id');
             $table->string('answer');
             $table->enum('status', ['true', 'false'])->default('true');
             $table->foreignId('question_id')->constrained('questions')->onUpdate('cascade')->onDelete('cascade');

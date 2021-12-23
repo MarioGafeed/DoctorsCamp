@@ -7,7 +7,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form method="post" action="{{ route('pcategories.multi_delete') }}">
+            <form method="post" action="{{ route('categories.multi_delete') }}">
                 @csrf
                 <div class="portlet light">
                     <div class="portlet-title">
@@ -58,7 +58,7 @@
             });
         });
         $(document).on('click', '.createBtn', function() {
-            window.location = "{{ route('pcategories.create') }}";
+            window.location = "{{ route('categories.create') }}";
         });
         $(document).on('click', '.deleteBtn', function() {
             $('#multi_delete').modal('show');

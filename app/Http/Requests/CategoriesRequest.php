@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VcategoriesRequest extends FormRequest
+class CategoriesRequest extends FormRequest
 {
     /**
      * Determine if the pcategories is authorized to make this request.
@@ -24,12 +24,13 @@ class VcategoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'title_en'        => 'required|string|max:50',
-            'title_ar'        => 'required|string|max:50',          
+            'title_en'        => 'nullable|string|max:50',
+            'title_ar'        => 'required|string|max:50',
             'keyword'         => 'nullable',
-            'summary_en'      => 'required',
+            'slug'            => 'nullable',
+            'summary_en'      => 'nullable',
             'summary_ar'      => 'required',
-            'desc_en'         => 'required',
+            'desc_en'         => 'nullable',
             'desc_ar'         => 'required',
         ];
     }

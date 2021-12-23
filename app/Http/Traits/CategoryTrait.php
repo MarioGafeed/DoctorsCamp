@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Traits;
 
-trait PcategoryTrait
+trait CategoryTrait
 {
     private function getById($id)
     {
-        return $this->pcategoryModel::findOrFail($id);
+        return $this->categoryModel::findOrFail($id);
     }
 }

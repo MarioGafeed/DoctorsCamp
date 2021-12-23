@@ -1,20 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-use App\Http\Interfaces\PcategoryInterface;
-use App\Http\Requests\PcategoriesRequest;
-use App\DataTables\PcategoriesDataTable;
+use App\Http\Interfaces\CategoryInterface;
+use App\Http\Requests\CategoriesRequest;
+use App\DataTables\CategoriesDataTable;
 use App\Authorizable;
 
-class PcategoryController extends Controller
+class CategoryController extends Controller
 {
   // use Authorizable;
-  private $PcategoryInterface;
-  public function __construct(PcategoryInterface $PcategoryInterface)
+  private $CategoryInterface;
+  public function __construct(CategoryInterface $CategoryInterface)
   {
-      $this->PcategoryInterface = $PcategoryInterface;
+      $this->CategoryInterface = $CategoryInterface;
   }
 
   /**
@@ -22,9 +21,9 @@ class PcategoryController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index(PcategoriesDataTable $dataTable)
+  public function index(CategoriesDataTable $dataTable)
   {
-      return $this->PcategoryInterface->index($dataTable);
+      return $this->CategoryInterface->index($dataTable);
   }
 
   /**
@@ -34,7 +33,7 @@ class PcategoryController extends Controller
    */
   public function create()
   {
-      return $this->PcategoryInterface->create();
+      return $this->CategoryInterface->create();
   }
 
   /**
@@ -43,9 +42,9 @@ class PcategoryController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(PcategoriesRequest $request)
+  public function store(CategoriesRequest $request)
   {
-      return $this->PcategoryInterface->store($request);
+      return $this->CategoryInterface->store($request);
   }
 
   /**
@@ -56,7 +55,7 @@ class PcategoryController extends Controller
    */
   public function show($id)
   {
-    return $this->PcategoryInterface->show($id);
+    return $this->CategoryInterface->show($id);
   }
 
   /**
@@ -67,7 +66,7 @@ class PcategoryController extends Controller
    */
   public function edit($id)
   {
-    return $this->PcategoryInterface->edit($id);
+    return $this->CategoryInterface->edit($id);
   }
 
   /**
@@ -77,9 +76,9 @@ class PcategoryController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(PcategoriesRequest $request, $id)
+  public function update(CategoriesRequest $request, $id)
   {
-      return $this->PcategoryInterface->update($request, $id);
+      return $this->CategoryInterface->update($request, $id);
   }
 
   /**
@@ -91,7 +90,7 @@ class PcategoryController extends Controller
    */
   public function destroy($id)
   {
-      return $this->PcategoryInterface->destroy($id);
+      return $this->CategoryInterface->destroy($id);
   }
 
 

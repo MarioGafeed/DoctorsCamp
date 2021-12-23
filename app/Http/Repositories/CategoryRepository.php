@@ -2,22 +2,22 @@
 
 namespace App\Http\Repositories;
 
-use App\Http\Interfaces\PcategoryInterface;
-use App\Http\Traits\PcategoryTrait;
-use App\Models\Pcategory;
+use App\Http\Interfaces\CategoryInterface;
+use App\Http\Traits\CategoryTrait;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
 
 
-class PcategoryRepository implements PcategoryInterface
+class CategoryRepository implements CategoryInterface
 {
-    private $viewPath = 'backend.pcategories';
-    use PcategoryTrait;
-    private $pcategoryModel;
-    public function __construct(Pcategory $pcat)
+    private $viewPath = 'backend.categories';
+    use CategoryTrait;
+    private $categoryModel;
+    public function __construct(Category $cat)
     {
-        $this->pcategoryModel = $pcat;
+        $this->categoryModel = $cat;
     }
 
     /**
@@ -29,14 +29,14 @@ class PcategoryRepository implements PcategoryInterface
     public function index($dataTable)
     {
       return $dataTable->render("{$this->viewPath}.index", [
-          'title' => trans('main.show-all') . ' ' . trans('main.pcategories')
+          'title' => trans('main.show-all') . ' ' . trans('main.categories')
       ]);
     }
 
     public function create()
     {
       return view("{$this->viewPath}.create", [
-          'title' => trans('main.add') . ' ' . trans('main.pcategories'),
+          'title' => trans('main.add') . ' ' . trans('main.categories'),
       ]);
     }
 
@@ -57,15 +57,15 @@ class PcategoryRepository implements PcategoryInterface
         'ar' => $request->summary_ar,
       ]);
 
-      $pcat = Pcategory::create($requestAll);
+      $cat = Category::create($requestAll);
 
       if ($request->hasFile('image')) {
-        $pcat->addMediaFromRequest('image')->toMediaCollection();
+        $cat->addMediaFromRequest('image')->toMediaCollection();
       }
 
 
       session()->flash('success', trans('main.added-message'));
-      return redirect()->route('pcategories.index');
+      return redirect()->route('categories.index');
     }
 
     /**
@@ -76,77 +76,77 @@ class PcategoryRepository implements PcategoryInterface
      */
     public function show($id)
     {
-      // $pcat = Pcategory::where('id', $id)->with('class')->first();
-      $pcat = $this->getById($id);
-      $pcat['title_en']    = json_decode($pcat->title)->en;
-      $pcat['title_ar']    = json_decode($pcat->title)->ar;
-      $pcat['desc_en']     = json_decode($pcat->desc)->en;
-      $pcat['desc_ar']     = json_decode($pcat->desc)->ar;
-      $pcat['summary_en']  = json_decode($pcat->summary)->en;
-      $pcat['summary_ar']  = json_decode($pcat->summary)->ar;
+      // $cat = Pcategory::where('id', $id)->with('class')->first();
+      $cat = $this->getById($id);
+      $cat['title_en']    = json_decode($cat->title)->en;
+      $cat['title_ar']    = json_decode($cat->title)->ar;
+      $cat['desc_en']     = json_decode($cat->desc)->en;
+      $cat['desc_ar']     = json_decode($cat->desc)->ar;
+      $cat['summary_en']  = json_decode($cat->summary)->en;
+      $cat['summary_ar']  = json_decode($cat->summary)->ar;
 
       return view("{$this->viewPath}.show", [
-          'title' => trans('main.show') . ' ' . trans('main.pcategory') . ' : ' . $pcat->title_en . ' : ' . $pcat->title_ar,
-          'show' => $pcat,
+          'title' => trans('main.show') . ' ' . trans('main.category') . ' : ' . $cat->title_en . ' : ' . $cat->title_ar,
+          'show' => $cat,
       ]);
     }
 
 
     public function edit($id)
     {
-      $pcat = $this->getById($id);
-      $pcat['title_en'] = json_decode($pcat->title)->en;
-      $pcat['title_ar'] = json_decode($pcat->title)->ar;
-      $pcat['desc_en'] = json_decode($pcat->desc)->en;
-      $pcat['desc_ar'] = json_decode($pcat->desc)->ar;
-      $pcat['summary_en'] = json_decode($pcat->summary)->en;
-      $pcat['summary_ar'] = json_decode($pcat->summary)->ar;
+      $cat = $this->getById($id);
+      $cat['title_en'] = json_decode($cat->title)->en;
+      $cat['title_ar'] = json_decode($cat->title)->ar;
+      $cat['desc_en'] = json_decode($cat->desc)->en;
+      $cat['desc_ar'] = json_decode($cat->desc)->ar;
+      $cat['summary_en'] = json_decode($cat->summary)->en;
+      $cat['summary_ar'] = json_decode($cat->summary)->ar;
       return view("{$this->viewPath}.edit", [
-          'title' => trans('main.edit') . ' ' . trans('main.pcategory') . ' : ' . $pcat->title_en . ' : ' . $pcat->title_ar,
-          'edit' => $pcat
+          'title' => trans('main.edit') . ' ' . trans('main.category') . ' : ' . $cat->title_en . ' : ' . $cat->title_ar,
+          'edit' => $cat
       ]);
     }
 
     public function update($request, $id)
     {
-      $pcat = Pcategory::find($id);
-      $pcat->title = json_encode([
+      $cat = Category::find($id);
+      $cat->title = json_encode([
         'en' => $request->title_en,
         'ar' => $request->title_ar,
       ]);
-      $pcat->desc = json_encode([
+      $cat->desc = json_encode([
         'en' => $request->desc_en,
         'ar' => $request->desc_ar,
       ]);
-      $pcat->summary = json_encode([
+      $cat->summary = json_encode([
         'en' => $request->summary_en,
         'ar' => $request->summary_ar,
       ]);
-      $pcat->keyword = $request->keyword;
+      $cat->keyword = $request->keyword;
 
       if ($request->hasFile('image')) {
-        $pcat->clearMediaCollection();
-        $pcat
+        $cat->clearMediaCollection();
+        $cat
           ->addMediaFromRequest('image')
           ->toMediaCollection();
       }
 
-      $pcat->save();
+      $cat->save();
 
       session()->flash('success', trans('main.updated'));
-      return redirect()->route('pcategories.show', [$pcat->id]);
+      return redirect()->route('categories.show', [$cat->id]);
     }
 
     public function destroy($id)
     {
       $redirect = true;
-      $pcat = $this->getById($id);
-      $pcat->clearMediaCollection();
-      $pcat->delete();
+      $cat = $this->getById($id);
+      $cat->clearMediaCollection();
+      $cat->delete();
 
       if ($redirect) {
           session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('pcategories.index');
+          return redirect()->route('categories.index');
       }
     }
 
@@ -164,7 +164,7 @@ class PcategoryRepository implements PcategoryInterface
               $this->destroy($id, false);
           }
           session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('pcategories.index');
+          return redirect()->route('categories.index');
       }
     }
 }

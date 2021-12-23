@@ -20,4 +20,9 @@ class Course extends Model
     {
         return $this->HasMany(Lesson::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\category', 'category_id');
+    }
 }

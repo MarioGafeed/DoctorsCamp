@@ -12,9 +12,9 @@ class CreateMessagesTable extends Migration
      * @return void
      */
     public function up()
-    {      
+    {
         Schema::create('messages', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name', 255);
             $table->string('email', 255);
             $table->string('phone')->nullable(); // For mobile Phone

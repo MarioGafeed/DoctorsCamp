@@ -11,7 +11,7 @@
                 {{trans('main.ask-delete')}} : {{ $title }}
             </div>
             <div class="modal-footer">
-                {!! Form::open([ 'method' => 'DELETE', 'route' => ['pcategories.destroy', $id] ]) !!}
+                {!! Form::open([ 'method' => 'DELETE', 'route' => ['categories.destroy', $id] ]) !!}
                 {!! Form::submit(trans('main.approval'), ['class' => 'btn btn-danger']) !!}
                 <a class="btn btn-default" data-dismiss="modal">{{trans('main.cancel')}}</a>
                 {!! Form::close() !!}

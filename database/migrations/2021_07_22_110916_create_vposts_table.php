@@ -15,14 +15,14 @@ class CreateVpostsTable extends Migration
     {
       Schema::disableForeignKeyConstraints(); // For Forgen Key Checks Disable
         Schema::create('vposts', function (Blueprint $table) {
-          $table->engine = 'InnoDB';            
-            $table->bigIncrements();
+          $table->engine = 'InnoDB';
+            $table->bigIncrements('id');
             $table->text('title');
             $table->longtext('content');
             $table->longtext('desc');
             $table->text('keyword');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('vcat_id')->constrained('vcategories');
+            $table->foreignId('category_id')->constrained('categories');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
