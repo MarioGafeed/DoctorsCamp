@@ -17,7 +17,7 @@ class Post extends Model Implements HasMedia
   use InteractsWithMedia, HasTags;
 
   protected $fillable = [
-     'title', 'keyword', 'content', 'desc', 'active', 'user_id',
+     'title_en', 'title_ar', 'keyword', 'content', 'desc', 'active', 'user_id', 'category_id'
   ];
 
   // public function categoryable()
@@ -36,9 +36,9 @@ class Post extends Model Implements HasMedia
   }
 
 
-  public function title($lang = null)
-  {
-    $lang = $lang ?? App::getLocale();
-    return json_decode($this->title)->$lang;
-  }
+  // public function title($lang = null)
+  // {
+  //   $lang = $lang ?? App::getLocale();
+  //   return json_decode($this->title)->$lang;
+  // }
 }

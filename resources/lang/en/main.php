@@ -755,6 +755,7 @@ return [
     'score'                        => 'Score',
     'login_error'                  => 'Login Error',
     'identity'                     => 'Identity',
+    'desc'                         => 'Description',
     'no_answers'                   => ' There Is No Answers For This Question ',
     'pcategories'                  => 'Categories For Posts',
     'pcategory'                    => 'Post Category',

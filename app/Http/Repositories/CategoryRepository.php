@@ -6,7 +6,6 @@ use App\Http\Interfaces\CategoryInterface;
 use App\Http\Traits\CategoryTrait;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Helpers\Helper;
 
 
 
@@ -44,10 +43,6 @@ class CategoryRepository implements CategoryInterface
     {
       $requestAll = $request->all();
 
-      $requestAll['title'] = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
       $requestAll['desc'] = json_encode([
         'en' => $request->desc_en,
         'ar' => $request->desc_ar,
@@ -78,8 +73,8 @@ class CategoryRepository implements CategoryInterface
     {
       // $cat = Pcategory::where('id', $id)->with('class')->first();
       $cat = $this->getById($id);
-      $cat['title_en']    = json_decode($cat->title)->en;
-      $cat['title_ar']    = json_decode($cat->title)->ar;
+      $cat['title_en']    = $cat->title_en;
+      $cat['title_ar']    = $cat->title_ar;
       $cat['desc_en']     = json_decode($cat->desc)->en;
       $cat['desc_ar']     = json_decode($cat->desc)->ar;
       $cat['summary_en']  = json_decode($cat->summary)->en;
@@ -95,8 +90,8 @@ class CategoryRepository implements CategoryInterface
     public function edit($id)
     {
       $cat = $this->getById($id);
-      $cat['title_en'] = json_decode($cat->title)->en;
-      $cat['title_ar'] = json_decode($cat->title)->ar;
+      $requestAll['title_en'] = $cat->title_en;
+      $requestAll['title_ar'] = $cat->title_ar;
       $cat['desc_en'] = json_decode($cat->desc)->en;
       $cat['desc_ar'] = json_decode($cat->desc)->ar;
       $cat['summary_en'] = json_decode($cat->summary)->en;
@@ -110,10 +105,8 @@ class CategoryRepository implements CategoryInterface
     public function update($request, $id)
     {
       $cat = Category::find($id);
-      $cat->title = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
+      $cat->title_en = $request->title_en;
+      $cat->title_ar = $request->title_ar;
       $cat->desc = json_encode([
         'en' => $request->desc_en,
         'ar' => $request->desc_ar,

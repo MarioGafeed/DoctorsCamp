@@ -21,9 +21,3 @@
         }
     });
 </script>
-
-@if (getData($data, 'type'))
-    <script type="text/javascript">
-        $('#type').val('{{ getData($data, 'type') }}').trigger('change');
-    </script>
-@endif

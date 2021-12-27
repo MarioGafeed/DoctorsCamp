@@ -17,7 +17,7 @@ class Vpost extends Model Implements HasMedia
     use InteractsWithMedia, HasTags;
 
     protected $fillable = [
-       'vcat_id', 'title', 'keyword', 'content', 'desc', 'active', 'user_id',
+       'category_id', 'title_en', 'title_ar', 'keyword', 'content', 'desc', 'active', 'user_id',
   ];
 
     public function category()

@@ -26,10 +26,16 @@ class CategoriesDataTable extends DataTable
        ->addColumn('categories.summary_ar', function($model){
                           return json_decode($model->summary)->ar ?? trans('main.n_a');
                  })
+      ->addColumn('categories.desc_en', function($model){
+                          return json_decode($model->desc)->en;
+                 })
+      ->addColumn('categories.desc_ar', function($model){
+                          return json_decode($model->desc)->ar ?? trans('main.n_a');
+                 })
        ->addColumn('show', 'backend.categories.buttons.show')
        ->addColumn('edit', 'backend.categories.buttons.edit')
        ->addColumn('delete', 'backend.categories.buttons.delete')
-       ->rawColumns(['checkbox','title_ar','title_en','show','edit', 'delete'])
+       ->rawColumns(['checkbox','show','edit', 'delete'])
        ;
      }
 
@@ -55,7 +61,7 @@ class CategoriesDataTable extends DataTable
         $html =  $this->builder()
         ->columns($this->getColumns())
         ->ajax('')
-        ->parameters($this->getCustomBuilderParameters([1,2,3,4], [], GetLanguage() == 'ar'));
+        ->parameters($this->getCustomBuilderParameters([1,2,3,4,5], [], GetLanguage() == 'ar'));
         return $html;
     }
 
@@ -78,11 +84,42 @@ class CategoriesDataTable extends DataTable
                 'width'          => '10px',
                 'aaSorting'      => 'none'
             ],
-            
+            [
+                'name'       => "categories.title_en",
+                'data'       => 'title_en',
+                'title'      => trans('main.title')." (en)",
+                'searchable' => true,
+                'orderable'  => true,
+                'width'      => '200px',
+            ],
+            [
+                'name'       => "categories.title_ar",
+                'data'       => 'title_ar',
+                'title'      => trans('main.title')." (ar)",
+                'searchable' => true,
+                'orderable'  => true,
+                'width'      => '200px',
+            ],
+            [
+                'name'       => "categories.keyword",
+                'data'       => 'keyword',
+                'title'      => trans('main.keyword'),
+                'searchable' => true,
+                'orderable'  => true,
+                'width'      => '200px',
+            ],
             [
                 'name'       => "categories.summary",
                 'data'       => 'categories.summary_en',
-                'title'      => trans('main.summary')." en",
+                'title'      => trans('main.summary')." (en)",
+                'searchable' => true,
+                'orderable'  => true,
+                'width'      => '200px',
+            ],
+            [
+                'name'       => "categories.desc",
+                'data'       => 'categories.desc_en',
+                'title'      => trans('main.desc')." (en)",
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
@@ -90,7 +127,15 @@ class CategoriesDataTable extends DataTable
             [
                 'name'       => "categories.summary",
                 'data'       => 'categories.summary_ar',
-                'title'      => trans('main.summary')." ar",
+                'title'      => trans('main.summary')." (ar)",
+                'searchable' => true,
+                'orderable'  => true,
+                'width'      => '200px',
+            ],
+            [
+                'name'       => "categories.desc",
+                'data'       => 'categories.desc_ar',
+                'title'      => trans('main.desc')." (ar)",
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
@@ -128,6 +173,6 @@ class CategoriesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'Pcategories_' . date('YmdHis');
+        return 'categories_' . date('YmdHis');
     }
 }

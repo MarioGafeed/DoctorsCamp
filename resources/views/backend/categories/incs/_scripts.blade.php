@@ -3,17 +3,9 @@
 <!-- END PAGE LEVEL PLUGINS -->
 
 <script type="text/javascript">
-    $(document).on('change', '#type', function(event) {
-        if ($(this).val() == 'admin') {
-            $('#roles').removeClass('hidden');
-        } else {
-            $('#roles').addClass('hidden');
-        }
+    $(document).ready(function() {
+         $('input[name=title_en]').on('keyup', function(event) {
+             $('input[name=slug]').val(($(this).val().toLowerCase()).split(" ").join("-"))
+         });
     });
 </script>
-
-@if (getData($data, 'type'))
-    <script type="text/javascript">
-        $('#type').val('{{ getData($data, 'type') }}').trigger('change');
-    </script>
-@endif

@@ -30,12 +30,12 @@ class VpostsRequest extends FormRequest
         return [
             'title_en'      => 'required',
             'title_ar'      => 'nullable',
-            'vcat_id'       => 'required|exists:vcategories,id',
+            'category_id'   => 'required|exists:categories,id',
             'content'       => 'required',
             'keyword'       => 'required',
             'desc_en'       => 'required',
             'desc_ar'       => 'nullable',
-            'active'        => 'required|in:0,1',        
+            'active'        => 'required|in:0,1',
         ];
     }
 
@@ -44,7 +44,7 @@ class VpostsRequest extends FormRequest
     {
         return [
             'title'       => trans('main.title'),
-            'vcat_id'     => trans('main.vcategory'),
+            'category_id' => trans('main.category'),
             'content'     => trans('main.content'),
             'keyword'     => trans('main.keyword'),
             'desc'        => trans('main.description'),

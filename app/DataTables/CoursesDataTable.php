@@ -129,6 +129,6 @@ class CoursesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'Pcategories_' . date('YmdHis');
+        return 'categories_' . date('YmdHis');
     }
 }

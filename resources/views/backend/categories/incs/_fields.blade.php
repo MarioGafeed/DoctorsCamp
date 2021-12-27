@@ -23,6 +23,18 @@
         </div>
     </div>
 
+    <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
+          <label class="col-md-2 control-label">{{ trans('main.slug') }} <span class="required" ></span> </label>
+          <div class="col-md-6">
+              <input type="text" name="slug" value="{{ getData($data, 'slug') }}" class="form-control" placeholder="{{ trans('main.slug') }}" >
+              @if ($errors->has('slug'))
+                  <span class="help-block">
+                      <strong class="help-block">{{ $errors->first('slug') }}</strong>
+                  </span>
+              @endif
+          </div>
+      </div>
+
     <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
        <label class="control-label col-md-2">{{ trans('main.image') }}</label>
        <div class="col-md-10">

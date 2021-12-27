@@ -5,7 +5,7 @@ namespace App\Http\Repositories;
 use App\Http\Interfaces\VpostInterface;
 use App\Http\Traits\VpostTrait;
 use App\Models\Vpost;
-use App\Models\Vcategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
@@ -16,11 +16,11 @@ class VpostRepository implements VpostInterface
     private $viewPath = 'backend.vposts';
     use VpostTrait;
     private $vpostModel;
-    private $vcatModel;
-    public function __construct(Vpost $vpost, Vcategory $vcat)
+    private $catModel;
+    public function __construct(Vpost $vpost, Category $cat)
     {
         $this->vpostModel = $vpost;
-        $this->vcatModel  = $vcat;
+        $this->catModel   = $cat;
     }
 
     /**
@@ -38,10 +38,10 @@ class VpostRepository implements VpostInterface
 
     public function create()
     {
-      $vcat = $this->getAllvcategory();
+      $cats = $this->getAllcategory();
       return view("{$this->viewPath}.create", [
           'title' => trans('main.add') . ' ' . trans('main.vposts'),
-          'vcat'  => $vcat,
+          'cats'  => $cats,
       ]);
     }
 
@@ -49,10 +49,6 @@ class VpostRepository implements VpostInterface
     {
       $requestAll = $request->all();
 
-      $requestAll['title'] = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
       $requestAll['desc'] = json_encode([
         'en' => $request->desc_en,
         'ar' => $request->desc_ar,
@@ -79,13 +75,11 @@ class VpostRepository implements VpostInterface
      */
     public function show($id)
     {
-      $vpos = $this->getvPostWithvCat($id);
-      $vpos['title_en'] = json_decode($vpos->title)->en;
-      $vpos['title_ar'] = json_decode($vpos->title)->ar;
+      $vpos = $this->getvPostWithCat($id);      
       $vpos['desc_en']  = json_decode($vpos->desc)->en;
       $vpos['desc_ar']  = json_decode($vpos->desc)->ar;
       return view("{$this->viewPath}.show", [
-          'title' => trans('main.show') . ' ' . trans('main.post') . ' : ' . $vpos->title,
+          'title' => trans('main.show') . ' ' . trans('main.post') . ' : ' . $vpos->title_ar,
           'show' => $vpos,
       ]);
     }
@@ -94,18 +88,19 @@ class VpostRepository implements VpostInterface
     public function edit($id)
     {
       $vpos = $this->getVpostFirst($id);
-      $vcat = $this->getAllvcategory();
+      $cats = $this->getAllcategory();
 
       $tags = $vpos->tags->pluck('name')->implode(', ');
 
-      $vpos['title_en'] = json_decode($vpos->title)->en;
-      $vpos['title_ar'] = json_decode($vpos->title)->ar;
+      $vpos['content']  = $vpos->content;
+      $vpos['keyword']  = $vpos->keyword;
+
       $vpos['desc_en'] = json_decode($vpos->desc)->en;
       $vpos['desc_ar'] = json_decode($vpos->desc)->ar;
       return view("{$this->viewPath}.edit", [
           'title' => trans('main.edit') . ' ' . trans('main.vpost') . ' : ' . $vpos->title,
           'edit' => $vpos,
-          'vcat' => $vcat,
+          'cats'  => $cats,
           'tags' => $tags,
       ]);
     }
@@ -116,16 +111,14 @@ class VpostRepository implements VpostInterface
       if (!$vpos) {
         return back();
       }
-      $vpos->title = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
+      $vpos->title_en = $request->title_en;
+      $vpos->title_ar = $request->title_ar;
       $vpos->desc = json_encode([
         'en' => $request->desc_en,
         'ar' => $request->desc_ar,
       ]);
       $vpos->content  = $request->content;
-      $vpos->vcat_id  = $request->vcat_id;
+      $vpos->category_id  = $request->category_id;
       $vpos->keyword   = $request->keyword;
       $vpos->active = $request->active;
       $vpos->user_id = auth()->user()->id;

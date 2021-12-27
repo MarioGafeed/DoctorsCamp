@@ -5,10 +5,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" data-dismiss="modal">x</button>
-                <h4 class="modal-title">{{trans('main.delete')}} {{ $title }} ! </h4>
+                <h4 class="modal-title">{{trans('main.delete')}} {{ $title_ar }} ! </h4>
             </div>
             <div class="modal-body">
-                {{trans('main.ask-delete')}} : {{ $title }}
+                {{trans('main.ask-delete')}} : {{ $title_ar}}
             </div>
             <div class="modal-footer">
                 {!! Form::open([ 'method' => 'DELETE', 'route' => ['vposts.destroy', $id] ]) !!}

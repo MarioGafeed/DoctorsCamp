@@ -8,9 +8,9 @@ trait PostTrait
         return $this->postModel::findOrFail($id);
     }
 
-    private function getAllpcategory()
+    private function getAllcategory()
     {
-        return $this->catModel::select('id', 'title')->get();
+        return $this->catModel::select('id', 'title_en', 'title_ar')->get();
     }
 
     private function getAlltaqs()
@@ -20,10 +20,10 @@ trait PostTrait
 
     private function getPostFirst($id)
     {
-        return $this->postModel::where('id', $id)->with('pcategory', 'user')->first();
+        return $this->postModel::where('id', $id)->with('category', 'user')->first();
     }
     private function getPostWithCat($id)
     {
-        return $this->postModel::where('id', $id)->with('pcategory')->first();
+        return $this->postModel::where('id', $id)->with('category')->first();
     }
 }

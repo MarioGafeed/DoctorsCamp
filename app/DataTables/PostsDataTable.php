@@ -19,12 +19,7 @@ class PostsDataTable extends DataTable
     {
         return datatables($query)
         ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
-        ->addColumn('posts.title_en', function($model){
-                 return json_decode($model->title)->en;
-             })
-        ->addColumn('posts.title_ar', function($model){
-                      return json_decode($model->title)->ar ?? trans('main.n_a');
-                  })
+
 
 
       ->addColumn('active', function ($model) {
@@ -54,7 +49,7 @@ class PostsDataTable extends DataTable
      */
     public function query()
     {
-        $query = Post::query()->with('pcategory')->select('posts.*');
+        $query = Post::query()->with('category', 'user')->select('posts.*');
         return $this->applyScopes($query);
     }
 
@@ -68,7 +63,7 @@ class PostsDataTable extends DataTable
         $html =  $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
-         ->parameters($this->getCustomBuilderParameters([1,2,3], [], GetLanguage() == 'ar'));
+         ->parameters($this->getCustomBuilderParameters([1,2,3,4,5], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -93,25 +88,41 @@ class PostsDataTable extends DataTable
                  'aaSorting'      => 'none'
              ],
              [
-                 'name'       => "posts.title",
-                 'data'       => 'posts.title_en',
+                 'name'       => "posts.title_en",
+                 'data'       => 'title_en',
                  'title'      => trans('main.titlepcat')." en",
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "posts.title",
-                 'data'       => 'posts.title_ar',
+                 'name'       => "posts.title_ar",
+                 'data'       => 'title_ar',
                  'title'      => trans('main.titlepcat')." ar",
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "pcategory.title",
-                 'data'       => 'pcategory.title',
-                 'title'      => trans('main.pcategory'),
+                 'name'       => "category.title_en",
+                 'data'       => 'category.title_en',
+                 'title'      => trans('main.category'). " (EN)",
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'      => '200px',
+             ],
+             [
+                 'name'       => "category.title_ar",
+                 'data'       => 'category.title_ar',
+                 'title'      => trans('main.category')." (AR)",
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'      => '200px',
+             ],
+             [
+                 'name'       => "user.name",
+                 'data'       => 'user.name',
+                 'title'      => trans('main.user'),
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',

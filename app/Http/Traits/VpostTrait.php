@@ -8,18 +8,18 @@ trait VpostTrait
         return $this->vpostModel::findOrFail($id);
     }
 
-    private function getAllvcategory()
+    private function getAllcategory()
     {
-        return $this->vcatModel::select('id', 'title')->get();
+        return $this->catModel::select('id', 'title_en', 'title_ar')->get();
     }
-  
+
 
     private function getVpostFirst($id)
     {
-        return $this->vpostModel::where('id', $id)->with('vcategory', 'user')->first();
+        return $this->vpostModel::where('id', $id)->with('category', 'user')->first();
     }
-    private function getvPostWithvCat($id)
+    private function getvPostWithCat($id)
     {
-        return $this->vpostModel::where('id', $id)->with('vcategory')->first();
+        return $this->vpostModel::where('id', $id)->with('category')->first();
     }
 }

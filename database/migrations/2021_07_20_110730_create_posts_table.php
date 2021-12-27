@@ -17,7 +17,8 @@ class CreatepostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
           $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->text('title');
+            $table->text('title_en');
+            $table->text('title_ar');
             $table->longtext('content');
             $table->text('desc');
             $table->text('keyword');

@@ -52,25 +52,25 @@
 
 
     {{-- Add Post's Category --}}
-    <div class="form-group{{ $errors->has('vcat_id') ? ' has-error' : '' }}">
+    <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
         <label class="col-md-2 control-label">{{ trans('main.vcategory') }} <span class="required"></span> </label>
         <div class="col-md-6">
-            <select class="form-control select2" id="vcat_id" name="vcat_id">
+            <select class="form-control select2" id="category_id" name="category_id">
               <option value="">{{ trans('main.select Category') }}</option>
-              @foreach ($vcat as $pc)
-                  <option value="{{ $pc->id }}" {{ getData($data, 'vcat_id') == $pc->id ? 'selected' : '' }}>
+              @foreach ($cats as $pc)
+                  <option value="{{ $pc->id }}" {{ getData($data, 'category_id') == $pc->id ? 'selected' : '' }}>
                     @if(GetLanguage() == 'en')
-                      {{ json_decode($pc->title)->en }}
+                      {{ $pc->title_en }}
                     @else
-                      {{ json_decode($pc->title)->ar }}
+                      {{ $pc->title_ar }}
                     @endif
                   </option>
 
               @endforeach
             </select>
-            @if ($errors->has('vcat_id'))
+            @if ($errors->has('category_id'))
                 <span class="help-block">
-                    <strong class="help-block">{{ $errors->first('vcat_id') }}</strong>
+                    <strong class="help-block">{{ $errors->first('category_id') }}</strong>
                 </span>
             @endif
         </div>

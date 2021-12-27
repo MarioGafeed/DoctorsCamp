@@ -17,7 +17,8 @@ class CreateVpostsTable extends Migration
         Schema::create('vposts', function (Blueprint $table) {
           $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->text('title');
+            $table->text('title_en');
+            $table->text('title_ar');
             $table->longtext('content');
             $table->longtext('desc');
             $table->text('keyword');

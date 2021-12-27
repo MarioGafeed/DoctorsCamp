@@ -5,7 +5,7 @@ namespace App\Http\Repositories;
 use App\Http\Interfaces\PostInterface;
 use App\Http\Traits\PostTrait;
 use App\Models\Post;
-use App\Models\Pcategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
@@ -18,7 +18,7 @@ class PostRepository implements PostInterface
     private $postModel;
     private $catModel;
 
-    public function __construct(Post $post, Pcategory $cat)
+    public function __construct(Post $post, Category $cat)
     {
         $this->postModel = $post;
         $this->catModel  = $cat;
@@ -39,10 +39,10 @@ class PostRepository implements PostInterface
 
     public function create()
     {
-      $pcats = $this->getAllpcategory();
+      $cats = $this->getAllcategory();
       return view("{$this->viewPath}.create", [
           'title' => trans('main.add') . ' ' . trans('main.posts'),
-          'pcats' => $pcats,
+          'cats' => $cats,
       ]);
     }
 
@@ -50,10 +50,7 @@ class PostRepository implements PostInterface
     {
 
       $requestAll = $request->all();
-      $requestAll['title'] = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
+
       $requestAll['desc'] = json_encode([
         'en' => $request->desc_en,
         'ar' => $request->desc_ar,
@@ -87,14 +84,14 @@ class PostRepository implements PostInterface
     public function show($id)
     {
       $pos = $this->getPostWithCat($id);
-      $pos['title_en'] = json_decode($pos->title)->en;
-      $pos['title_ar'] = json_decode($pos->title)->ar;
+      $pos['title_en'] = $pos->title_en;
+      $pos['title_ar'] = $pos->title_ar;
       $pos['desc_en'] = json_decode($pos->desc)->en;
       $pos['desc_ar'] = json_decode($pos->desc)->ar;
       $pos['content_en'] = json_decode($pos->content)->en;
       $pos['content_ar'] = json_decode($pos->content)->ar;
       return view("{$this->viewPath}.show", [
-          'title' => trans('main.show') . ' ' . trans('main.post') . ' : ' . $pos->title,
+          'title' => trans('main.show') . ' ' . trans('main.post') . ' : ' . $pos->title_ar,
           'show' => $pos,
       ]);
     }
@@ -103,12 +100,12 @@ class PostRepository implements PostInterface
     public function edit($id)
     {
       $pos = $this->getPostFirst($id);
-      $pcats = $this->getAllpcategory();
-
+      $cats = $this->getAllcategory();
       $tags = $pos->tags->pluck('name')->implode(', ');
 
-      $pos['title_en'] = json_decode($pos->title)->en;
-      $pos['title_ar'] = json_decode($pos->title)->ar;
+      $pos['title_en'] = $pos->title_en;
+      $pos['title_ar'] = $pos->title_ar;
+
       $pos['desc_en'] = json_decode($pos->desc)->en;
       $pos['desc_ar'] = json_decode($pos->desc)->ar;
       $pos['content_en'] = json_decode($pos->content)->en;
@@ -116,7 +113,7 @@ class PostRepository implements PostInterface
       return view("{$this->viewPath}.edit", [
           'title' => trans('main.edit') . ' ' . trans('main.post') . ' : ' . $pos->title,
           'edit' => $pos,
-          'pcats' => $pcats,
+          'cats' => $cats,
           'tags' => $tags,
       ]);
     }
@@ -127,10 +124,8 @@ class PostRepository implements PostInterface
       if (!$pos) {
         return back();
       }
-      $pos->title = json_encode([
-        'en' => $request->title_en,
-        'ar' => $request->title_ar,
-      ]);
+      $pos->title_en = $request->title_en;
+      $pos->title_ar = $request->title_ar;
       $pos->desc = json_encode([
         'en' => $request->desc_en,
         'ar' => $request->desc_ar,
@@ -139,7 +134,7 @@ class PostRepository implements PostInterface
         'en' => $request->content_en,
         'ar' => $request->content_ar,
       ]);
-      $pos->pcat_id  = $request->pcat_id;
+      $pos->category_id  = $request->category_id;
       $pos->keyword   = $request->keyword;
       $pos->active = $request->active;
       $pos->user_id = auth()->user()->id;

@@ -6,7 +6,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption">
-                        <span class="caption-subject bold uppercase font-blue">{{$title}}</span>
+                        <span class="caption-subject bold uppercase font-blue">{{ $show->title_ar }}</span>
                     </div>
                     <div class="actions">
                         <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('vposts.create') }}" data-toggle="tooltip" title="{{trans('main.add')}}  {{trans('main.vposts')}}"> <i class="fa fa-plus"></i> </a>
@@ -24,7 +24,7 @@
                                         </h4>
                                     </div>
                                     <div class="modal-body">
-                                        {{trans('main.ask-delete')}} {{ $show->title }} !
+                                        {{trans('main.ask-delete')}} {{ $show->title_ar }} !
                                     </div>
                                     <div class="modal-footer">
                                         {!! Form::open([ 'method' => 'DELETE', 'route' => ['vposts.destroy', $show->id] ]) !!}
@@ -46,22 +46,22 @@
                     <div class="row">
                         <div class="col-md-6">
                             <strong>{{trans('main.title')}} : (en)</strong>
-                            {{ json_decode($show->title)->en }}
+                            {{ $show->title_en }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.title')}} : (ar)</strong>
-                            {{ json_decode($show->title)->ar }}
+                            {{ $show->title_ar }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.category')}} : (en)</strong>
-                            {{ json_decode($show->vcategory->title)->en }}
+                            {{ $show->category->title_en }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.category')}} : (ar)</strong>
-                            {{ json_decode($show->vcategory->title)->ar }}
+                            {{ $show->category->title_ar }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
@@ -87,6 +87,11 @@
                         <div class="col-md-6">
                             <strong>{{trans('main.status')}} : </strong>
                             {{ $show->active }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.tags')}} : </strong>
+                            {{ $show->tags->pluck('name')->implode(', ') }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">

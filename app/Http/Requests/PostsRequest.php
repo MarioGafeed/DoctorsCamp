@@ -28,7 +28,7 @@ class PostsRequest extends FormRequest
         $rules = [
           'title_en'         => 'nullable|string|max:50',
           'title_ar'         => 'required|string|max:50',
-          'pcat_id'          => 'required|exists:pcategories,id',        
+          'category_id'      => 'required|exists:categories,id',
           'content_en'       => 'required',
           'content_ar'       => 'nullable',
           'keyword'          => 'required',
@@ -48,7 +48,7 @@ class PostsRequest extends FormRequest
     {
         return [
             'title'       => trans('main.title'),
-            'pcat_id'   => trans('main.pcategory'),
+            'category_id' => trans('main.pcategory'),
             'content'     => trans('main.content'),
             'keyword'     => trans('main.keyword'),
             'desc'        => trans('main.description'),

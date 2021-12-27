@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class CategoriesRequest extends FormRequest
 {
     /**
-     * Determine if the pcategories is authorized to make this request.
+     * Determine if the categories is authorized to make this request.
      *
      * @return bool
      */

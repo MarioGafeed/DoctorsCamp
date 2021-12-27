@@ -19,12 +19,6 @@ class VpostsDataTable extends DataTable
     {
         return datatables($query)
         ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
-        ->addColumn('vposts.title_en', function($model){
-                 return json_decode($model->title)->en;
-             })
-        ->addColumn('vposts.title_ar', function($model){
-                      return json_decode($model->title)->ar ?? trans('main.n_a');
-                  })
 
        ->addColumn('active', function ($model) {
                if ($model->active == '1') {
@@ -52,7 +46,7 @@ class VpostsDataTable extends DataTable
      */
     public function query()
     {
-        $query = Vpost::query()->with('vcategory')->select('vposts.*');
+        $query = Vpost::query()->with('category')->select('vposts.*');
         return $this->applyScopes($query);
     }
 
@@ -66,7 +60,7 @@ class VpostsDataTable extends DataTable
         $html =  $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
-         ->parameters($this->getCustomBuilderParameters([1,2,3], [], GetLanguage() == 'ar'));
+         ->parameters($this->getCustomBuilderParameters([1,2,3,4], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -91,25 +85,33 @@ class VpostsDataTable extends DataTable
                  'aaSorting'      => 'none'
              ],
              [
-                 'name'       => "vposts.title",
-                 'data'       => 'vposts.title_en',
-                 'title'      => trans('main.titlevcat')." en",
+                 'name'       => "vposts.title_en",
+                 'data'       => 'title_en',
+                 'title'      => trans('main.titlevcat')." (en)",
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "vposts.title",
-                 'data'       => 'vposts.title_ar',
-                 'title'      => trans('main.titlevcat')." ar",
+                 'name'       => "vposts.title_ar",
+                 'data'       => 'title_ar',
+                 'title'      => trans('main.titlevcat')." (ar)",
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "vcategory.title",
-                 'data'       => 'vcategory.title',
-                 'title'      => trans('main.vcategory'),
+                 'name'       => "category.title_en",
+                 'data'       => 'category.title_en',
+                 'title'      => trans('main.category'). " (en)",
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'      => '200px',
+             ],
+             [
+                 'name'       => "category.title_ar",
+                 'data'       => 'category.title_ar',
+                 'title'      => trans('main.category'). " (ar)",
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
