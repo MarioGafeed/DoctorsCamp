@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Http\Interfaces\CategoryInterface;
+use App\Http\Interfaces\categoryInterface;
 use App\Http\Requests\CategoriesRequest;
 use App\DataTables\CategoriesDataTable;
 use App\Authorizable;
@@ -10,10 +10,10 @@ use App\Authorizable;
 class CategoryController extends Controller
 {
   // use Authorizable;
-  private $CategoryInterface;
-  public function __construct(CategoryInterface $CategoryInterface)
+  private $categoryInterface;
+  public function __construct(categoryInterface $categoryInterface)
   {
-      $this->CategoryInterface = $CategoryInterface;
+      $this->categoryInterface = $categoryInterface;
   }
 
   /**
@@ -23,7 +23,7 @@ class CategoryController extends Controller
    */
   public function index(CategoriesDataTable $dataTable)
   {
-      return $this->CategoryInterface->index($dataTable);
+      return $this->categoryInterface->index($dataTable);
   }
 
   /**
@@ -33,7 +33,7 @@ class CategoryController extends Controller
    */
   public function create()
   {
-      return $this->CategoryInterface->create();
+      return $this->categoryInterface->create();
   }
 
   /**
@@ -44,7 +44,7 @@ class CategoryController extends Controller
    */
   public function store(CategoriesRequest $request)
   {
-      return $this->CategoryInterface->store($request);
+      return $this->categoryInterface->store($request);
   }
 
   /**
@@ -55,7 +55,7 @@ class CategoryController extends Controller
    */
   public function show($id)
   {
-    return $this->CategoryInterface->show($id);
+    return $this->categoryInterface->show($id);
   }
 
   /**
@@ -66,7 +66,7 @@ class CategoryController extends Controller
    */
   public function edit($id)
   {
-    return $this->CategoryInterface->edit($id);
+    return $this->categoryInterface->edit($id);
   }
 
   /**
@@ -78,7 +78,7 @@ class CategoryController extends Controller
    */
   public function update(CategoriesRequest $request, $id)
   {
-      return $this->CategoryInterface->update($request, $id);
+      return $this->categoryInterface->update($request, $id);
   }
 
   /**
@@ -90,7 +90,7 @@ class CategoryController extends Controller
    */
   public function destroy($id)
   {
-      return $this->CategoryInterface->destroy($id);
+      return $this->categoryInterface->destroy($id);
   }
 
 

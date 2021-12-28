@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\VpostsRequest;
-use App\Http\Interfaces\VpostInterface;
+use App\Http\Interfaces\vpostInterface;
 use App\DataTables\VpostsDataTable;
 use App\Helpers\Helper;
 use App\Authorizable;
@@ -12,10 +12,10 @@ use App\Authorizable;
 class VpostController extends Controller
 {
   // use Authorizable;
-  private $VpostInterface;
-  public function __construct(VpostInterface $VpostInterface)
+  private $vpostInterface;
+  public function __construct(vpostInterface $vpostInterface)
   {
-      $this->VpostInterface = $VpostInterface;
+      $this->vpostInterface = $vpostInterface;
   }
 
   /**
@@ -25,8 +25,8 @@ class VpostController extends Controller
    */
 
   public function index(VpostsDataTable $dataTable)
-  {    
-      return $this->VpostInterface->index($dataTable);
+  {
+      return $this->vpostInterface->index($dataTable);
   }
 
   /**
@@ -36,7 +36,7 @@ class VpostController extends Controller
    */
   public function create()
   {
-      return $this->VpostInterface->create();
+      return $this->vpostInterface->create();
   }
 
   /**
@@ -47,7 +47,7 @@ class VpostController extends Controller
    */
   public function store(VpostsRequest $request)
   {
-      return $this->VpostInterface->store($request);
+      return $this->vpostInterface->store($request);
   }
 
   /**
@@ -58,7 +58,7 @@ class VpostController extends Controller
    */
   public function show($id)
   {
-      return $this->VpostInterface->show($id);
+      return $this->vpostInterface->show($id);
   }
 
   /**
@@ -69,7 +69,7 @@ class VpostController extends Controller
    */
   public function edit($id)
   {
-     return $this->VpostInterface->edit($id);
+     return $this->vpostInterface->edit($id);
   }
 
   /**
@@ -81,7 +81,7 @@ class VpostController extends Controller
    */
   public function update(VpostsRequest $request, $id)
   {
-     return $this->VpostInterface->update($request, $id);
+     return $this->vpostInterface->update($request, $id);
   }
 
   /**
@@ -93,7 +93,7 @@ class VpostController extends Controller
    */
   public function destroy($id)
   {
-    return $this->VpostInterface->destroy($id);
+    return $this->vpostInterface->destroy($id);
   }
 
 
@@ -105,6 +105,6 @@ class VpostController extends Controller
    */
   public function multi_delete(Request $request)
   {
-      return $this->VpostInterface->multi_delete($request);
+      return $this->vpostInterface->multi_delete($request);
   }
 }

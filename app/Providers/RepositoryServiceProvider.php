@@ -18,15 +18,15 @@ class RepositoryServiceProvider extends ServiceProvider
           'App\Http\Repositories\UserRepository'
       );
       $this->app->bind(
-          'App\Http\Interfaces\CategoryInterface',
+          'App\Http\Interfaces\categoryInterface',
           'App\Http\Repositories\CategoryRepository'
       );
       $this->app->bind(
-          'App\Http\Interfaces\PostInterface',
+          'App\Http\Interfaces\postInterface',
           'App\Http\Repositories\PostRepository'
       );
       $this->app->bind(
-          'App\Http\Interfaces\VpostInterface',
+          'App\Http\Interfaces\vpostInterface',
           'App\Http\Repositories\VpostRepository'
       );
     }

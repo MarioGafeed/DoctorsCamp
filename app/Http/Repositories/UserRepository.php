@@ -5,7 +5,6 @@ namespace App\Http\Repositories;
 use App\Http\Interfaces\UserInterface;
 use App\Http\Traits\UserTrait;
 use Spatie\Permission\Models\Role;
-// use App\Http\Traits\HelperTrait;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;

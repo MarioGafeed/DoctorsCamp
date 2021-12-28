@@ -7,8 +7,6 @@ use App\Http\Traits\VpostTrait;
 use App\Models\Vpost;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Helpers\Helper;
-
 
 
 class VpostRepository implements VpostInterface
@@ -75,7 +73,7 @@ class VpostRepository implements VpostInterface
      */
     public function show($id)
     {
-      $vpos = $this->getvPostWithCat($id);      
+      $vpos = $this->getvPostWithCat($id);
       $vpos['desc_en']  = json_decode($vpos->desc)->en;
       $vpos['desc_ar']  = json_decode($vpos->desc)->ar;
       return view("{$this->viewPath}.show", [

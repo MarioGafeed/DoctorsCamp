@@ -176,8 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Spatie\Tags\TagsServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
-        Spatie\Tags\TagsServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,    
 
     ],
 

@@ -36,9 +36,9 @@ Route::middleware(\App\Http\Middleware\LangMiddleware::class)->group(function ()
     Route::resource('vposts', 'VpostController');
     Route::post('vposts/multi_delete', 'VpostController@multi_delete')->name('vposts.multi_delete');
 
-    // Post Categories
+    //  Categories
     Route::resource('categories', 'CategoryController');
-    Route::post('categories/multi_delete', 'CategoryController@multi_delete')->name('categories.multi_delete');    
+    Route::post('categories/multi_delete', 'CategoryController@multi_delete')->name('categories.multi_delete');
 
     // Messages
     Route::resource('messages', 'MessageController');

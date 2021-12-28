@@ -3,7 +3,7 @@ namespace App\Http\Interfaces;
 use Illuminate\Http\Request;
 
 
-interface VpostInterface
+interface vpostInterface
 {
     public function index($dataTable);
     public function create();

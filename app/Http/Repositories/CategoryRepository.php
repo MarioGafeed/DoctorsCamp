@@ -7,8 +7,6 @@ use App\Http\Traits\CategoryTrait;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-
-
 class CategoryRepository implements CategoryInterface
 {
     private $viewPath = 'backend.categories';
@@ -71,7 +69,6 @@ class CategoryRepository implements CategoryInterface
      */
     public function show($id)
     {
-      // $cat = Pcategory::where('id', $id)->with('class')->first();
       $cat = $this->getById($id);
       $cat['title_en']    = $cat->title_en;
       $cat['title_ar']    = $cat->title_ar;
@@ -154,7 +151,7 @@ class CategoryRepository implements CategoryInterface
     {
       if (count($request->selected_data)) {
           foreach ($request->selected_data as $id) {
-              $this->destroy($id, false);
+              $this->destroy($id);
           }
           session()->flash('success', trans('main.deleted-message'));
           return redirect()->route('categories.index');
