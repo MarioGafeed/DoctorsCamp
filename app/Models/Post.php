@@ -17,7 +17,7 @@ class Post extends Model Implements HasMedia
   use InteractsWithMedia, HasTags;
 
   protected $fillable = [
-     'title_en', 'title_ar', 'keyword', 'content', 'desc', 'active', 'user_id', 'category_id'
+     'title_en', 'title_ar', 'keyword', 'content', 'desc', 'active', 'user_id', 'category_id', 'youtubeURL', 'type'
   ];
 
   // public function categoryable()

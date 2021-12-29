@@ -14,10 +14,18 @@
 
 <script type="text/javascript">
     $(document).on('change', '#type', function(event) {
-        if ($(this).val() == 'admin') {
-            $('#roles').removeClass('hidden');
+        if ($(this).val() == 'video') {
+            $('#video').removeClass('hidden');
+            $('#article').addClass('hidden');
         } else {
-            $('#roles').addClass('hidden');
+            $('#video').addClass('hidden');
+            $('#article').removeClass('hidden');
         }
     });
 </script>
+
+@if (getData($data, 'type'))
+    <script type="text/javascript">
+        $('#type').val('{{ getData($data, 'type') }}').trigger('change');
+    </script>
+@endif

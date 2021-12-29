@@ -1045,6 +1045,8 @@ return [
     // Blog Details
     'pub_by'                              => 'Published by: ',
     'relate_article'                      => 'Related Articles',
+    'article'                             => 'Article',
+    'youtubeURL'                          => 'Article Youtube URL',
     'tags'                                => 'Tags:',
 
     // Contact

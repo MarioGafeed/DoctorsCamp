@@ -128,6 +128,14 @@ class PostsDataTable extends DataTable
                  'width'      => '200px',
              ],
              [
+                 'name'       => "posts.type",
+                 'data'       => 'type',
+                 'title'      => trans('main.type'),
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'      => '200px',
+             ],
+             [
                  'name' => "posts.active",
                  'data'    => 'active',
                  'title'   => trans('main.status'),

@@ -24,8 +24,8 @@ class CategoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'title_en'        => 'nullable|string|max:50',
-            'title_ar'        => 'required|string|max:50',
+            'title_en'        => 'nullable|string|max:50|unique:categories',
+            'title_ar'        => 'required|string|max:50|unique:categories',
             'keyword'         => 'nullable',
             'slug'            => 'nullable',
             'summary_en'      => 'nullable',

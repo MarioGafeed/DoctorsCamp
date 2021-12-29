@@ -9,8 +9,6 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 
 
-
-
 class PostRepository implements postInterface
 {
     private $viewPath = 'backend.posts';
@@ -48,7 +46,6 @@ class PostRepository implements postInterface
 
     public function store($request)
     {
-
       $requestAll = $request->all();
 
       $requestAll['desc'] = json_encode([
@@ -59,7 +56,6 @@ class PostRepository implements postInterface
         'en' => $request->content_en,
         'ar' => $request->content_ar,
       ]);
-
 
       $requestAll['user_id'] = auth()->user()->id;
 
@@ -84,12 +80,14 @@ class PostRepository implements postInterface
     public function show($id)
     {
       $pos = $this->getPostWithCat($id);
-      $pos['title_en'] = $pos->title_en;
-      $pos['title_ar'] = $pos->title_ar;
-      $pos['desc_en'] = json_decode($pos->desc)->en;
-      $pos['desc_ar'] = json_decode($pos->desc)->ar;
-      $pos['content_en'] = json_decode($pos->content)->en;
-      $pos['content_ar'] = json_decode($pos->content)->ar;
+      $pos['title_en']       = $pos->title_en;
+      $pos['title_ar']       = $pos->title_ar;
+      $pos['type']           = $pos->type;
+      $pos['youtubeURL']     = $pos->youtubeURL;
+      $pos['desc_en']        = json_decode($pos->desc)->en;
+      $pos['desc_ar']        = json_decode($pos->desc)->ar;
+      $pos['content_en']     = json_decode($pos->content)->en;
+      $pos['content_ar']     = json_decode($pos->content)->ar;
       return view("{$this->viewPath}.show", [
           'title' => trans('main.show') . ' ' . trans('main.post') . ' : ' . $pos->title_ar,
           'show' => $pos,
@@ -99,12 +97,12 @@ class PostRepository implements postInterface
 
     public function edit($id)
     {
-      $pos = $this->getPostFirst($id);
+      $pos  = $this->getPostFirst($id);
       $cats = $this->getAllcategory();
       $tags = $pos->tags->pluck('name')->implode(', ');
 
-      $pos['title_en'] = $pos->title_en;
-      $pos['title_ar'] = $pos->title_ar;
+      $pos['title_en']   = $pos->title_en;
+      $pos['title_ar']   = $pos->title_ar;
 
       $pos['desc_en'] = json_decode($pos->desc)->en;
       $pos['desc_ar'] = json_decode($pos->desc)->ar;
@@ -124,8 +122,10 @@ class PostRepository implements postInterface
       if (!$pos) {
         return back();
       }
-      $pos->title_en = $request->title_en;
-      $pos->title_ar = $request->title_ar;
+      $pos->title_en   = $request->title_en;
+      $pos->title_en   = $request->title_en;
+      $pos->type       = $request->type;
+      $pos->youtubeURL = $request->youtubeURL;
       $pos->desc = json_encode([
         'en' => $request->desc_en,
         'ar' => $request->desc_ar,

@@ -985,6 +985,8 @@ return [
     // Blog details
     'pub_by'                              => 'نُشر بواسطة: ',
     'relate_article'                      => 'المقالات المُشابهة',
+    'article'                             => 'منشور مقالي',
+    'youtubeurl'                          => 'رابط منشور فيديو يوتيوب',
     'tags'                                => 'Tags:',
 
     // Contact

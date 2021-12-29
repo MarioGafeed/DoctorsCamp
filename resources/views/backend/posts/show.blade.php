@@ -53,7 +53,7 @@
                             <strong>{{trans('main.title')}} : (ar)</strong>
                             {{ $show->title_ar }}
                             <br><hr>
-                        </div>                        
+                        </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.category')}} : (en)</strong>
                             {{ $show->category->title_en }}
@@ -87,6 +87,19 @@
                         <div class="col-md-6">
                             <strong>{{trans('main.status')}} : </strong>
                             {{ $show->active }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.content')}} : </strong>
+                            <div class="inner-banner relative bg-cover" );">
+                                <a href="{{ $show->youtubeURL }}" target="_blank" class="laink-arrow btn-lg z-10 popup-video transform-center"> <i class="fas fa-play"></i>
+                                </a>
+                            </div>
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.type')}} : (ar)</strong>
+                            {{ $show->type }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">

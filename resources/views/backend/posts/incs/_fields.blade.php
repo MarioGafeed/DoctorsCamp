@@ -73,6 +73,8 @@
         </div>
     </div>
 
+
+
     {{-- Add Post's Taq --}}
     <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
         <label class="col-md-2 control-label">{{ trans('main.tags') }} <span class="required"></span> </label>
@@ -108,29 +110,6 @@
         </div>
     </div>
 
-    <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
-        <label class="col-md-2 control-label">{{ trans('main.content') }} (en) </label>
-        <div class="col-md-10">
-            <textarea name="content_en" class="form-control" placeholder="{{ trans('main.content') }}">{{ getData($data, 'content_en') }}</textarea>
-            @if ($errors->has('content'))
-                <span class="help-block">
-                    <strong class="help-block">{{ $errors->first('content') }}</strong>
-                </span>
-            @endif
-        </div>
-    </div>
-
-    <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
-        <label class="col-md-2 control-label">{{ trans('main.content') }}  (ar)</label>
-        <div class="col-md-10">
-            <textarea name="content_ar" class="form-control" placeholder="{{ trans('main.content') }}">{{ getData($data, 'content_ar') }}</textarea>
-            @if ($errors->has('content'))
-                <span class="help-block">
-                    <strong class="help-block">{{ $errors->first('content') }}</strong>
-                </span>
-            @endif
-        </div>
-    </div>
 
     <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
         <label class="col-md-2 control-label">{{ trans('main.description') }} (en)</label>
@@ -167,5 +146,61 @@
             @endif
         </div>
     </div>
+
+    <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+        <label class="col-md-2 control-label">{{ trans('main.type') }} <span class="required"></span> </label>
+        <div class="col-md-10">
+            <select class="form-control" id="type" name="type">
+                <option></option>
+                <option value="article" {{ getData($data, 'type') == 'article' ? ' selected' : '' }}>{{trans('main.article')}}</option>
+                <option value="video" {{ getData($data, 'type') == 'video' ? ' selected' : '' }}>{{trans('main.youtubeURL')}}</option>
+            </select>
+            @if ($errors->has('type'))
+                <span class="help-block">
+                    <strong class="help-block">{{ $errors->first('type') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
+    <div  class='form-group hidden' id="video">
+        <div class="form-group{{ $errors->has('youtubeURL') ? ' has-error' : '' }}">
+            <label class="col-md-2 control-label">{{ trans('main.youtubeURL') }} <span class="required"></span> </label>
+            <div class="col-md-6">
+                <input type="text" name="youtubeURL" value="{{ getData($data, 'youtubeURL') }}" class="form-control" placeholder="{{ trans('main.youtubeURL') }}" required>
+                @if ($errors->has('youtubeURL'))
+                    <span class="help-block">
+                        <strong class="help-block">{{ $errors->first('youtubeURL') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div   class='form-group hidden' id="article" >
+        <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
+            <label class="col-md-2 control-label">{{ trans('main.content') }} (en) </label>
+            <div class="col-md-10">
+                <textarea name="content_en" class="form-control" placeholder="{{ trans('main.content') }}">{{ getData($data, 'content_en') }}</textarea>
+                @if ($errors->has('content'))
+                    <span class="help-block">
+                        <strong class="help-block">{{ $errors->first('content') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
+            <label class="col-md-2 control-label">{{ trans('main.content') }}  (ar)</label>
+            <div class="col-md-10">
+                <textarea name="content_ar" class="form-control" placeholder="{{ trans('main.content') }}">{{ getData($data, 'content_ar') }}</textarea>
+                @if ($errors->has('content'))
+                    <span class="help-block">
+                        <strong class="help-block">{{ $errors->first('content') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+  </div>
 
 </div>

@@ -19,11 +19,13 @@ class CreatepostsTable extends Migration
             $table->bigIncrements('id');
             $table->text('title_en');
             $table->text('title_ar');
-            $table->longtext('content');
+            $table->longtext('content')->nullable();
+            $table->string('youtubeURL')->nullable();
             $table->text('desc');
             $table->text('keyword');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('category_id')->constrained('categories');
+            $table->enum('type', ['article', 'video']);
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
