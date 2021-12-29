@@ -104,16 +104,7 @@
                             <span class="title">{{ trans('main.show-all') }} {{ trans('main.posts') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ active_route('vposts.create') }}">
-                        <a href="{{ route('vposts.create') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.add') }} {{ trans('main.vpost') }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ active_route('vposts.index') }}">
-                        <a href="{{ route('vposts.index') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.vposts') }}</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
 
@@ -140,7 +131,7 @@
                             <span class="title">{{ trans('main.show-all') }} {{ trans('main.categories') }}</span>
                         </a>
                     </li>
-                    
+
                 </ul>
             </li>
 

@@ -22,12 +22,7 @@ class Category extends Model Implements HasMedia
     public function posts()
     {
       return $this->hasMany(post::class, 'category_id');
-    }
-
-    public function vposts()
-    {
-      return $this->hasMany(Vpost::class, 'category_id');
-    }
+    }    
 
     public function courses()
     {
