@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\PostsRequest;
-use App\Http\Interfaces\postInterface;
-use App\DataTables\PostsDataTable;
+use App\Http\Requests\EventsRequest;
+use App\Http\Interfaces\eventInterface;
+use App\DataTables\EventsDataTable;
 use App\Authorizable;
 
-class PostController extends Controller
+class EventController extends Controller
 {
   // use Authorizable;
-  private $postInterface;
-  public function __construct(postInterface $postInterface)
+  private $eventInterface;
+  public function __construct(eventInterface $eventInterface)
   {
-      $this->postInterface = $postInterface;
+      $this->eventInterface = $eventInterface;
   }
 
    /**
@@ -25,9 +25,9 @@ class PostController extends Controller
 
 
 
-   public function index(PostsDataTable $dataTable)
+   public function index(EventsDataTable $dataTable)
    {
-       return $this->postInterface->index($dataTable);
+       return $this->eventInterface->index($dataTable);
    }
 
    /**
@@ -37,7 +37,7 @@ class PostController extends Controller
     */
    public function create()
    {
-      return $this->postInterface->create();
+      return $this->eventInterface->create();
    }
 
 
@@ -48,9 +48,9 @@ class PostController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function store(PostsRequest $request)
+   public function store(EventsRequest $request)
    {
-       return $this->postInterface->store($request);
+       return $this->eventInterface->store($request);
    }
 
    /**
@@ -61,7 +61,7 @@ class PostController extends Controller
     */
    public function show($id)
    {
-       return $this->postInterface->show($id);
+       return $this->eventInterface->show($id);
    }
 
    /**
@@ -72,7 +72,7 @@ class PostController extends Controller
     */
    public function edit($id)
    {
-       return $this->postInterface->edit($id);
+       return $this->eventInterface->edit($id);
    }
 
    /**
@@ -82,9 +82,9 @@ class PostController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function update(PostsRequest $request, $id)
+   public function update(EventsRequest $request, $id)
    {
-       return $this->postInterface->update($request, $id);
+       return $this->eventInterface->update($request, $id);
    }
 
    /**
@@ -96,7 +96,7 @@ class PostController extends Controller
     */
    public function destroy($id)
    {
-       return $this->postInterface->destroy($id);
+       return $this->eventInterface->destroy($id);
    }
 
 
@@ -108,6 +108,6 @@ class PostController extends Controller
     */
    public function multi_delete(Request $request)
    {
-        return $this->postInterface->multi_delete($request);
+        return $this->eventInterface->multi_delete($request);
    }
 }

@@ -36,7 +36,7 @@ class PostsRequest extends FormRequest
            'desc_ar'         => 'required',
            'desc_en'         => 'nullable',
            'active'          => 'required|in:0,1',
-           'type'            => 'required|in:article,video',           
+           'type'            => 'required|in:article,video',
         ];
 
         // if ($this->method() == 'PATCH') {
@@ -49,7 +49,7 @@ class PostsRequest extends FormRequest
     public function attributes()
     {
         return [
-            'title'       => trans('main.title'),
+            'title_ar'    => trans('main.title'),
             'category_id' => trans('main.pcategory'),
             'content'     => trans('main.content'),
             'youtubeURL'  => trans('main.youtubeURL'),

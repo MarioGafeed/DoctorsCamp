@@ -104,7 +104,18 @@
                             <span class="title">{{ trans('main.show-all') }} {{ trans('main.posts') }}</span>
                         </a>
                     </li>
-                    
+                </ul>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('events.create') }}">
+                        <a href="{{ route('events.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.event') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('events.index') }}">
+                        <a href="{{ route('events.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.events') }}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

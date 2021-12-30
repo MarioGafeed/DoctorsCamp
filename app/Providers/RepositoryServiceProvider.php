@@ -29,6 +29,10 @@ class RepositoryServiceProvider extends ServiceProvider
           'App\Http\Interfaces\vpostInterface',
           'App\Http\Repositories\VpostRepository'
       );
+      $this->app->bind(
+          'App\Http\Interfaces\eventInterface',
+          'App\Http\Repositories\EventRepository'
+      );
     }
 
     /**

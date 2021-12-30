@@ -10,6 +10,7 @@ use App\Authorizable;
 class CategoryController extends Controller
 {
   // use Authorizable;
+  private $viewPath = 'backend.categories';
   private $categoryInterface;
   public function __construct(categoryInterface $categoryInterface)
   {

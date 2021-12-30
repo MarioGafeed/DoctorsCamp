@@ -165,9 +165,9 @@
 
     <div  class='form-group hidden' id="video">
         <div class="form-group{{ $errors->has('youtubeURL') ? ' has-error' : '' }}">
-            <label class="col-md-2 control-label">{{ trans('main.youtubeURL') }} <span class="required"></span> </label>
+            <label class="col-md-2 control-label">{{ trans('main.youtubeURL') }}  </label>
             <div class="col-md-6">
-                <input type="text" name="youtubeURL" value="{{ getData($data, 'youtubeURL') }}" class="form-control" placeholder="{{ trans('main.youtubeURL') }}" required>
+                <input type="text" name="youtubeURL" value="{{ getData($data, 'youtubeURL') }}" class="form-control" placeholder="{{ trans('main.youtubeURL') }}" >
                 @if ($errors->has('youtubeURL'))
                     <span class="help-block">
                         <strong class="help-block">{{ $errors->first('youtubeURL') }}</strong>

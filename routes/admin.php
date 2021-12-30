@@ -31,7 +31,11 @@ Route::middleware(\App\Http\Middleware\LangMiddleware::class)->group(function ()
     // Posts
     Route::resource('posts', 'PostController');
     Route::post('posts/multi_delete', 'PostController@multi_delete')->name('posts.multi_delete');
-  
+
+    // Events
+    Route::resource('events', 'EventController');
+    Route::post('events/multi_delete', 'EventController@multi_delete')->name('events.multi_delete');
+
 
     //  Categories
     Route::resource('categories', 'CategoryController');
