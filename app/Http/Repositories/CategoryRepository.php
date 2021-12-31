@@ -56,7 +56,6 @@ class CategoryRepository implements CategoryInterface
         $cat->addMediaFromRequest('image')->toMediaCollection();
       }
 
-
       session()->flash('success', trans('main.added-message'));
       return redirect()->route('categories.index');
     }

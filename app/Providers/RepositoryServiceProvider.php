@@ -33,6 +33,10 @@ class RepositoryServiceProvider extends ServiceProvider
           'App\Http\Interfaces\eventInterface',
           'App\Http\Repositories\EventRepository'
       );
+      $this->app->bind(
+          'App\Http\Interfaces\imageInterface',
+          'App\Http\Repositories\ImageRepository'
+      );
     }
 
     /**

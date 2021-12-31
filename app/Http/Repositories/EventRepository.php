@@ -71,18 +71,7 @@ class EventRepository implements eventInterface
      */
     public function show($id)
     {
-      $event = $this->getById($id);
-      $event['title_en']       = $event->title_en;
-      $event['title_ar']       = $event->title_ar;
-      $event['country']        = $event->country;
-      $event['city']           = $event->city;
-      $event['location']       = $event->location;
-      $event['description_en'] = json_decode($event->description)->en;
-      $event['description_ar'] = json_decode($event->description)->ar;
-      $event['start_date']     = $event->start_date;
-      $event['end_date']       = $event->end_date;
-      $event['active']         = $event->active;
-      $event['user_id']        = $event->user_id;
+      $event = $this->getById($id);    
       return view("{$this->viewPath}.show", [
           'title' => trans('main.show') . ' ' . trans('main.event') . ' : ' . $event->title_ar,
           'show' => $event,

@@ -117,6 +117,18 @@
                         </a>
                     </li>
                 </ul>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('images.create') }}">
+                        <a href="{{ route('images.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.image') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('images.index') }}">
+                        <a href="{{ route('images.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.images') }}</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
 

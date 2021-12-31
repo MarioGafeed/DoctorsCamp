@@ -29,7 +29,7 @@ class CoursesDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Pcategory $model
+     * @param \App\Models\category $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()

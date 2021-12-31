@@ -50,7 +50,7 @@ class PostsRequest extends FormRequest
     {
         return [
             'title_ar'    => trans('main.title'),
-            'category_id' => trans('main.pcategory'),
+            'category_id' => trans('main.category'),
             'content'     => trans('main.content'),
             'youtubeURL'  => trans('main.youtubeURL'),
             'type'        => trans('main.type'),

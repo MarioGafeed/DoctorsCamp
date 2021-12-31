@@ -4,30 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
+use App\Models\Category;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Tags\HasTags;
 
-
-class Vpost extends Model Implements HasMedia
+class Image extends Model Implements HasMedia
 {
-    use InteractsWithMedia, HasTags;
-
+    use HasFactory, InteractsWithMedia;
     protected $fillable = [
-       'category_id', 'title_en', 'title_ar', 'keyword', 'content', 'desc', 'active', 'user_id',
-  ];
+        'category_id', 'user_id', 'title_en', 'title_ar'
+    ];
 
     public function category()
     {
-        return $this->belongsTo('App\Models\category', 'category_id');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
 
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
-
 }

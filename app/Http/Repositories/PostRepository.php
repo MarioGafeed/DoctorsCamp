@@ -79,11 +79,7 @@ class PostRepository implements postInterface
      */
     public function show($id)
     {
-      $pos = $this->getPostWithCat($id);
-      $pos['title_en']       = $pos->title_en;
-      $pos['title_ar']       = $pos->title_ar;
-      $pos['type']           = $pos->type;
-      $pos['youtubeURL']     = $pos->youtubeURL;
+      $pos = $this->getPostWithCat($id);      
       $pos['desc_en']        = json_decode($pos->desc)->en;
       $pos['desc_ar']        = json_decode($pos->desc)->ar;
       $pos['content_en']     = json_decode($pos->content)->en;

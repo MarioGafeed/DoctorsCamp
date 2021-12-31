@@ -51,7 +51,7 @@
 
     {{-- Add Post's Category --}}
     <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
-        <label class="col-md-2 control-label">{{ trans('main.pcategory') }} <span class="required"></span> </label>
+        <label class="col-md-2 control-label">{{ trans('main.category') }} <span class="required"></span> </label>
         <div class="col-md-6">
             <select class="form-control select2" id="category_id" name="category_id">
               <option value="">{{ trans('main.select Category') }}</option>
