@@ -18,28 +18,24 @@ class RepositoryServiceProvider extends ServiceProvider
           'App\Http\Repositories\UserRepository'
       );
       $this->app->bind(
-          'App\Http\Interfaces\PcategoryInterface',
-          'App\Http\Repositories\PcategoryRepository'
+          'App\Http\Interfaces\categoryInterface',
+          'App\Http\Repositories\CategoryRepository'
       );
       $this->app->bind(
-          'App\Http\Interfaces\VcategoryInterface',
-          'App\Http\Repositories\VcategoryRepository'
-      );
-      $this->app->bind(
-          'App\Http\Interfaces\PtaqInterface',
-          'App\Http\Repositories\PtaqRepository'
-      );
-      $this->app->bind(
-          'App\Http\Interfaces\VtaqInterface',
-          'App\Http\Repositories\VtaqRepository'
-      );
-      $this->app->bind(
-          'App\Http\Interfaces\PostInterface',
+          'App\Http\Interfaces\postInterface',
           'App\Http\Repositories\PostRepository'
       );
       $this->app->bind(
-          'App\Http\Interfaces\VpostInterface',
+          'App\Http\Interfaces\vpostInterface',
           'App\Http\Repositories\VpostRepository'
+      );
+      $this->app->bind(
+          'App\Http\Interfaces\eventInterface',
+          'App\Http\Repositories\EventRepository'
+      );
+      $this->app->bind(
+          'App\Http\Interfaces\imageInterface',
+          'App\Http\Repositories\ImageRepository'
       );
     }
 

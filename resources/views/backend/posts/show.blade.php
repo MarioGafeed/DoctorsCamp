@@ -6,7 +6,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption">
-                        <span class="caption-subject bold uppercase font-blue">{{$title}}</span>
+                        <span class="caption-subject bold uppercase font-blue">{{$title}} </span>
                     </div>
                     <div class="actions">
                         <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('posts.create') }}" data-toggle="tooltip" title="{{trans('main.add')}}  {{trans('main.posts')}}"> <i class="fa fa-plus"></i> </a>
@@ -46,22 +46,22 @@
                     <div class="row">
                         <div class="col-md-6">
                             <strong>{{trans('main.title')}} : (en)</strong>
-                            {{ json_decode($show->title)->en }}
+                            {{ $show->title_en }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.title')}} : (ar)</strong>
-                            {{ json_decode($show->title)->ar }}
+                            {{ $show->title_ar }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.category')}} : (en)</strong>
-                            {{ json_decode($show->pcategory->title)->en }}
+                            {{ $show->category->title_en }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.category')}} : (ar)</strong>
-                            {{ json_decode($show->pcategory->title)->ar }}
+                            {{ $show->category->title_ar }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
@@ -86,7 +86,20 @@
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.status')}} : </strong>
-                            {{ $show->status }}
+                            {{ $show->active }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.content')}} : </strong>
+                            <div class="inner-banner relative bg-cover" );">
+                                <a href="{{ $show->youtubeURL }}" target="_blank" class="laink-arrow btn-lg z-10 popup-video transform-center"> <i class="fas fa-play"></i>
+                                </a>
+                            </div>
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.type')}} : (ar)</strong>
+                            {{ $show->type }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">

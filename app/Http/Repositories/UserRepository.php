@@ -5,7 +5,6 @@ namespace App\Http\Repositories;
 use App\Http\Interfaces\UserInterface;
 use App\Http\Traits\UserTrait;
 use Spatie\Permission\Models\Role;
-// use App\Http\Traits\HelperTrait;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
@@ -45,8 +44,7 @@ class UserRepository implements UserInterface
 
     public function store($request)
     {
-        $requestAll = $request->all();
-        // $requestAll['image'] = Helper::Upload('users', $request->file('image'), 'checkImages');
+        $requestAll = $request->all();        
         $requestAll['password'] = Hash::make($request->password);
 
         $user = User::create($requestAll);

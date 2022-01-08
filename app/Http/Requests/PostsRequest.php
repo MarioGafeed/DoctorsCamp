@@ -28,14 +28,15 @@ class PostsRequest extends FormRequest
         $rules = [
           'title_en'         => 'nullable|string|max:50',
           'title_ar'         => 'required|string|max:50',
-          'pcat_id'          => 'required|exists:pcategories,id',
-          'ptaq_id'          => 'required|exists:ptaqs,id',
-          'content_en'       => 'required',
+          'youtubeURL'       => 'nullable|string|max:244',
+          'category_id'      => 'required|exists:categories,id',
+          'content_en'       => 'nullable',
           'content_ar'       => 'nullable',
           'keyword'          => 'required',
            'desc_ar'         => 'required',
            'desc_en'         => 'nullable',
            'active'          => 'required|in:0,1',
+           'type'            => 'required|in:article,video',
         ];
 
         // if ($this->method() == 'PATCH') {
@@ -48,12 +49,14 @@ class PostsRequest extends FormRequest
     public function attributes()
     {
         return [
-            'title'       => trans('main.title'),
-            'pcat_id'   => trans('main.pcategory'),
+            'title_ar'    => trans('main.title'),
+            'category_id' => trans('main.category'),
             'content'     => trans('main.content'),
+            'youtubeURL'  => trans('main.youtubeURL'),
+            'type'        => trans('main.type'),
             'keyword'     => trans('main.keyword'),
             'desc'        => trans('main.description'),
-            'active'      => trans('main.status'),        
+            'active'      => trans('main.status'),
         ];
     }
 }

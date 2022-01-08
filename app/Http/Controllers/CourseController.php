@@ -13,7 +13,7 @@ use App\Authorizable;
 
 class CourseController extends Controller
 {
-  use Authorizable;
+  // use Authorizable;
   private $viewPath = 'backend.courses';
 
   /**

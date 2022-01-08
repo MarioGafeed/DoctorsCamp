@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostsRequest;
-use App\Http\Interfaces\PostInterface;
+use App\Http\Interfaces\postInterface;
 use App\DataTables\PostsDataTable;
-use App\Helpers\Helper;
 use App\Authorizable;
 
 class PostController extends Controller
 {
   // use Authorizable;
-  private $PostInterface;
-  public function __construct(PostInterface $PostInterface)
+  private $postInterface;
+  public function __construct(postInterface $postInterface)
   {
-      $this->PostInterface = $PostInterface;
+      $this->postInterface = $postInterface;
   }
 
    /**
@@ -28,7 +27,7 @@ class PostController extends Controller
 
    public function index(PostsDataTable $dataTable)
    {
-       return $this->PostInterface->index($dataTable);
+       return $this->postInterface->index($dataTable);
    }
 
    /**
@@ -38,7 +37,7 @@ class PostController extends Controller
     */
    public function create()
    {
-      return $this->PostInterface->create();
+      return $this->postInterface->create();
    }
 
 
@@ -51,7 +50,7 @@ class PostController extends Controller
     */
    public function store(PostsRequest $request)
    {
-       return $this->PostInterface->store($request);
+       return $this->postInterface->store($request);
    }
 
    /**
@@ -62,7 +61,7 @@ class PostController extends Controller
     */
    public function show($id)
    {
-       return $this->PostInterface->show($id);
+       return $this->postInterface->show($id);
    }
 
    /**
@@ -73,7 +72,7 @@ class PostController extends Controller
     */
    public function edit($id)
    {
-       return $this->PostInterface->edit($id);
+       return $this->postInterface->edit($id);
    }
 
    /**
@@ -85,7 +84,7 @@ class PostController extends Controller
     */
    public function update(PostsRequest $request, $id)
    {
-       return $this->PostInterface->update($request, $id);
+       return $this->postInterface->update($request, $id);
    }
 
    /**
@@ -97,7 +96,7 @@ class PostController extends Controller
     */
    public function destroy($id)
    {
-       return $this->PostInterface->destroy($id);
+       return $this->postInterface->destroy($id);
    }
 
 
@@ -109,6 +108,6 @@ class PostController extends Controller
     */
    public function multi_delete(Request $request)
    {
-        return $this->PostInterface->multi_delete($request);
+        return $this->postInterface->multi_delete($request);
    }
 }

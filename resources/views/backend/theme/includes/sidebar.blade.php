@@ -104,86 +104,57 @@
                             <span class="title">{{ trans('main.show-all') }} {{ trans('main.posts') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ active_route('vposts.create') }}">
-                        <a href="{{ route('vposts.create') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.add') }} {{ trans('main.vpost') }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ active_route('vposts.index') }}">
-                        <a href="{{ route('vposts.index') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.vposts') }}</span>
-                        </a>
-                    </li>
                 </ul>
-            </li>
-
-            <!-- Add Post Taq  (Mario Added) -->
-            <li class="heading">
-                <h3 class="uppercase">{{ trans('main.taqs') }}</h3>
-            </li>
-
-            <li class="nav-item  {{ active_route('ptaq.*') }}">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
-                    <span class="title">{{ trans('main.taqs') }}</span>
-                    <span class="arrow"></span>
-                </a>
                 <ul class="sub-menu">
-                    <li class="nav-item {{ active_route('ptaqs.create') }}">
-                        <a href="{{ route('ptaqs.create') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.add') }} {{ trans('main.ptaq') }}</span>
+                    <li class="nav-item {{ active_route('events.create') }}">
+                        <a href="{{ route('events.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.event') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ active_route('ptaqs.index') }}">
-                        <a href="{{ route('ptaqs.index') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.ptaqs') }}</span>
+                    <li class="nav-item {{ active_route('events.index') }}">
+                        <a href="{{ route('events.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.events') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ active_route('vtaqs.create') }}">
-                        <a href="{{ route('vtaqs.create') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.add') }} {{ trans('main.vtaq') }}</span>
+                </ul>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('images.create') }}">
+                        <a href="{{ route('images.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.image') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ active_route('vtaqs.index') }}">
-                        <a href="{{ route('vtaqs.index') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.vtaqs') }}</span>
+                    <li class="nav-item {{ active_route('images.index') }}">
+                        <a href="{{ route('images.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.images') }}</span>
                         </a>
                     </li>
                 </ul>
             </li>
+
 
             <!-- Add Post category  (Mario Added) -->
             <li class="heading">
                 <h3 class="uppercase">{{ trans('main.categories') }}</h3>
             </li>
 
-            <li class="nav-item  {{ active_route('pcategories.*') }}">
+            <li class="nav-item  {{ active_route('categories.*') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
                     <span class="title">{{ trans('main.categories') }}</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item {{ active_route('pcategories.create') }}">
-                        <a href="{{ route('pcategories.create') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.add') }} {{ trans('main.pcategory') }}</span>
+                    <li class="nav-item {{ active_route('categories.create') }}">
+                        <a href="{{ route('categories.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.category') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ active_route('pcategories.index') }}">
-                        <a href="{{ route('pcategories.index') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.pcategories') }}</span>
+                    <li class="nav-item {{ active_route('categories.index') }}">
+                        <a href="{{ route('categories.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.categories') }}</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ active_route('vcategories.create') }}">
-                        <a href="{{ route('vcategories.create') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.add') }} {{ trans('main.vcategory') }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ active_route('vcategories.index') }}">
-                        <a href="{{ route('vcategories.index') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.vcategories') }}</span>
-                        </a>
-                    </li>
+
                 </ul>
             </li>
 

@@ -15,17 +15,18 @@ class CreateUsersTable extends Migration
     {
       Schema::disableForeignKeyConstraints();
         Schema::create('users', function (Blueprint $table) {
-          $table->engine = 'InnoDB';
-            // $table->increments('id');
-            $table->id();
-            // $table->ipAddress('visitor');
-            $table->string('name');                        
+          $table->engine = 'InnoDB';          
+            $table->bigIncrements('id');
+            $table->datetime('last_login_at')->nullable();
+            $table->string('last_login_ip')->nullable();
+            $table->string('name');
             $table->string('phone')->nullable(); // For mobile Phone
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('type', ['user', 'admin'])->default('user');
             $table->boolean('active')->default(true);
+            $table->string('country');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -753,19 +753,12 @@ return [
     'login_error'                     => 'خطأ بتسجيل الدخول تأكد من البريد وكلمة السر',
     'identity'                        => 'ألرقم القومي',
     'desc'                            => ' الوصف ',
-    'pcategories'                     => ' تصنيفات المنشورات ',
-    'pcategory'                       => 'تصنيف المنشور',
+    'categories'                     => 'تصنيفات',
+    'category'                       => 'تصنيف',
     'summary'                         => 'موجز',
     'keyword'                         => 'كلمات مُفتاحية',
     'titlepcat'                       => 'إسم تصنيف المنشورات',
-    'titlevcat'                       => 'إسم تصنيف فيديو',
-    'epcategory'                      => 'تصنيفات المنشورات E',
-    'epcategories'                    => 'تصنيفات منشورات E',
-    'vcategory'                       => 'أسم تصنيف الفيديوهات',
-    'vcategories'                     => 'تصنيفات الفيديوهات',
-    'evcategory'                      => 'تصنيفات فيديو E',
-    'evcategories'                    => 'تصنيفات فيديوهات E',
-    'categories'                      => 'التصنيفات',
+    'titlevcat'                       => 'إسم تصنيف فيديو',            
     'select Category'                 => 'اختر تصنيفاً',
     'post'                            => 'منشور',
     'postn'                           => 'إسم المقال',
@@ -808,289 +801,12 @@ return [
     'blogs'                           => 'مقالات',
     'blog'                            => 'مدونة',
 
-    // Banner Start
-    'txt1'                            => 'أطباء',
-    'txt2'                            => 'لهم',
-    'txt3'                            => 'رسالة',
-    'txt4'                            => ' مجموعه طبية مسيحية من العاملين بالحقل الطبي من مختلف التخصصات الطبية والأعمار وضع الرب علي قلوب أعضائها الوصول للمحرومين طبياً وروحياً من خلال مهاراتهم الطبية داخل مصر ومنطقه الشرق الأوسط وإفريقيا وأيضا تشجيع آخرين على ذات الأمر.تأسست عام 2007',
-    'banner_button1'                  => 'تواصل معنا الأن',
 
-    'txt11'                           => '',
-    'txt22'                           => 'الرؤية',
-    'txt33'                           => '',
-    'txt44'                           => '.الوصول للمحرومين طبياً وروحياً داخل مصر ومنطقه الشرق الأوسط وأفريقيا وأيضا تشجيع آخرين للقيام بهذا أيضاً',
-
-
-    'txt111'                          => '',
-    'txt222'                          => 'المهمة',
-    'txt333'                          => '',
-    'txt444'                          => 'تدريب واعداد وخدمة العاملين بالحقل الطبي ليصلوا للآخرين',
-
-
-    'txt1111'                         => 'وذلك',
-    'txt2222'                         => 'عن',
-    'txt3333'                         => 'طريق',
-    'txt4444'                         => 'عقد لقاءات روحيه في عدد كبير من محافظات مصر وبعض الدول العربية والأفريقية',
-
-    'txt11111'                        => 'وذلك',
-    'txt22222'                        => 'عن',
-    'txt33333'                        => 'طريق',
-    'txt44444'                        => 'عقد المؤتمرات الروحية – مؤتمر سنوي- للعاملين بالحقل الطبي من مصر والمنطقة العربية',
-
-    'txt111111'                       => 'وذلك',
-    'txt222222'                       => 'عن',
-    'txt333333'                       => 'طريق',
-    'txt444444'                       => 'دورات تدربيه علميه في مستشفيات مسيحيه بواسطة اطباء متميزين علميا وروحيا مصريين واجانب .',
-
-    'txt1111111'                      => 'وذلك',
-    'txt2222222'                      => 'عن',
-    'txt3333333'                      => 'طريق',
-    'txt4444444'                      => ' .إرسال رحلات قصيره لدول المنطقة',
-
-    'txt11111111'                     => 'وذلك',
-    'txt22222222'                     => 'عن',
-    'txt33333333'                     => 'طريق',
-    'txt44444444'                     => 'مساندة ودعم العاملين بالحقل الطبي روحياً وعلمياً وإن أمكن مادياً',
-
-    'txt111111111'                    => 'يمكنكم دعم',
-    'txt222222222'                    => 'دوام',
-    'txt333333333'                    => 'من خلال',
-    'txt444444444'                    => 'الصلاة والعمل',
-
-    'txt1111111111'                   => '',
-    'txt2222222222'                   => 'الصلاة',
-    'txt3333333333'                   => '',
-    'txt4444444444'                   => 'تستطيع ان تشترك معنا في الصلاة',
-
-    'txt11111111111'                  => '',
-    'txt22222222222'                  => 'الصلاة',
-    'txt33333333333'                  => '',
-    'txt44444444444'                  => 'من فضلك، صلي خاصهً لاستمرار المساندة الروحية والتدريبات العلمية',
-
-    'txt111111111111'                 => '',
-    'txt222222222222'                 => 'عمل',
-    'txt333333333333'                 => '',
-    'txt444444444444'                 => 'هل انت طبيب مسيحي؟ هل يملئك الشغف للخدمة في بلادنا ومنطقتنا؟',
-
-    'txt1111111111111'                => '',
-    'txt2222222222222'                => 'عمل',
-    'txt3333333333333'                => '',
-    'txt4444444444444'                => 'هل لديك خبرة علمية؟',
-
-    'txt11111111111111'               => '',
-    'txt22222222222222'               => 'عمل',
-    'txt33333333333333'               => '',
-    'txt44444444444444'               => 'اشترك معنا في تدريب أطباء وطلبة آخرين، او الذهاب بنفسك لرحلات قصيره لدول المنطقة',
-
-
-
-
-    // history
-    'history'                          => 'ما اكرمنا به الرب من عام 2007 الي 2020',
-    'his_desc1'                        => 'لقاءات المحافظات وقد حضرها على مدار ما يقرب من 4 سنوات 4000 من العاملين بالحقل الطبي وطلبة الكليات الطبية',
-    'his_year1'                        => '2007',
-    'his_bold1'                        => 'عام التأسيس',
-
-    'his_desc1.5'                        => 'ثلاثة عشر مؤتمر روحي سنوي حضرها حوالي 4800 من العاملين بالحق الطبي في مصر والمنطقة العربية',
-    'his_year1.5'                        => '2007',
-    'his_bold1.5'                        => 'عام التأسيس',
-
-    'his_desc2'                        => 'مؤتمرين للصلاة حضرهما 100 من العاملين بالحقل الطبي في مصر',
-    'his_year2'                        => '2007',
-    'his_bold2'                        => 'عام التأسيس',
-
-    'his_desc2.5'                        => 'ثلاث مؤتمرات روحيه لطلبة الكليات الطبية حضرها 130 طالب وطالبة',
-    'his_year2.5'                        => '2007',
-    'his_bold2.5'                        => 'عام التأسيس',
-
-    'his_desc3'                        => 'خمسة عشر دورة عملية في التخصصات الطبية المختلفة حضرها سبعون مُتدرب',
-    'his_year3'                        => '2007',
-    'his_bold3'                        => 'عام التأسيس',
-
-    'his_desc4'                        => 'إرسال رحلات قصيرة خارج البلاد للمنطقة العربية والدول الأفريقية',
-    'his_year4'                        => '2007',
-    'his_bold4'                        => 'عام التأسيس',
-
-    // Audio
-    'audio_title'                      => 'أسم يسوع أروع اسم ـ أسالوني عن يسوع – ناصــف صبحـي',
-    'audio_desc'                       => 'مؤتمر دوام 2019',
-
-    // Work Gallery
-    'work1'                            => 'D.W.A.M',
-    'work_desc'                        => 'الوصول للمحرومين طبياً وروحياً داخل مصر ومنطقه الشرق الاوسط وافريقيا وايضا تشجيع آخرين على ذات الامر',
-
-    // About me
-    'exper_age'                        => '35',
-    'exper_txt'                        => 'Years of Experience',
-    'me_name'                          => 'Maher Samuel',
-    'me_desc'                          => 'I graduated from the Faculty of Medicine - Alexandria University with a diploma in brain diseases Neurology and psychiatry are from the same university. Many programs offer on Most Christian channels..',
-    'me_why'                           => 'Why Choose D.W.A.M.?',
-    'reson1'                           => 'First Reason.',
-    'reson2'                           => 'Second Reason.',
-    'reson3'                           => 'Third Reason.',
-    'reson4'                           => 'Fourth Reason.',
-
-    // Live Video
-    'live_video'                       => 'الفيديو الإفتتاحي',
-    'video_txt'                        => 'فيديو دوام',
-    'video_desc'                       => 'مقتصفات من مؤتمرات دوام',
-    'video_desc_ehab'                  => '',
-
-
-    // Members
-    'member_says'                         => 'What our Members Says',
-    'member_share'                        => 'Share Opinion',
-    'member_title1'                       => 'D.W.A.M. is the Best',
-    'member_txt1'                         => 'I visited other sites but I cant find enjoying like D.W.A.M site, please go on and continue to develop ideas and features.',
-    'member_who1'                         => 'David Joe',
-    'member_job1'                         => 'CEO, Abc Company',
-    'member_title2'                       => '100% Recommended',
-    'member_txt2'                         => 'I visited other sites but I cant find enjoying like D.W.A.M site, please go on and continue to develop ideas and features.',
-    'member_who2'                         => 'David Joe',
-    'member_job2'                         => 'CEO, Abc Company',
-    'member_title3'                       => '100% Recommended',
-    'member_txt3'                         => 'I visited other sites but I cant find enjoying like D.W.A.M site, please go on and continue to develop ideas and features.',
-    'member_who3'                         => 'David Joe',
-    'member_job3'                         => 'CEO, Abc Company',
-    'member_title4'                       => '100% Recommended',
-    'member_txt4'                         => 'I visited other sites but I cant find enjoying like D.W.A.M site, please go on and continue to develop ideas and features.',
-    'member_who4'                         => 'David Joe',
-    'member_job4'                         => 'CEO, Abc Company',
 
     // EVENT
-    'event'                               => 'الأحداث القادمة',
-    'event_desc'                          => 'الجديد & المؤتمرات',
-    'event1'                              => 'مؤتمر دوام الأول لعام 2021(زوم)',
-    'event2'                              => 'مؤتمر العاملين بالحقل الطبي 2021',
-    'event3'                              => 'Be brave to stand for what you...',
-    'event4'                              => 'Be brave to stand for what you...',
-    'soon'                                => 'قريباً',
+    'event'                                => 'حدث قادم',
+    'events'                               => 'الأحداث القادمة',
 
-    // Connect area
-    'connect_area'                        => 'إلى الأن لم تتواصل معنا, نُرحب بتواصلك معنا..',
-    'connect_area_us'                     => 'اشترك الان',
-
-    // Footer
-    'about'                               => 'ماذا عنا',
-    'about_desc1'                         => 'اطباء لهم رسالة هي مجموعه طبية مسيحية من العاملين بالحقل الطبي من مختلف التخصصات الطبية والاعمار ',
-    'about_desc2'                         => 'وضع الرب علي قلوب اعضائها الوصول للمحرومين طبياً وروحياً من خلال مهاراتهم الطبية داخل مصر ومنطقه الشرق الأوسط وافريقيا وايضا تشجيع آخرين على ذات الامر. تأسست عام 2007  ',
-    'read_more'                           => 'أقرا المزيد',
-    'contact'                             => 'تواصل معنا',
-    'terms'                               => 'الشروط والأحكام',
-    'subscribe'                           => 'اشترك لكي يصلك كل جديد',
-    'ur_name'                             => 'إسمك',
-    'ur_email'                            => 'إيميل الإشتراك',
-    'subscribe_b'                         => 'إشترك الأن',
-
-    // Blog details
-    'pub_by'                              => 'نُشر بواسطة: ',
-    'relate_article'                      => 'المقالات المُشابهة',
-    'tags'                                => 'Tags:',
-
-    // Contact
-    'touch'                               =>'كن على تواصل',
-    'con_info'                            =>'معلومات التواصل',
-    'call'                                =>'إتصل بنا',
-    'send_mail'                           =>'إرسل رسالة',
-    'our_add'                             =>'عنواننا',
-    'full_add'                            =>'إضغط للدخول للصفحة',
-    'send_message'                        =>'إرسل لنا رسالة',
-    'your_message'                        =>'نص رسالتك',
-    'contact_mgs_send'                    =>'تم إرسالة رسالتك بنجاح سيتم التواصل معك قريباً',
-    'body'                                =>'نص رسالتك',
-    'submit'                              =>'إرسال',
-    'subject'                             =>'موضوع الرسالة',
-
-    // about us
-    'about_title'                         =>'تدريب واعداد وخدمة العاملين بالحقل الطبي ليصلوا للآخرين',
-    'about_desc'                          =>'الوصول للمحرومين طبياً وروحياً داخل مصر ومنطقه الشرق الاوسط  وافريقيا وايضا تشجيع آخرين على ذات الامر',
-    'about_desc_right'                    =>'مجموعه طبية مسيحية من العاملين بالحقل الطبي من مختلف التخصصات الطبية والاعمار وضع الرب علي قلوب اعضائها الوصول للمحرومين طبياً وروحياً من خلال مهاراتهم الطبية داخل مصر ومنطقه الشرق الأوسط وافريقيا وايضا تشجيع آخرين على ذات الامر. تأسست عام 2007',
-    'about_desc_left'                     =>'عقد المؤتمرات الروحية – مؤتمر سنوي- للعاملين بالحقل الطبي من مصر والمنطقة العربية',
-    'about_desc_left2'                    =>'دورات تدربيه علميه في مستشفيات مسيحيه بواسطة اطباء متميزين علميا وروحيا مصريين واجانب ارسال رحلات مرسليه قصيره لدول المنطقة و مسانده ودعم اطباء بالحقل المرسلى روحيا وماديا ان أمكن هل انت طبيب مسيحي؟ هل يملئك الشغف للخدمة في بلادنا ومنطقتنا؟',
-    'about_video_title'                   =>'D.W.A.M',
-    'about_video_desc'                    =>'يمكنكم دعم DWAM من خلال الصلاة والعمل',
-    'about_pastor_txt_back'               =>'كل شخص يستطيع ان يشترك معنا في الصلاة!',
-    'about_pastor_txt_title'              =>'صلي',
-    'view_all'                            =>'شاهد الكل',
-    'about_pastor1'                       =>'د. ايهاب ايوب',
-    'about_pastor1_role'                  =>'01223945545 - ehab@dwam4j.com',
-    'about_pastor2'                       =>'د. اندرو جمال',
-    'about_pastor2_role'                  =>'01221277030',
-    'about_pastor3'                       =>'د. ميرا نظمي',
-    'about_pastor3_role'                  =>'01221266136',
-    'about_pastor4'                       =>'د. ديفيد نعيم',
-    'about_pastor4_role'                  =>'01226652756',
-    'about_pastor5'                       =>'د. ماجد ميلاد',
-    'about_pastor5_role'                  =>'01206166603',
-    'about_pastor6'                       =>'د. إيمان هارون',
-    'about_pastor6_role'                  =>'01224246679',
-    'about_squre1'                        =>'تم إنضمام ',
-    'about_num'                           =>' 300',
-    'about_squre2'                        =>'+ عضو',
-
-    // Work Gallery Start.. Dwam Life
-    'work_life1'                          =>'Facebook',
-    'work_life_desc1'                     =>'تمتع بمقالات دوام علي FB',
-
-    'work_life2'                          =>'Instagram',
-    'work_life_desc2'                     =>'تمتع بصور دوام على الـ Insta',
-
-    'work_life3'                          =>'Twitter',
-    'work_life_desc3'                     =>'تابع كل تويتات دوام على Twitter',
-
-    'work_life4'                          =>'ترانيم',
-    'work_life_desc4'                     =>'سبح مع ترانيم دوام.',
-
-    'work_life5'                          =>'ZOOM',
-    'work_life_desc5'                     =>'تواصل مع فريق دوام عبر تطبيق زوم.',
-
-    'work_life6'                          =>'مدونات',
-    'work_life_desc6'                     =>'تمتع بمقالات دوام وتفاعل معها.',
-
-    'work_life7'                          =>'سجل الأن',
-    'work_life_desc7'                     =>'سجل لتتمكن من حجز المؤتمر القادم.',
-
-    'work_life8'                          =>'كتب',
-    'work_life_desc8'                     =>'تمتع بقراءة كتب دوام.',
-
-    'work_life9'                          =>'المؤتمرات السابقة',
-    'work_life_desc9'                     =>'الان تستطيع ان تتابع المؤتمرات السابقة.',
-
-    'work_life10'                          =>'ورشة عمل',
-    'work_life_desc10'                     =>'انضم وتفاعل مع ورش عمل دوام.',
-
-    'work_life11'                          =>'أهلاً باسئلتك',
-    'work_life_desc11'                     =>'كل اسئلتك مُرحب بها.',
-
-    'work_life12'                          =>'أخبارنا',
-    'work_life_desc12'                     =>'الأن تستطيع ان تُتابع كل ما هو جديد لدوام.',
-
-    'work_life13'                          =>'محاضرات عملية',
-    'work_life_desc13'                     =>'تمتع بمحاضرات المجال الطبي.',
-
-    'work_life14'                          =>'خدمات',
-    'work_life_desc14'                     =>'شاهد وشارك في خدمات دوام.',
-
-    'work_life15'                          =>'',
-    'work_life_desc15'                     =>'.',
-
-    'work_life16'                          =>'',
-    'work_life_desc16'                     =>'',
-
-
-    // register create account
-      'createacc'                          =>'إنشاء حساب',
-      'createdesc'                         =>'تجربة تجربة تجربة',
-      'username'                           =>'إسم المستخدم',
-
-      'remeberme'                          =>'تذكرني',
-      'signup'                             =>'تسجيل',
-      'login'                              =>'تسجيل دخول',
-      'forgetpass'                         =>'نسيت كلمة السر',
-      'areadymemeber'                      =>'هل انت عضو بالفعل؟',
-      'newhere'                            =>'جديد هنا؟',
-      'haveaccount'                        =>'هل لديك حساب؟',
-      'haveaccountdesc'                    =>'وصف بسيط',
       // msg verify
       'verify_problem'                     =>'بتواجه مشكلة في التحقق؟',
       'resend_mail'                        =>'طلب إعادة إرسال',
@@ -1099,6 +815,11 @@ return [
       // E- e_learning
       'e_learning'                         =>'التعلم عن بعد',
       'vcontent'                           =>'رابط الفيديو',
+      'start_date'                         => 'تاريخ بداية الحدث',
+      'end_date'                           => 'تاريخ إنتهاء الحدث',
+      'location'                           => 'مكان الحدث',
+      'eventTitle'                         => 'إسم الحدث',
+      'select country'                     => 'إختر الدولة',
 
 
 ];
