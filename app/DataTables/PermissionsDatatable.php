@@ -1,8 +1,9 @@
 <?php
+
 namespace App\DataTables;
 
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Services\DataTable;
 
 class PermissionsDatatable extends DataTable
@@ -25,6 +26,7 @@ class PermissionsDatatable extends DataTable
     public function query()
     {
         $query = Permission::query()->select('permissions.*');
+
         return $this->applyScopes($query);
     }
 
@@ -56,7 +58,7 @@ class PermissionsDatatable extends DataTable
     {
         return [
             [
-                'name' => "permissions.name",
+                'name' => 'permissions.name',
                 'data'    => 'name',
                 'title'   => trans('main.permissions'),
                 'searchable' => true,
@@ -91,6 +93,6 @@ class PermissionsDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'PermissionsDataTable_' . time();
+        return 'PermissionsDataTable_'.time();
     }
 }

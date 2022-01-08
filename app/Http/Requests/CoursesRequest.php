@@ -31,17 +31,15 @@ class CoursesRequest extends FormRequest
             'price'    => 'sometimes|nullable|numeric',
         ];
 
-
         return $return;
     }
-
 
     public function attributes()
     {
         return [
             'name'     => trans('main.name'),
             'slug'     => trans('main.slug'),
-            'desc'     => trans('main.desc'),        
+            'desc'     => trans('main.desc'),
             'active'   => trans('main.active'),
             'price'    => trans('main.price'),
         ];

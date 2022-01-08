@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Authorizable;
+use App\DataTables\UsersDataTable;
 use App\Http\Interfaces\UserInterface;
 use App\Http\Requests\UsersRequest;
-use App\DataTables\UsersDataTable;
-use App\Authorizable;
-
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
     // use Authorizable;
 
     private $UserInterface;
+
     public function __construct(UserInterface $UserInterface)
     {
         $this->UserInterface = $UserInterface;
@@ -24,13 +24,10 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-     public function index(UsersDataTable $dataTable)
-     {
-       return $this->UserInterface->index($dataTable);
-     }
-
-
+    public function index(UsersDataTable $dataTable)
+    {
+        return $this->UserInterface->index($dataTable);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -39,7 +36,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-       return $this->UserInterface->create();
+        return $this->UserInterface->create();
     }
 
     /**
@@ -61,7 +58,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-      return  $this->UserInterface->show($id);
+        return  $this->UserInterface->show($id);
     }
 
     /**
@@ -72,7 +69,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-      return $this->UserInterface->edit($id);
+        return $this->UserInterface->edit($id);
     }
 
     /**
@@ -99,7 +96,6 @@ class UsersController extends Controller
         return $this->UserInterface->destroy($id);
     }
 
-
     /**
      * Remove the multible resource from storage.
      *
@@ -108,6 +104,6 @@ class UsersController extends Controller
      */
     public function multi_delete(Request $request)
     {
-      return $this->UserInterface->multi_delete($request);
+        return $this->UserInterface->multi_delete($request);
     }
 }

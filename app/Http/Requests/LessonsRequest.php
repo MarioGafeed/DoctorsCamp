@@ -33,7 +33,6 @@ class LessonsRequest extends FormRequest
         ];
     }
 
-
     public function attributes()
     {
         return [
@@ -42,7 +41,7 @@ class LessonsRequest extends FormRequest
             'content'     => trans('main.content'),
             'vcontent'    => trans('main.vcontent'),
             'myorder'     => trans('main.myorder'),
-            'active'      => trans('main.active'),            
+            'active'      => trans('main.active'),
         ];
     }
 }

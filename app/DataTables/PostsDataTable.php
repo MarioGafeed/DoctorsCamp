@@ -20,25 +20,22 @@ class PostsDataTable extends DataTable
         return datatables($query)
         ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
 
-
-
       ->addColumn('active', function ($model) {
-              if ($model->active == '1') {
-                  return '
-                      <span style="padding: 1px 6px;" class="label lable-sm label-success">' . trans("main.yes") . '</span>
+          if ($model->active == '1') {
+              return '
+                      <span style="padding: 1px 6px;" class="label lable-sm label-success">'.trans('main.yes').'</span>
                           ';
-              } else {
-                  return '
-                      <span style="padding: 1px 6px;" class="label lable-sm label-danger">' . trans("main.no") . '</span>
+          } else {
+              return '
+                      <span style="padding: 1px 6px;" class="label lable-sm label-danger">'.trans('main.no').'</span>
                   ';
-              }
-          })
+          }
+      })
 
         ->addColumn('show', 'backend.posts.buttons.show')
         ->addColumn('edit', 'backend.posts.buttons.edit')
         ->addColumn('delete', 'backend.posts.buttons.delete')
-        ->rawColumns(['checkbox','show','edit', 'delete', 'active'])
-        ;
+        ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'active']);
     }
 
     /**
@@ -50,6 +47,7 @@ class PostsDataTable extends DataTable
     public function query()
     {
         $query = Post::query()->with('category', 'user')->select('posts.*');
+
         return $this->applyScopes($query);
     }
 
@@ -60,10 +58,10 @@ class PostsDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
-         ->parameters($this->getCustomBuilderParameters([1,2,3,4,5], [], GetLanguage() == 'ar'));
+         ->parameters($this->getCustomBuilderParameters([1, 2, 3, 4, 5], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -73,9 +71,9 @@ class PostsDataTable extends DataTable
      *
      * @return array
      */
-     protected function getColumns()
-     {
-         return [
+    protected function getColumns()
+    {
+        return [
              [
                  'name' => 'checkbox',
                  'data' => 'checkbox',
@@ -85,42 +83,42 @@ class PostsDataTable extends DataTable
                  'exportable'     => false,
                  'printable'      => false,
                  'width'          => '10px',
-                 'aaSorting'      => 'none'
+                 'aaSorting'      => 'none',
              ],
              [
-                 'name'       => "posts.title_en",
+                 'name'       => 'posts.title_en',
                  'data'       => 'title_en',
-                 'title'      => trans('main.titlepcat')." en",
+                 'title'      => trans('main.titlepcat').' en',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "posts.title_ar",
+                 'name'       => 'posts.title_ar',
                  'data'       => 'title_ar',
-                 'title'      => trans('main.titlepcat')." ar",
+                 'title'      => trans('main.titlepcat').' ar',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "category.title_en",
+                 'name'       => 'category.title_en',
                  'data'       => 'category.title_en',
-                 'title'      => trans('main.category'). " (EN)",
+                 'title'      => trans('main.category').' (EN)',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "category.title_ar",
+                 'name'       => 'category.title_ar',
                  'data'       => 'category.title_ar',
-                 'title'      => trans('main.category')." (AR)",
+                 'title'      => trans('main.category').' (AR)',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "user.name",
+                 'name'       => 'user.name',
                  'data'       => 'user.name',
                  'title'      => trans('main.user'),
                  'searchable' => true,
@@ -128,7 +126,7 @@ class PostsDataTable extends DataTable
                  'width'      => '200px',
              ],
              [
-                 'name'       => "posts.type",
+                 'name'       => 'posts.type',
                  'data'       => 'type',
                  'title'      => trans('main.type'),
                  'searchable' => true,
@@ -136,7 +134,7 @@ class PostsDataTable extends DataTable
                  'width'      => '200px',
              ],
              [
-                 'name' => "posts.active",
+                 'name' => 'posts.active',
                  'data'    => 'active',
                  'title'   => trans('main.status'),
                  'searchable' => true,
@@ -172,10 +170,10 @@ class PostsDataTable extends DataTable
              ],
 
          ];
-     }
+    }
 
     protected function filename()
     {
-        return 'Posts_' . date('YmdHis');
+        return 'Posts_'.date('YmdHis');
     }
 }

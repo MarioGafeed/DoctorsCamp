@@ -2,20 +2,21 @@
 
 namespace App\Http\Repositories;
 
+use App\Helpers\Helper;
 use App\Http\Interfaces\UserInterface;
 use App\Http\Traits\UserTrait;
-use Spatie\Permission\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Helpers\Helper;
 use Hash;
-
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserRepository implements UserInterface
 {
-   private $viewPath = 'backend.users';
+    private $viewPath = 'backend.users';
     use UserTrait;
+
     private $userModel;
+
     public function __construct(User $user)
     {
         $this->userModel = $user;
@@ -26,31 +27,30 @@ class UserRepository implements UserInterface
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index($dataTable)
     {
-      return $dataTable->render("{$this->viewPath}.index", [
-          'title' => trans('main.show-all') . ' ' . trans('main.users')
+        return $dataTable->render("{$this->viewPath}.index", [
+          'title' => trans('main.show-all').' '.trans('main.users'),
       ]);
     }
 
     public function create()
     {
-      return view("{$this->viewPath}.create", [
-          'title' => trans('main.add') . ' ' . trans('main.users'),
+        return view("{$this->viewPath}.create", [
+          'title' => trans('main.add').' '.trans('main.users'),
           'roles' => Role::get(),
       ]);
     }
 
     public function store($request)
     {
-        $requestAll = $request->all();        
+        $requestAll = $request->all();
         $requestAll['password'] = Hash::make($request->password);
 
         $user = User::create($requestAll);
 
         if ($request->hasFile('image')) {
-        $user
+            $user
           ->addMediaFromRequest('image')
           ->toMediaCollection();
         }
@@ -64,6 +64,7 @@ class UserRepository implements UserInterface
             }
         }
         session()->flash('success', trans('main.added-message'));
+
         return redirect()->route('users.index');
     }
 
@@ -75,22 +76,22 @@ class UserRepository implements UserInterface
      */
     public function show($id)
     {
-       $user = $this->getById($id);
+        $user = $this->getById($id);
 
         return view("{$this->viewPath}.show", [
-            'title' => trans('main.show') . ' ' . trans('main.user') . ' : ' . $user->name,
+            'title' => trans('main.show').' '.trans('main.user').' : '.$user->name,
             'show' => $user,
         ]);
     }
 
-
     public function edit($id)
     {
         $user = $this->getById($id);
+
         return view("{$this->viewPath}.edit", [
-            'title' => trans('main.edit') . ' ' . trans('main.user') . ' : ' . $user->name,
+            'title' => trans('main.edit').' '.trans('main.user').' : '.$user->name,
             'edit' => $user,
-            'roles' => Role::get()
+            'roles' => Role::get(),
         ]);
     }
 
@@ -100,7 +101,7 @@ class UserRepository implements UserInterface
         $user->name = $request->name;
         $user->email = $request->email;
 
-        if ($request->has('password') && !empty($request->password) && !is_null($request->password)) {
+        if ($request->has('password') && ! empty($request->password) && ! is_null($request->password)) {
             $user->password = Hash::make($request->password);
         }
 
@@ -109,8 +110,8 @@ class UserRepository implements UserInterface
         $user->active = $request->active;
 
         if ($request->hasFile('image')) {
-          $user->clearMediaCollection();
-          $user
+            $user->clearMediaCollection();
+            $user
             ->addMediaFromRequest('image')
             ->toMediaCollection();
         }
@@ -125,24 +126,25 @@ class UserRepository implements UserInterface
         }
 
         session()->flash('success', trans('main.updated'));
+
         return redirect()->route('users.show', [$user->id]);
     }
 
     public function destroy($id)
     {
-      $redirect = true;
-      $user = $this->getById($id );
+        $redirect = true;
+        $user = $this->getById($id);
 
-      $user->clearMediaCollection();
+        $user->clearMediaCollection();
 
-      $user->delete();
+        $user->delete();
 
-      if ($redirect) {
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('users.index');
-      }
+        if ($redirect) {
+            session()->flash('success', trans('main.deleted-message'));
+
+            return redirect()->route('users.index');
+        }
     }
-
 
     /**
      * Remove the multible resource from storage.
@@ -152,12 +154,13 @@ class UserRepository implements UserInterface
      */
     public function multi_delete($request)
     {
-      if (count($request->selected_data)) {
-          foreach ($request->selected_data as $id) {
-              $this->destroy($id, false);
-          }
-          session()->flash('success', trans('main.deleted-message'));
-          return redirect()->route('users.index');
-      }
+        if (count($request->selected_data)) {
+            foreach ($request->selected_data as $id) {
+                $this->destroy($id, false);
+            }
+            session()->flash('success', trans('main.deleted-message'));
+
+            return redirect()->route('users.index');
+        }
     }
 }

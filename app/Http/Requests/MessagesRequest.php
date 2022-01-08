@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class MessagesRequest extends FormRequest
@@ -12,9 +11,6 @@ class MessagesRequest extends FormRequest
      *
      * @return bool
      */
-
-
-
     public function authorize()
     {
         return true;
@@ -35,7 +31,6 @@ class MessagesRequest extends FormRequest
             'body'    =>'required|string',
         ];
     }
-
 
     public function attributes()
     {

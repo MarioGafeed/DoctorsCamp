@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
-
-//Importing laravel-permission models
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\DataTables\PermissionsDatatable;
+use Auth;
+//Importing laravel-permission models
+use Illuminate\Http\Request;
 use Session;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Validator;
 
 class PermissionController extends Controller
@@ -20,15 +19,16 @@ class PermissionController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
 
         // dd(Permission::pluck('name')->toArray());
         $roles = Role::get(); //Get all roles
+
         return view('backend.permissions.create', [
             'title'     => trans('main.permissions'),
             'roles'     => $roles,
@@ -36,11 +36,11 @@ class PermissionController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $rules = [
@@ -62,7 +62,7 @@ class PermissionController extends Controller
 
         $permission->save();
 
-        if (!empty($request['roles'])) { //If one or more role is selected
+        if (! empty($request['roles'])) { //If one or more role is selected
             foreach ($roles as $role) {
                 $r = Role::where('id', '=', $role)->firstOrFail(); //Match input role to db record
                 $permission = Permission::where('name', '=', $name)->first(); //Match input //permission to db record
@@ -80,8 +80,6 @@ class PermissionController extends Controller
         return redirect()->back();
     }
 
-
-
     public function show($id)
     {
         return view('backend.permissions.show', [
@@ -90,20 +88,17 @@ class PermissionController extends Controller
         ]);
     }
 
-
-
     public function edit($id)
     {
         $permission = Permission::findOrFail($id);
         $roles = Role::get(); //Get all roles
+
         return view('backend.permissions.edit', [
             'title'       => trans('main.permissions'),
             'permission' => $permission,
             'roles'     => $roles,
         ]);
     }
-
-
 
     public function update(Request $request, $id)
     {
@@ -122,28 +117,26 @@ class PermissionController extends Controller
 
         $permission->fill($input)->save();
 
-
         // get thye user permissions depinding on then roles
         $permissions = auth()->user()->getAllPermissions()->pluck('name')->toArray();
         // save the persdissions to can Chack on the persissions
         session()->put('user.permissions', $permissions);
 
-
         session()->flash('success', trans('log.edit_record'));
+
         return redirect()->route('permissions.index');
     }
-
 
     public function destroy($id)
     {
         $permission = Permission::findOrFail($id);
         //Make it impossible to delete this specific permission
-        if ($permission->name == "Admin") {
+        if ($permission->name == 'Admin') {
             session()->flash('error', 'error this permision can not be deleted');
+
             return redirect()->route('permissions.index');
         }
         $permission->delete();
-
 
         // get thye user permissions depinding on then roles
         $permissions = auth()->user()->getAllPermissions()->pluck('name')->toArray();
@@ -151,6 +144,7 @@ class PermissionController extends Controller
         session()->put('user.permissions', $permissions);
 
         session()->flash('success', trans('log.delete_record'));
+
         return redirect()->route('permissions.index');
     }
 }

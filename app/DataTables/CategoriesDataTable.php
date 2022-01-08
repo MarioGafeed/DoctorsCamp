@@ -15,29 +15,28 @@ class CategoriesDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-     public function dataTable($query)
-     {
-       return datatables($query)
+    public function dataTable($query)
+    {
+        return datatables($query)
        ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
 
-       ->addColumn('categories.summary_en', function($model){
-                          return json_decode($model->summary)->en;
-                 })
-       ->addColumn('categories.summary_ar', function($model){
-                          return json_decode($model->summary)->ar ?? trans('main.n_a');
-                 })
-      ->addColumn('categories.desc_en', function($model){
-                          return json_decode($model->desc)->en;
-                 })
-      ->addColumn('categories.desc_ar', function($model){
-                          return json_decode($model->desc)->ar ?? trans('main.n_a');
-                 })
+       ->addColumn('categories.summary_en', function ($model) {
+           return json_decode($model->summary)->en;
+       })
+       ->addColumn('categories.summary_ar', function ($model) {
+           return json_decode($model->summary)->ar ?? trans('main.n_a');
+       })
+      ->addColumn('categories.desc_en', function ($model) {
+          return json_decode($model->desc)->en;
+      })
+      ->addColumn('categories.desc_ar', function ($model) {
+          return json_decode($model->desc)->ar ?? trans('main.n_a');
+      })
        ->addColumn('show', 'backend.categories.buttons.show')
        ->addColumn('edit', 'backend.categories.buttons.edit')
        ->addColumn('delete', 'backend.categories.buttons.delete')
-       ->rawColumns(['checkbox','show','edit', 'delete'])
-       ;
-     }
+       ->rawColumns(['checkbox', 'show', 'edit', 'delete']);
+    }
 
     /**
      * Get query source of dataTable.
@@ -48,6 +47,7 @@ class CategoriesDataTable extends DataTable
     public function query()
     {
         $query = Category::query()->select('categories.*');
+
         return $this->applyScopes($query);
     }
 
@@ -58,10 +58,11 @@ class CategoriesDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
         ->columns($this->getColumns())
         ->ajax('')
-        ->parameters($this->getCustomBuilderParameters([1,2,3,4,5], [], GetLanguage() == 'ar'));
+        ->parameters($this->getCustomBuilderParameters([1, 2, 3, 4, 5], [], GetLanguage() == 'ar'));
+
         return $html;
     }
 
@@ -82,26 +83,26 @@ class CategoriesDataTable extends DataTable
                 'exportable'     => false,
                 'printable'      => false,
                 'width'          => '10px',
-                'aaSorting'      => 'none'
+                'aaSorting'      => 'none',
             ],
             [
-                'name'       => "categories.title_en",
+                'name'       => 'categories.title_en',
                 'data'       => 'title_en',
-                'title'      => trans('main.title')." (en)",
+                'title'      => trans('main.title').' (en)',
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
             ],
             [
-                'name'       => "categories.title_ar",
+                'name'       => 'categories.title_ar',
                 'data'       => 'title_ar',
-                'title'      => trans('main.title')." (ar)",
+                'title'      => trans('main.title').' (ar)',
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
             ],
             [
-                'name'       => "categories.keyword",
+                'name'       => 'categories.keyword',
                 'data'       => 'keyword',
                 'title'      => trans('main.keyword'),
                 'searchable' => true,
@@ -109,33 +110,33 @@ class CategoriesDataTable extends DataTable
                 'width'      => '200px',
             ],
             [
-                'name'       => "categories.summary",
+                'name'       => 'categories.summary',
                 'data'       => 'categories.summary_en',
-                'title'      => trans('main.summary')." (en)",
+                'title'      => trans('main.summary').' (en)',
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
             ],
             [
-                'name'       => "categories.desc",
+                'name'       => 'categories.desc',
                 'data'       => 'categories.desc_en',
-                'title'      => trans('main.desc')." (en)",
+                'title'      => trans('main.desc').' (en)',
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
             ],
             [
-                'name'       => "categories.summary",
+                'name'       => 'categories.summary',
                 'data'       => 'categories.summary_ar',
-                'title'      => trans('main.summary')." (ar)",
+                'title'      => trans('main.summary').' (ar)',
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
             ],
             [
-                'name'       => "categories.desc",
+                'name'       => 'categories.desc',
                 'data'       => 'categories.desc_ar',
-                'title'      => trans('main.desc')." (ar)",
+                'title'      => trans('main.desc').' (ar)',
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
@@ -173,6 +174,6 @@ class CategoriesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'categories_' . date('YmdHis');
+        return 'categories_'.date('YmdHis');
     }
 }

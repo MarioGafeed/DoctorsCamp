@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Traits;
 
 trait ImageTrait
@@ -17,6 +18,7 @@ trait ImageTrait
     {
         return $this->imageModel::where('id', $id)->with('category', 'user')->first();
     }
+
     private function getImageWithCat($id)
     {
         return $this->imageModel::where('id', $id)->with('category')->first();

@@ -23,8 +23,7 @@ class EventsDataTable extends DataTable
         ->addColumn('show', 'backend.events.buttons.show')
         ->addColumn('edit', 'backend.events.buttons.edit')
         ->addColumn('delete', 'backend.events.buttons.delete')
-        ->rawColumns(['checkbox','show','edit', 'delete', 'active'])
-        ;
+        ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'active']);
     }
 
     /**
@@ -36,6 +35,7 @@ class EventsDataTable extends DataTable
     public function query()
     {
         $query = Event::query()->with('country', 'user')->select('events.*');
+
         return $this->applyScopes($query);
     }
 
@@ -46,10 +46,10 @@ class EventsDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
-         ->parameters($this->getCustomBuilderParameters([1,2,3,4,5,6,7], [], GetLanguage() == 'ar'));
+         ->parameters($this->getCustomBuilderParameters([1, 2, 3, 4, 5, 6, 7], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -59,9 +59,9 @@ class EventsDataTable extends DataTable
      *
      * @return array
      */
-     protected function getColumns()
-     {
-         return [
+    protected function getColumns()
+    {
+        return [
              [
                  'name' => 'checkbox',
                  'data' => 'checkbox',
@@ -71,26 +71,26 @@ class EventsDataTable extends DataTable
                  'exportable'     => false,
                  'printable'      => false,
                  'width'          => '10px',
-                 'aaSorting'      => 'none'
+                 'aaSorting'      => 'none',
              ],
              [
-                 'name'       => "events.title_en",
+                 'name'       => 'events.title_en',
                  'data'       => 'title_en',
-                 'title'      => trans('main.eventTitle')." en",
+                 'title'      => trans('main.eventTitle').' en',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "events.title_ar",
+                 'name'       => 'events.title_ar',
                  'data'       => 'title_ar',
-                 'title'      => trans('main.eventTitle')." ar",
+                 'title'      => trans('main.eventTitle').' ar',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "country.name",
+                 'name'       => 'country.name',
                  'data'       => 'country.name',
                  'title'      => trans('main.country'),
                  'searchable' => true,
@@ -98,7 +98,7 @@ class EventsDataTable extends DataTable
                  'width'      => '200px',
              ],
              [
-                 'name'       => "user.name",
+                 'name'       => 'user.name',
                  'data'       => 'user.name',
                  'title'      => trans('main.user'),
                  'searchable' => true,
@@ -106,7 +106,7 @@ class EventsDataTable extends DataTable
                  'width'      => '200px',
              ],
              [
-                 'name' => "events.location",
+                 'name' => 'events.location',
                  'data'    => 'location',
                  'title'   => trans('main.location'),
                  'searchable' => true,
@@ -114,7 +114,7 @@ class EventsDataTable extends DataTable
                  'width'          => '200px',
              ],
              [
-                 'name'       => "events.start_date",
+                 'name'       => 'events.start_date',
                  'data'       => 'start_date',
                  'title'      => trans('main.start_date'),
                  'searchable' => true,
@@ -122,7 +122,7 @@ class EventsDataTable extends DataTable
                  'width'      => '300px',
              ],
              [
-                 'name'       => "events.end_date",
+                 'name'       => 'events.end_date',
                  'data'       => 'end_date',
                  'title'      => trans('main.end_date'),
                  'searchable' => true,
@@ -130,7 +130,7 @@ class EventsDataTable extends DataTable
                  'width'      => '300px',
              ],
              [
-                 'name' => "events.active",
+                 'name' => 'events.active',
                  'data'    => 'active',
                  'title'   => trans('main.status'),
                  'searchable' => true,
@@ -166,10 +166,10 @@ class EventsDataTable extends DataTable
              ],
 
          ];
-     }
+    }
 
     protected function filename()
     {
-        return 'Events_' . date('YmdHis');
+        return 'Events_'.date('YmdHis');
     }
 }

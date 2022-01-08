@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 class Course extends Model
@@ -13,7 +13,7 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','slug', 'desc', 'price', 'active'
+        'name', 'slug', 'desc', 'price', 'active',
     ];
 
     public function lessons()

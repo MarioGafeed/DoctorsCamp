@@ -7,7 +7,6 @@ use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
 {
-
     use BuilderParameters;
 
     /**
@@ -18,17 +17,16 @@ class UsersDataTable extends DataTable
      */
     public function dataTable($query)
     {
-
         return datatables($query)
         ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
         ->addColumn('type', function ($model) {
             if ($model->type == 'admin') {
                 return '
-                    <span style="padding: 1px 6px;" class="label lable-sm label-success">' . trans("main.admin") . '</span>
+                    <span style="padding: 1px 6px;" class="label lable-sm label-success">'.trans('main.admin').'</span>
                 ';
             } else {
                 return '
-                    <span style="padding: 1px 6px;" class="label lable-sm label-warning">' . trans("main.user") . '</span>
+                    <span style="padding: 1px 6px;" class="label lable-sm label-warning">'.trans('main.user').'</span>
                 ';
             }
         })
@@ -36,11 +34,11 @@ class UsersDataTable extends DataTable
         ->addColumn('active', function ($model) {
             if ($model->active == '1') {
                 return '
-                    <span style="padding: 1px 6px;" class="label lable-sm label-success">' . trans("main.yes") . '</span>
+                    <span style="padding: 1px 6px;" class="label lable-sm label-success">'.trans('main.yes').'</span>
                 ';
             } else {
                 return '
-                    <span style="padding: 1px 6px;" class="label lable-sm label-danger">' . trans("main.no") . '</span>
+                    <span style="padding: 1px 6px;" class="label lable-sm label-danger">'.trans('main.no').'</span>
                 ';
             }
         })
@@ -48,8 +46,7 @@ class UsersDataTable extends DataTable
         ->addColumn('show', 'backend.users.buttons.show')
         ->addColumn('edit', 'backend.users.buttons.edit')
         ->addColumn('delete', 'backend.users.buttons.delete')
-        ->rawColumns(['checkbox','show','edit', 'delete', 'type', 'active'])
-        ;
+        ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'type', 'active']);
     }
 
     /**
@@ -62,6 +59,7 @@ class UsersDataTable extends DataTable
     {
         // $query = User::query()->with('class')->select('users.*');
         $query = User::query()->with('roles')->select('users.*');
+
         return $this->applyScopes($query);
     }
 
@@ -72,10 +70,10 @@ class UsersDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
-        ->parameters($this->getCustomBuilderParameters([1,2,3,4,5], [], GetLanguage() == 'ar'));
+        ->parameters($this->getCustomBuilderParameters([1, 2, 3, 4, 5], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -97,10 +95,10 @@ class UsersDataTable extends DataTable
                 'exportable'     => false,
                 'printable'      => false,
                 'width'          => '10px',
-                'aaSorting'      => 'none'
+                'aaSorting'      => 'none',
             ],
             [
-                'name' => "users.name",
+                'name' => 'users.name',
                 'data'    => 'name',
                 'title'   => trans('main.name'),
                 'searchable' => true,
@@ -108,7 +106,7 @@ class UsersDataTable extends DataTable
                 'width'          => '100px',
             ],
             [
-                'name' => "users.phone",
+                'name' => 'users.phone',
                 'data'    => 'phone',
                 'title'   => trans('main.phone'),
                 'searchable' => true,
@@ -116,7 +114,7 @@ class UsersDataTable extends DataTable
                 'width'          => '100px',
             ],
             [
-                'name' => "users.email",
+                'name' => 'users.email',
                 'data'    => 'email',
                 'title'   => trans('main.email'),
                 'searchable' => true,
@@ -124,7 +122,7 @@ class UsersDataTable extends DataTable
                 'width'          => '100px',
             ],
             [
-                'name' => "users.type",
+                'name' => 'users.type',
                 'data'    => 'type',
                 'title'   => trans('main.type'),
                 'searchable' => true,
@@ -132,7 +130,7 @@ class UsersDataTable extends DataTable
                 'width'          => '100px',
             ],
             [
-                'name' => "users.active",
+                'name' => 'users.active',
                 'data'    => 'active',
                 'title'   => trans('main.active'),
                 'searchable' => true,
@@ -180,6 +178,6 @@ class UsersDataTable extends DataTable
 
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'Users_'.date('YmdHis');
     }
 }

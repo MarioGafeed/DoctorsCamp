@@ -7,18 +7,19 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-  public function changeLang($lang)
-  {
-      if (in_array($lang, ['ar', 'en'])) {
-          session()->put('lang', $lang);
-      }
-      return redirect()->back();
-  }
+    public function changeLang($lang)
+    {
+        if (in_array($lang, ['ar', 'en'])) {
+            session()->put('lang', $lang);
+        }
 
-  public function logout()
+        return redirect()->back();
+    }
+
+    public function logout()
     {
         auth()->logout();
+
         return redirect('/login');
     }
-    
 }

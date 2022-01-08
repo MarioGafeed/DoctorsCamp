@@ -24,25 +24,24 @@ class UserRolesDataTable extends DataTable
         ->addColumn('type', function ($model) {
             if ($model->type == 'admin') {
                 return '
-                    <span class="label label-success">' . trans("main.admin") . '</span>
+                    <span class="label label-success">'.trans('main.admin').'</span>
                 ';
             } else {
                 return '
-                    <span class="label label-warning">' . trans("main.user") . '</span>
+                    <span class="label label-warning">'.trans('main.user').'</span>
                 ';
             }
         })
         ->addColumn('show', 'backend.users.buttons.show')
         ->addColumn('edit', 'backend.users.buttons.edit')
         ->addColumn('delete', 'backend.users.buttons.delete')
-        ->rawColumns(['checkbox','show','edit', 'delete', 'type'])
-        ;
+        ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'type']);
     }
-
 
     public function GetRoleName($name)
     {
         $this->roleName = $name;
+
         return $this;
     }
 
@@ -55,6 +54,7 @@ class UserRolesDataTable extends DataTable
     public function query()
     {
         $query = User::query()->select('users.*')->role($this->roleName);
+
         return $this->applyScopes($query);
     }
 
@@ -65,7 +65,7 @@ class UserRolesDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
          ->parameters($this->getCustomBuilderParameters([1, 2, 3], []));
@@ -94,10 +94,10 @@ class UserRolesDataTable extends DataTable
                 'exportable'     => false,
                 'printable'      => false,
                 'width'          => '10px',
-                'aaSorting'      => 'none'
+                'aaSorting'      => 'none',
             ],
             [
-                'name' => "users.name",
+                'name' => 'users.name',
                 'data'    => 'name',
                 'title'   => trans('main.name'),
                 'searchable' => true,
@@ -105,7 +105,7 @@ class UserRolesDataTable extends DataTable
                 'width'          => '200px',
             ],
             [
-                'name' => "users.email",
+                'name' => 'users.email',
                 'data'    => 'email',
                 'title'   => trans('main.email'),
                 'searchable' => true,
@@ -113,7 +113,7 @@ class UserRolesDataTable extends DataTable
                 'width'          => '200px',
             ],
             [
-                'name' => "users.type",
+                'name' => 'users.type',
                 'data'    => 'type',
                 'title'   => trans('main.type'),
                 'searchable' => true,
@@ -153,6 +153,6 @@ class UserRolesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'UserRoles_' . date('YmdHis');
+        return 'UserRoles_'.date('YmdHis');
     }
 }

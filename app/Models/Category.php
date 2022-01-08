@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-
-class Category extends Model Implements HasMedia
+class Category extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
+
     protected $fillable = [
-        'title_ar', 'title_en', 'slug',  'summary', 'keyword', 'desc'
+        'title_ar', 'title_en', 'slug',  'summary', 'keyword', 'desc',
     ];
     // public function categoryable()
     // {
@@ -21,11 +21,11 @@ class Category extends Model Implements HasMedia
 
     public function posts()
     {
-      return $this->hasMany(post::class, 'category_id');
-    }    
+        return $this->hasMany(post::class, 'category_id');
+    }
 
     public function courses()
     {
-      return $this->hasMany(Course::class, 'category_id');
+        return $this->hasMany(Course::class, 'category_id');
     }
 }

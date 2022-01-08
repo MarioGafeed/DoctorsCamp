@@ -21,6 +21,7 @@ class LangMiddleware
             session()->put('lang', 'en');
             \App::setLocale('en');
         }
+
         return $next($request);
     }
 }

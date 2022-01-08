@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostsRequest extends FormRequest
@@ -12,7 +11,6 @@ class PostsRequest extends FormRequest
      *
      * @return bool
      */
-
     public function authorize()
     {
         return true;
@@ -44,7 +42,6 @@ class PostsRequest extends FormRequest
         // }
         return $rules;
     }
-
 
     public function attributes()
     {

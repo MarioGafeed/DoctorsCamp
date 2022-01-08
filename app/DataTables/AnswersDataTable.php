@@ -22,8 +22,7 @@ class AnswersDataTable extends DataTable
         ->addColumn('show', 'backend.answers.buttons.show')
         ->addColumn('edit', 'backend.answers.buttons.edit')
         ->addColumn('delete', 'backend.answers.buttons.delete')
-        ->rawColumns(['checkbox','show','edit', 'delete'])
-        ;
+        ->rawColumns(['checkbox', 'show', 'edit', 'delete']);
     }
 
     /**
@@ -35,6 +34,7 @@ class AnswersDataTable extends DataTable
     public function query()
     {
         $query = Answer::query()->with('question')->select('answers.*');
+
         return $this->applyScopes($query);
     }
 
@@ -45,10 +45,10 @@ class AnswersDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
-         ->parameters($this->getCustomBuilderParameters([1,2,3], [], GetLanguage() == 'ar'));
+         ->parameters($this->getCustomBuilderParameters([1, 2, 3], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -70,10 +70,10 @@ class AnswersDataTable extends DataTable
                  'exportable'     => false,
                  'printable'      => false,
                  'width'          => '10px',
-                 'aaSorting'      => 'none'
+                 'aaSorting'      => 'none',
              ],
              [
-                 'name' => "answers.answer",
+                 'name' => 'answers.answer',
                  'data'    => 'answer',
                  'title'   => trans('main.answer'),
                  'searchable' => true,
@@ -81,7 +81,7 @@ class AnswersDataTable extends DataTable
                  'width'          => '100px',
              ],
              [
-                 'name' => "question.title",
+                 'name' => 'question.title',
                  'data'    => 'question.title',
                  'title'   => trans('main.question'),
                  'searchable' => true,
@@ -89,7 +89,7 @@ class AnswersDataTable extends DataTable
                  'width'          => '100px',
              ],
              [
-                 'name' => "answers.status",
+                 'name' => 'answers.status',
                  'data'    => 'status',
                  'title'   => trans('main.status'),
                  'searchable' => true,
@@ -130,6 +130,6 @@ class AnswersDataTable extends DataTable
 
     protected function filename()
     {
-        return 'answers' . date('YmdHis');
+        return 'answers'.date('YmdHis');
     }
 }

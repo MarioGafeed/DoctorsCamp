@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
-{  
+{
     public function index()
     {
         return view('backend.home.index', [
-            'title' => trans('main.dashboard')
+            'title' => trans('main.dashboard'),
         ]);
     }
 
     public function logout()
     {
         auth()->logout();
+
         return redirect('/');
     }
 
@@ -24,6 +25,7 @@ class AdminController extends Controller
         if (in_array($lang, ['ar', 'en'])) {
             session()->put('lang', $lang);
         }
+
         return redirect()->back();
     }
 }

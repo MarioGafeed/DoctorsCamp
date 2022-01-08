@@ -34,10 +34,10 @@ class EventsRequest extends FormRequest
            'start_date'      => 'required',
            'end_date'        => 'required',
          ];
-         // if ($this->method() == 'PATCH') {
-         //   $rules['image'] = 'sometimes|nullable|mimes:jpg|dimensions:width=350,height=299';
-         // }
-         return $rules;
+        // if ($this->method() == 'PATCH') {
+        //   $rules['image'] = 'sometimes|nullable|mimes:jpg|dimensions:width=350,height=299';
+        // }
+        return $rules;
     }
 
     public function attributes()

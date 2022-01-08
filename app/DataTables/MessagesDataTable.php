@@ -15,16 +15,15 @@ class MessagesDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-     public function dataTable($query)
-     {
-       return datatables($query)
+    public function dataTable($query)
+    {
+        return datatables($query)
        ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
        ->addColumn('show', 'backend.messages.buttons.show')
        ->addColumn('edit', 'backend.messages.buttons.edit')
        ->addColumn('delete', 'backend.messages.buttons.delete')
-       ->rawColumns(['checkbox','show','edit', 'delete'])
-       ;
-     }
+       ->rawColumns(['checkbox', 'show', 'edit', 'delete']);
+    }
 
     /**
      * Get query source of dataTable.
@@ -35,6 +34,7 @@ class MessagesDataTable extends DataTable
     public function query()
     {
         $query = Message::query()->select('messages.*');
+
         return $this->applyScopes($query);
     }
 
@@ -45,10 +45,10 @@ class MessagesDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
         ->columns($this->getColumns())
         ->ajax('')
-        ->parameters($this->getCustomBuilderParameters([1, 2, 3 ], [], GetLanguage() == 'ar'));
+        ->parameters($this->getCustomBuilderParameters([1, 2, 3], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -70,10 +70,10 @@ class MessagesDataTable extends DataTable
                 'exportable'     => false,
                 'printable'      => false,
                 'width'          => '10px',
-                'aaSorting'      => 'none'
+                'aaSorting'      => 'none',
             ],
             [
-                'name' => "messages.name",
+                'name' => 'messages.name',
                 'data'    => 'name',
                 'title'   => trans('main.name'),
                 'searchable' => true,
@@ -81,7 +81,7 @@ class MessagesDataTable extends DataTable
                 'width'          => '200px',
             ],
             [
-                'name' => "messages.email",
+                'name' => 'messages.email',
                 'data'    => 'email',
                 'title'   => trans('main.email'),
                 'searchable' => true,
@@ -89,7 +89,7 @@ class MessagesDataTable extends DataTable
                 'width'          => '200px',
             ],
             [
-                'name' => "messages.phone",
+                'name' => 'messages.phone',
                 'data'    => 'phone',
                 'title'   => trans('main.phone'),
                 'searchable' => true,
@@ -97,7 +97,7 @@ class MessagesDataTable extends DataTable
                 'width'          => '200px',
             ],
             [
-                'name' => "messages.subject",
+                'name' => 'messages.subject',
                 'data'    => 'subject',
                 'title'   => trans('main.subject'),
                 'searchable' => true,
@@ -128,6 +128,6 @@ class MessagesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'Message_' . date('YmdHis');
+        return 'Message_'.date('YmdHis');
     }
 }

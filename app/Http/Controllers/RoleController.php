@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Auth;
-//Importing laravel-permission models
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\DataTables\RolesDatatable;
 use App\DataTables\UserRolesDataTable;
+//Importing laravel-permission models
+use Auth;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Validator;
 
 class RoleController extends Controller
@@ -22,9 +21,10 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all(); //Get all permissions
+
         return view('backend.roles.create', [
             'title' => trans('main.role_name'),
-            'permissions' => $permissions
+            'permissions' => $permissions,
         ]);
     }
 
@@ -37,7 +37,7 @@ class RoleController extends Controller
         $validator = Validator::make($request->all(), $rules);
         $validator->SetAttributeNames([
              'name'         => trans('main.role_name'),
-             'permissions'  => trans('main.permissions')
+             'permissions'  => trans('main.permissions'),
          ]);
         if ($validator->fails()) {
             return back()->withInput()->withErrors($validator);
@@ -65,17 +65,15 @@ class RoleController extends Controller
             }
         }
 
-
         // get thye user permissions depinding on then roles
         $permissions = auth()->user()->getAllPermissions()->pluck('name')->toArray();
         // save the persdissions to can Chack on the persissions
         session()->put('user.permissions', $permissions);
 
-
         session()->flash('success', trans('main.added-message'));
+
         return redirect()->route('roles.index');
     }
-
 
     public function show(UserRolesDataTable $dataTable, $id)
     {
@@ -87,21 +85,21 @@ class RoleController extends Controller
                 'show' => $role,
             ]);
         }
+
         return redirect()->back();
     }
-
 
     public function edit($id)
     {
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
+
         return view('backend.roles.edit', [
             'title'       => trans('main.role_name'),
             'role'        => $role,
-            'permissions' => $permissions
+            'permissions' => $permissions,
         ]);
     }
-
 
     public function update(Request $request, $id)
     {
@@ -117,7 +115,7 @@ class RoleController extends Controller
                 $validator = Validator::make($request->all(), $rules);
                 $validator->SetAttributeNames([
                     'name'         => trans('main.role_name'),
-                    'permissions'  => trans('main.permisions')
+                    'permissions'  => trans('main.permisions'),
                 ]);
                 if ($validator->fails()) {
                     return back()->withInput()->withErrors($validator);
@@ -143,11 +141,12 @@ class RoleController extends Controller
 
                 session()->flash('success', trans('main.updated'));
             }
+
             return redirect()->route('roles.index');
         }
+
         return back()->withErrors(['There Is Some Error']);
     }
-
 
     public function destroy($id)
     {

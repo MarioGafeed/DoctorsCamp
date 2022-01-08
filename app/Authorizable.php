@@ -11,25 +11,24 @@ trait Authorizable
         'update' => 'Edit',
         'create' => 'Add',
         'store' => 'Add',
-        'destroy' => 'Delete'
+        'destroy' => 'Delete',
     ];
 
     /**
-    * Override of callAction to perform the authorization before
-    *
-    * @param $method
-    * @param $parameters
-    * @return mixed
-    */
-
+     * Override of callAction to perform the authorization before.
+     *
+     * @param $method
+     * @param $parameters
+     * @return mixed
+     */
     public function callAction($method, $parameters)
     {
         $ability = $this->getAbility($method);
-        if (!is_null($ability)) {
+        if (! is_null($ability)) {
             // if (!userCan($ability)) {
             //     error(trans('main.no_permissions'));
             //     return redirect()->route('adminhome');
-                if (!userCan($ability)) {
+            if (! userCan($ability)) {
                 // error(trans('main.no_permissions'));
                 // return redirect()->route('adminhome');
                 return redirect()->route('admin.index')->withErrors([trans('main.no_permissions')]);
@@ -43,7 +42,8 @@ trait Authorizable
     {
         $routeName = explode('.', \Request::route()->getName());
         $action = array_get($this->getAbilities(), $method);
-        return $action ? $action . ' ' . ucfirst($routeName[0]) : null;
+
+        return $action ? $action.' '.ucfirst($routeName[0]) : null;
     }
 
     private function getAbilities()

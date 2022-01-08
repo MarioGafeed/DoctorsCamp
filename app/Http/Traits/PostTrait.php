@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Traits;
 
 trait PostTrait
@@ -22,6 +23,7 @@ trait PostTrait
     {
         return $this->postModel::where('id', $id)->with('category', 'user')->first();
     }
+
     private function getPostWithCat($id)
     {
         return $this->postModel::where('id', $id)->with('category')->first();

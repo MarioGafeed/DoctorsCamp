@@ -31,14 +31,13 @@ class QuestionsRequest extends FormRequest
         ];
     }
 
-
     public function attributes()
     {
         return [
             'title'       => trans('main.title'),
             'lesson_id'   => trans('main.lesson'),
             'q_order'     => trans('main.q_order'),
-            'desc'        => trans('main.desc'),            
+            'desc'        => trans('main.desc'),
         ];
     }
 }

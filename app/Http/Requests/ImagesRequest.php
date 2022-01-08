@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImagesRequest extends FormRequest
@@ -12,7 +11,6 @@ class ImagesRequest extends FormRequest
      *
      * @return bool
      */
-
     public function authorize()
     {
         return true;
@@ -30,9 +28,9 @@ class ImagesRequest extends FormRequest
           'title_ar'         => 'required|string|max:50',
           'category_id'      => 'required|exists:categories,id',
         ];
+
         return $rules;
     }
-
 
     public function attributes()
     {

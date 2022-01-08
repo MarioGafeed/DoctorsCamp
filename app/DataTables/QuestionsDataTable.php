@@ -25,8 +25,7 @@ class QuestionsDataTable extends DataTable
         ->addColumn('show', 'backend.questions.buttons.show')
         ->addColumn('edit', 'backend.questions.buttons.edit')
         ->addColumn('delete', 'backend.questions.buttons.delete')
-        ->rawColumns(['checkbox','show','edit', 'delete'])
-        ;
+        ->rawColumns(['checkbox', 'show', 'edit', 'delete']);
     }
 
     /**
@@ -38,6 +37,7 @@ class QuestionsDataTable extends DataTable
     public function query()
     {
         $query = Question::query()->with('lesson')->select('questions.*');
+
         return $this->applyScopes($query);
     }
 
@@ -48,7 +48,7 @@ class QuestionsDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
          ->parameters($this->getCustomBuilderParameters([1, 2, 3], [], GetLanguage() == 'ar'));
@@ -73,10 +73,10 @@ class QuestionsDataTable extends DataTable
                  'exportable'     => false,
                  'printable'      => false,
                  'width'          => '10px',
-                 'aaSorting'      => 'none'
+                 'aaSorting'      => 'none',
              ],
              [
-                 'name' => "questions.title",
+                 'name' => 'questions.title',
                  'data'    => 'title',
                  'title'   => trans('main.question'),
                  'searchable' => true,
@@ -85,7 +85,7 @@ class QuestionsDataTable extends DataTable
              ],
 
              [
-                 'name' => "questions.q_order",
+                 'name' => 'questions.q_order',
                  'data'    => 'q_order',
                  'title'   => trans('main.q_order'),
                  'searchable' => true,
@@ -93,7 +93,7 @@ class QuestionsDataTable extends DataTable
                  'width'          => '100px',
              ],
              [
-                 'name' => "questions.desc",
+                 'name' => 'questions.desc',
                  'data'    => 'desc',
                  'title'   => trans('main.desc'),
                  'searchable' => true,
@@ -102,7 +102,7 @@ class QuestionsDataTable extends DataTable
              ],
 
              [
-                 'name' => "lesson.title",
+                 'name' => 'lesson.title',
                  'data'    => 'lesson.title',
                  'title'   => trans('main.lesson'),
                  'searchable' => true,
@@ -142,6 +142,6 @@ class QuestionsDataTable extends DataTable
 
     protected function filename()
     {
-        return 'questions_' . date('YmdHis');
+        return 'questions_'.date('YmdHis');
     }
 }

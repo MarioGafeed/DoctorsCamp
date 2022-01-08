@@ -40,7 +40,6 @@ class UsersRequest extends FormRequest
         return $return;
     }
 
-
     public function attributes()
     {
         return [
@@ -48,7 +47,7 @@ class UsersRequest extends FormRequest
             'email'      => trans('main.email'),
             'password'   => trans('main.password'),
             'type'       => trans('main.type'),
-            'phone'      => trans('main.phone'),            
+            'phone'      => trans('main.phone'),
             'active'     => trans('main.active'),
         ];
     }

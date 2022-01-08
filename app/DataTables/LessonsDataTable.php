@@ -22,8 +22,7 @@ class LessonsDataTable extends DataTable
         ->addColumn('show', 'backend.lessons.buttons.show')
         ->addColumn('edit', 'backend.lessons.buttons.edit')
         ->addColumn('delete', 'backend.lessons.buttons.delete')
-        ->rawColumns(['checkbox','show','edit', 'delete'])
-        ;
+        ->rawColumns(['checkbox', 'show', 'edit', 'delete']);
     }
 
     /**
@@ -35,6 +34,7 @@ class LessonsDataTable extends DataTable
     public function query()
     {
         $query = Lesson::query()->with('course')->select('lessons.*');
+
         return $this->applyScopes($query);
     }
 
@@ -45,10 +45,10 @@ class LessonsDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
-         ->parameters($this->getCustomBuilderParameters([1,2,3], [], GetLanguage() == 'ar'));
+         ->parameters($this->getCustomBuilderParameters([1, 2, 3], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -58,9 +58,9 @@ class LessonsDataTable extends DataTable
      *
      * @return array
      */
-     protected function getColumns()
-     {
-         return [
+    protected function getColumns()
+    {
+        return [
              [
                  'name' => 'checkbox',
                  'data' => 'checkbox',
@@ -70,10 +70,10 @@ class LessonsDataTable extends DataTable
                  'exportable'     => false,
                  'printable'      => false,
                  'width'          => '10px',
-                 'aaSorting'      => 'none'
+                 'aaSorting'      => 'none',
              ],
              [
-                 'name' => "lessons.title",
+                 'name' => 'lessons.title',
                  'data'    => 'title',
                  'title'   => trans('main.title'),
                  'searchable' => true,
@@ -81,7 +81,7 @@ class LessonsDataTable extends DataTable
                  'width'          => '200px',
              ],
              [
-                 'name' => "lessons.myorder",
+                 'name' => 'lessons.myorder',
                  'data'    => 'myorder',
                  'title'   => trans('main.myorder'),
                  'searchable' => true,
@@ -89,7 +89,7 @@ class LessonsDataTable extends DataTable
                  'width'          => '100px',
              ],
              [
-                 'name' => "course.name",
+                 'name' => 'course.name',
                  'data'    => 'course.name',
                  'title'   => trans('main.course'),
                  'searchable' => true,
@@ -126,10 +126,10 @@ class LessonsDataTable extends DataTable
              ],
 
          ];
-     }
+    }
 
     protected function filename()
     {
-        return 'Lessons_' . date('YmdHis');
+        return 'Lessons_'.date('YmdHis');
     }
 }

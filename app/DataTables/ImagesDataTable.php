@@ -17,28 +17,25 @@ class ImagesDataTable extends DataTable
      */
     public function dataTable($query)
     {
-      return datatables($query)
+        return datatables($query)
       ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
 
-
-
     ->addColumn('active', function ($model) {
-            if ($model->active == '1') {
-                return '
-                    <span style="padding: 1px 6px;" class="label lable-sm label-success">' . trans("main.yes") . '</span>
+        if ($model->active == '1') {
+            return '
+                    <span style="padding: 1px 6px;" class="label lable-sm label-success">'.trans('main.yes').'</span>
                         ';
-            } else {
-                return '
-                    <span style="padding: 1px 6px;" class="label lable-sm label-danger">' . trans("main.no") . '</span>
+        } else {
+            return '
+                    <span style="padding: 1px 6px;" class="label lable-sm label-danger">'.trans('main.no').'</span>
                 ';
-            }
-        })
+        }
+    })
 
       ->addColumn('show', 'backend.images.buttons.show')
       ->addColumn('edit', 'backend.images.buttons.edit')
       ->addColumn('delete', 'backend.images.buttons.delete')
-      ->rawColumns(['checkbox','show','edit', 'delete', 'active'])
-      ;
+      ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'active']);
     }
 
     /**
@@ -50,6 +47,7 @@ class ImagesDataTable extends DataTable
     public function query()
     {
         $query = Image::query()->with('category', 'user')->select('images.*');
+
         return $this->applyScopes($query);
     }
 
@@ -60,10 +58,10 @@ class ImagesDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
-         ->parameters($this->getCustomBuilderParameters([1,2,3,4,5], [], GetLanguage() == 'ar'));
+         ->parameters($this->getCustomBuilderParameters([1, 2, 3, 4, 5], [], GetLanguage() == 'ar'));
 
         return $html;
     }
@@ -73,9 +71,9 @@ class ImagesDataTable extends DataTable
      *
      * @return array
      */
-     protected function getColumns()
-     {
-         return [
+    protected function getColumns()
+    {
+        return [
              [
                  'name' => 'checkbox',
                  'data' => 'checkbox',
@@ -85,42 +83,42 @@ class ImagesDataTable extends DataTable
                  'exportable'     => false,
                  'printable'      => false,
                  'width'          => '10px',
-                 'aaSorting'      => 'none'
+                 'aaSorting'      => 'none',
              ],
              [
-                 'name'       => "images.title_en",
+                 'name'       => 'images.title_en',
                  'data'       => 'title_en',
-                 'title'      => trans('main.title')." en",
+                 'title'      => trans('main.title').' en',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "images.title_ar",
+                 'name'       => 'images.title_ar',
                  'data'       => 'title_ar',
-                 'title'      => trans('main.title')." ar",
+                 'title'      => trans('main.title').' ar',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "category.title_en",
+                 'name'       => 'category.title_en',
                  'data'       => 'category.title_en',
-                 'title'      => trans('main.category'). " (EN)",
+                 'title'      => trans('main.category').' (EN)',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "category.title_ar",
+                 'name'       => 'category.title_ar',
                  'data'       => 'category.title_ar',
-                 'title'      => trans('main.category')." (AR)",
+                 'title'      => trans('main.category').' (AR)',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
              ],
              [
-                 'name'       => "user.name",
+                 'name'       => 'user.name',
                  'data'       => 'user.name',
                  'title'      => trans('main.user'),
                  'searchable' => true,
@@ -128,7 +126,7 @@ class ImagesDataTable extends DataTable
                  'width'      => '200px',
              ],
              [
-                 'name'       => "image.image",
+                 'name'       => 'image.image',
                  'data'       => 'image',
                  'title'      => trans('main.image'),
                  'searchable' => true,
@@ -164,10 +162,10 @@ class ImagesDataTable extends DataTable
              ],
 
          ];
-     }
+    }
 
     protected function filename()
     {
-        return 'Images_' . date('YmdHis');
+        return 'Images_'.date('YmdHis');
     }
 }

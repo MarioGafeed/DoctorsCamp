@@ -1,8 +1,9 @@
 <?php
+
 namespace App\DataTables;
 
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Services\DataTable;
 
 class RolesDatatable extends DataTable
@@ -17,7 +18,7 @@ class RolesDatatable extends DataTable
             ->addColumn('show', 'backend.roles.buttons.show')
             ->addColumn('edit', 'backend.roles.buttons.edit')
             ->addColumn('delete', 'backend.roles.buttons.delete')
-            ->rawColumns(['checkbox','show','edit', 'delete', 'permisions_name']);
+            ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'permisions_name']);
     }
 
     /**
@@ -28,6 +29,7 @@ class RolesDatatable extends DataTable
     public function query()
     {
         $query = Role::query()->orderBy('id', 'DESC')->with('permissions')->select('roles.*');
+
         return $this->applyScopes($query);
     }
 
@@ -38,7 +40,7 @@ class RolesDatatable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
          ->columns($this->getColumns())
          ->ajax('')
          ->parameters($this->getCustomBuilderParameters([1], []));
@@ -67,17 +69,17 @@ class RolesDatatable extends DataTable
                 'exportable'     => false,
                 'printable'      => false,
                 'width'          => '10px',
-                'aaSorting'      => 'none'
+                'aaSorting'      => 'none',
             ],
             [
-                'name' => "roles.name",
+                'name' => 'roles.name',
                 'data'    => 'name',
                 'title'   => trans('main.role_name'),
                 'searchable' => true,
                 'orderable'  => true,
             ],
             [
-                'name' => "permissions.name",
+                'name' => 'permissions.name',
                 'data'    => 'permissions_name',
                 'title'   => trans('main.permissions'),
                 'searchable' => false,
@@ -121,6 +123,6 @@ class RolesDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'RolesDataTable_' . time();
+        return 'RolesDataTable_'.time();
     }
 }

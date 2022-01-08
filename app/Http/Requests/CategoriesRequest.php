@@ -35,7 +35,6 @@ class CategoriesRequest extends FormRequest
         ];
     }
 
-
     public function attributes()
     {
         return [

@@ -15,16 +15,15 @@ class CoursesDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-     public function dataTable($query)
-     {
-       return datatables($query)
+    public function dataTable($query)
+    {
+        return datatables($query)
        ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
        ->addColumn('show', 'backend.courses.buttons.show')
        ->addColumn('edit', 'backend.courses.buttons.edit')
        ->addColumn('delete', 'backend.courses.buttons.delete')
-       ->rawColumns(['checkbox','show','edit', 'delete'])
-       ;
-     }
+       ->rawColumns(['checkbox', 'show', 'edit', 'delete']);
+    }
 
     /**
      * Get query source of dataTable.
@@ -35,6 +34,7 @@ class CoursesDataTable extends DataTable
     public function query()
     {
         $query = Course::query()->select('courses.*');
+
         return $this->applyScopes($query);
     }
 
@@ -45,10 +45,11 @@ class CoursesDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
         ->columns($this->getColumns())
         ->ajax('')
-        ->parameters($this->getCustomBuilderParameters([1,2,3], [], GetLanguage() == 'ar'));
+        ->parameters($this->getCustomBuilderParameters([1, 2, 3], [], GetLanguage() == 'ar'));
+
         return $html;
     }
 
@@ -69,10 +70,10 @@ class CoursesDataTable extends DataTable
                 'exportable'     => false,
                 'printable'      => false,
                 'width'          => '10px',
-                'aaSorting'      => 'none'
+                'aaSorting'      => 'none',
             ],
             [
-                 'name' => "courses.name",
+                 'name' => 'courses.name',
                  'data'    => 'name',
                  'title'   => trans('main.name'),
                  'searchable' => true,
@@ -80,7 +81,7 @@ class CoursesDataTable extends DataTable
                  'width'          => '250px',
              ],
              [
-                 'name' => "courses.desc",
+                 'name' => 'courses.desc',
                  'data'    => 'desc',
                  'title'   => trans('main.description'),
                  'searchable' => true,
@@ -88,7 +89,7 @@ class CoursesDataTable extends DataTable
                  'width'          => '200px',
              ],
              [
-                 'name' => "courses.price",
+                 'name' => 'courses.price',
                  'data'    => 'price',
                  'title'   => trans('main.price'),
                  'searchable' => true,
@@ -129,6 +130,6 @@ class CoursesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'categories_' . date('YmdHis');
+        return 'categories_'.date('YmdHis');
     }
 }

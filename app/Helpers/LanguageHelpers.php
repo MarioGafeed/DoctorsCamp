@@ -1,8 +1,7 @@
 <?php
 
-
 /**
- * Get The Application Locale
+ * Get The Application Locale.
  * @return string
  */
 function GetLanguage() : string
@@ -11,7 +10,7 @@ function GetLanguage() : string
 }
 
 /**
- * Get's The Site Direction
+ * Get's The Site Direction.
  * @return string
  */
 function GetDirection() : string
@@ -20,7 +19,7 @@ function GetDirection() : string
 }
 
 /**
- * Get's The Default Language
+ * Get's The Default Language.
  * @return string
  */
 function GetDefaultLang() : string
@@ -29,7 +28,7 @@ function GetDefaultLang() : string
 }
 
 /**
- * if design isRtl
+ * if design isRtl.
  * @return bool
  */
 function isRtl() : bool

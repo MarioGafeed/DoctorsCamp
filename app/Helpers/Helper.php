@@ -6,9 +6,8 @@ use Illuminate\Http\UploadedFile;
 
 class Helper
 {
-
     /**
-     * Uploads The File
+     * Uploads The File.
      *
      * @param string $dir
      * @param UploadedFile $image
@@ -21,7 +20,7 @@ class Helper
     }
 
     /**
-     * Upload Update
+     * Upload Update.
      *
      * @param string $oldFile
      * @param string $dir
@@ -31,15 +30,15 @@ class Helper
      */
     public static function UploadUpdate(string $oldFile, string $dir, UploadedFile $image, string $checkFunction = null) : string
     {
-        if (!empty($oldFile) && !is_null($oldFile) && file_exists(public_path('uploads/' . $oldFile))) {
-            @unlink(public_path('uploads/' . $oldFile));
+        if (! empty($oldFile) && ! is_null($oldFile) && file_exists(public_path('uploads/'.$oldFile))) {
+            @unlink(public_path('uploads/'.$oldFile));
         }
+
         return UploadImages($dir, $image, $checkFunction);
     }
 
-
     /**
-     * MultiUpload Images
+     * MultiUpload Images.
      * @param  array        $images
      * @param  string       $dir
      * @param  UploadedFile $image
@@ -52,12 +51,12 @@ class Helper
         foreach ($images as $image) {
             $uploaded_images[] = static::Upload($dir, $image, $checkFunction);
         }
+
         return implode('|', $uploaded_images);
     }
 
-
     /**
-     * MultiUploadUpdate
+     * MultiUploadUpdate.
      * @param  array  $oldImages
      * @param  array  $newImages
      * @param  string $currentImages
@@ -80,22 +79,22 @@ class Helper
 
         if (count($newImages)) {
             $newImages = static::MultiUpload($newImages, $dir, $checkFunction);
+
             return implode('|', array_merge(explode('|', $newImages), $currentImages));
         }
 
         return implode('|', $currentImages);
     }
 
-
     /**
-     * unlink images
+     * unlink images.
      * @param string $image
      * @return void
      */
     public static function unlink(string $image) : void
     {
-        if (file_exists(public_path('uploads/' . $image))) {
-            @unlink(public_path('uploads/' . $image));
+        if (file_exists(public_path('uploads/'.$image))) {
+            @unlink(public_path('uploads/'.$image));
         }
     }
 }

@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Event extends Model Implements HasMedia
+class Event extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-       'title_en', 'title_ar', 'country_id', 'location', 'start_date', 'end_date', 'user_id', 'description', 'active', 'city'
+       'title_en', 'title_ar', 'country_id', 'location', 'start_date', 'end_date', 'user_id', 'description', 'active', 'city',
     ];
 
     public function country()

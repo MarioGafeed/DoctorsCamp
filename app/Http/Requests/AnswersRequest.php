@@ -30,7 +30,6 @@ class AnswersRequest extends FormRequest
         ];
     }
 
-
     public function attributes()
     {
         return [
