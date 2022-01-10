@@ -20,4 +20,11 @@ class Lesson extends Model
     {
         return $this->belongsTo('App\Models\Course', 'course_id');
     }
+
+    public function users()
+    {
+      return $this->BelongsToMany(User::class)
+      ->withPivot('score','time_mins','status')
+      ->withTimestamps();
+    }
 }

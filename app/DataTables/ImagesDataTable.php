@@ -19,23 +19,16 @@ class ImagesDataTable extends DataTable
     {
         return datatables($query)
       ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
-
-    ->addColumn('active', function ($model) {
-        if ($model->active == '1') {
-            return '
-                    <span style="padding: 1px 6px;" class="label lable-sm label-success">'.trans('main.yes').'</span>
-                        ';
-        } else {
-            return '
-                    <span style="padding: 1px 6px;" class="label lable-sm label-danger">'.trans('main.no').'</span>
-                ';
+      ->addColumn('image', function($model){
+        if ($model->getFirstMediaUrl()) {
+          $src = $model->getFirstMediaUrl();
         }
-    })
-
+              return '<img src="{{'.$src.'}}" style="width: 50px;">';
+      })
       ->addColumn('show', 'backend.images.buttons.show')
       ->addColumn('edit', 'backend.images.buttons.edit')
       ->addColumn('delete', 'backend.images.buttons.delete')
-      ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'active']);
+      ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'active','image']);
     }
 
     /**
@@ -126,12 +119,12 @@ class ImagesDataTable extends DataTable
                  'width'      => '200px',
              ],
              [
-                 'name'       => 'image.image',
-                 'data'       => 'image',
-                 'title'      => trans('main.image'),
+                 'name' => 'images.image',
+                 'data'    => 'image',
+                 'title'   => trans('main.image'),
                  'searchable' => true,
                  'orderable'  => true,
-                 'width'      => '200px',
+                 'width'          => '100px',
              ],
              [
                  'name' => 'show',

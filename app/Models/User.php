@@ -47,6 +47,20 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
+    public function lessons()
+    {
+      return $this->BelongsToMany(Lesson::class)
+       ->withPivot('score','time_mins','status')
+       ->withTimestamps();
+    }
+
+    public function courses()
+    {
+      return $this->BelongsToMany(Course::class)
+       ->withPivot('score','active')
+       ->withTimestamps();
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
