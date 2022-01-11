@@ -19,6 +19,7 @@ class ImagesDataTable extends DataTable
     {
         return datatables($query)
       ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
+
       ->addColumn('image', function($model){
         if ($model->getFirstMediaUrl()) {
           $src = $model->getFirstMediaUrl();
@@ -28,7 +29,7 @@ class ImagesDataTable extends DataTable
       ->addColumn('show', 'backend.images.buttons.show')
       ->addColumn('edit', 'backend.images.buttons.edit')
       ->addColumn('delete', 'backend.images.buttons.delete')
-      ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'active','image']);
+      ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'image']);
     }
 
     /**

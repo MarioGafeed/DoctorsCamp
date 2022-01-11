@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('type', ['user', 'admin'])->default('user');
             $table->boolean('active')->default(true);
-            $table->string('country');
+            $table->string('country')->default('Egypt');
             $table->rememberToken();
             $table->timestamps();
         });
