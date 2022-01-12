@@ -19,6 +19,17 @@ class EventsDataTable extends DataTable
     {
         return datatables($query)
         ->addColumn('checkbox', '<input type="checkbox" class="selected_data" name="selected_data[]" value="{{ $id }}">')
+        ->addColumn('active', function ($model) {
+            if ($model->active == '1') {
+                return '
+                    <span style="padding: 1px 6px;" class="label lable-sm label-success">'.trans('main.yes').'</span>
+                ';
+            } else {
+                return '
+                    <span style="padding: 1px 6px;" class="label lable-sm label-danger">'.trans('main.no').'</span>
+                ';
+            }
+        })
 
         ->addColumn('show', 'backend.events.buttons.show')
         ->addColumn('edit', 'backend.events.buttons.edit')

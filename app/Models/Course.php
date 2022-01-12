@@ -21,6 +21,13 @@ class Course extends Model
         return $this->HasMany(Lesson::class);
     }
 
+    public function users()
+    {
+      return $this->BelongsToMany(User::class)
+       ->withPivot('score','active')
+       ->withTimestamps();
+    }
+
     public function category()
     {
         return $this->belongsTo('App\Models\category', 'category_id');

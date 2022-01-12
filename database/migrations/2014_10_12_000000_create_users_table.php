@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
       Schema::disableForeignKeyConstraints();
         Schema::create('users', function (Blueprint $table) {
-          $table->engine = 'InnoDB';          
+          $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->datetime('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('type', ['user', 'admin'])->default('user');
             $table->boolean('active')->default(true);
-            $table->string('country');
+            $table->string('country')->default('Egypt');
             $table->rememberToken();
             $table->timestamps();
         });
