@@ -13,7 +13,7 @@ use Spatie\Permission\Models\Role;
 
 class LessonController extends Controller
 {
-    use Authorizable;
+    // use Authorizable;
 
     private $viewPath = 'backend.lessons';
 
@@ -60,10 +60,7 @@ class LessonController extends Controller
 
             return redirect()->back();
         }
-
         $requestAll = $request->all();
-
-        // $requestAll['image'] = Helper::Upload('lessons', $request->file('image'), 'checkImages');
 
         $lesson = Lesson::create($requestAll);
 

@@ -33,7 +33,7 @@ class CoursesDataTable extends DataTable
      */
     public function query()
     {
-        $query = Course::query()->select('courses.*');
+        $query = Course::query()->select('courses.*')->with('category');
 
         return $this->applyScopes($query);
     }
@@ -79,6 +79,22 @@ class CoursesDataTable extends DataTable
                  'searchable' => true,
                  'orderable'  => true,
                  'width'          => '250px',
+             ],
+             [
+                 'name' => 'category.title_en',
+                 'data'    => 'category.title_en',
+                 'title'   => trans('main.category').' (en)',
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'          => '300px',
+             ],
+             [
+                 'name' => 'category.title_ar',
+                 'data'    => 'category.title_ar',
+                 'title'   => trans('main.category').' (ar)',
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'          => '300px',
              ],
              [
                  'name' => 'courses.desc',

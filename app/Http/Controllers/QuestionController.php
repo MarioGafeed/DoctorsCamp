@@ -13,7 +13,7 @@ use Spatie\Permission\Models\Role;
 
 class QuestionController extends Controller
 {
-    use Authorizable;
+    // use Authorizable;
 
     private $viewPath = 'backend.questions';
 

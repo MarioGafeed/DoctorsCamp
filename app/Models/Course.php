@@ -13,7 +13,7 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'desc', 'price', 'active',
+        'name', 'slug', 'desc', 'price', 'active', 'category_id'
     ];
 
     public function lessons()
@@ -31,5 +31,5 @@ class Course extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\category', 'category_id');
-    }
+    }    
 }

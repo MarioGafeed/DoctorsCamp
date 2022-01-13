@@ -22,7 +22,31 @@
             @endif
         </div>
     </div>
-    
+
+    {{-- Add Post's Category --}}
+    <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
+        <label class="col-md-2 control-label">{{ trans('main.category') }} <span class="required"></span> </label>
+        <div class="col-md-6">
+            <select class="form-control select2" id="category_id" name="category_id">
+              <option value="">{{ trans('main.select Category') }}</option>
+              @foreach ($categories as $category)
+                   <option value="{{ $category->id }}" {{ getData($data, 'category_id') == $category->id ? 'selected' : '' }}>
+                     @if(GetLanguage() == 'en')
+                       {{ $category->title_en }}
+                     @else
+                       {{ $category->title_ar }}
+                     @endif
+                   </option>
+              @endforeach
+            </select>
+            @if ($errors->has('category_id'))
+                <span class="help-block">
+                    <strong class="help-block">{{ $errors->first('category_id') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
 
     <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
         <label class="col-md-2 control-label">{{ trans('main.status') }} </span> </label>

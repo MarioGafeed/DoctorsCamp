@@ -55,6 +55,16 @@
                             <br><hr>
                         </div>
                         <div class="col-md-6">
+                            <strong>{{trans('main.category')}} : </strong>
+                            {{ $show->category->title_en }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.category')}} : </strong>
+                            {{ $show->category->title_ar }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
                             <strong>{{trans('main.description')}} : </strong>
                             {{  $show->desc }}
                             <br><hr>
@@ -63,7 +73,7 @@
                             <strong>{{trans('main.price')}} : </strong>
                             {{ $show->price }}
                             <br><hr>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
