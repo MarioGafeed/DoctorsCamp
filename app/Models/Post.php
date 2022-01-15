@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\App;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Tags\HasTags;
+use BeyondCode\Comments\Traits\HasComments;
+
 
 class Post extends Model implements HasMedia
 {
-    use InteractsWithMedia, HasTags;
+    use InteractsWithMedia, HasTags,HasComments;
 
     protected $fillable = [
      'title_en', 'title_ar', 'keyword', 'content', 'desc', 'active', 'user_id', 'category_id', 'youtubeURL', 'type',

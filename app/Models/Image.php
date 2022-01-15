@@ -10,10 +10,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use BeyondCode\Comments\Traits\HasComments;
 
 class Image extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, HasComments;
 
     protected $fillable = [
         'category_id', 'user_id', 'title_en', 'title_ar',
