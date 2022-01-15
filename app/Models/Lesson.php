@@ -23,8 +23,8 @@ class Lesson extends Model
 
     public function users()
     {
-      return $this->BelongsToMany(User::class)
-      ->withPivot('score','time_mins','status')
+      return $this->belongsToMany(User::class)
+      ->withPivot('score','quizz_time','status')
       ->withTimestamps();
     }
 }
