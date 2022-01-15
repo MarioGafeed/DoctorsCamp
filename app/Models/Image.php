@@ -14,6 +14,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Image extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
+    use \Conner\Likeable\Likeable;
 
     protected $fillable = [
         'category_id', 'user_id', 'title_en', 'title_ar',

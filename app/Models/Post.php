@@ -15,6 +15,7 @@ use Spatie\Tags\HasTags;
 class Post extends Model implements HasMedia
 {
     use InteractsWithMedia, HasTags;
+    use \Conner\Likeable\Likeable;
 
     protected $fillable = [
      'title_en', 'title_ar', 'keyword', 'content', 'desc', 'active', 'user_id', 'category_id', 'youtubeURL', 'type',

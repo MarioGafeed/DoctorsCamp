@@ -10,6 +10,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Event extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
+    use \Conner\Likeable\Likeable;
 
     protected $fillable = [
        'title_en', 'title_ar', 'country_id', 'location', 'start_date', 'end_date', 'user_id', 'description', 'active', 'city',
