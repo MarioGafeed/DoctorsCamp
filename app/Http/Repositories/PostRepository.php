@@ -2,16 +2,16 @@
 
 namespace App\Http\Repositories;
 
-use App\Http\Interfaces\postInterface;
+use App\Http\Interfaces\PostInterface;
 use App\Http\Traits\PostTrait;
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
-class PostRepository implements postInterface
+class PostRepository implements PostInterface
 {
-    private $viewPath = 'backend.posts';
     use PostTrait;
+
+    private $viewPath = 'backend.posts';
 
     private $postModel;
 

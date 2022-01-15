@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Authorizable;
 use App\DataTables\PostsDataTable;
-use App\Http\Interfaces\postInterface;
+use App\Http\Interfaces\PostInterface;
 use App\Http\Requests\PostsRequest;
 use Illuminate\Http\Request;
 

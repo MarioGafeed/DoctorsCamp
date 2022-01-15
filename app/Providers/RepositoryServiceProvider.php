@@ -22,7 +22,7 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Http\Repositories\CategoryRepository'
         );
         $this->app->bind(
-            'App\Http\Interfaces\postInterface',
+            'App\Http\Interfaces\PostInterface',
             'App\Http\Repositories\PostRepository'
         );
         $this->app->bind(

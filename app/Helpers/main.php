@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 /**
@@ -75,16 +76,22 @@ function ShowImage($image) : string
  */
 function userCan(string $permission) : bool
 {
-    if (session()->has('user.permissions')) {
-        return in_array($permission, session('user.permissions'));
-    } else {
-        // get thye user permissions depinding on then roles
-        $permissions = auth()->user()->getAllPermissions()->pluck('name')->toArray();
-        // save the persdissions to can Chack on the persissions
-        session()->put('user.permissions', $permissions);
-
-        return in_array($permission, session('user.permissions'));
+    if (auth()->user()->hasRole(User::SuperAdminRole)) {
+        return true;
     }
+
+    static $permissions = [];
+
+    $id = auth()->id();
+
+    if (isset($permissions[$id])) {
+        return in_array($permission, $permissions[$id]);
+    }
+
+    // save the persdissions to can Chack on the persissions
+    $permissions[$id] = auth()->user()->getAllPermissions()->pluck('name')->toArray();
+
+    return in_array($permission, $permissions[$id]);
 }
 
 /**

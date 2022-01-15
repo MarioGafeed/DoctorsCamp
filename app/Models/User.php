@@ -14,6 +14,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
     use HasFactory, Notifiable, HasRoles, InteractsWithMedia;
 
+    public const SuperAdminRole = 'Admin';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,13 +25,13 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'name',
         'email',
         'password',
-         'type',
-         'phone',
-         'active',
-         'country',
-         'last_login_at',
-         'last_login_ip',
-         'country',
+        'type',
+        'phone',
+        'active',
+        'country',
+        'last_login_at',
+        'last_login_ip',
+        'country',
     ];
 
     /**
@@ -49,15 +51,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     public function lessons()
     {
-      return $this->belongsToMany(Lesson::class)
-       ->withPivot('score','quizz_time','status')
+        return $this->belongsToMany(Lesson::class)
+       ->withPivot('score', 'quizz_time', 'status')
        ->withTimestamps();
     }
 
     public function courses()
     {
-      return $this->belongsToMany(Course::class)
-       ->withPivot('score','active')
+        return $this->belongsToMany(Course::class)
+       ->withPivot('score', 'active')
        ->withTimestamps();
     }
 
