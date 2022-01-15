@@ -14,7 +14,7 @@ class CreateUserProgressTable extends Migration
     public function up()
     {
         Schema::create('user_progress', function (Blueprint $table) {
-            $table->bigIncrements();
+            $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('lesson_id')->constrained();
             $table->foreignId('course_id')->constrained();
