@@ -2,21 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\Category;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use BeyondCode\Comments\Traits\HasComments;
+use Conner\Likeable\Likeable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\App;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Tags\HasTags;
-use BeyondCode\Comments\Traits\HasComments;
-
 
 class Post extends Model implements HasMedia
 {
-    use InteractsWithMedia, HasTags,HasComments;
+    use InteractsWithMedia, HasTags,HasComments, Likeable;
 
     protected $fillable = [
      'title_en', 'title_ar', 'keyword', 'content', 'desc', 'active', 'user_id', 'category_id', 'youtubeURL', 'type',

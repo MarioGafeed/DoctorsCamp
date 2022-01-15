@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use BeyondCode\Comments\Traits\HasComments;
+use Conner\Likeable\Likeable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use BeyondCode\Comments\Traits\HasComments;
+use Spatie\Tags\HasTags;
 
 class Event extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, HasComments;
+    use HasComments;
+    use HasTags;
+    use InteractsWithMedia;
+    use Likeable;
 
     protected $fillable = [
        'title_en', 'title_ar', 'country_id', 'location', 'start_date', 'end_date', 'user_id', 'description', 'active', 'city',
