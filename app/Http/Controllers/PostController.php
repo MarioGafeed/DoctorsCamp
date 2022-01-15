@@ -13,7 +13,7 @@ class PostController extends Controller
     // use Authorizable;
     private $postInterface;
 
-    public function __construct(postInterface $postInterface)
+    public function __construct(PostInterface $postInterface)
     {
         $this->postInterface = $postInterface;
     }
@@ -46,7 +46,11 @@ class PostController extends Controller
      */
     public function store(PostsRequest $request)
     {
-        return $this->postInterface->store($request);
+        $pos = $this->postInterface->store($request->all());
+
+        session()->flash('success', trans('main.added-message'));
+
+        return redirect()->route('posts.index');
     }
 
     /**

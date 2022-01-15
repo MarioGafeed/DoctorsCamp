@@ -24,22 +24,26 @@ class PostsRequest extends FormRequest
     public function rules()
     {
         $rules = [
-          'title_en'         => 'nullable|string|max:50',
-          'title_ar'         => 'required|string|max:50',
-          'youtubeURL'       => 'nullable|string|max:244',
-          'category_id'      => 'required|exists:categories,id',
-          'content_en'       => 'nullable',
-          'content_ar'       => 'nullable',
-          'keyword'          => 'required',
-           'desc_ar'         => 'required',
-           'desc_en'         => 'nullable',
-           'active'          => 'required|in:0,1',
-           'type'            => 'required|in:article,video',
+            'title_en'    => 'nullable|string|max:50',
+            'title_ar'    => 'required|string|max:50',
+            'youtubeURL'  => 'nullable|string|max:244',
+            'category_id' => 'required|exists:categories,id',
+            'content_en'  => 'nullable',
+            'content_ar'  => 'nullable',
+            'keyword'     => 'required',
+            'desc_ar'     => 'required',
+            'desc_en'     => 'nullable',
+            'active'      => 'required|in:0,1',
+            'type'        => 'required|in:article,video',
+            'image'       => 'required|image',
+            'tags'        => 'required',
+            'tags.*'      => 'required|integer|exists:tags,id',
         ];
 
-        // if ($this->method() == 'PATCH') {
-        //   $rules['image'] = 'sometimes|nullable|mimes:jpg|dimensions:width=350,height=299';
-        // }
+        if ($this->method() == 'PATCH') {
+            $rules['image'] = 'sometimes|nullable|image';
+        }
+
         return $rules;
     }
 

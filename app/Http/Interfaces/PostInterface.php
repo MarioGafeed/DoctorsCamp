@@ -10,7 +10,7 @@ interface PostInterface
 
     public function create();
 
-    public function store($request);
+    public function store(array $data);
 
     public function edit($id);
 

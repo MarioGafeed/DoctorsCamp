@@ -2,10 +2,12 @@
 
 namespace App\Http\Repositories;
 
+use App\Authorizable;
 use App\Http\Interfaces\PostInterface;
 use App\Http\Traits\PostTrait;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Http\UploadedFile;
 
 class PostRepository implements PostInterface
 {
@@ -45,32 +47,35 @@ class PostRepository implements PostInterface
       ]);
     }
 
-    public function store($request)
+    public function store(array $data)
     {
-        $requestAll = $request->all();
+        $data['desc'] = json_encode([
+            'en' => $data['desc_en'],
+            'ar' => $data['desc_ar'],
+        ]);
 
-        $requestAll['desc'] = json_encode([
-        'en' => $request->desc_en,
-        'ar' => $request->desc_ar,
-      ]);
-        $requestAll['content'] = json_encode([
-        'en' => $request->content_en,
-        'ar' => $request->content_ar,
-      ]);
+        $data['content'] = json_encode([
+            'en' => $data['content_en'],
+            'ar' => $data['content_ar'],
+        ]);
 
-        $requestAll['user_id'] = auth()->user()->id;
+        $data['user_id'] = auth()->user()->id;
 
-        $pos = Post::create($requestAll);
-        if ($request->hasFile('image')) {
-            $pos->addMediaFromRequest('image')->toMediaCollection();
+        $pos = Post::create($data);
+
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+            $pos->addMedia($data['image'])->toMediaCollection();
         }
 
-        $tags = explode(',', $request->tags);
+        $tags = $data['tags'] ?? [];
+
+        if (! is_array($tags)) {
+            $tags = explode(',', $tags);
+        }
+
         $pos->attachTags($tags);
 
-        session()->flash('success', trans('main.added-message'));
-
-        return redirect()->route('posts.index');
+        return $pos;
     }
 
     /**
