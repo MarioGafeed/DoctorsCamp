@@ -24,13 +24,13 @@ trait Authorizable
     public function callAction($method, $parameters)
     {
         $ability = $this->getAbility($method);
+
         if (! is_null($ability)) {
-            // if (!userCan($ability)) {
-            //     error(trans('main.no_permissions'));
-            //     return redirect()->route('adminhome');
             if (! userCan($ability)) {
-                // error(trans('main.no_permissions'));
-                // return redirect()->route('adminhome');
+                if (request()->expectsJson()) {
+                    abort(403, "Forbidden, Permission Required [$ability]");
+                }
+
                 return redirect()->route('admin.index')->withErrors([trans('main.no_permissions')]);
             }
         }
