@@ -24,12 +24,13 @@ class UsersRequest extends FormRequest
     public function rules()
     {
         $return = [
-            'name'     => 'required',
-            'email'    => 'required|unique:users',
-            'phone'    => 'required|unique:users',
-            'password' => 'required|confirmed',
-            'type'     => 'required|in:user,admin',
-            'active'   => 'required|in:0,1',
+            'name'             => 'required',
+            'email'            => 'required|unique:users',
+            'phone'            => 'required|unique:users',
+            'password'         => 'required|confirmed',
+            'type'             => 'required|in:user,admin',
+            'active'           => 'required|in:0,1',
+            'country_id'       => 'required|exists:countries,id',
         ];
 
         if (in_array($this->method(), ['POST', 'PATCH'])) {

@@ -10,11 +10,11 @@ interface UserInterface
 
     public function create();
 
-    public function store($request);
+    public function store(array $data);
 
     public function edit($id);
 
-    public function update($request, $id);
+    public function update(array $data, $id);
 
     public function show($id);
 

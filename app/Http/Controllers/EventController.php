@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Authorizable;
 use App\DataTables\EventsDataTable;
-use App\Http\Interfaces\eventInterface;
+use App\Http\Interfaces\EventInterface;
 use App\Http\Requests\EventsRequest;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class EventController extends Controller
     // use Authorizable;
     private $eventInterface;
 
-    public function __construct(eventInterface $eventInterface)
+    public function __construct(EventInterface $eventInterface)
     {
         $this->eventInterface = $eventInterface;
     }
@@ -46,7 +46,10 @@ class EventController extends Controller
      */
     public function store(EventsRequest $request)
     {
-        return $this->eventInterface->store($request);
+        $event = $this->eventInterface->store($request->all());
+        session()->flash('success', trans('main.added-message'));
+
+        return redirect()->route('events.index');
     }
 
     /**
@@ -80,7 +83,10 @@ class EventController extends Controller
      */
     public function update(EventsRequest $request, $id)
     {
-        return $this->eventInterface->update($request, $id);
+        $event = $this->eventInterface->update($request->all(), $id);
+        session()->flash('success', trans('main.updated'));
+
+        return redirect()->route('events.show', [$event->id]);
     }
 
     /**
@@ -92,7 +98,10 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        return $this->eventInterface->destroy($id);
+        $event = $this->eventInterface->destroy($id);
+        session()->flash('success', trans('main.deleted-message'));
+
+        return redirect()->route('events.index');
     }
 
     /**

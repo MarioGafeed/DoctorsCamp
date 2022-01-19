@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Authorizable;
 use App\DataTables\ImagesDataTable;
-use App\Http\Interfaces\imageInterface;
+use App\Http\Interfaces\ImageInterface;
 use App\Http\Requests\ImagesRequest;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class ImageController extends Controller
     // use Authorizable;
     private $imageInterface;
 
-    public function __construct(imageInterface $imageInterface)
+    public function __construct(ImageInterface $imageInterface)
     {
         $this->imageInterface = $imageInterface;
     }
@@ -46,7 +46,10 @@ class ImageController extends Controller
      */
     public function store(ImagesRequest $request)
     {
-        return $this->imageInterface->store($request);
+        $image = $this->imageInterface->store($request->all());
+        session()->flash('success', trans('main.added-message'));
+
+        return redirect()->route('images.index');
     }
 
     /**
@@ -80,7 +83,10 @@ class ImageController extends Controller
      */
     public function update(ImagesRequest $request, $id)
     {
-        return $this->imageInterface->update($request, $id);
+        $image = $this->imageInterface->update($request->all(), $id);
+        session()->flash('success', trans('main.updated'));
+
+        return redirect()->route('images.show', [$image->id]);
     }
 
     /**

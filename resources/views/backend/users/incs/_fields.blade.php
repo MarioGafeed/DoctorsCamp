@@ -37,6 +37,26 @@
        </div>
    </div>
 
+   {{-- Add Country --}}
+   <div class="form-group{{ $errors->has('country_id') ? ' has-error' : '' }}">
+       <label class="col-md-2 control-label">{{ trans('main.country') }} <span class="required"></span> </label>
+       <div class="col-md-6">
+           <select class="form-control select2" id="country_id" name="country_id">
+             <option value="">{{ trans('main.select country') }}</option>
+             @foreach ($countries as $country)
+                  <option value="{{ $country->id }}" {{ getData($data, 'country_id') == $country->id ? 'selected' : '' }}>
+                    {{  $country->name }}
+                  </option>
+             @endforeach
+           </select>
+           @if ($errors->has('country_id'))
+               <span class="help-block">
+                   <strong class="help-block">{{ $errors->first('country_id') }}</strong>
+               </span>
+           @endif
+       </div>
+   </div>
+
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
         <label class="col-md-2 control-label">{{ trans('main.email') }} <span class="required"></span> </label>
         <div class="col-md-10">

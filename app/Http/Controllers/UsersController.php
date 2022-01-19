@@ -47,7 +47,10 @@ class UsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
-        $this->UserInterface->store($request);
+        $user = $this->UserInterface->store($request->all());
+        session()->flash('success', trans('main.added-message'));
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -81,7 +84,10 @@ class UsersController extends Controller
      */
     public function update(UsersRequest $request, $id)
     {
-        return $this->UserInterface->update($request, $id);
+        $user = $this->UserInterface->update($request->all(), $id);
+        session()->flash('success', trans('main.updated'));
+
+        return redirect()->route('users.show', [$user->id]);
     }
 
     /**
@@ -93,7 +99,10 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        return $this->UserInterface->destroy($id);
+        $user = $this->UserInterface->destroy($id);
+        session()->flash('success', trans('main.deleted-message'));
+
+        return redirect()->route('users.index');
     }
 
     /**

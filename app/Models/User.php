@@ -32,7 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'country',
         'last_login_at',
         'last_login_ip',
-        'country',
+        'country_id'
     ];
 
     /**
@@ -48,6 +48,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function role()
     {
         return $this->belongsTo('App\Models\Role', 'role_id');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo('App\Models\Country', 'country_id');
     }
 
     public function lessons()
