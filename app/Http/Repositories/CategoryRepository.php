@@ -38,28 +38,25 @@ class CategoryRepository implements CategoryInterface
       ]);
     }
 
-    public function store($request)
+    public function store(array $data)
     {
-        $requestAll = $request->all();
-
-        $requestAll['desc'] = json_encode([
-        'en' => $request->desc_en,
-        'ar' => $request->desc_ar,
+        $data['desc'] = json_encode([
+        'en' => $data['desc_en'],
+        'ar' => $data['desc_ar']
       ]);
-        $requestAll['summary'] = json_encode([
-        'en' => $request->summary_en,
-        'ar' => $request->summary_ar,
+        $data['summary'] = json_encode([
+        'en' => $data['summary_en'],
+        'ar' => $data['summary_ar']
       ]);
 
-        $cat = Category::create($requestAll);
+        $cat = Category::create($data);
 
-        if ($request->hasFile('image')) {
-            $cat->addMediaFromRequest('image')->toMediaCollection();
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+            $cat->addMedia($data['image'])->toMediaCollection();
         }
 
-        session()->flash('success', trans('main.added-message'));
+        return $cat;
 
-        return redirect()->route('categories.index');
     }
 
     /**
@@ -100,33 +97,28 @@ class CategoryRepository implements CategoryInterface
       ]);
     }
 
-    public function update($request, $id)
+    public function update(array $data, $id)
     {
         $cat = Category::find($id);
-        $cat->title_en = $request->title_en;
-        $cat->title_ar = $request->title_ar;
+        $cat->title_en = $data['title_en'];
+        $cat->title_ar = $data['title_ar'];
         $cat->desc = json_encode([
-        'en' => $request->desc_en,
-        'ar' => $request->desc_ar,
+        'en' => $data['desc_en'],
+        'ar' => $data['desc_ar']
       ]);
         $cat->summary = json_encode([
-        'en' => $request->summary_en,
-        'ar' => $request->summary_ar,
+        'en' => $data['summary_en'],
+        'ar' => $data['summary_ar'],
       ]);
-        $cat->keyword = $request->keyword;
+        $cat->keyword = $data['keyword'];
 
-        if ($request->hasFile('image')) {
-            $cat->clearMediaCollection();
-            $cat
-          ->addMediaFromRequest('image')
-          ->toMediaCollection();
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+            $cat->addMedia($data['image'])->toMediaCollection();
         }
 
         $cat->save();
 
-        session()->flash('success', trans('main.updated'));
-
-        return redirect()->route('categories.show', [$cat->id]);
+        return $cat;
     }
 
     public function destroy($id)
@@ -137,9 +129,7 @@ class CategoryRepository implements CategoryInterface
         $cat->delete();
 
         if ($redirect) {
-            session()->flash('success', trans('main.deleted-message'));
-
-            return redirect()->route('categories.index');
+            return $cat;
         }
     }
 

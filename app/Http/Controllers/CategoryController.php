@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Authorizable;
 use App\DataTables\CategoriesDataTable;
-use App\Http\Interfaces\categoryInterface;
+use App\Http\Interfaces\CategoryInterface;
 use App\Http\Requests\CategoriesRequest;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
     private $categoryInterface;
 
-    public function __construct(categoryInterface $categoryInterface)
+    public function __construct(CategoryInterface $categoryInterface)
     {
         $this->categoryInterface = $categoryInterface;
     }
@@ -48,7 +48,11 @@ class CategoryController extends Controller
      */
     public function store(CategoriesRequest $request)
     {
-        return $this->categoryInterface->store($request);
+        $cat = $this->categoryInterface->store($request->all());
+
+        session()->flash('success', trans('main.added-message'));
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -82,7 +86,10 @@ class CategoryController extends Controller
      */
     public function update(CategoriesRequest $request, $id)
     {
-        return $this->categoryInterface->update($request, $id);
+        $cat = $this->categoryInterface->update($request->all(), $id);
+        session()->flash('success', trans('main.updated'));
+
+        return redirect()->route('categories.show', [$cat->id]);
     }
 
     /**
@@ -94,7 +101,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        return $this->categoryInterface->destroy($id);
+        $cat = $this->categoryInterface->destroy($id);
+        session()->flash('success', trans('main.deleted-message'));
+
+        return redirect()->route('categories.index');
     }
 
     /**

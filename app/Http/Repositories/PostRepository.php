@@ -120,42 +120,46 @@ class PostRepository implements PostInterface
       ]);
     }
 
-    public function update($request, $id)
+    public function update(array $data, $id)
     {
         $pos = $this->getById($id);
         if (! $pos) {
             return back();
         }
-        $pos->title_en = $request->title_en;
-        $pos->title_en = $request->title_en;
-        $pos->type = $request->type;
-        $pos->youtubeURL = $request->youtubeURL;
+        $pos->title_en = $data['title_en'];
+        $pos->title_ar= $data['title_ar'];
+        $pos->type = $data['type'];
+        $pos->youtubeURL = $data['youtubeURL'];
         $pos->desc = json_encode([
-        'en' => $request->desc_en,
-        'ar' => $request->desc_ar,
+        'en' => $data['desc_en'],
+        'ar' => $data['desc_ar'],
       ]);
         $pos->content = json_encode([
-        'en' => $request->content_en,
-        'ar' => $request->content_ar,
+        'en' => $data['content_en'],
+        'ar' => $data['content_ar'],
       ]);
-        $pos->category_id = $request->category_id;
-        $pos->keyword = $request->keyword;
-        $pos->active = $request->active;
+        $pos->category_id = $data['category_id'];
+        $pos->keyword = $data['keyword'];
+        $pos->active = $data['active'];
         $pos->user_id = auth()->user()->id;
 
-        if ($request->hasFile('image')) {
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
             $pos->clearMediaCollection();
-            $pos
-          ->addMediaFromRequest('image')
-          ->toMediaCollection();
+            $pos->addMedia($data['image'])->toMediaCollection();
         }
 
         $pos->save();
-        $tags = explode(',', $request->tags);
-        $pos->syncTags($tags);
-        session()->flash('success', trans('main.updated'));
 
-        return redirect()->route('posts.show', [$pos->id]);
+        $tags = $data['tags'] ?? [];
+
+        if (! is_array($tags)) {
+            $tags = explode(',', $tags);
+        }
+
+        $pos->syncTags($tags);
+
+        return $pos;
+
     }
 
     public function destroy($id)
@@ -166,9 +170,7 @@ class PostRepository implements PostInterface
         $pos->delete();
 
         if ($redirect) {
-            session()->flash('success', trans('main.deleted-message'));
-
-            return redirect()->route('posts.index');
+          return $pos;
         }
     }
 

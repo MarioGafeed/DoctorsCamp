@@ -2,13 +2,13 @@
 
 namespace App\Http\Repositories;
 
-use App\Http\Interfaces\imageInterface;
+use App\Http\Interfaces\ImageInterface;
 use App\Http\Traits\ImageTrait;
 use App\Models\Category;
 use App\Models\Image;
 use Illuminate\Http\Request;
 
-class ImageRepository implements imageInterface
+class ImageRepository implements ImageInterface
 {
     private $viewPath = 'backend.images';
     use ImageTrait;
@@ -45,19 +45,16 @@ class ImageRepository implements imageInterface
     ]);
     }
 
-    public function store($request)
+    public function store(array $data)
     {
-        $requestAll = $request->all();
-        $requestAll['user_id'] = auth()->user()->id;
+        $data['user_id'] = auth()->user()->id;
 
-        $image = Image::create($requestAll);
-        if ($request->hasFile('image')) {
-            $image->addMediaFromRequest('image')->toMediaCollection();
+        $image = Image::create($data);
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+            $image->addMedia($data['image'])->toMediaCollection();
         }
 
-        session()->flash('success', trans('main.added-message'));
-
-        return redirect()->route('images.index');
+      return $image;
     }
 
     /**
@@ -88,28 +85,25 @@ class ImageRepository implements imageInterface
     ]);
     }
 
-    public function update($request, $id)
+    public function update(array $data, $id)
     {
         $image = $this->getById($id);
         if (! $image) {
             return back();
         }
-        $image->title_en = $request->title_en;
-        $image->title_en = $request->title_en;
-        $image->category_id = $request->category_id;
+        $image->title_en = $data['title_en'];
+        $image->title_ar = $data['title_ar'];
+        $image->category_id = $data['category_id'];
         $image->user_id = auth()->user()->id;
 
-        if ($request->hasFile('image')) {
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
             $image->clearMediaCollection();
-            $image
-        ->addMediaFromRequest('image')
-        ->toMediaCollection();
+            $image->addMedia($data['image'])->toMediaCollection();
         }
 
         $image->save();
-        session()->flash('success', trans('main.updated'));
 
-        return redirect()->route('images.show', [$image->id]);
+        return $image;
     }
 
     public function destroy($id)

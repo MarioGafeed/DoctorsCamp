@@ -84,7 +84,11 @@ class PostController extends Controller
      */
     public function update(PostsRequest $request, $id)
     {
-        return $this->postInterface->update($request, $id);
+        $pos = $this->postInterface->update($request->all(), $id);
+
+        session()->flash('success', trans('main.updated'));
+
+        return redirect()->route('posts.show', [$pos->id]);
     }
 
     /**
@@ -96,7 +100,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        return $this->postInterface->destroy($id);
+        $pos = $this->postInterface->destroy($id);
+        session()->flash('success', trans('main.deleted-message'));
+
+        return redirect()->route('posts.index');
     }
 
     /**

@@ -2,13 +2,12 @@
 
 namespace App\Http\Repositories;
 
-use App\Http\Interfaces\eventInterface;
+use App\Http\Interfaces\EventInterface;
 use App\Http\Traits\EventTrait;
 use App\Models\Country;
 use App\Models\Event;
-use Illuminate\Http\Request;
 
-class EventRepository implements eventInterface
+class EventRepository implements EventInterface
 {
     private $viewPath = 'backend.events';
     use EventTrait;
@@ -45,24 +44,21 @@ class EventRepository implements eventInterface
       ]);
     }
 
-    public function store($request)
+    public function store(array $data)
     {
-        $requestAll = $request->all();
-        $requestAll['description'] = json_encode([
-        'en' => $request->description_en,
-        'ar' => $request->description_ar,
+        $data['description'] = json_encode([
+        'en' => $data['description_en'],
+        'ar' => $data['description_ar'],
       ]);
 
-        $requestAll['user_id'] = auth()->user()->id;
+        $data['user_id'] = auth()->user()->id;
 
-        $event = Event::create($requestAll);
-        if ($request->hasFile('image')) {
-            $event->addMediaFromRequest('image')->toMediaCollection();
+        $event = Event::create($data);
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+            $event->addMedia($data['image'])->toMediaCollection();
         }
 
-        session()->flash('success', trans('main.added-message'));
-
-        return redirect()->route('events.index');
+        return $event;
     }
 
     /**
@@ -96,38 +92,33 @@ class EventRepository implements eventInterface
       ]);
     }
 
-    public function update($request, $id)
+    public function update(array $data, $id)
     {
         $event = $this->getById($id);
         if (! $event) {
             return back();
         }
-        $event->title_en = $request->title_en;
-        $event->title_en = $request->title_en;
-        $event->country_id = $request->country_id;
-        $event->city = $request->city;
-        $event->location = $request->location;
-        $event->start_date = $request->start_date;
-        $event->end_date = $request->end_date;
+        $event->title_en = $data['title_en'];
+        $event->title_en = $data['title_en'];
+        $event->country_id = $data['country_id'];
+        $event->city = $data['city'];
+        $event->location = $data['location'];
+        $event->start_date = $data['start_date'];
+        $event->end_date = $data['end_date'];
         $event->description = json_encode([
-        'en' => $request->description_en,
-        'ar' => $request->description_ar,
+        'en' => $data['description_en'],
+        'ar' => $data['description_ar'],
       ]);
-        $event->active = $request->active;
+        $event->active = $data['active'];
         $event->user_id = auth()->user()->id;
 
-        if ($request->hasFile('image')) {
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
             $event->clearMediaCollection();
-            $event
-          ->addMediaFromRequest('image')
-          ->toMediaCollection();
+            $event->addMedia($data['image'])->toMediaCollection();
         }
 
         $event->save();
-
-        session()->flash('success', trans('main.updated'));
-
-        return redirect()->route('events.show', [$event->id]);
+        return $event;
     }
 
     public function destroy($id)
@@ -138,9 +129,7 @@ class EventRepository implements eventInterface
         $event->delete();
 
         if ($redirect) {
-            session()->flash('success', trans('main.deleted-message'));
-
-            return redirect()->route('events.index');
+            return $event;
         }
     }
 

@@ -8,4 +8,9 @@ trait UserTrait
     {
         return $this->userModel::findOrFail($id);
     }
+    
+    private function getAllCountries()
+    {
+        return $this->countryModel::select('id', 'name')->get();
+    }
 }

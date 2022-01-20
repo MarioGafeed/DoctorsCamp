@@ -58,7 +58,7 @@ class UsersDataTable extends DataTable
     public function query()
     {
         // $query = User::query()->with('class')->select('users.*');
-        $query = User::query()->with('roles')->select('users.*');
+        $query = User::query()->with('roles')->with('country')->select('users.*');
 
         return $this->applyScopes($query);
     }
@@ -122,6 +122,14 @@ class UsersDataTable extends DataTable
                 'width'          => '100px',
             ],
             [
+                'name' => 'country.name',
+                'data'    => 'country.name',
+                'title'   => trans('main.country'),
+                'searchable' => true,
+                'orderable'  => true,
+                'width'          => '100px',
+            ],
+            [
                 'name' => 'users.type',
                 'data'    => 'type',
                 'title'   => trans('main.type'),
@@ -137,6 +145,7 @@ class UsersDataTable extends DataTable
                 'orderable'  => true,
                 'width'          => '100px',
             ],
+
             // [
             //     'name' => "role.name",
             //     'data'    => 'role.name',

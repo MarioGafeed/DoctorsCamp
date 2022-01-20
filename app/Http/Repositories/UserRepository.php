@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Interfaces\UserInterface;
 use App\Http\Traits\UserTrait;
 use App\Models\User;
+use App\Models\Country;
 use Hash;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -15,11 +16,12 @@ class UserRepository implements UserInterface
     private $viewPath = 'backend.users';
     use UserTrait;
 
-    private $userModel;
+    private $userModel, $countryModel;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Country $countryModel)
     {
         $this->userModel = $user;
+        $this->countryModel = $countryModel;
     }
 
     /**
@@ -36,26 +38,25 @@ class UserRepository implements UserInterface
 
     public function create()
     {
+      $countries = $this->getAllCountries();
         return view("{$this->viewPath}.create", [
-          'title' => trans('main.add').' '.trans('main.users'),
-          'roles' => Role::get(),
+          'title'     => trans('main.add').' '.trans('main.users'),
+          'roles'     => Role::get(),
+          'countries' => $countries,
       ]);
     }
 
-    public function store($request)
+    public function store(array $data)
     {
-        $requestAll = $request->all();
-        $requestAll['password'] = Hash::make($request->password);
+        $data['password'] = Hash::make($data->password);
 
-        $user = User::create($requestAll);
+        $user = User::create($data);
 
-        if ($request->hasFile('image')) {
-            $user
-          ->addMediaFromRequest('image')
-          ->toMediaCollection();
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+            $user->addMedia($data['image'])->toMediaCollection();
         }
 
-        $roles = $request['roles']; //Retrieving the roles field
+        $roles = $data['roles']; //Retrieving the roles field
         //Checking if a role was selected
         if (isset($roles)) {
             foreach ($roles as $role) {
@@ -63,9 +64,7 @@ class UserRepository implements UserInterface
                 $user->assignRole($role_r); //Assigning role to user
             }
         }
-        session()->flash('success', trans('main.added-message'));
-
-        return redirect()->route('users.index');
+        return $user;
     }
 
     /**
@@ -81,53 +80,53 @@ class UserRepository implements UserInterface
         return view("{$this->viewPath}.show", [
             'title' => trans('main.show').' '.trans('main.user').' : '.$user->name,
             'show' => $user,
+
         ]);
     }
 
     public function edit($id)
     {
         $user = $this->getById($id);
+        $countries = $this->getAllCountries();
 
         return view("{$this->viewPath}.edit", [
             'title' => trans('main.edit').' '.trans('main.user').' : '.$user->name,
             'edit' => $user,
             'roles' => Role::get(),
+            'countries' => $countries,
         ]);
     }
 
-    public function update($request, $id)
+    public function update(array $data, $id)
     {
         $user = $this->getById($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user->name  =    $data['name'];
+        $user->email =    $data['email'];
 
-        if ($request->has('password') && ! empty($request->password) && ! is_null($request->password)) {
-            $user->password = Hash::make($request->password);
+        if (isset($data['password']) && ! empty($data['password']) && ! is_null($data['password']) ) {
+            $user->password = Hash::make($data['password']);
         }
 
-        $user->type = $request->type;
-        $user->phone = $request->phone;
-        $user->active = $request->active;
+        $user->type        = $data['type'];
+        $user->phone       = $data['phone'];
+        $user->active      = $data['active'];
+        $user->country_id  = $data['country_id'];
 
-        if ($request->hasFile('image')) {
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
             $user->clearMediaCollection();
-            $user
-            ->addMediaFromRequest('image')
-            ->toMediaCollection();
+            $user->addMedia($data['image'])->toMediaCollection();
         }
+
         $user->save();
 
-        $roles = $request['roles']; //Retreive all roles
+        $roles = $data['roles'] ?? [];
 
         if (isset($roles)) {
             $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
         } else {
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         }
-
-        session()->flash('success', trans('main.updated'));
-
-        return redirect()->route('users.show', [$user->id]);
+        return $user;
     }
 
     public function destroy($id)
@@ -140,9 +139,7 @@ class UserRepository implements UserInterface
         $user->delete();
 
         if ($redirect) {
-            session()->flash('success', trans('main.deleted-message'));
-
-            return redirect()->route('users.index');
+            return $user;
         }
     }
 
