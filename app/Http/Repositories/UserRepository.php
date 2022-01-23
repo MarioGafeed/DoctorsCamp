@@ -48,15 +48,16 @@ class UserRepository implements UserInterface
 
     public function store(array $data)
     {
-        $data['password'] = Hash::make($data->password);
+
+        $data['password'] = Hash::make($data['password']);
 
         $user = User::create($data);
 
         if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
             $user->addMedia($data['image'])->toMediaCollection();
-        }
+        }      
 
-        $roles = $data['roles']; //Retrieving the roles field
+        $roles = $data['roles'] ?? []; //Retrieving the roles field
         //Checking if a role was selected
         if (isset($roles)) {
             foreach ($roles as $role) {

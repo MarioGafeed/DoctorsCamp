@@ -3,17 +3,26 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Interfaces\UserInterface;
+use App\Http\Requests\UsersRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+
+  public function __construct(private UserInterface $userInterface)
+  {
+  }
     public function login(Request $request)
     {
         $request->validate([
-            'email' => ['required', 'string', 'max:255', 'email'],
+            'email' => ['required', 'email', 'max:255', 'email'],
             'password' => ['required', 'string', 'max:50', 'min:6'],
         ]);
 
@@ -33,6 +42,39 @@ class AuthController extends Controller
             'user' => $user,
             'token_type' => 'Bearer',
         ]);
+    }
+
+    public function register(UsersRequest $request)
+    {
+      $user = $this->userInterface->store($request->all());
+      // $validator = Validator::make($request->all(), [
+      //   'name'             => 'required',
+      //   'email'            => 'required|unique:users',
+      //   'password'         => 'required|confirmed',
+      //   'country_id'       => 'required|exists:countries,id',
+      //   'phone'            => 'required|unique:users',
+      // ]);
+      //
+      // if ($validator->fails()) {
+      //   $errors = $validator->errors();
+      //   return Response::json($errors);
+      // }
+
+      // $user = User::create([
+      //   'name'         => $request->name,
+      //   'email'        => $request->email,
+      //   'password'     => Hash::make($request->password),
+      //   'country_id'   => $request->country_id,
+      //   'phone'        => $request->phone,
+      // ]);
+
+      $token = $user->createToken('auth-token');
+      $plainToken = $token->plainTextToken;
+
+      return Response::json([
+        'token'  => $plainToken
+      ]);
+      // return new UserResource($user);
     }
 
     public function me()

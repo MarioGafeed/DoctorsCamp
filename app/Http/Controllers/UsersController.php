@@ -47,7 +47,8 @@ class UsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
-        $user = $this->UserInterface->store($request->all());
+        $user = $this->UserInterface->store($request->all());        
+
         session()->flash('success', trans('main.added-message'));
 
         return redirect()->route('users.index');

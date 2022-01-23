@@ -34,7 +34,7 @@ class UsersRequest extends FormRequest
         ];
 
         if (in_array($this->method(), ['POST', 'PATCH'])) {
-            $return['email'] = 'required|unique:users,phone,'.$this->route()->parameter('user').',id';
+            $return['email'] = 'required|unique:users,email,'.$this->route()->parameter('user').',id';
             $return['phone'] = 'required|unique:users,phone,'.$this->route()->parameter('user').',id';
         }
 
