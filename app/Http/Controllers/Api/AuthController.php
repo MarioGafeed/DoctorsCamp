@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -14,7 +17,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'email' => ['required', 'string', 'max:255', 'email'],
-            'password' => ['required', 'string', 'max:50', 'min:6'],
+            'password' => ['required', 'string', 'max:50'],
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -34,6 +37,8 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
+
+
 
     public function me()
     {
@@ -69,6 +74,8 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
+
+    
 
     public function logout()
     {
