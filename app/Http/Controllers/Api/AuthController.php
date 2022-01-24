@@ -51,7 +51,7 @@ class AuthController extends Controller
       $token = $user->createToken($user->id.'-'.time());
 
       return response()->json([
-          'message' => 'user logged successfully',
+          'message' => 'Registration successfully',
           'access_token' => $token->plainTextToken,
           'user' => $user,
           'token_type' => 'Bearer',
