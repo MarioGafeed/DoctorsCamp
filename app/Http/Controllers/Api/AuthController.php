@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+
 use App\Http\Interfaces\UserInterface;
 use App\Http\Requests\UsersRequest;
 use App\Http\Resources\UserResource;
@@ -11,7 +12,11 @@ use Illuminate\Http\Request;
 use Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -22,8 +27,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
+
             'email' => ['required', 'email', 'max:255', 'email'],
             'password' => ['required', 'string', 'max:50', 'min:6'],
+            'email' => ['required', 'string', 'max:255', 'email'],
+            'password' => ['required', 'string', 'max:50'],
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -44,6 +52,7 @@ class AuthController extends Controller
         ]);
     }
 
+
     public function register(UsersRequest $request)
     {
       $user = $this->userInterface->store($request->all());
@@ -55,13 +64,7 @@ class AuthController extends Controller
           'access_token' => $token->plainTextToken,
           'user' => $user,
           'token_type' => 'Bearer',
-      ]);
-      // $token = $user->createToken('auth-token');
-      // $plainToken = $token->plainTextToken;
-      // return Response::json([
-      //   'token'  => $plainToken
-      // ]);
-      // return new UserResource($user);
+      ]);      
     }
 
     public function me()
@@ -98,6 +101,8 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
+
+    
 
     public function logout()
     {
