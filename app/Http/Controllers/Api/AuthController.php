@@ -75,8 +75,6 @@ class AuthController extends Controller
         ]);
     }
 
-<<<<<<< Updated upstream
-    // Send Password by Email ( BY Mario )
     public function sendPasswordResetLinkEmail(Request $request)
     {
   		$request->validate(['email' => 'required|email']);
@@ -87,14 +85,12 @@ class AuthController extends Controller
 
   		if($status === Password::RESET_LINK_SENT) {
   			return response()->json(['message' => __($status)], 200);
-  		} else {
-  			throw ValidationException::withMessages([
-  				'email' => __($status)
-  			]);
   		}
+       throw ValidationException::withMessages([
+       'email' => __($status)
+      ]);
 	 }
 
-    // Reset password Via Mario
     public function resetPassword(Request $request)
     {
   		$request->validate([
@@ -118,10 +114,10 @@ class AuthController extends Controller
 
   		if($status == Password::PASSWORD_RESET) {
   			return response()->json(['message' => __($status)], 200);
-  		} else {
-  			throw ValidationException::withMessages([
-  				'email' => __($status)
-  			]);
+  		}
+       throw ValidationException::withMessages([
+        'email' => __($status)
+        ]);
   		}
       // Mine
       // if($status == Password::PASSWORD_RESET) {
