@@ -75,6 +75,7 @@ class AuthController extends Controller
         ]);
     }
 
+<<<<<<< Updated upstream
     // Send Password by Email ( BY Mario )
     public function sendPasswordResetLinkEmail(Request $request)
     {
@@ -132,6 +133,8 @@ class AuthController extends Controller
   		// }
   	}
 
+=======
+>>>>>>> Stashed changes
     public function logout()
     {
         auth()->user()->currentAccessToken()->delete();
