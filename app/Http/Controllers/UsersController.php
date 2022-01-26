@@ -12,11 +12,11 @@ class UsersController extends Controller
 {
     // use Authorizable;
 
-    private $UserInterface;
+    private $userInterface;
 
-    public function __construct(UserInterface $UserInterface)
+    public function __construct(UserInterface $userInterface)
     {
-        $this->UserInterface = $UserInterface;
+        $this->userInterface = $userInterface;
     }
 
     /**
@@ -26,7 +26,7 @@ class UsersController extends Controller
      */
     public function index(UsersDataTable $dataTable)
     {
-        return $this->UserInterface->index($dataTable);
+        return $this->userInterface->index($dataTable);
     }
 
     /**
@@ -36,7 +36,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return $this->UserInterface->create();
+        return $this->userInterface->create();
     }
 
     /**
@@ -47,8 +47,8 @@ class UsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
-        $user = $this->UserInterface->store($request->all());        
-
+        $user = $this->userInterface->store($request->all());
+      
         session()->flash('success', trans('main.added-message'));
 
         return redirect()->route('users.index');
@@ -62,7 +62,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return  $this->UserInterface->show($id);
+        return  $this->userInterface->show($id);
     }
 
     /**
@@ -73,7 +73,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        return $this->UserInterface->edit($id);
+        return $this->userInterface->edit($id);
     }
 
     /**
@@ -85,7 +85,7 @@ class UsersController extends Controller
      */
     public function update(UsersRequest $request, $id)
     {
-        $user = $this->UserInterface->update($request->all(), $id);
+        $user = $this->userInterface->update($request->all(), $id);
         session()->flash('success', trans('main.updated'));
 
         return redirect()->route('users.show', [$user->id]);
@@ -100,7 +100,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = $this->UserInterface->destroy($id);
+        $user = $this->userInterface->destroy($id);
         session()->flash('success', trans('main.deleted-message'));
 
         return redirect()->route('users.index');
@@ -114,6 +114,6 @@ class UsersController extends Controller
      */
     public function multi_delete(Request $request)
     {
-        return $this->UserInterface->multi_delete($request);
+        return $this->userInterface->multi_delete($request);
     }
 }
