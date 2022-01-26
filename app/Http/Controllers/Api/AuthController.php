@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+
+use App\Http\Interfaces\UserInterface;
+use App\Http\Requests\UsersRequest;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Events\PasswordReset;
@@ -13,9 +20,16 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+
+  public function __construct(private UserInterface $userInterface)
+  {
+  }
     public function login(Request $request)
     {
         $request->validate([
+
+            'email' => ['required', 'email', 'max:255', 'email'],
+            'password' => ['required', 'string', 'max:50', 'min:6'],
             'email' => ['required', 'string', 'max:255', 'email'],
             'password' => ['required', 'string', 'max:50'],
         ]);
@@ -39,6 +53,19 @@ class AuthController extends Controller
     }
 
 
+    public function register(UsersRequest $request)
+    {
+      $user = $this->userInterface->store($request->all());
+
+      $token = $user->createToken($user->id.'-'.time());
+
+      return response()->json([
+          'message' => 'Registration successfully',
+          'access_token' => $token->plainTextToken,
+          'user' => $user,
+          'token_type' => 'Bearer',
+      ]);      
+    }
 
     public function me()
     {
