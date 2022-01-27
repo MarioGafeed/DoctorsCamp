@@ -54,10 +54,10 @@ class UserRepository implements UserInterface
 
         if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
             $user->addMedia($data['image'])->toMediaCollection();
-        }
+        }      
 
-        $roles = $data['roles'] ?? []; //Retrieving the roles field
-        //Checking if a role was selected
+        $roles = $data['roles'] ?? []; 
+        
         if (isset($roles)) {
             foreach ($roles as $role) {
                 $role_r = Role::where('id', '=', $role)->firstOrFail();
@@ -67,12 +67,6 @@ class UserRepository implements UserInterface
         return $user;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $user = $this->getById($id);
@@ -142,13 +136,7 @@ class UserRepository implements UserInterface
             return $user;
         }
     }
-
-    /**
-     * Remove the multible resource from storage.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Http\Response
-     */
+   
     public function multi_delete($request)
     {
         if (count($request->selected_data)) {
