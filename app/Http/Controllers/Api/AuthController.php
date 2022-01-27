@@ -119,18 +119,8 @@ class AuthController extends Controller
         'email' => __($status)
         ]);
   		}
-      // Mine
-      // if($status == Password::PASSWORD_RESET) {
-  		// 	return response()->json(['message' => __($status)], 200);
-  		// } else {
-  		// 	throw ValidationException::withMessages([
-  		// 		'email' => __($status)
-  		// 	]);
-  		// }
   	}
 
-=======
->>>>>>> Stashed changes
     public function logout()
     {
         auth()->user()->currentAccessToken()->delete();
