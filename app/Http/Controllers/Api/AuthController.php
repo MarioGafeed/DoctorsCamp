@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
-use App\Models\User;
+
 
 class AuthController extends Controller
 {
@@ -64,7 +64,7 @@ class AuthController extends Controller
           'access_token' => $token->plainTextToken,
           'user' => $user,
           'token_type' => 'Bearer',
-      ]);      
+      ]);
     }
 
     public function me()
@@ -120,7 +120,7 @@ class AuthController extends Controller
 
     public function resetPassword(Request $request)
     {
-  		$request->validate([
+      $request->validate([
   			'token' => 'required',
   			'email' => 'required|email',
   			'password' => 'required|confirmed',
@@ -145,7 +145,6 @@ class AuthController extends Controller
        throw ValidationException::withMessages([
         'email' => __($status)
         ]);
-  		}
   	}
 
     public function logout()
