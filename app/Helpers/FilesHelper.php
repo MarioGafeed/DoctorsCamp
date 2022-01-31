@@ -1,47 +1,48 @@
 <?php
 
 /**
- * CSV Type Extensions.
+ * CSV Type Extensions
  *
  * @return array
  */
 function allowExtFilesCSV() : array
 {
     return [
-        'csv',
+        'csv'
     ];
 }
 
 /**
- * Image Extensions.
+ * Image Extensions
  *
  * @return array
  */
-// function allowExtFilesImage() : array
-// {
-//     return [
-//         'png',
-//         'jpg',
-//         'jpeg',
-//         'gif',
-//         'bmp'
-//     ];
-// }
+function allowExtFilesImage() : array
+{
+    return [
+        'png',
+        'jpg',
+        'jpeg',
+        'gif',
+        'bmp',
+        'icon'
+    ];
+}
 
 /**
- * PDF Extensions.
+ * PDF Extensions
  *
  * @return array
  */
 function allowExtPDF() : array
 {
     return [
-        'pdf',
+        'pdf'
     ];
 }
 
 /**
- * Allow Files.
+ * Allow Files
  *
  * @return array
  */
@@ -59,12 +60,12 @@ function allowExtFiles() : array
         'docx',
         'xls',
         'ppt',
-        'pptx',
+        'pptx'
     ];
 }
 
 /**
- * Get File Extension.
+ * Get File Extension
  *
  * @param string $fileName
  * @return string
@@ -73,37 +74,37 @@ function getEx(string $fileName) : string
 {
     $fileName = trim($fileName);
     $fileName = explode('.', $fileName);
-
     return end($fileName);
 }
 
 /**
- * Check If File is CSV.
+ * Check If File is CSV
  *
  * @param string $fileName
- * @return bool
+ * @return boolean
  */
 function checkFiles(string $fileName) : bool
 {
     return in_array(getEx($fileName), allowExtFilesCSV());
 }
 
-// /**
-//  * Check If File Is Image
-//  *
-//  * @param string $fileName
-//  * @return boolean
-//  */
-// function checkImages(string $fileName) : bool
-// {
-//     return in_array(getEx($fileName), allowExtFilesImage());
-// }
-
 /**
- * Check If File Is PDF.
+ * Check If File Is Image
  *
  * @param string $fileName
- * @return bool
+ * @return boolean
+ */
+function checkImages(string $fileName) : bool
+{
+    return in_array(getEx($fileName), allowExtFilesImage());
+}
+
+
+/**
+ * Check If File Is PDF
+ *
+ * @param string $fileName
+ * @return boolean
  */
 function checkPDF(string $fileName) : bool
 {
@@ -111,7 +112,7 @@ function checkPDF(string $fileName) : bool
 }
 
 /**
- * Get File Extension Name.
+ * Get File Extension Name
  *
  * @return array
  */
@@ -124,17 +125,17 @@ function fileTypeName() : array
         'xls' => 'Microsoft Excel',
         'xlsx' => 'Microsoft Excel',
         'zip' => 'Archive',
-        // 'gif' => 'GIF Image',
-        // 'jpg' => 'JPEG Image',
-        // 'jpeg' => 'JPEG Image',
-        // 'png' => 'PNG Image',
+        'gif' => 'GIF Image',
+        'jpg' => 'JPEG Image',
+        'jpeg' => 'JPEG Image',
+        'png' => 'PNG Image',
         'ppt' => 'Microsoft PowerPoint',
         'pptx' => 'Microsoft PowerPoint',
     ];
 }
 
 /**
- * Get File Extension Icon.
+ * Get File Extension Icon
  *
  * @return array
  */
@@ -147,17 +148,17 @@ function fileIcon() : array
         'xls' => 'fa-file-excel-o',
         'xlsx' => 'fa-file-excel-o',
         'zip' => 'fa-file-archive-o',
-        // 'gif' => 'fa-file-image-o',
-        // 'jpg' => 'fa-file-image-o',
-        // 'jpeg' => 'fa-file-image-o',
-        // 'png' => 'fa-file-image-o',
+        'gif' => 'fa-file-image-o',
+        'jpg' => 'fa-file-image-o',
+        'jpeg' => 'fa-file-image-o',
+        'png' => 'fa-file-image-o',
         'ppt' => 'fa-file-powerpoint-o',
         'pptx' => 'fa-file-powerpoint-o',
     ];
 }
 
 /**
- * Get Ex of File Name & Icon.
+ * Get Ex of File Name & Icon
  *
  * @param string $ex
  * @param string $fileIcon
@@ -170,17 +171,16 @@ function getTypeFile(string $ex, string $fileIcon = null, string $fileType = nul
         $fileIcon = fileIcon()[$ex];
         $fileType = fileTypeName()[$ex];
     }
-
     return ['fileIcon' => $fileIcon, 'fileType' => $fileType];
 }
 
 /**
- * Check Allowed Extensions.
+ * Check Allowed Extensions
  *
  * @param string $fileName
- * @return bool
+ * @return boolean
  */
-// function checklist(string $fileName) : bool
-// {
-//     return in_array(getEx($fileName), allowExtFilesImage());
-// }
+function checklist(string $fileName) : bool
+{
+    return in_array(getEx($fileName), allowExtFilesImage());
+}

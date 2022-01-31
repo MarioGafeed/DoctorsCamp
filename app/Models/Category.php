@@ -7,17 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+
 class Category extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        'title_ar', 'title_en', 'slug',  'summary', 'keyword', 'desc',
+        'title_ar', 'title_en', 'slug',  'summary', 'keyword', 'desc', 'icon'
     ];
-    // public function categoryable()
-    // {
-    //   return $this->morphMany();
-    // }
 
     public function posts()
     {

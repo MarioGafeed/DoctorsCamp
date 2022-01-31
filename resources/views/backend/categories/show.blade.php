@@ -84,6 +84,11 @@
                             <img style="width: 200px; height: 150px;" src="{{ $show->getFirstMediaUrl() }}" alt="">
                             <br><hr>
                         </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.icon')}} : </strong>
+                            <img style="width: 200px; height: 150px;" src="{{ ShowImage($show->icon) }}" alt="">
+                            <br><hr>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -762,7 +762,7 @@ return [
     'summary'                      => 'Summary',
     'keyword'                      => 'Keyword',
     'titlepcat'                    => 'Post Category Name',
-    'titlevcat'                    => 'Video Category Name',    
+    'titlevcat'                    => 'Video Category Name',
     'select Category'              => 'Select Category',
     'post'                         => 'Post',
     'posts'                        => 'Posts',
@@ -794,6 +794,7 @@ return [
     'location'                     => 'Event Location',
     'eventTitle'                   => 'Event Title',
     'select country'               => 'Select Country',
+    'icon'                         => 'Mobile Icon',
 
 
 

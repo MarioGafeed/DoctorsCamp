@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->longtext('summary');
             $table->text('keyword');
             $table->longtext('desc');
+            $table->string('icon');
             $table->timestamps();
         });
     }

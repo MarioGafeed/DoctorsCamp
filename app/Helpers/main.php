@@ -33,13 +33,15 @@ function UploadImages(string $dir, $image, $checkFunction = null) : string
     }
 
     if (File::isFile($image)) {
+
         $name = $image->getClientOriginalName(); // get image name
         $extension = $image->getClientOriginalExtension(); // get image extension
         $sha1 = sha1($name); // hash the image name
+
         $fileName = rand(1, 1000000).'_'.date('y-m-d-h-i-s').'_'.$sha1.'.'.$extension; // create new name for the image
 
         if (! is_null($checkFunction)) {
-            if (! $checkFunction($name)) {
+            if (! $checkFunction($name)) {              
                 return false;
             }
         }

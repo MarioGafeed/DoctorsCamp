@@ -6,6 +6,7 @@ use App\Http\Interfaces\CategoryInterface;
 use App\Http\Traits\CategoryTrait;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -48,6 +49,12 @@ class CategoryRepository implements CategoryInterface
         'en' => $data['summary_en'],
         'ar' => $data['summary_ar']
       ]);
+
+      if ($data['icon']) {
+         $data['icon'] = Helper::Upload('categories', $data['icon'], 'checkImages');
+       }else {
+         $data['icon'] = "categories/default.ico";
+       }
 
         $cat = Category::create($data);
 
@@ -116,6 +123,10 @@ class CategoryRepository implements CategoryInterface
             $cat->addMedia($data['image'])->toMediaCollection();
         }
 
+        if ($request->hasFile('icon')) {
+            $cat->icon = Helper::UploadUpdate($cat->icon ?? "", 'categories', $request->file('icon'), 'checkImages');
+        }
+
         $cat->save();
 
         return $cat;
@@ -126,6 +137,9 @@ class CategoryRepository implements CategoryInterface
         $redirect = true;
         $cat = $this->getById($id);
         $cat->clearMediaCollection();
+        if (file_exists(public_path('uploads/' . $cat->icon))) {
+            @unlink(public_path('uploads/' . $cat->icon));
+        }
         $cat->delete();
 
         if ($redirect) {

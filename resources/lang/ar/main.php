@@ -758,7 +758,7 @@ return [
     'summary'                         => 'موجز',
     'keyword'                         => 'كلمات مُفتاحية',
     'titlepcat'                       => 'إسم تصنيف المنشورات',
-    'titlevcat'                       => 'إسم تصنيف فيديو',            
+    'titlevcat'                       => 'إسم تصنيف فيديو',
     'select Category'                 => 'اختر تصنيفاً',
     'post'                            => 'منشور',
     'postn'                           => 'إسم المقال',
@@ -820,6 +820,7 @@ return [
       'location'                           => 'مكان الحدث',
       'eventTitle'                         => 'إسم الحدث',
       'select country'                     => 'إختر الدولة',
+      'icon'                               => 'ايقون للموبايل',
 
 
 ];

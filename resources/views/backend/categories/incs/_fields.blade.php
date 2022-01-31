@@ -23,6 +23,32 @@
         </div>
     </div>
 
+    <div class="form-group{{ $errors->has('icon') ? ' has-error' : '' }}">
+       <label class="control-label col-md-2">{{ trans('main.icon') }}</label>
+       <div class="col-md-6">
+           <div class="fileinput fileinput-new" data-provides="fileinput">
+               <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                   @if (checkValue(getData($data, 'icon')))
+                       <img src="{{ ShowImage(getData($data, 'icon')) }}" alt="" />
+                   @endif
+               </div>
+               <div>
+                   <span class="btn red btn-outline btn-file">
+                       <span class="fileinput-new"> {{ trans('main.icon') }} </span>
+                       <span class="fileinput-exists"> {{ trans('main.change') }} </span>
+                       <input type="file" name="icon">
+                   </span>
+                   <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> {{ trans('main.remove') }} </a>
+               </div>
+           </div>
+           @if ($errors->has('icon'))
+               <span class="help-block">
+                   <strong class="help-block">{{ $errors->first('icon') }}</strong>
+               </span>
+           @endif
+       </div>
+   </div>
+
     <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
           <label class="col-md-2 control-label">{{ trans('main.slug') }} <span class="required" ></span> </label>
           <div class="col-md-6">
