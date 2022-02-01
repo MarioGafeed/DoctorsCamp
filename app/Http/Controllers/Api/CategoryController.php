@@ -10,7 +10,6 @@ use App\Http\Requests\CategorysRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Response;
 
 class CategoryController extends Controller
 {
@@ -20,30 +19,22 @@ class CategoryController extends Controller
   {
   }
 
-  public function index()
+  public function index(Request $request)
   {
-      $categories = Category::with('media')->paginate(10);
+      $categories = Category::query()->with('media');
 
-      return CategoryResource::collection($categories);
+        $categories->when(
+                $request->keyword,
+                fn ($q) => $q->where('title_ar', 'LIKE', "%$request->keyword%")
+                              ->where('title_ar', 'LIKE', "%$request->keyword%")
+                              ->orWhere('slug','LIKE','%'.$request->keyword.'%')
+       );
+
+      return CategoryResource::collection($categories->get());
   }
 
   public function show(Category $category)
   {
       return new CategoryResource($category);
   }
-
-  public function searchCategory(Request $request)
-  {
-        $categories = Category::where('title_ar','LIKE','%'.$request->keyword.'%')
-                      ->orWhere('title_en','LIKE','%'.$request->keyword.'%')
-                      ->orWhere('slug','LIKE','%'.$request->keyword.'%')
-                      ->get();
-
-        if(count($categories)==0)
-        {
-            return Response::json(['message'=>'No category match found !']);
-        }else{
-            return Response::json($categories);
-        }
-    }
 }

@@ -23,10 +23,7 @@ class CategoryResource extends JsonResource
           'desc' => json_decode($this->desc, true),
           'posts_count' => $this->posts_count ?? $this->posts()->count(),
           'videos'         => $this->posts->where('type', '=', 'video'),
-          'articles'       => $this->posts->where('type', '=', 'article'),
-          // 'posts' => PostResource::collection($this->whenLoaded('posts')),
-          // 'posts' => PostResource::collection($this->posts),
-          // 'posts' =>  new PostResource::collection($this->posts),
+          'articles'       => $this->posts->where('type', '=', 'article'),          
           'image' => $this->getFirstMediaUrl(),
           'icon' =>  $this->icon,
         ];
