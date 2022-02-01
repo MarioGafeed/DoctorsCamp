@@ -30,13 +30,6 @@ class Category extends Model implements HasMedia
     public function courses()
     {
         return $this->hasMany(Course::class, 'category_id');
-    }
-
-    public function scopeSearch(Builder $query, ?string $search)
-    {
-        if ($search) {
-            return $query->where('title_en', 'LIKE', "%{$search}%");
-        }
-    }
+    }    
 
 }
