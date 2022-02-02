@@ -27,6 +27,7 @@ class PostResource extends JsonResource
             'youtubeURL' => $this->youtubeURL,
             'image' => $this->getFirstMediaUrl(),
             'comments_count' => $this->comments_count ?? $this->comments()->count(),
+            'comments' => $this->comments()->approved()->get(),
         ];
     }
 }
