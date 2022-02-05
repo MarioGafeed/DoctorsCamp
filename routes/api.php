@@ -17,7 +17,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('posts', 'PostsController');
 
-    Route::apiResource('categories', 'CategoryController');
-    Route::get('categories/{keyword}/search','CategoryController@searchCategory');
+    Route::apiResource('categories', 'CategoryController');    
 
 });

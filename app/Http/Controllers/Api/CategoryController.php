@@ -21,12 +21,12 @@ class CategoryController extends Controller
 
   public function index(Request $request)
   {
-      $categories = Category::query()->with('media');
+      $categories = Category::query()->with('media')->with('posts');
 
         $categories->when(
                 $request->keyword,
                 fn ($q) => $q->where('title_ar', 'LIKE', "%$request->keyword%")
-                              ->where('title_ar', 'LIKE', "%$request->keyword%")
+                              ->where('title_en', 'LIKE', "%$request->keyword%")
                               ->orWhere('slug','LIKE','%'.$request->keyword.'%')
        );
 

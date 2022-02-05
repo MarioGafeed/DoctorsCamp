@@ -21,7 +21,7 @@ class CategoryResource extends JsonResource
           'keyword'          => $this->keyword,
           'summary'          => $this->summary,
           'desc'             => json_decode($this->desc, true),
-          'posts_count'      => $this->posts_count ?? $this->posts()->count(),
+          'posts_count'      => $this->posts_count ?? $this->posts()->count(),        
           'videos'           => $this->posts->where('type', '=', 'video'),
           'articles'         => $this->posts->where('type', '=', 'article'),
           'image'            => $this->getFirstMediaUrl(),
