@@ -28,6 +28,11 @@ Route::middleware(\App\Http\Middleware\LangMiddleware::class)->group(function ()
     Route::resource('permissions', 'PermissionController');
     Route::post('permissions/multi_delete', 'PermissionController@multi_delete')->name('permissions.multi_delete');
 
+    // Comments
+    Route::resource('comments', 'CommentController');
+    Route::post('comments/multi_delete', 'CommentController@multi_delete')->name('comments.multi_delete');
+    Route::get('/comments/toggle/{id}', 'CommentController@toggle')->name('comments.toggle');
+
     // Posts
     Route::resource('posts', 'PostController');
     Route::post('posts/multi_delete', 'PostController@multi_delete')->name('posts.multi_delete');

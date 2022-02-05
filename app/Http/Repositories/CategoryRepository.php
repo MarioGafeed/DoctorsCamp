@@ -7,6 +7,7 @@ use App\Http\Traits\CategoryTrait;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use Illuminate\Http\UploadedFile;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -90,9 +91,7 @@ class CategoryRepository implements CategoryInterface
 
     public function edit($id)
     {
-        $cat = $this->getById($id);
-        $requestAll['title_en'] = $cat->title_en;
-        $requestAll['title_ar'] = $cat->title_ar;
+        $cat = $this->getById($id);        
         $cat['desc_en'] = json_decode($cat->desc)->en;
         $cat['desc_ar'] = json_decode($cat->desc)->ar;
         $cat['summary_en'] = json_decode($cat->summary)->en;

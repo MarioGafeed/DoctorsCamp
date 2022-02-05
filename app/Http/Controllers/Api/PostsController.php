@@ -21,9 +21,9 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = Post::with('media')->paginate(10);
-
-        return PostResource::collection($posts);
+        return PostResource::collection(
+          Post::with('media')->paginate(10)
+        );
     }
 
     public function store(PostsRequest $request)
