@@ -16,4 +16,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', 'AuthController@logout');
 
     Route::apiResource('posts', 'PostsController');
+
+    Route::apiResource('images', 'ImagesController');
 });
