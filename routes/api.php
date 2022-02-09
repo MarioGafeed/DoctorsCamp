@@ -18,4 +18,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('posts', 'PostsController');
 
     Route::apiResource('images', 'ImagesController');
+
+    Route::post('/events/{event}/likes', 'EventLikeController@store')->name('events.likes.store');
+    Route::delete('/events/{event}/likes', 'EventLikeController@destroy')->name('events.likes.destroy');
 });
