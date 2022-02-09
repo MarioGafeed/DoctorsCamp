@@ -15,7 +15,7 @@ class PostLikeController extends Controller
 
   public function destroy(Post $post)
   {
-      if ($post->liked();) {      
+      if ($post->liked()) {      
         return $post->unlike();
       }
   }
