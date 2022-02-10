@@ -75,13 +75,7 @@ class CategoryRepository implements CategoryInterface
      */
     public function show($id)
     {
-        $cat = $this->getById($id);
-        $cat['title_en'] = $cat->title_en;
-        $cat['title_ar'] = $cat->title_ar;
-        $cat['desc_en'] = json_decode($cat->desc)->en;
-        $cat['desc_ar'] = json_decode($cat->desc)->ar;
-        $cat['summary_en'] = json_decode($cat->summary)->en;
-        $cat['summary_ar'] = json_decode($cat->summary)->ar;
+        $cat = $this->getById($id);    
 
         return view("{$this->viewPath}.show", [
           'title' => trans('main.show').' '.trans('main.category').' : '.$cat->title_en.' : '.$cat->title_ar,
