@@ -8,6 +8,7 @@ Route::post('login', 'AuthController@login');
 Route::post('/password/email', 'AuthController@sendPasswordResetLinkEmail')->middleware('throttle:5,1')->name('password.email');
 Route::post('/password/reset', 'AuthController@resetPassword')->name('password.reset');
 
+Route::apiResource('courses', 'CourseController');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('me', 'AuthController@me');
@@ -16,4 +17,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', 'AuthController@logout');
 
     Route::apiResource('posts', 'PostsController');
+
 });

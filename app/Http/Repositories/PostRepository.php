@@ -111,7 +111,7 @@ class PostRepository implements PostInterface
         $pos['desc_ar'] = json_decode($pos->desc)->ar;
         $pos['content_en'] = json_decode($pos->content)->en;
         $pos['content_ar'] = json_decode($pos->content)->ar;
-
+  
         return view("{$this->viewPath}.edit", [
           'title' => trans('main.edit').' '.trans('main.post').' : '.$pos->title,
           'edit' => $pos,
