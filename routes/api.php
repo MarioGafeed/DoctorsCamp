@@ -17,6 +17,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('posts', 'PostsController');
 
+
     Route::apiResource('categories', 'CategoryController');    
 
+
+    Route::post('/images/{image}/likes', 'ImageLikeController@store')->name('images.likes.store');
+    Route::delete('/images/{image}/likes', 'ImageLikeController@destroy')->name('images.likes.destroy');
 });
