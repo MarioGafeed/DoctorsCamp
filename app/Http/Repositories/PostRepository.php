@@ -48,7 +48,7 @@ class PostRepository implements PostInterface
     }
 
     public function store(array $data)
-    {
+    {      
         $data['desc'] = json_encode([
             'en' => $data['desc_en'],
             'ar' => $data['desc_ar'],
