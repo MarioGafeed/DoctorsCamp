@@ -34,22 +34,19 @@ class EventsRequest extends FormRequest
            'start_date'      => 'required',
            'end_date'        => 'required',
          ];
-        // if ($this->method() == 'PATCH') {
-        //   $rules['image'] = 'sometimes|nullable|mimes:jpg|dimensions:width=350,height=299';
-        // }
         return $rules;
     }
 
     public function attributes()
     {
         return [
-            'title_ar'    => trans('main.eventTitle'),
-            'country_id'  => trans('main.country'),
-            'location'    => trans('main.location'),
-            'start_date'  => trans('main.start_date'),
-            'end_date'    => trans('main.end_date'),
+            'title_ar'           => trans('main.eventTitle'),
+            'country_id'         => trans('main.country'),
+            'location'           => trans('main.location'),
+            'start_date'         => trans('main.start_date'),
+            'end_date'           => trans('main.end_date'),
             'description-ar'     => trans('main.description'),
-            'active'      => trans('main.status'),
+            'active'             => trans('main.status'),
         ];
     }
 }
