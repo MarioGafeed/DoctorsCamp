@@ -14,10 +14,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', 'AuthController@logout');
 
     Route::apiResource('posts', 'PostsController');
+
   
     Route::apiResource('comments', 'CommentController');
     Route::apiResource('categories', 'CategoryController');
 
+    
+    Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
+    Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
+  
+  
+    Route::apiResource('categories', 'CategoryController');    
 
     Route::post('/images/{image}/likes', 'ImageLikeController@store')->name('images.likes.store');
     Route::delete('/images/{image}/likes', 'ImageLikeController@destroy')->name('images.likes.destroy');
