@@ -52,22 +52,6 @@ class CourseController extends Controller
 
     public function update(CoursesRequest $request, $id)
     {
-        // $course = Course::find($id);
-        // $course->name = $request->name;
-        // $course->slug = $request->slug;
-        // $course->desc = $request->desc;
-        // $course->price = $request->price;
-        // $course->active = $request->active;
-        // $course->category_id = $request->category_id;
-        //
-        // if ($request->hasFile('image')) {
-        //     $course->clearMediaCollection();
-        //     $course
-        //   ->addMediaFromRequest('image')
-        //   ->toMediaCollection();
-        // }
-        // $course->save();
-
         $course = $this->courseInterface->update($request->all(), $id);
 
 

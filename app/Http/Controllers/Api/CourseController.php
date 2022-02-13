@@ -19,21 +19,14 @@ class CourseController extends Controller
 
   public function index(Request $request)
   {
-      $courses = Course::where([
-        ['name', '!=', NULL],
-        [function ($query) use ($request){
+        $courses = Course::when($request->keyword, function ($query) use ($request){
               $query->orWhere('name', 'LIKE', "%$request->keyword%")->get();
-        }]
-      ])
+        })->whereNotNull('name')
       ->where('active', 1)
       ->with('category', 'lessons')
       ->paginate(10);
 
-      if( count($courses)==0 ){
-            return Response::json(['message'=>'No Course match found !']);
-        }else{
-            return CourseResource::collection($courses);
-        }
+      return CourseResource::collection($courses);
   }
 
   public function show(Course $course)

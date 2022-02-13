@@ -21,7 +21,7 @@ class CourseResource extends JsonResource
           'active'      => $this->active,
           'category_ar' => $this->category->title_ar,
           'category_en' => $this->category->title_en,
-          'lessons'     => $this->lessons->where('active', 1),
+          'lessons'     => $this->lessons,
           'lessons_counts'     => $this->lessons->count(),
           'image'       => $this->getFirstMediaUrl(),
           'price'       => $this->price,
