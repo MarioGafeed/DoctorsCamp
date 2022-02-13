@@ -22,7 +22,7 @@ class EventController extends Controller
 
   public function index()
   {
-      $events = Event::with('media')->where('active', '1')->paginate(10);
+      $events = Event::with('media')->with('user', 'country')->where('active', '1')->paginate(10);
 
       return EventResource::collection($events);
   }
