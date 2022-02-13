@@ -25,9 +25,7 @@ class CommentsRequest extends FormRequest
     {
         return [
           'comment'     => 'required',
-          'post_id'     => 'required|exists:posts,id',
-          // 'image_id'     => 'required|exists:posts,id',
-          // 'event_id'     => 'required|exists:posts,id',
+          'post_id'     => 'required|exists:posts,id',      
         ];
         if ($this->method() == 'PATCH') {
             $rules['post_id'] = 'sometimes|nullable';

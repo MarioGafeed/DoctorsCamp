@@ -20,7 +20,7 @@ class CommentController extends Controller
   public function index()
   {
       return CommentResource::collection(
-        Comment::paginate(10)
+        Comment::with('user')->paginate(10)
       );
   }
 
