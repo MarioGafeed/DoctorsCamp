@@ -19,6 +19,7 @@ class CourseResource extends JsonResource
           'name'        => $this->name,
           'desc'        => json_decode($this->desc, true),
           'active'      => $this->active,
+          'category'    => $this->category->id,
           'category_ar' => $this->category->title_ar,
           'category_en' => $this->category->title_en,
           'lessons'     => $this->lessons,

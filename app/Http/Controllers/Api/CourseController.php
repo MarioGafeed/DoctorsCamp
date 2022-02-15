@@ -23,7 +23,8 @@ class CourseController extends Controller
               $query->orWhere('name', 'LIKE', "%$request->keyword%")->get();
         })->whereNotNull('name')
       ->where('active', 1)
-      ->with('category', 'lessons')
+      ->with('category:id,title_en,title_ar')
+      ->with('lessons')->where('active', 1)
       ->paginate(10);
 
       return CourseResource::collection($courses);
