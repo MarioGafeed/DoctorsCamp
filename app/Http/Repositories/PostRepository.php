@@ -25,11 +25,6 @@ class PostRepository implements PostInterface
         $this->catModel = $cat;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($dataTable)
     {
         return $dataTable->render("{$this->viewPath}.index", [
@@ -48,7 +43,7 @@ class PostRepository implements PostInterface
     }
 
     public function store(array $data)
-    {      
+    {
         $data['desc'] = json_encode([
             'en' => $data['desc_en'],
             'ar' => $data['desc_ar'],
@@ -78,12 +73,6 @@ class PostRepository implements PostInterface
         return $pos;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $pos = $this->getPostWithCat($id);
@@ -174,12 +163,6 @@ class PostRepository implements PostInterface
         }
     }
 
-    /**
-     * Remove the multible resource from storage.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Http\Response
-     */
     public function multi_delete($request)
     {
         if (count($request->selected_data)) {
