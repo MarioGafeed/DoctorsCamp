@@ -64,11 +64,6 @@
                             {{ $show->active }}
                             <br><hr>
                         </div>
-                        <div class="col-md-6">
-                            <strong>{{trans('main.image')}} : </strong>
-                            <img style="width: 200px; height: 150px;" src="{{ $show->getFirstMediaUrl() }}" alt="">
-                            <br><hr>
-                        </div>
                         <div class="col-md-12">
                             <strong>{{trans('main.content')}} : </strong>
                             {!! $show->content !!}
@@ -76,14 +71,10 @@
                         </div>
                         <div class="col-md-12">
                             <strong>{{trans('main.vcontent')}} : </strong>
-                            <!-- <iframe width="560" height="315" src="{{ $show->content }}" frameborder="0" allowfullscreen> -->
-                            <!-- {<iframe width="450" height="360" src="{{ $show->content  }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>} -->
                             <div class="inner-banner relative bg-cover" );">
                                 <a href="{{ $show->vcontent }}" target="_blank" class="laink-arrow btn-lg z-10 popup-video transform-center"> <i class="fas fa-play"></i>
                                 </a>
                             </div>
-                              <!-- <video  src="{{ $show->content }}" controls> </video> -->
-                            <!-- {!! $show->content !!} -->
                             <br><hr>
                         </div>
                     </div>
