@@ -27,9 +27,4 @@ class Lesson extends Model
       ->withPivot('score','quizz_time','status')
       ->withTimestamps();
     }
-
-    public function questions()
-    {
-      return $this->HasMany(Question::class);
-    }
 }

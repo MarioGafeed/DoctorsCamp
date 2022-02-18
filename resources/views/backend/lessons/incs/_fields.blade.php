@@ -17,8 +17,8 @@
         <div class="col-md-6">
             <select class="form-control select2" id="course_id" name="course_id">
               <option value="">{{ trans('main.select course') }}</option>
-              @foreach ($courses as $course)
-                  <option value="{{ $course->id }}" {{ getData($data, 'course_id') == $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
+              @foreach ($cor as $c)
+                  <option value="{{ $c->id }}" {{ getData($data, 'course_id') == $c->id ? 'selected' : '' }}>{{ $c->name }}</option>
               @endforeach
             </select>
             @if ($errors->has('course_id'))
@@ -28,7 +28,7 @@
             @endif
         </div>
     </div>
-
+  
 
     <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
         <label class="col-md-2 control-label">{{ trans('main.status') }} </span> </label>
