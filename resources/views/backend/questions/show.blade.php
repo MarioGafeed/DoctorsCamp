@@ -60,7 +60,7 @@
                             <br><hr>
                         </div>
                         <div class="col-md-12">
-                            @if ($show->answers_relation->count())
+                            @if ($show->answers->count())
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -69,7 +69,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($show->answers_relation as $a)
+                                        @foreach ($show->answers as $a)
                                             <tr>
                                                 <td>{{ $a->answer }}</td>
                                                 <td>{{ $a->status }}</td>

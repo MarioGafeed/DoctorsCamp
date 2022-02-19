@@ -17,7 +17,7 @@
         <div class="col-md-8">
             <select class="form-control select2" id="lesson_id" name="lesson_id">
               <option value="">{{ trans('main.select lesson') }}</option>
-              @foreach ($les as $l)
+              @foreach ($lessons as $l)
                   <option value="{{ $l->id }}" {{ getData($data, 'lesson_id') == $l->id ? 'selected' : '' }}>{{ $l->title }}</option>
               @endforeach
             </select>
