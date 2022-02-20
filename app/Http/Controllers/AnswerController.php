@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Authorizable;
 use App\DataTables\AnswersDataTable;
 use App\DataTables\UserAnswersDataTable;
+use App\Http\Interfaces\AnswerInterface;
 use App\Helpers\Helper;
 use App\Http\Requests\AnswersRequest;
 use App\Models\Answer;
@@ -15,151 +16,64 @@ class AnswerController extends Controller
 {
     use Authorizable;
 
-    private $viewPath = 'backend.answers';
+    private $answerInterface;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(AnswerInterface $answerInterface)
+    {
+        $this->answerInterface = $answerInterface;
+    }
+
     public function index(AnswersDataTable $dataTable)
     {
-        return $dataTable->render("{$this->viewPath}.index", [
-          'title' => trans('main.show-all').' '.trans('main.answers'),
-      ]);
+        return $this->answerInterface->index($dataTable);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $quest = Question::all();
-
-        return view("{$this->viewPath}.create", [
-          'title' => trans('main.add').' '.trans('main.answers'),
-          'quest' => $quest,
-      ]);
+        return $this->answerInterface->create();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(AnswersRequest $request)
     {
-        // To Make Sure my order doesn't duplicate..
-        $requestAll = $request->all();
-
-        $ans = Answer::create($requestAll);
+        $answer = $this->answerInterface->store($request->all());
 
         session()->flash('success', trans('main.added-message'));
 
         return redirect()->route('answers.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $ans = Answer::where('id', $id)->with('question')->first();
-
-        return view("{$this->viewPath}.show", [
-          'title' => trans('main.show').' '.trans('main.answer').' : '.$ans->question->title,
-          'show' => $ans,
-      ]);
+        return $this->answerInterface->show($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $ans = Answer::findOrFail($id);
-        $quest = Question::all();
-
-        return view("{$this->viewPath}.edit", [
-          'title' => trans('main.edit').' '.trans('main.answer').' : '.$ans->name,
-          'edit' => $ans,
-          'quest' => $quest,
-      ]);
+       return $this->answerInterface->edit($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(AnswersRequest $request, $id)
     {
-        $ans = Answer::find($id);
-
-        $ans->answer = $request->answer;
-        $ans->status = $request->status;
-        $ans->question_id = $request->question_id;
-
-        $ans->save();
+        $answer = $this->answerInterface->update($request->all(), $id);
 
         session()->flash('success', trans('main.updated'));
 
-        return redirect()->route('answers.show', [$ans->id]);
+        return redirect()->route('answers.show', [$answer->id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @param  bool  $redirect
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id, $redirect = true)
+    public function destroy($id)
     {
-        $ans = Answer::findOrFail($id);
-        $ans->delete();
+      $answer = $this->answerInterface->destroy($id);
+      session()->flash('success', trans('main.deleted-message'));
 
-        if ($redirect) {
-            session()->flash('success', trans('main.deleted-message'));
-
-            return redirect()->route('answers.index');
-        }
+      return redirect()->route('answers.index');
     }
 
-    /**
-     * Remove the multible resource from storage.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Http\Response
-     */
     public function multi_delete(Request $request)
     {
-        if (count($request->selected_data)) {
-            foreach ($request->selected_data as $id) {
-                $this->destroy($id, false);
-            }
-            session()->flash('success', trans('main.deleted-message'));
-
-            return redirect()->route('answers.index');
-        }
+        return $this->answerInterface->multi_delete($request);
     }
 
-    /**
-     * user_answers.
-     * @param  UserAnswersDataTable $dataTable
-     * @return UserAnswersDataTable
-     */
     public function user_answers(UserAnswersDataTable $dataTable)
     {
         return $dataTable->render("{$this->viewPath}.index", [
