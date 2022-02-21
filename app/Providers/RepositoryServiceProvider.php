@@ -34,8 +34,9 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Http\Repositories\ImageRepository'
         );
         $this->app->bind(
-            'App\Http\Interfaces\QuestionInterface',
-            'App\Http\Repositories\QuestionRepository'
+
+            'App\Http\Interfaces\AnswerInterface',
+            'App\Http\Repositories\AnswerRepository'
         );
         $this->app->bind(
             'App\Http\Interfaces\CommentInterface',
@@ -48,6 +49,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Http\Interfaces\LessonInterface',
             'App\Http\Repositories\LessonRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\QuestionInterface',
+            'App\Http\Repositories\QuestionRepository'
         );
     }
 

@@ -6,7 +6,7 @@
         <div class="col-md-6">
             <select class="form-control select2" id="question_id" name="question_id">
               <option value="">{{ trans('main.select question') }}</option>
-              @foreach ($quest as $q)
+              @foreach ($questions as $q)
                   <option value="{{ $q->id }}" {{ getData($data, 'question_id') || request()->get('q_id') == $q->id ? 'selected' : '' }}>{{ $q->title }}</option>
               @endforeach
             </select>
