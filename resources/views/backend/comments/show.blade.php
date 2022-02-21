@@ -6,11 +6,11 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption">
-                        <span class="caption-subject bold uppercase font-blue">{{$title}}</span>
+                        <span class="caption-subject bold uppercase font-blue">{{$title}} </span>
                     </div>
                     <div class="actions">
-                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('courses.create') }}" data-toggle="tooltip" title="{{trans('main.add')}}  {{trans('main.courses')}}"> <i class="fa fa-plus"></i> </a>
-                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('courses.edit', [$show->id]) }}" data-toggle="tooltip" title="{{ trans('main.edit') }}  {{ trans('main.job') }}"> <i class="fa fa-edit"></i> </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('comments.create') }}" data-toggle="tooltip" title="{{trans('main.add')}}  {{trans('main.comments')}}"> <i class="fa fa-plus"></i> </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('comments.toggle', [$show->id]) }}" data-toggle="tooltip" title="{{ trans('main.toggle') }}  {{ trans('main.job') }}"> <i class="fa fa-toggle"></i> </a>
                         <span data-toggle="tooltip" title="{{ trans('main.delete') }}  {{ trans('main.job') }}">
                             <a data-toggle="modal" data-target="#myModal{{ $show->id }}" class="btn btn-circle btn-icon-only btn-default" href=""> <i class="fa fa-trash"></i> </a>
                         </span>
@@ -27,7 +27,7 @@
                                         {{trans('main.ask-delete')}} {{ $show->title }} !
                                     </div>
                                     <div class="modal-footer">
-                                        {!! Form::open([ 'method' => 'DELETE', 'route' => ['courses.destroy', $show->id] ]) !!}
+                                        {!! Form::open([ 'method' => 'DELETE', 'route' => ['comments.destroy', $show->id] ]) !!}
                                         {!! Form::submit(trans('main.approval'), ['class' => 'btn btn-danger']) !!}
                                         <a class="btn btn-default" data-dismiss="modal">
                                             {{ trans('main.cancel') }}
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('courses.index') }}" data-toggle="tooltip" title="{{trans('main.show-all')}}  {{trans('main.courses')}}"> <i class="fa fa-list"></i> </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('comments.index') }}" data-toggle="tooltip" title="{{trans('main.show-all')}}  {{trans('main.comments')}}"> <i class="fa fa-list"></i> </a>
                         <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#" data-original-title="{{trans('main.full-screen')}}" title="{{trans('main.full-screen')}}"> </a>
                     </div>
                 </div>
@@ -45,48 +45,32 @@
                     <br>
                     <div class="row">
                         <div class="col-md-6">
-                            <strong>{{trans('main.name')}} : </strong>
-                            {{ $show->name }}
+                            <strong>{{trans('main.comment')}} </strong>
+                            {{ $show->comment }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
-                            <strong>{{trans('main.slug')}} : </strong>
-                            {{ $show->slug }}
+                            <strong>{{trans('main.user')}} : (en)</strong>
+                            {{ $show->user->name }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
-                            <strong>{{trans('main.active')}} : </strong>
-                            {{ trans( $show->active) }}
+                            <strong>{{trans('main.is_approved')}}</strong>
+                            @if($show->is_approved)
+                            <span style="padding: 1px 6px;" class="label lable-sm label-success">{{ trans('main.yes') }}</span>
+                            @else
+                            <span style="padding: 1px 6px;" class="label lable-sm label-danger">{{ trans('main.no') }}</span>
+                            @endif
                             <br><hr>
                         </div>
                         <div class="col-md-6">
-                            <strong>{{trans('main.category')}} : </strong>
-                            {{ $show->category->title_en }}
+                            <strong>{{trans('main.resource')}} : (en)</strong>
+                            {{ $show->commentable->title_en }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
-                            <strong>{{trans('main.category')}} : </strong>
-                            {{ $show->category->title_ar }}
-                            <br><hr>
-                        </div>
-                        <div class="col-md-6">
-                            <strong>{{trans('main.description')}} : (en)</strong>
-                            {{ json_decode($show->desc)->en }}
-                            <br><hr>
-                        </div>
-                        <div class="col-md-6">
-                            <strong>{{trans('main.description')}} : (ar)</strong>
-                            {{ json_decode($show->desc)->ar }}
-                            <br><hr>
-                        </div>
-                        <div class="col-md-6">
-                            <strong>{{trans('main.price')}} : </strong>
-                            {{ $show->price }}
-                            <br><hr>
-                        </div>
-                        <div class="col-md-6">
-                            <strong>{{trans('main.image')}} : </strong>
-                            <img style="width: 200px; height: 150px;" src="{{ $show->getFirstMediaUrl() }}" alt="">
+                            <strong>{{trans('main.resource')}} : (ar)</strong>
+                            {{ $show->commentable->title_ar }}
                             <br><hr>
                         </div>
                     </div>

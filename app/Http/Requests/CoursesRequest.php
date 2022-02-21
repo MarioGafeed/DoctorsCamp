@@ -26,9 +26,10 @@ class CoursesRequest extends FormRequest
         $return = [
             'name'     => 'required',
             'slug'     => 'sometimes|nullable',
-            'desc'     => 'required',
+            'desc_ar'  => 'required',
+            'desc_en'  => 'nullable',
             'active'   => 'required|in:0,1',
-            'price'    => 'sometimes|nullable|numeric',
+            'price'    => 'nullable|numeric',
         ];
 
         return $return;
