@@ -7,6 +7,7 @@ use App\Http\Traits\ImageTrait;
 use App\Models\Category;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class ImageRepository implements ImageInterface
 {

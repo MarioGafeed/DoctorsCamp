@@ -55,6 +55,11 @@
                             <br><hr>
                         </div>
                         <div class="col-md-6">
+                            <strong>{{trans('main.active')}} : </strong>
+                            {{ trans( $show->active) }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
                             <strong>{{trans('main.category')}} : </strong>
                             {{ $show->category->title_en }}
                             <br><hr>
@@ -65,13 +70,23 @@
                             <br><hr>
                         </div>
                         <div class="col-md-6">
-                            <strong>{{trans('main.description')}} : </strong>
-                            {{  $show->desc }}
+                            <strong>{{trans('main.description')}} : (en)</strong>
+                            {{ json_decode($show->desc)->en }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.description')}} : (ar)</strong>
+                            {{ json_decode($show->desc)->ar }}
                             <br><hr>
                         </div>
                         <div class="col-md-6">
                             <strong>{{trans('main.price')}} : </strong>
                             {{ $show->price }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.image')}} : </strong>
+                            <img style="width: 200px; height: 150px;" src="{{ $show->getFirstMediaUrl() }}" alt="">
                             <br><hr>
                         </div>
                     </div>
