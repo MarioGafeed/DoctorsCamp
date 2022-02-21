@@ -34,13 +34,16 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Http\Repositories\ImageRepository'
         );
         $this->app->bind(
-            'App\Http\Interfaces\CourseInterface',
-            'App\Http\Repositories\CourseRepository'
+            'App\Http\Interfaces\LessonInterface',
+            'App\Http\Repositories\LessonRepository'
         );
-      
         $this->app->bind(
             'App\Http\Interfaces\CommentInterface',
             'App\Http\Repositories\CommentRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\CourseInterface',
+            'App\Http\Repositories\CourseRepository'
         );
     }
 
