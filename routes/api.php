@@ -13,6 +13,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('logout', 'AuthController@logout');
     Route::apiResource('posts', 'PostsController');
+    Route::apiResource('images', 'ImagesController');
     Route::apiResource('events', 'EventController');
     Route::apiResource('comments', 'CommentController');
     Route::apiResource('categories', 'CategoryController');
