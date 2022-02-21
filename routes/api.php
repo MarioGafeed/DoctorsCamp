@@ -17,6 +17,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
     Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
     Route::apiResource('categories', 'CategoryController');
+    Route::apiResource('questions', 'QuestionController');
+    Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
+    Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
+    Route::apiResource('categories', 'CategoryController');
     Route::apiResource('lessons', 'LessonController'); 
     Route::apiResource('courses', 'CourseController');
     Route::post('/courses/{course}/likes', 'CourseLikeController@store')->name('courses.likes.store');

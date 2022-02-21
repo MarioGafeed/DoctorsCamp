@@ -6,6 +6,7 @@ use App\Authorizable;
 use App\DataTables\QuestionsDataTable;
 use App\Helpers\Helper;
 use App\Http\Requests\QuestionsRequest;
+use App\Http\Interfaces\QuestionInterface;
 use App\Models\Lesson;
 use App\Models\Question;
 use Illuminate\Http\Request;
@@ -14,149 +15,59 @@ use Spatie\Permission\Models\Role;
 class QuestionController extends Controller
 {
     // use Authorizable;
+    private $questionInterface;
 
-    private $viewPath = 'backend.questions';
+    public function __construct(QuestionInterface $questionInterface)
+    {
+        $this->questionInterface = $questionInterface;
+    }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(QuestionsDataTable $dataTable)
     {
-        return $dataTable->render("{$this->viewPath}.index", [
-          'title' => trans('main.show-all').' '.trans('main.questions'),
-      ]);
+      return $this->questionInterface->index($dataTable);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $les = Lesson::all();
-
-        return view("{$this->viewPath}.create", [
-          'title' => trans('main.add').' '.trans('main.questions'),
-          'les' => $les,
-      ]);
+        return $this->questionInterface->create();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(QuestionsRequest $request)
     {
-        // To Make Sure my order doesn't duplicate..
-        $requestAll = $request->all();
-
-        if (Question::where('lesson_id', $request->lesson_id)->where('q_order', $request->q_order)->exists()) {
-            session()->flash('error', trans('main.qordernumber'));
-
-            return redirect()->back();
-        }
-
-        $requestAll = $request->all();
-
-        $quest = Question::create($requestAll);
+        $question = $this->questionInterface->store($request->all());
 
         session()->flash('success', trans('main.added-message'));
 
         return redirect()->route('questions.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $quest = Question::where('id', $id)->with('lesson')->first();
-
-        return view("{$this->viewPath}.show", [
-          'title' => trans('main.show').' '.trans('main.question').' : '.$quest->title,
-          'show' => $quest,
-      ]);
+        return $this->questionInterface->show($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $quest = Question::findOrFail($id);
-        $les = Lesson::all();
-
-        return view("{$this->viewPath}.edit", [
-          'title' => trans('main.edit').' '.trans('main.question').' : '.$quest->name,
-          'edit' => $quest,
-          'les' => $les,
-      ]);
+        return $this->questionInterface->edit($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(QuestionsRequest $request, $id)
     {
-        $quest = Question::find($id);
-
-        if ($quest && Question::where('id', '!=', $id)->where('q_order', $request->q_order)->exists()) {
-            session()->flash('error', trans('main.qordernumber'));
-
-            return redirect()->back();
-        }
-
-        $quest->title = $request->title;
-        $quest->q_order = $request->q_order;
-        $quest->lesson_id = $request->lesson_id;
-
-        $quest->save();
+        $question = $this->questionInterface->update($request->all(), $id);
 
         session()->flash('success', trans('main.updated'));
 
-        return redirect()->route('questions.show', [$quest->id]);
+        return redirect()->route('questions.show', [$question->id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @param  bool  $redirect
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id, $redirect = true)
+    public function destroy($id)
     {
-        $quest = Question::findOrFail($id);
-        $quest->delete();
+      $question = $this->questionInterface->destroy($id);
+      session()->flash('success', trans('main.deleted-message'));
 
-        if ($redirect) {
-            session()->flash('success', trans('main.deleted-message'));
-
-            return redirect()->route('questions.index');
-        }
+      return redirect()->route('questions.index');
     }
 
-    /**
-     * Remove the multible resource from storage.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Http\Response
-     */
     public function multi_delete(Request $request)
     {
         if (count($request->selected_data)) {
