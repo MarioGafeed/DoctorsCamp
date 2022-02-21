@@ -11,16 +11,11 @@ use Spatie\Tags\HasTags;
 
 class Post extends Model implements HasMedia
 {
-    use InteractsWithMedia, HasTags,HasComments, Likeable;
+    use InteractsWithMedia, HasTags, HasComments, Likeable;
 
     protected $fillable = [
         'title_en', 'title_ar', 'keyword', 'content', 'desc', 'active', 'user_id', 'category_id', 'youtubeURL', 'type',
     ];
-
-    // public function categoryable()
-    // {
-    //     return $this->morphTo('App\Models\Category', 'categoryable');
-    // }
 
     public function category()
     {
@@ -30,11 +25,5 @@ class Post extends Model implements HasMedia
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
-    }
-
-    // public function title($lang = null)
-  // {
-  //   $lang = $lang ?? App::getLocale();
-  //   return json_decode($this->title)->$lang;
-  // }
+    }  
 }

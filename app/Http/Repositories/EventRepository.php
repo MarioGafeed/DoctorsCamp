@@ -6,6 +6,7 @@ use App\Http\Interfaces\EventInterface;
 use App\Http\Traits\EventTrait;
 use App\Models\Country;
 use App\Models\Event;
+use Illuminate\Http\UploadedFile;
 
 class EventRepository implements EventInterface
 {
