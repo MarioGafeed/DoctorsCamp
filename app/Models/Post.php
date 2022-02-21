@@ -25,11 +25,5 @@ class Post extends Model implements HasMedia
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
-    }
-
-    // public function title($lang = null)
-  // {
-  //   $lang = $lang ?? App::getLocale();
-  //   return json_decode($this->title)->$lang;
-  // }
+    }  
 }
