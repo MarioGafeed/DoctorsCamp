@@ -24,7 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Http\Interfaces\PostInterface',
             'App\Http\Repositories\PostRepository'
-        );        
+        );
         $this->app->bind(
             'App\Http\Interfaces\EventInterface',
             'App\Http\Repositories\EventRepository'
@@ -32,6 +32,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Http\Interfaces\ImageInterface',
             'App\Http\Repositories\ImageRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\CommentInterface',
+            'App\Http\Repositories\CommentRepository'
         );
     }
 

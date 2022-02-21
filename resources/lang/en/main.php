@@ -61,6 +61,7 @@ return [
     'ask-delete'          => 'Are you sure that you want to delete ',
     'ask-assign'          => 'Are you sure that you want to assign ',
     'approval'            =>'Accept',
+    'is_approved'         =>'Was this comment approved?',
     'cancel'              =>'Cancel',
     'deleted-message'     => 'Deleted successfully',
     'record'              => 'Records',
@@ -795,6 +796,8 @@ return [
     'eventTitle'                   => 'Event Title',
     'select country'               => 'Select Country',
     'icon'                         => 'Mobile Icon',
+    'toggle'                       => 'Toggle',
+    'resource'                     => 'Resource',
 
 
 
