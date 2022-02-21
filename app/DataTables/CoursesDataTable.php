@@ -9,12 +9,6 @@ class CoursesDataTable extends DataTable
 {
     use BuilderParameters;
 
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
     public function dataTable($query)
     {
         return datatables($query)
@@ -22,15 +16,20 @@ class CoursesDataTable extends DataTable
        ->addColumn('show', 'backend.courses.buttons.show')
        ->addColumn('edit', 'backend.courses.buttons.edit')
        ->addColumn('delete', 'backend.courses.buttons.delete')
-       ->rawColumns(['checkbox', 'show', 'edit', 'delete']);
+       ->addColumn('active', function ($model) {
+           if ($model->active == '1') {
+               return '
+                   <span style="padding: 1px 6px;" class="label lable-sm label-success">'.trans('main.yes').'</span>
+               ';
+           } else {
+               return '
+                   <span style="padding: 1px 6px;" class="label lable-sm label-danger">'.trans('main.no').'</span>
+               ';
+           }
+       })
+       ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'active']);
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\category $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query()
     {
         $query = Course::query()->select('courses.*')->with('category');
@@ -38,11 +37,6 @@ class CoursesDataTable extends DataTable
         return $this->applyScopes($query);
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html()
     {
         $html = $this->builder()
@@ -53,11 +47,6 @@ class CoursesDataTable extends DataTable
         return $html;
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns()
     {
         return [
@@ -97,14 +86,6 @@ class CoursesDataTable extends DataTable
                  'width'          => '300px',
              ],
              [
-                 'name' => 'courses.desc',
-                 'data'    => 'desc',
-                 'title'   => trans('main.description'),
-                 'searchable' => true,
-                 'orderable'  => true,
-                 'width'          => '200px',
-             ],
-             [
                  'name' => 'courses.price',
                  'data'    => 'price',
                  'title'   => trans('main.price'),
@@ -112,7 +93,14 @@ class CoursesDataTable extends DataTable
                  'orderable'  => true,
                  'width'          => '50px',
              ],
-
+             [
+                 'name' => 'courses.active',
+                 'data'    => 'active',
+                 'title'   => trans('main.active'),
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'          => '50px',
+             ],
             [
                 'name' => 'show',
                 'data' => 'show',
