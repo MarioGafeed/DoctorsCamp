@@ -48,7 +48,7 @@ class PostRepository implements PostInterface
     }
 
     public function store(array $data)
-    {
+    {      
         $data['desc'] = json_encode([
             'en' => $data['desc_en'],
             'ar' => $data['desc_ar'],
@@ -103,10 +103,7 @@ class PostRepository implements PostInterface
         $pos = $this->getPostFirst($id);
         $cats = $this->getAllcategory();
         $tags = $pos->tags->pluck('name')->implode(', ');
-
-        $pos['title_en'] = $pos->title_en;
-        $pos['title_ar'] = $pos->title_ar;
-
+        
         $pos['desc_en'] = json_decode($pos->desc)->en;
         $pos['desc_ar'] = json_decode($pos->desc)->ar;
         $pos['content_en'] = json_decode($pos->content)->en;
