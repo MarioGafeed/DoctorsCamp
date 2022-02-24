@@ -798,6 +798,7 @@ return [
     'icon'                         => 'Mobile Icon',
     'toggle'                       => 'Toggle',
     'resource'                     => 'Resource',
+    'libraries'                    => 'Libraries',
 
 
 

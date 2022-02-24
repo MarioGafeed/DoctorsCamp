@@ -84,7 +84,7 @@
 
             <!-- Add Post  (Mario Added) -->
             <li class="heading">
-                <h3 class="uppercase">{{ trans('main.posts') }}</h3>
+                <h3 class="uppercase">{{ trans('main.libraries') }}</h3>
             </li>
 
             <li class="nav-item  {{ active_route('posts.*') }}">
@@ -94,18 +94,6 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item {{ active_route('comments.create') }}">
-                        <a href="{{ route('comments.create') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.add') }} {{ trans('main.comment') }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ active_route('comments.index') }}">
-                        <a href="{{ route('comments.index') }}" class="nav-link ">
-                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.comments') }}</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="sub-menu">
                     <li class="nav-item {{ active_route('posts.create') }}">
                         <a href="{{ route('posts.create') }}" class="nav-link ">
                             <span class="title">{{ trans('main.add') }} {{ trans('main.post') }}</span>
@@ -114,6 +102,18 @@
                     <li class="nav-item {{ active_route('posts.index') }}">
                         <a href="{{ route('posts.index') }}" class="nav-link ">
                             <span class="title">{{ trans('main.show-all') }} {{ trans('main.posts') }}</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('comments.create') }}">
+                        <a href="{{ route('comments.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.comment') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('comments.index') }}">
+                        <a href="{{ route('comments.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.comments') }}</span>
                         </a>
                     </li>
                 </ul>
