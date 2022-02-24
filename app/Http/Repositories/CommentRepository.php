@@ -22,11 +22,6 @@ class CommentRepository implements CommentInterface
         $this->postModel = $post;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($dataTable)
     {
         return $dataTable->render("{$this->viewPath}.index", [
@@ -53,12 +48,6 @@ class CommentRepository implements CommentInterface
         return $comment;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $comment = $this->getById($id);
@@ -68,7 +57,7 @@ class CommentRepository implements CommentInterface
           'show' => $comment,
       ]);
     }
-    
+
     public function destroy($id)
     {
         $redirect = true;
@@ -80,12 +69,6 @@ class CommentRepository implements CommentInterface
         }
     }
 
-    /**
-     * Remove the multible resource from storage.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Http\Response
-     */
     public function multi_delete($request)
     {
         if (count($request->selected_data)) {
