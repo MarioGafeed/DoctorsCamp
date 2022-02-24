@@ -18,7 +18,9 @@ class CommentResource extends JsonResource
           'id'        => $this->id,
           'comment'   => $this->comment,
           'user_name' => $this->user->name,
-          'user_url' => route('users.show', $this->user),
+          'user_id'   => $this->user_id,
+          'post_id'   => $this->post_id,
+          'user_url'  => route('users.show', $this->user),
         ];
     }
 }

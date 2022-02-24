@@ -10,6 +10,7 @@ use App\Models\Country;
 use Hash;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Http\UploadedFile;
 
 class UserRepository implements UserInterface
 {
@@ -24,11 +25,6 @@ class UserRepository implements UserInterface
         $this->countryModel = $countryModel;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($dataTable)
     {
         return $dataTable->render("{$this->viewPath}.index", [
@@ -54,10 +50,10 @@ class UserRepository implements UserInterface
 
         if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
             $user->addMedia($data['image'])->toMediaCollection();
-        }      
+        }
 
-        $roles = $data['roles'] ?? []; 
-        
+        $roles = $data['roles'] ?? [];
+
         if (isset($roles)) {
             foreach ($roles as $role) {
                 $role_r = Role::where('id', '=', $role)->firstOrFail();
@@ -136,7 +132,7 @@ class UserRepository implements UserInterface
             return $user;
         }
     }
-   
+
     public function multi_delete($request)
     {
         if (count($request->selected_data)) {

@@ -21,11 +21,6 @@ class CategoryRepository implements CategoryInterface
         $this->categoryModel = $cat;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($dataTable)
     {
         return $dataTable->render("{$this->viewPath}.index", [
@@ -64,18 +59,11 @@ class CategoryRepository implements CategoryInterface
         }
 
         return $cat;
-
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $cat = $this->getById($id);    
+        $cat = $this->getById($id);
 
         return view("{$this->viewPath}.show", [
           'title' => trans('main.show').' '.trans('main.category').' : '.$cat->title_en.' : '.$cat->title_ar,
@@ -85,7 +73,7 @@ class CategoryRepository implements CategoryInterface
 
     public function edit($id)
     {
-        $cat = $this->getById($id);        
+        $cat = $this->getById($id);
         $cat['desc_en'] = json_decode($cat->desc)->en;
         $cat['desc_ar'] = json_decode($cat->desc)->ar;
         $cat['summary_en'] = json_decode($cat->summary)->en;
@@ -116,9 +104,9 @@ class CategoryRepository implements CategoryInterface
             $cat->addMedia($data['image'])->toMediaCollection();
         }
 
-        if ($request->hasFile('icon')) {
-            $cat->icon = Helper::UploadUpdate($cat->icon ?? "", 'categories', $request->file('icon'), 'checkImages');
-        }
+        // if (isset($data['icon'])) {
+        //     $cat->icon = Helper::UploadUpdate($cat->icon ?? "", 'categories', isset($data['icon']), 'checkImages');
+        // }
 
         $cat->save();
 
@@ -140,12 +128,6 @@ class CategoryRepository implements CategoryInterface
         }
     }
 
-    /**
-     * Remove the multible resource from storage.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Http\Response
-     */
     public function multi_delete($request)
     {
         if (count($request->selected_data)) {

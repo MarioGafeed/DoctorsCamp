@@ -3,22 +3,11 @@
 use App\Models\User;
 use Illuminate\Support\Collection;
 
-/**
- * @param  string $url 'url into admin pages'
- * @return string $url
- */
 function aurl(string $url)
 {
     return url('/admin'.$url);
 }
 
-/**
- * the image dynamic function.
- * @param string $dir           'image directory'
- * @param $image
- * @param $checkFunction
- * @return string
- */
 function UploadImages(string $dir, $image, $checkFunction = null) : string
 {
     $saveImage = '';
@@ -41,7 +30,7 @@ function UploadImages(string $dir, $image, $checkFunction = null) : string
         $fileName = rand(1, 1000000).'_'.date('y-m-d-h-i-s').'_'.$sha1.'.'.$extension; // create new name for the image
 
         if (! is_null($checkFunction)) {
-            if (! $checkFunction($name)) {              
+            if (! $checkFunction($name)) {
                 return false;
             }
         }
@@ -57,11 +46,6 @@ function UploadImages(string $dir, $image, $checkFunction = null) : string
     return $saveImage;
 }
 
-/**
- * Return The Image With Path.
- * @param string $image
- * @return string $image
- */
 function ShowImage($image) : string
 {
     if (! is_null($image) && ! empty($image) && File::exists(public_path('uploads').'/'.$image)) {
@@ -71,11 +55,6 @@ function ShowImage($image) : string
     return 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image';
 }
 
-/**
- * userCan description.
- * @param  string $permission
- * @return bool
- */
 function userCan(string $permission) : bool
 {
     if (auth()->user()->hasRole(User::SuperAdminRole)) {
@@ -96,33 +75,16 @@ function userCan(string $permission) : bool
     return in_array($permission, $permissions[$id]);
 }
 
-/**
- * getData.
- *
- * gets data from old() and $edit
- */
 function getData(Collection $data, $attr)
 {
     return $data->has($attr) ? $data[$attr] : null;
 }
 
- /**
-  * Check values.
-  *
-  * Checks The Empty And Null Vals
-  */
  function checkValue($val)
  {
      return ! empty($val) && ! is_null($val);
  }
 
- /**
-  * panic.
-  *
-  * throws an exception with the specified message
-  *
-  * @return Exception
-  */
  function panic($msg)
  {
      throw new \Exception($msg);
