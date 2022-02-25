@@ -23,6 +23,7 @@ class EventResource extends JsonResource
           'user_name'  => $this->user->name,
           'start_date' => $this->start_date,
           'end_date'   => $this->end_date,
+          'likes_count'=> $this->likes()->count(),
           'image'      => $this->getFirstMediaUrl(),
         ];
     }

@@ -27,6 +27,7 @@ class PostResource extends JsonResource
             'category' => new CategoryResource($this->category),
             'youtubeURL' => $this->youtubeURL,
             'image' => $this->getFirstMediaUrl(),
+            'likes_count' => $this->likes()->count(),
             'comments_count' => $this->comments()->count(),
             'comments' => $this->comments()->approved()->get(),
             'created_at' => (string) $this->created_at,
