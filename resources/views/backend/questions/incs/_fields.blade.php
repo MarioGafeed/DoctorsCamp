@@ -52,4 +52,64 @@
             @endif
         </div>
     </div>
+
+    <div class="form-group{{ $errors->has('op1') ? ' has-error' : '' }}">
+        <label class="col-md-3 control-label">{{ trans('main.op1') }} <span class="required"></span> </label>
+        <div class="col-md-8">
+            <input type="text" name="op1" value="{{ getData($data, 'op1') }}" class="form-control" placeholder="{{ trans('main.op1') }}" required>
+            @if ($errors->has('op1'))
+                <span class="help-block">
+                    <strong class="help-block">{{ $errors->first('op1') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('op2') ? ' has-error' : '' }}">
+        <label class="col-md-3 control-label">{{ trans('main.op2') }} <span class="required"></span> </label>
+        <div class="col-md-8">
+            <input type="text" name="op2" value="{{ getData($data, 'op2') }}" class="form-control" placeholder="{{ trans('main.op2') }}" required>
+            @if ($errors->has('op2'))
+                <span class="help-block">
+                    <strong class="help-block">{{ $errors->first('op2') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('op3') ? ' has-error' : '' }}">
+        <label class="col-md-3 control-label">{{ trans('main.op3') }} <span class="required"></span> </label>
+        <div class="col-md-8">
+            <input type="text" name="op3" value="{{ getData($data, 'op3') }}" class="form-control" placeholder="{{ trans('main.op3') }}" required>
+            @if ($errors->has('op3'))
+                <span class="help-block">
+                    <strong class="help-block">{{ $errors->first('op3') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('op4') ? ' has-error' : '' }}">
+        <label class="col-md-3 control-label">{{ trans('main.op4') }} <span class="required"></span> </label>
+        <div class="col-md-8">
+            <input type="text" name="op4" value="{{ getData($data, 'op4') }}" class="form-control" placeholder="{{ trans('main.op4') }}" required>
+            @if ($errors->has('op4'))
+                <span class="help-block">
+                    <strong class="help-block">{{ $errors->first('op4') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group{{ $errors->has('right_ans') ? ' has-error' : '' }}">
+        <label class="col-md-3 control-label">{{ trans('main.right_ans') }} <span class="required"></span> </label>
+        <div class="col-md-8">
+            <input type="number" name="right_ans" value="{{ getData($data, 'right_ans') }}" class="form-control" placeholder="{{ trans('main.right_ans') }}" required min="1" max="4">
+            @if ($errors->has('right_ans'))
+                <span class="help-block">
+                    <strong class="help-block">{{ $errors->first('right_ans') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
 </div>

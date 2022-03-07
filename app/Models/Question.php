@@ -13,16 +13,11 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-      'title', 'q_order', 'lesson_id', 'desc',
+      'title', 'q_order', 'lesson_id', 'desc', 'op1', 'op2', 'op3', 'op4', 'right_ans'
   ];
 
     public function lesson()
     {
         return $this->belongsTo('App\Models\Lesson', 'lesson_id');
-    }
-
-    public function answers()
-    {
-        return $this->hasMany('App\Models\Answer', 'question_id');
     }
 }

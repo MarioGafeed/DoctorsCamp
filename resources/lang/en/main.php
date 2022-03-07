@@ -348,7 +348,8 @@ return [
     'bottom'              => 'Bottom',
     'bottom-right'        => 'Bottom Right',
     'arabic'              => 'Arabic',
-    'E'             => 'E',
+    'E'                   => 'E',
+    'e_learning'          => 'E Learning',
     'agent_calls'         => 'Agent Calls',
     'agent_meetings'      => 'Agent Meetings',
     'num_calls'           => 'Calls Number',
@@ -799,6 +800,11 @@ return [
     'toggle'                       => 'Toggle',
     'resource'                     => 'Resource',
     'libraries'                    => 'Libraries',
+    'op1'                          => 'Option 1',
+    'op2'                          => 'Option 2',
+    'op3'                          => 'Option 3',
+    'op4'                          => 'Option 4',
+    'right_ans'                    => 'Right Answer',
 
 
 

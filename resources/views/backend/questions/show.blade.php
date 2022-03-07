@@ -59,29 +59,30 @@
                             {{ trans( $show->q_order) }}
                             <br><hr>
                         </div>
-                        <div class="col-md-12">
-                            @if ($show->answers->count())
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>{{ trans('main.answer') }}</th>
-                                            <th>{{ trans('main.status') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($show->answers as $a)
-                                            <tr>
-                                                <td>{{ $a->answer }}</td>
-                                                <td>{{ $a->status }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            @else
-                                <div class="alert alert-info">
-                                    {{ trans('main.no_answers') }} <a href="{{ route('answers.create') }}?q_id={{ $show->id }}">{{ trans('main.add') }}</a>
-                                </div>
-                            @endif
+                        <div class="col-md-6">
+                            <strong>{{trans('main.op1')}} : </strong>
+                            {{ trans( $show->op1) }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.op2')}} : </strong>
+                            {{ trans( $show->op2) }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.op3')}} : </strong>
+                            {{ trans( $show->op3) }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.op4')}} : </strong>
+                            {{ trans( $show->op4) }}
+                            <br><hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>{{trans('main.right_ans')}} : </strong>
+                            {{ trans( $show->right_ans) }}
+                            <br><hr>
                         </div>
                     </div>
                 </div>

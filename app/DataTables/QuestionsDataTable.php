@@ -9,12 +9,6 @@ class QuestionsDataTable extends DataTable
 {
     use BuilderParameters;
 
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
     public function dataTable($query)
     {
         return datatables($query)
@@ -28,12 +22,6 @@ class QuestionsDataTable extends DataTable
         ->rawColumns(['checkbox', 'show', 'edit', 'delete']);
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\Question $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query()
     {
         $query = Question::query()->with('lesson')->select('questions.*');
@@ -41,11 +29,6 @@ class QuestionsDataTable extends DataTable
         return $this->applyScopes($query);
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html()
     {
         $html = $this->builder()
@@ -56,11 +39,6 @@ class QuestionsDataTable extends DataTable
         return $html;
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns()
     {
         return [
@@ -83,14 +61,21 @@ class QuestionsDataTable extends DataTable
                  'orderable'  => true,
                  'width'          => '100px',
              ],
-
+             [
+                 'name' => 'lesson.title',
+                 'data'    => 'lesson.title',
+                 'title'   => trans('main.lesson'),
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'          => '100px',
+             ],
              [
                  'name' => 'questions.q_order',
                  'data'    => 'q_order',
                  'title'   => trans('main.q_order'),
                  'searchable' => true,
                  'orderable'  => true,
-                 'width'          => '100px',
+                 'width'          => '25px',
              ],
              [
                  'name' => 'questions.desc',
@@ -100,14 +85,45 @@ class QuestionsDataTable extends DataTable
                  'orderable'  => true,
                  'width'          => '100px',
              ],
-
              [
-                 'name' => 'lesson.title',
-                 'data'    => 'lesson.title',
-                 'title'   => trans('main.lesson'),
+                 'name' => 'questions.op1',
+                 'data'    => 'op1',
+                 'title'   => trans('main.op1'),
                  'searchable' => true,
                  'orderable'  => true,
-                 'width'          => '100px',
+                 'width'          => '25px',
+             ],
+             [
+                 'name' => 'questions.op2',
+                 'data'    => 'op2',
+                 'title'   => trans('main.op2'),
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'          => '25px',
+             ],
+             [
+                 'name' => 'questions.op3',
+                 'data'    => 'op3',
+                 'title'   => trans('main.op3'),
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'          => '25px',
+             ],
+             [
+                 'name' => 'questions.op4',
+                 'data'    => 'op4',
+                 'title'   => trans('main.op4'),
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'          => '25px',
+             ],
+             [
+                 'name' => 'questions.right_ans',
+                 'data'    => 'right_ans',
+                 'title'   => trans('main.right_ans'),
+                 'searchable' => true,
+                 'orderable'  => true,
+                 'width'          => '25px',
              ],
              [
                  'name' => 'show',

@@ -19,6 +19,11 @@ class CreateQuestionsTable extends Migration
             $table->integer('q_order');
             $table->longText('desc');
             $table->foreignId('lesson_id')->constrained('lessons')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('op1');
+            $table->string('op2');
+            $table->string('op3');
+            $table->string('op4');
+            $table->tinyInteger('right_ans');
             $table->timestamps();
         });
     }

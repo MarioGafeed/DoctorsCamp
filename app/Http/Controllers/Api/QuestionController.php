@@ -16,16 +16,18 @@ class QuestionController extends Controller
   public function __construct(private QuestionInterface $questionInterface)
   {
   }
+  // 
+  // public function index()
+  // {
+  //     $questions = Question::with('lesson', 'answers')->(10);
+  //
+  //     return QuestionResource::collection($questions);
+  // }
 
-  public function index()
+  public function show($id)
   {
-      $questions = Question::with('lesson', 'answers')->paginate(10);
+      $question = Question::with('answers')->findOrFail($id);
 
-      return QuestionResource::collection($questions);
-  }
-
-  public function show(Question $question)
-  {
       return new QuestionResource($question);
   }
 }
