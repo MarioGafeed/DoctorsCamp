@@ -15,9 +15,7 @@ class QuestionResource extends JsonResource
         'title'        => $this->title,
         'description'  => $this->desc,
         'lesson_id'    => $this->lesson_id,
-        'lesson'       => $this->lesson->title,
-        // 'answers'      => AnswersResource::collection($this->whenLoaded('answers')),
-        'answers'      => AnswersResource::collection($this->answers),
+        'lesson'       => $this->lesson->title,              
       ];
     }
 }

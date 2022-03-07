@@ -20,7 +20,7 @@ class CreateLessonsTable extends Migration
           $table->longtext('vcontent');
           $table->integer('myorder');
           $table->foreignId('course_id')->constrained('courses')->onUpdate('cascade')->onDelete('cascade');
-          $table->boolean('active')->default(true);
+          $table->boolean('active')->default(false);
           $table->timestamps();
         });
     }

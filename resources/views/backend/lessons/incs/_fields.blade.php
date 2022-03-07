@@ -35,8 +35,8 @@
         <div class="col-md-6">
             <select class="form-control select2" id="active" name="active">
                 <option value="">{{ trans('main.status_choose') }}</option>
-                <option value="1" {{ getData($data, 'active') == '1' ? ' selected' : '' }}>{{trans('main.active')}}</option>
                 <option value="0" {{ getData($data, 'active') == '0' ? ' selected' : '' }}>{{trans('main.inactive')}}</option>
+                <option value="1" {{ getData($data, 'active') == '1' ? ' selected' : '' }}>{{trans('main.active')}}</option>
             </select>
             @if ($errors->has('active'))
                 <span class="help-block">

@@ -90,6 +90,11 @@ class QuestionRepository implements QuestionInterface
       $question->desc = $data['desc'];
       $question->q_order = $data['q_order'];
       $question->lesson_id = $data['lesson_id'];
+      $question->op1 = $data['op1'];
+      $question->op2 = $data['op2'];
+      $question->op3 = $data['op3'];
+      $question->op4 = $data['op1'];
+      $question->right_ans = $data['right_ans'];
 
       $question->save();
 
