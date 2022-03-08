@@ -31,13 +31,31 @@ class LessonController extends Controller
 
   public function show(Lesson $lesson, Request $request)
   {
-    if (!is_null($request->user()->last_lesson) && $lesson = Lesson::find($request->user()->last_lesson)) {
-       return new LessonResource($lesson);
-    }else {
+    $lessonId = Lesson::select('id')->where('myorder', ($lesson->myorder)-1)->where('course_id', $lesson->course_id)->first();
+    // dd($request->user()->lessons->contains(($lesson->id)-1) );
+// dd($request->user()->lessons[($lesson->myorder)-1]->pivot->status);
+    if (! $request->user()->lessons->contains($lessonId) && ! is_null($lessonId) ) {
       return response()->json([
-        'message' => "Plz yous should finish the prev lesson"
+        'message' => "Plz you should finish the prev lesson"
       ]);
+    }else {
+      return new LessonResource($lesson);
     }
+
+//  $prevLessonOrder = ($lesson->myorder)-1;
+// $prevLesson  = Lesson::where('myorder', $prevLessonOrder)->where('course_id', $lesson->course_id)->first();
+//  dd($prevLesson->pivot->status);
+//     dd($lesson->myorder);
+//     dd($request->user()->lessons[$lesson-1]->myorder);
+//
+//
+//     if (!is_null($request->user()->last_lesson) && $lesson = Lesson::find($request->user()->last_lesson)) {
+//        return new LessonResource($lesson);
+//     }else {
+//       return response()->json([
+//         'message' => "Plz you should finish the prev lesson"
+//       ]);
+//     }
   }
 
   public function showQuestion($id)
@@ -49,7 +67,14 @@ class LessonController extends Controller
 
   public function startQuiz($lessonId, Request $request)
   {
-      $request->user()->lessons()->attach($lessonId);
+      if (! $request->user()->lessons->contains($lessonId)) {
+        $request->user()->lessons()->attach($lessonId);
+      }
+      else {
+        $request->user()->lessons()->updateExistingPivot($lessonId, [
+          'status' => 'closed',
+        ]);
+      }
 
       return response()->json([
         'message' => "You start Quiz"
@@ -103,19 +128,14 @@ class LessonController extends Controller
      $user->lessons()->updateExistingPivot($lessonId, [
        'score'            => $score,
        'quizz_time'       => $time_mins,
-       'status'           => 'closed'
+       'status'           => 'closed',
      ]);
-     // if ($score == 100) {
-     //   // get next lesson id
-     //   dd(Lesson);
-     //        $next = Lesson::where('status', 'active')->where('course_id',  $request->user()->courses()->course_id)->where('myorder', '>', $lesson->myorder)->first();
-     //
-     //        if ($next) {
-     //            return new LessonResource($next);
-     //        }
-     //   // $user->last_lesson = $lesson->id;
-     //   // $user->save();
-     // }
+     if($score == 100)
+     {
+       $user->lessons()->updateExistingPivot($lessonId, [
+         'status'              => 'opened',
+       ]);
+     }    
      return response()->json([
        'message' => "You submitted exam successfully your score is: $score%"
      ]);

@@ -18,6 +18,7 @@ class CreateUserProgressTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('lesson_id')->constrained();
             $table->foreignId('course_id')->constrained();
+            $table->float('progress')->constrained();
             $table->timestamps();
         });
     }

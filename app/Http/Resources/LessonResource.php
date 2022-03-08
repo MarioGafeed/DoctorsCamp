@@ -15,7 +15,7 @@ class LessonResource extends JsonResource
           'active'       => $this->active,
           'course_id'    => $this->course_id,
           'course'       => $this->course->name,
-          'question'     => $this->questions()->select('id','title')->get(),          
+          'question'     => $this->questions()->select('id','title','desc','op1','op2','op3','op4')->get(),          
           'vcontent'     => $this->vcontent,
           'updated_at'   => (string) $this->updated_at,
       ];
