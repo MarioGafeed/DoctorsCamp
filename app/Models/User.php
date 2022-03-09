@@ -55,7 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function courses()
     {
         return $this->belongsToMany(Course::class)
-        ->withPivot('score', 'quizz_time', 'status')
+        ->withPivot('score',  'active')
         ->withTimestamps();
     }
 

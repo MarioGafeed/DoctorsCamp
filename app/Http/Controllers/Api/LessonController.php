@@ -112,11 +112,10 @@ class LessonController extends Controller
 
      $time_mins = $submitTime->diffInMinutes($starttime);
 
-
      if ($time_mins > $pivotRow->duration_mins) {
        $score = 0;
      }
-     // Update Pivot row
+     // Update lesson_user Pivot row
      $user->lessons()->updateExistingPivot($lesson->id, [
        'score'            => $score,
        'quizz_time'       => $time_mins,
@@ -124,18 +123,32 @@ class LessonController extends Controller
      ]);
      if($score == 100)
      {
+       if (! $request->user()->courses->contains($lesson->course_id)) {
+         $request->user()->courses()->attach($lesson->course_id);
+       }
        $user->lessons()->updateExistingPivot($lesson->id, [
-         'status'              => 'opened',
+         'status'              => 'closed',
        ]);
-     }
+
      $course = Course::select('id','name')->withCount('lessons')->findOrFail($lesson->course->id);
 
      $userCourseProgress = round(( ($request->user()->lessons()->where('course_id', $course->id)->where('score', 100)->count() ) / ($course->lessons()->count()) ) * 100 ,2);
 
      $lessonCourseName = $lesson->course->name;
 
+     // Update Course_user Pivot row
+     $user->courses()->updateExistingPivot($lesson->course_id, [
+       'score'            => $userCourseProgress,
+       'active'           => '1',
+      ]);
+
      return response()->json([
        'message' => "You submitted Quiz successfully your score is: $score%, Congratulation your progress in course: $lessonCourseName is: $userCourseProgress"
      ]);
+   }else {
+     return response()->json([
+       'message' => "You submitted Quiz successfully your score is: $score%"
+     ]);
+   }
   }
 }
