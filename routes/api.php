@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('questions', 'QuestionController');
     Route::get('lesson/showquestion/{id}', 'LessonController@showQuestion');
     Route::post('lesson/startquiz/{id}', 'LessonController@startQuiz');
-    Route::post('lesson/submitquiz/{id}', 'LessonController@submitQuiz');
+    Route::post('lesson/submitquiz/{lesson}', 'LessonController@submitQuiz');
     Route::apiResource('courses', 'CourseController');
     Route::post('/courses/{course}/likes', 'CourseLikeController@store')->name('courses.likes.store');
     Route::delete('/courses/{course}/likes', 'CourseLikeController@destroy')->name('courses.likes.destroy');

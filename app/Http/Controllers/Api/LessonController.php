@@ -9,6 +9,7 @@ use App\Http\Interfaces\LessonInterface;
 use App\Http\Requests\LessonsRequest;
 use App\Http\Resources\LessonResource;
 use App\Models\Lesson;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -32,8 +33,7 @@ class LessonController extends Controller
   public function show(Lesson $lesson, Request $request)
   {
     $lessonId = Lesson::select('id')->where('myorder', ($lesson->myorder)-1)->where('course_id', $lesson->course_id)->first();
-    // dd($request->user()->lessons->contains(($lesson->id)-1) );
-// dd($request->user()->lessons[($lesson->myorder)-1]->pivot->status);
+
     if (! $request->user()->lessons->contains($lessonId) && ! is_null($lessonId) ) {
       return response()->json([
         'message' => "Plz you should finish the prev lesson"
@@ -41,21 +41,6 @@ class LessonController extends Controller
     }else {
       return new LessonResource($lesson);
     }
-
-//  $prevLessonOrder = ($lesson->myorder)-1;
-// $prevLesson  = Lesson::where('myorder', $prevLessonOrder)->where('course_id', $lesson->course_id)->first();
-//  dd($prevLesson->pivot->status);
-//     dd($lesson->myorder);
-//     dd($request->user()->lessons[$lesson-1]->myorder);
-//
-//
-//     if (!is_null($request->user()->last_lesson) && $lesson = Lesson::find($request->user()->last_lesson)) {
-//        return new LessonResource($lesson);
-//     }else {
-//       return response()->json([
-//         'message' => "Plz you should finish the prev lesson"
-//       ]);
-//     }
   }
 
   public function showQuestion($id)
@@ -81,8 +66,15 @@ class LessonController extends Controller
       ]);
   }
 
-  public function submitQuiz($lessonId, Request $request)
+  public function submitQuiz(Lesson $lesson, Request $request)
   {
+    // $courses = Course::select('id', 'name')->withCount('lessons')->get();
+    // foreach ($courses as $course) {
+    //   $userProgress = ( ($request->user()->lessons()->where('course_id', $course->id)->where('score', 100)->count() ) / ($course->lessons()->count()) ) * 100;
+    //
+    //   dd(round($userProgress,2));
+    // }
+
     $validator = Validator::make($request->all(), [
       'answers'   => 'required|array',
       'answers.*' => 'required|in:1,2,3,4',
@@ -92,7 +84,7 @@ class LessonController extends Controller
      }
      // Calculate Score..
      $points = 0;
-     $lesson = Lesson::findOrFail($lessonId);
+     // $lesson = Lesson::findOrFail($lesson);
      $totalQcount = $lesson->questions->count();
 
      foreach ($lesson->questions as $question) {
@@ -109,7 +101,7 @@ class LessonController extends Controller
 
      // Calculate Time
      $user = $request->user();
-     $pivotRow = $user->lessons()->where('lesson_id', $lessonId)->first();
+     $pivotRow = $user->lessons()->where('lesson_id', $lesson->id)->first();
      if ($pivotRow->pivot->updated_at) {
        $starttime =  $pivotRow->pivot->updated_at;
      }
@@ -125,19 +117,25 @@ class LessonController extends Controller
        $score = 0;
      }
      // Update Pivot row
-     $user->lessons()->updateExistingPivot($lessonId, [
+     $user->lessons()->updateExistingPivot($lesson->id, [
        'score'            => $score,
        'quizz_time'       => $time_mins,
        'status'           => 'closed',
      ]);
      if($score == 100)
      {
-       $user->lessons()->updateExistingPivot($lessonId, [
+       $user->lessons()->updateExistingPivot($lesson->id, [
          'status'              => 'opened',
        ]);
-     }    
+     }
+     $course = Course::select('id','name')->withCount('lessons')->findOrFail($lesson->course->id);
+
+     $userCourseProgress = round(( ($request->user()->lessons()->where('course_id', $course->id)->where('score', 100)->count() ) / ($course->lessons()->count()) ) * 100 ,2);
+
+     $lessonCourseName = $lesson->course->name;
+
      return response()->json([
-       'message' => "You submitted exam successfully your score is: $score%"
+       'message' => "You submitted Quiz successfully your score is: $score%, Congratulation your progress in course: $lessonCourseName is: $userCourseProgress"
      ]);
   }
 }

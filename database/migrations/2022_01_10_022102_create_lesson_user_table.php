@@ -17,6 +17,7 @@ class CreateLessonUserTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('lesson_id')->constrained();
+            // $table->foreignId('course_id')->constrained();
             $table->float('score', 5, 2)->nullable(); // 5 Digits and 2 right on sign
             $table->smallInteger('quizz_time')->nullable();
             $table->enum('status', ['opened', 'closed'])->default('closed');

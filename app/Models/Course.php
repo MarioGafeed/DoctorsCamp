@@ -27,8 +27,8 @@ class Course extends Model implements HasMedia
     public function users()
     {
       return $this->belongsToMany(User::class)
-       ->withPivot('score','active')
-       ->withTimestamps();
+      ->withPivot('score','quizz_time','status')
+      ->withTimestamps();
     }
 
     public function category()
