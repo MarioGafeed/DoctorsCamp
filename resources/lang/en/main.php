@@ -580,6 +580,7 @@ return [
     'password_conf'       => 'Confirm Password',
     'cart'                => 'Cart',
     'wishlist'            => 'Wishlist',
+    'setting'             => 'Setting',
     'settings'            => 'Settings',
     'profile'             => 'Profile',
     'hello'               => 'Hotels',
@@ -805,6 +806,9 @@ return [
     'op3'                          => 'Option 3',
     'op4'                          => 'Option 4',
     'right_ans'                    => 'Right Answer',
+    'body'                         => 'Message Body',
+    'faq'                          => 'FAQ',
+    'faqs'                         => 'FAQs',
 
 
 

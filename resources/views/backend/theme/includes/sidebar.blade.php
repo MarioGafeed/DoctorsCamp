@@ -263,6 +263,31 @@
                 </ul>
             </li>
 
+            <!-- Add Faqs -->
+            <li class="heading">
+                <h3 class="uppercase">{{ trans('main.setting') }}</h3>
+            </li>
+
+            <li class="nav-item  {{ active_route('faqs.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">{{ trans('main.faqs') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('faqs.create') }}">
+                        <a href="{{ route('faqs.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.faq') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('faqs.index') }}">
+                        <a href="{{ route('faqs.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.faqs') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
 
 
             <!-- Add Site Seeting   (Mario Added)

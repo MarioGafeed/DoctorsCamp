@@ -69,8 +69,8 @@ Route::middleware(\App\Http\Middleware\LangMiddleware::class)->group(function ()
    Route::post('questions/multi_delete', 'QuestionController@multi_delete')->name('questions.multi_delete');
 
    // Answers
-   Route::resource('answers', 'AnswerController');
-   Route::post('answers/multi_delete', 'AnswerController@multi_delete')->name('answers.multi_delete');
+   Route::resource('faqs', 'FaqController');
+   Route::post('faqs/multi_delete', 'FaqController@multi_delete')->name('faqs.multi_delete');
 
 
 });
