@@ -6,7 +6,7 @@ use App\Authorizable;
 use App\Http\Controllers\Controller;
 use App\Helpers\JsonResponder;
 use App\Http\Interfaces\CategoryInterface;
-use App\Http\Requests\CategorysRequest;
+use App\Http\Requests\CategoriesRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;

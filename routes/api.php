@@ -7,6 +7,9 @@ Route::post('login', 'AuthController@login');
 Route::post('/password/email', 'AuthController@sendPasswordResetLinkEmail')->middleware('throttle:5,1')->name('password.email');
 Route::post('/password/reset', 'AuthController@resetPassword')->name('password.reset');
 
+// FAQs
+Route::apiResource('faqs', 'FaqController')->only(['show', 'index']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('me', 'AuthController@me');
@@ -40,4 +43,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('categories', 'CategoryController');
     Route::post('/images/{image}/likes', 'ImageLikeController@store')->name('images.likes.store');
     Route::delete('/images/{image}/likes', 'ImageLikeController@destroy')->name('images.likes.destroy');
+
 });
