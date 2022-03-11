@@ -89,7 +89,7 @@
 
             <li class="nav-item  {{ active_route('posts.*') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
                     <span class="title">{{ trans('main.posts') }}</span>
                     <span class="arrow"></span>
                 </a>
@@ -151,7 +151,7 @@
 
             <li class="nav-item  {{ active_route('categories.*') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                  <i class="fa fa-tree" aria-hidden="true"></i>
                     <span class="title">{{ trans('main.categories') }}</span>
                     <span class="arrow"></span>
                 </a>
@@ -177,7 +177,7 @@
 
             <li class="nav-item  {{ active_route('messages.*') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                  <i class="fa fa-inbox" aria-hidden="true"></i>
                     <span class="title">{{ trans('main.messages') }}</span>
                     <span class="arrow"></span>
                 </a>
@@ -202,7 +202,7 @@
 
             <li class="nav-item  {{ active_route('lessons.*') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                  <i class="fa fa-book" aria-hidden="true"></i>
                     <span class="title">{{ trans('main.lessons') }}</span>
                     <span class="arrow"></span>
                 </a>
@@ -224,7 +224,7 @@
 
             <li class="nav-item  {{ active_route('questions.*') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
                     <span class="title">{{ trans('main.questions') }}</span>
                     <span class="arrow"></span>
                 </a>
@@ -245,7 +245,7 @@
             <!-- Add Courses -->
             <li class="nav-item  {{ active_route('courses.*') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                  <i class="fa fa-briefcase" aria-hidden="true"></i>
                     <span class="title">{{ trans('main.courses') }}</span>
                     <span class="arrow"></span>
                 </a>
@@ -270,7 +270,7 @@
 
             <li class="nav-item  {{ active_route('faqs.*') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                  <i class="fa fa-question" aria-hidden="true"></i>
                     <span class="title">{{ trans('main.faqs') }}</span>
                     <span class="arrow"></span>
                 </a>
