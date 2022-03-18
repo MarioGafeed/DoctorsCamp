@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Authorizable;
 use App\Helpers\JsonResponder;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\ImageInterface;
@@ -13,8 +12,6 @@ use Illuminate\Http\Request;
 
 class ImagesController extends Controller
 {
-  use Authorizable;
-
   public function __construct(private ImageInterface $imageInterface)
   {
   }

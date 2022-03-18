@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Authorizable;
 use App\Helpers\JsonResponder;
 use App\Http\Interfaces\EventInterface;
 use App\Http\Requests\EventsRequest;
@@ -14,15 +13,21 @@ use App\Models\Event;
 
 class EventController extends Controller
 {
-  use Authorizable;
-
   public function __construct(private EventInterface $eventInterface)
   {
   }
 
-  public function index()
+  public function index(Request $request)
   {
-      $events = Event::with('media')->with('user', 'country')->where('active', '1')->paginate(10);
+       $events = Event::when($request->keyword, function ($query) use ($request){
+             $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+             ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+             ->get();
+       })->whereNotNull('title_ar')
+     ->where('active', 1)
+     ->with('user:id,name')
+     ->with('country:id,name')
+     ->paginate(10);
 
       return EventResource::collection($events);
   }

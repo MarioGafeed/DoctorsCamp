@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Authorizable;
 use App\Helpers\JsonResponder;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\LessonInterface;
@@ -17,8 +16,6 @@ use Response;
 
 class LessonController extends Controller
 {
-  use Authorizable;
-
   public function __construct(private LessonInterface $lessonInterface)
   {
   }

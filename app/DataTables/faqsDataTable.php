@@ -71,7 +71,7 @@ class FaqsDataTable extends DataTable
                 'searchable' => true,
                 'orderable'  => true,
                 'width'      => '200px',
-            ],            
+            ],
             [
                 'name' => 'show',
                 'data' => 'show',

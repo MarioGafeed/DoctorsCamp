@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
-  // use Authorizable;
+  use Authorizable;
   private $viewPath = 'backend.faqs';
 
   private $faqInterface;
