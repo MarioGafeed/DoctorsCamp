@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-  // use Authorizable;
+  use Authorizable;
   private $commentInterface;
 
   public function __construct(CommentInterface $commentInterface)

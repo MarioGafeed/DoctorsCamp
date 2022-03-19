@@ -14,7 +14,7 @@ use Spatie\Permission\Models\Role;
 
 class CourseController extends Controller
 {
-  // use Authorizable;
+  use Authorizable;
   private $courseInterface;
 
   public function __construct(CourseInterface $courseInterface)

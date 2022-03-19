@@ -14,7 +14,7 @@ use Spatie\Permission\Models\Role;
 
 class QuestionController extends Controller
 {
-    // use Authorizable;
+    use Authorizable;
     private $questionInterface;
 
     public function __construct(QuestionInterface $questionInterface)

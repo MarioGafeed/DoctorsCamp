@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    // use Authorizable;
+    use Authorizable;
     private $eventInterface;
 
     public function __construct(EventInterface $eventInterface)

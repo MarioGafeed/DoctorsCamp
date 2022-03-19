@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    // use Authorizable;
+    use Authorizable;
 
     private $userInterface;
 

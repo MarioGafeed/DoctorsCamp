@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    // use Authorizable;
+    use Authorizable;
     private $viewPath = 'backend.categories';
 
     private $categoryInterface;
@@ -38,7 +38,7 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index');
     }
-    
+
     public function show($id)
     {
         return $this->categoryInterface->show($id);

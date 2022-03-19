@@ -6,26 +6,23 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
         return [
           'id'               => $this->id,
-          'title_en'         => $this->title_en,
-          'title_ar'         => $this->title_ar,
+          'title'            => $this['title_' . request()->header('accept-language', 'en')],
           'keyword'          => $this->keyword,
-          'summary'          => $this->summary,
-          'desc'             => json_decode($this->desc, true),
-          'posts_count'      => $this->posts_count ?? $this->posts()->count(),        
-          'videos'           => $this->posts->where('type', '=', 'video'),
-          'articles'         => $this->posts->where('type', '=', 'article'),
+          'summary'          => json_decode($this->summary, true)[request()->header('Accept-Language', 'ar')] ?? null,
+          'description'      => json_decode($this->desc, true)[request()->header('Accept-Language', 'ar')] ?? null,
+          'posts_count'      => $this->posts()->count(),
+          'courses_count'    => $this->courses_count ?? $this->courses()->count(),
+          'images_count'     => $this->images_count ?? $this->images()->count(),
+          'videos'           => $this->posts->where('type', 'video')->where('active', 1),
+          'articles'         => $this->posts->where('type', 'article')->where('active', 1),          
+          'courses'          => $this->courses->where('active', 1),
+          'images'           => $this->images,
           'image'            => $this->getFirstMediaUrl(),
-          'icon'             =>  $this->icon,
+          'icon'             => $this->icon,
         ];
     }
 }

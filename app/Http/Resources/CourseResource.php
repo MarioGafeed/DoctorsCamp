@@ -17,11 +17,10 @@ class CourseResource extends JsonResource
         return [
           'id'          => $this->id,
           'name'        => $this->name,
-          'desc'        => json_decode($this->desc, true),
+          'desc'        => json_decode($this->desc, true)[request()->header('Accept-Language', 'ar')] ?? null,
           'active'      => $this->active,
           'category'    => $this->category->id,
-          'category_ar' => $this->category->title_ar,
-          'category_en' => $this->category->title_en,
+          'category_name' => $this->category['title_' . request()->header('accept-language', 'en')],
           'lessons'     => $this->lessons()->get(),
           'lessons_counts'     => $this->lessons()->count(),
           'image'       => $this->getFirstMediaUrl(),

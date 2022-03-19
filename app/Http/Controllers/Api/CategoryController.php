@@ -18,16 +18,17 @@ class CategoryController extends Controller
 
   public function index(Request $request)
   {
-      $categories = Category::query()->with('media')->with('posts');
+       $categories = Category::when($request->keyword, function ($query) use ($request){
+             $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+             ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+             ->get();
+       })->whereNotNull('title_ar')
+     ->with('posts')
+     ->with('courses')
+     ->with('images')
+     ->paginate(10);
 
-        $categories->when(
-                $request->keyword,
-                fn ($q) => $q->where('title_ar', 'LIKE', "%$request->keyword%")
-                              ->where('title_en', 'LIKE', "%$request->keyword%")
-                              ->orWhere('slug','LIKE','%'.$request->keyword.'%')
-       );
-
-      return CategoryResource::collection($categories->get());
+      return CategoryResource::collection($categories);
   }
 
   public function show(Category $category)

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
-  // use Authorizable;
+  use Authorizable;
   private $lessonInterface;
 
   public function __construct(LessonInterface $lessonInterface)
