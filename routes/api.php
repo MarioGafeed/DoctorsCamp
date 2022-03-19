@@ -17,6 +17,8 @@ Route::apiResource('posts', 'PostsController')->only(['show', 'index']);
 Route::apiResource('comments', 'CommentController')->only(['index']);
 // Courses
 Route::apiResource('courses', 'CourseController');
+// images
+Route::apiResource('images', 'ImagesController');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('me', 'AuthController@me');
@@ -39,7 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/courses/{course}/likes', 'CourseLikeController@store')->name('courses.likes.store');
     Route::delete('/courses/{course}/likes', 'CourseLikeController@destroy')->name('courses.likes.destroy');
-    Route::apiResource('images', 'ImagesController');
+
     Route::post('/events/{event}/likes', 'EventLikeController@store')->name('events.likes.store');
     Route::delete('/events/{event}/likes', 'EventLikeController@destroy')->name('events.likes.destroy');
     Route::apiResource('events', 'EventController');
