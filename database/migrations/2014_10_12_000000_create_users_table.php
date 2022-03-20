@@ -13,9 +13,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-      Schema::disableForeignKeyConstraints();
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('users', function (Blueprint $table) {
-          $table->engine = 'InnoDB';
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->datetime('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
@@ -30,7 +31,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-      Schema::enableForeignKeyConstraints();
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

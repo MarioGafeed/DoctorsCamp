@@ -27,12 +27,16 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'country',
         'last_login_at',
         'last_login_ip',
-        'country_id'
+        'country_id',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
     public function role()
@@ -55,11 +59,12 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function courses()
     {
         return $this->belongsToMany(Course::class)
-        ->withPivot('score',  'active')
+        ->withPivot('score', 'active')
         ->withTimestamps();
     }
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function linkedSocialAccounts()
+    {
+        return $this->hasMany(LinkedSocialAccount::class);
+    }
 }
