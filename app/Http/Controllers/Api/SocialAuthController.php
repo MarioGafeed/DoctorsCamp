@@ -17,12 +17,14 @@ class SocialAuthController extends Controller
         $request->validate([
             'access_token' => ['required'],
             'provider' => ['required', 'in:google,facebook'],
-            'country_id' => ['required', 'integer', 'exists:countries'],
+            'country_id' => ['required', 'integer', 'exists:countries,id'],
         ]);
 
         $user = Socialite::driver($request->provider)->userFromToken($request->access_token);
 
-        return $this->findOrCreate($user, $request->provider);
+        $user = $this->findOrCreate($user, $request->provider);
+
+        return $this->createToken($user);
     }
 
     protected function findOrCreate(ProviderUser $providerUser, string $provider): User
@@ -30,11 +32,11 @@ class SocialAuthController extends Controller
         $linkedSocialAccount = LinkedSocialAccount::whereProviderName($provider)->whereProviderId($providerUser->getId())->first();
 
         if ($linkedSocialAccount && $user = $linkedSocialAccount->user) {
-            return $this->createToken($linkedSocialAccount->user);
+            return $linkedSocialAccount->user;
         }
 
         if ($user = User::whereEmail($providerUser->getEmail())->first()) {
-            return $this->createToken($user);
+            return $user;
         }
 
         $user = User::create([
