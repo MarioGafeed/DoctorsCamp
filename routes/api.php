@@ -8,6 +8,7 @@ Route::post('login-social', 'SocialAuthController@login');
 Route::post('/password/email', 'AuthController@sendPasswordResetLinkEmail')->middleware('throttle:5,1')->name('password.email');
 Route::post('/password/reset', 'AuthController@resetPassword')->name('password.reset');
 
+
 // FAQs
 Route::apiResource('faqs', 'FaqController')->only(['show', 'index']);
 // Categories
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('verify', 'AuthController@verify');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('logout', 'AuthController@logout');
+    Route::post('changePassword', 'AuthController@changePassword')->name('changePassword');
     Route::apiResource('posts', 'PostsController')->only(['store', 'update', 'destroy']);
     Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
     Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');

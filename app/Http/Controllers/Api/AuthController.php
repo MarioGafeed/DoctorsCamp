@@ -147,6 +147,36 @@ class AuthController extends Controller
         ]);
   	}
 
+    public function changePassword(Request $request) {
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            return response()->json([
+                'message' => 'Your current password does not matches with the password.',
+            ]);
+        }
+
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+            // Current password and new password same
+            return response()->json([
+                'message' => 'New Password cannot be same as your current password.',
+            ]);
+        }
+
+        $validatedData = $request->validate([
+            'current-password' => 'required',
+            'new-password' => 'required|confirmed',
+        ]);
+
+        //Change Password
+        $user = Auth::user();
+        $user->password = Hash::make($request->get('new-password'));
+        $user->save();
+                
+        return response()->json([
+            'message' => 'success","Password successfully changed!',
+        ]);
+    }
+
     public function logout()
     {
         auth()->user()->currentAccessToken()->delete();
