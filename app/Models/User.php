@@ -63,6 +63,13 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         ->withTimestamps();
     }
 
+    public function events()
+    {
+        return $this->belongsToMany(Event::class)
+       ->withPivot('status')
+       ->withTimestamps();
+    }
+
     public function linkedSocialAccounts()
     {
         return $this->hasMany(LinkedSocialAccount::class);

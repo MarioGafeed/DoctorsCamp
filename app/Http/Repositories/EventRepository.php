@@ -23,11 +23,6 @@ class EventRepository implements EventInterface
         $this->countryModel = $country;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($dataTable)
     {
         return $dataTable->render("{$this->viewPath}.index", [
@@ -62,12 +57,6 @@ class EventRepository implements EventInterface
         return $event;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $event = $this->getById($id);
@@ -134,12 +123,6 @@ class EventRepository implements EventInterface
         }
     }
 
-    /**
-     * Remove the multible resource from storage.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Http\Response
-     */
     public function multi_delete($request)
     {
         if (count($request->selected_data)) {

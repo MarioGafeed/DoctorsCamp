@@ -29,4 +29,11 @@ class Event extends Model implements HasMedia
     {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
+
+    public function users()
+    {
+      return $this->belongsToMany(User::class)
+      ->withPivot('status')
+      ->withTimestamps();
+    }
 }

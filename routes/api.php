@@ -48,6 +48,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/events/{event}/likes', 'EventLikeController@store')->name('events.likes.store');
     Route::delete('/events/{event}/likes', 'EventLikeController@destroy')->name('events.likes.destroy');
     Route::apiResource('events', 'EventController');
+    Route::post('events/enroll/{id}', 'EventController@enroll')->name('user.events.enroll');
+    Route::post('events/disenroll/{id}', 'EventController@disenroll')->name('user.events.disenroll');
+    Route::get('userevents', 'EventController@userList')->name('user.events.list');
     Route::apiResource('comments', 'CommentController')->only('store', 'update', 'destroy');
     // Route::apiResource('categories', 'CategoryController');
     Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');

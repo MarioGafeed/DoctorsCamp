@@ -10,7 +10,6 @@ use App\Http\Requests\EventsRequest;
 use App\Http\Resources\EventResource;
 use App\Models\Event;
 
-
 class EventController extends Controller
 {
   public function __construct(private EventInterface $eventInterface)
@@ -39,11 +38,46 @@ class EventController extends Controller
       return new EventResource($event);
   }
 
+  public function enroll($eventId, Request $request)
+  {
+    if (! $request->user()->events->contains($eventId)) {
+      $request->user()->events()->attach($eventId);
+    }
+    else {
+      $request->user()->events()->updateExistingPivot($eventId, [
+        'status' => 'closed',
+      ]);
+      return response()->json([
+        'message' => "This event close now.."
+      ]);
+    }
+
+    return response()->json([
+      'message' => "Congratulation You Enroll Event Successfully.."
+    ]);
+  }
+
+  public function disenroll($eventId, Request $request)
+  {
+    if ( $request->user()->events->contains($eventId)) {
+      $request->user()->events()->detach($eventId);
+    }
+
+    return response()->json([
+      'message' => "Congratulation You disenroll Event Successfully.."
+    ]);
+  }
+
+  public function userList(Request $request)
+  {
+    $events = $request->user()->events()->get();
+    return EventResource::collection($events);
+  }
+
   public function show(Event $event)
   {
       return new EventResource($event);
   }
-
 
   public function destroy(Event $event)
   {
