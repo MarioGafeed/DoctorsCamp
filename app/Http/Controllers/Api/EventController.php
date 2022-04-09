@@ -64,7 +64,7 @@ class EventController extends Controller
     }
 
     return response()->json([
-      'message' => "Congratulation You disenroll Event Successfully.."
+      'message' => "You disenroll Event Successfully.."
     ]);
   }
 

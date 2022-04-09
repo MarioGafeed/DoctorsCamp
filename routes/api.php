@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::post('register', 'AuthController@register');
-Route::post('login', 'AuthController@login');
+Route::post('login', 'AuthController@login')->name('user.login');
 Route::post('login-social', 'SocialAuthController@login');
 Route::post('/password/email', 'AuthController@sendPasswordResetLinkEmail')->middleware('throttle:5,1')->name('password.email');
 Route::post('/password/reset', 'AuthController@resetPassword')->name('password.reset');
@@ -44,6 +44,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/courses/{course}/likes', 'CourseLikeController@store')->name('courses.likes.store');
     Route::delete('/courses/{course}/likes', 'CourseLikeController@destroy')->name('courses.likes.destroy');
+    Route::post('/courses/{course}/enroll', 'CourseController@enroll')->name('user.course.enroll');
+    Route::get('/usercompletecourses', 'CourseController@usercompletecourses')->name('user.course.list');
+    Route::get('/useruncompletecourses', 'CourseController@useruncompletecourses')->name('user.course.list');
 
     Route::post('/events/{event}/likes', 'EventLikeController@store')->name('events.likes.store');
     Route::delete('/events/{event}/likes', 'EventLikeController@destroy')->name('events.likes.destroy');
