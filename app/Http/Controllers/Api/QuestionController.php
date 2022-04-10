@@ -17,6 +17,13 @@ class QuestionController extends Controller
   {
   }
 
+  public function showLessonQuestions($id)
+  {
+      $questions = Question::where('lesson_id', $id)->get() ;
+
+      return  QuestionResource::collection($questions);
+  }
+
   public function show($id)
   {
       $question = Question::with('lesson')->findOrFail($id);

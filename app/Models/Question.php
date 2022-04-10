@@ -19,5 +19,5 @@ class Question extends Model
     public function lesson()
     {
         return $this->belongsTo('App\Models\Lesson', 'lesson_id');
-    }
+    }    
 }

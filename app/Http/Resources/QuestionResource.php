@@ -14,8 +14,11 @@ class QuestionResource extends JsonResource
         'id'           => $this->id,
         'title'        => $this->title,
         'description'  => $this->desc,
-        'lesson_id'    => $this->lesson_id,
-        'lesson'       => $this->lesson->title,              
+        'lesson'       => $this->lesson->title,
+        'op1'          => $this->op1,
+        'op2'          => $this->op2,
+        'op3'          => $this->op3,
+        'op4'          => $this->op4,
       ];
     }
 }

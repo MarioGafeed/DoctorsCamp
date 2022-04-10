@@ -38,7 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Route::apiResource('categories', 'CategoryController');
     Route::apiResource('lessons', 'LessonController');
     Route::apiResource('questions', 'QuestionController');
-    Route::get('lesson/showquestion/{id}', 'LessonController@showQuestion');
+    Route::get('lesson/{id}/showquestions', 'QuestionController@showLessonQuestions');
+    // Route::get('lesson/showquestion/{id}', 'LessonController@showQuestion');
+
     Route::post('lesson/startquiz/{id}', 'LessonController@startQuiz');
     Route::post('lesson/submitquiz/{lesson}', 'LessonController@submitQuiz');
 
@@ -47,6 +49,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/courses/{course}/enroll', 'CourseController@enroll')->name('user.course.enroll');
     Route::get('/usercompletecourses', 'CourseController@usercompletecourses')->name('user.course.list');
     Route::get('/useruncompletecourses', 'CourseController@useruncompletecourses')->name('user.course.list');
+
+    Route::get('/courses/{course}/lessons', 'LessonController@courseUserLessons')->name('user.course.lessons');
 
     Route::post('/events/{event}/likes', 'EventLikeController@store')->name('events.likes.store');
     Route::delete('/events/{event}/likes', 'EventLikeController@destroy')->name('events.likes.destroy');

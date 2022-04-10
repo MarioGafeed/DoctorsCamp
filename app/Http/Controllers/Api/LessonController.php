@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Interfaces\LessonInterface;
 use App\Http\Requests\LessonsRequest;
 use App\Http\Resources\LessonResource;
+use App\Http\Resources\UserLessonResource;
 use App\Models\Lesson;
 use App\Models\Course;
 use Illuminate\Http\Request;
@@ -20,11 +21,22 @@ class LessonController extends Controller
   {
   }
 
-  public function index()
+  public function index(Request $request)
   {
-      $lessons = Lesson::with('course:id,name', 'questions')->paginate(10);
+      $user = $request->user();
 
-      return LessonResource::collection($lessons);
+      if ($user !== null ) {
+          $userLessons = $user->lessons()->with('course:id,name')->get();
+
+          if ( empty( $userLessons->toArray() ) ) {
+            return response()->json([
+              'message' => "No lessons.."
+            ]);
+          }
+          else {
+            return UserLessonResource::collection($userLessons);
+          }
+        }
   }
 
   public function show(Lesson $lesson, Request $request)
@@ -40,12 +52,6 @@ class LessonController extends Controller
     }
   }
 
-  public function showQuestion($id)
-  {
-      $lesson = Lesson::with('questions')->findOrFail($id);
-
-      return new LessonResource($lesson);
-  }
 
   public function startQuiz($lessonId, Request $request)
   {
@@ -54,7 +60,7 @@ class LessonController extends Controller
       }
       else {
         $request->user()->lessons()->updateExistingPivot($lessonId, [
-          'status' => 'closed',
+          'status' => 'opened',
         ]);
       }
 
@@ -116,16 +122,25 @@ class LessonController extends Controller
      $user->lessons()->updateExistingPivot($lesson->id, [
        'score'            => $score,
        'quizz_time'       => $time_mins,
-       'status'           => 'closed',
+       'status'           => 'opened',
      ]);
      if($score == 100)
      {
+       $currentLesson      = $lesson->myorder;
+       $nextLessonorder    = $currentLesson+1;
+
+
        if (! $request->user()->courses->contains($lesson->course_id)) {
          $request->user()->courses()->attach($lesson->course_id);
        }
-       $user->lessons()->updateExistingPivot($lesson->id, [
-         'status'              => 'closed',
-       ]);
+
+       $lessonNextId = Lesson::where('myorder', $nextLessonorder)->first();
+
+       if (! is_null($lessonNextId) ) {
+         $user->lessons()->updateExistingPivot($lessonNextId->id, [
+           'status'              => 'opened',
+         ]);
+       }
 
      $course = Course::select('id','name')->withCount('lessons')->findOrFail($lesson->course->id);
 
@@ -148,4 +163,22 @@ class LessonController extends Controller
      ]);
    }
   }
+
+  public function courseUserLessons($courseId, Request $request)
+  {
+    $user = $request->user();
+
+    if ($user !== null) {
+        $userLessons = $user->lessons()->where('course_id', $courseId)->with('questions:id,title')->get();
+        if ( empty( $userLessons->toArray() ) ) {
+          return response()->json([
+            'message' => "No lessons in this Course.."
+          ]);
+        }
+        else {
+          return UserCoursesResource::collection($userLessons);
+        }
+        }
+  }
+
 }
