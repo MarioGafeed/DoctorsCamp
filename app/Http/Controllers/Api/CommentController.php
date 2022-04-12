@@ -17,16 +17,16 @@ class CommentController extends Controller
   {
   }
 
-  public function index()
+  public function postComments($postId)
   {
-     return CommentResource::collection(Comment::with('user')->paginate(10));
+     return CommentResource::collection(Comment::where('commentable_id', $postId)->with('user')->orderBy('created_at', 'desc')->paginate(10));
   }
 
   public function store(CommentsRequest $request)
   {
       $comment = $this->commentInterface->store($request->all());
 
-      return JsonResponder::make('Comment Created, Admin will approve Your comment soon..');
+      return JsonResponder::make(trans('main.commentcreate'));
   }
 
   public function update(CommentsRequest $request, Comment $comment)
@@ -40,6 +40,6 @@ class CommentController extends Controller
   {
       $comment->delete();
 
-      return JsonResponder::make('Comment deleted');
+      return JsonResponder::make(trans('main.commentdelete'));
   }
 }

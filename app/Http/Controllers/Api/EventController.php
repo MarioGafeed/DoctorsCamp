@@ -48,12 +48,12 @@ class EventController extends Controller
         'status' => 'closed',
       ]);
       return response()->json([
-        'message' => "This event close now.."
+        'message' => trans('main.eventclose'),
       ]);
     }
 
     return response()->json([
-      'message' => "Congratulation You Enroll Event Successfully.."
+      'message' => trans('main.eventsucc'),
     ]);
   }
 
@@ -64,7 +64,7 @@ class EventController extends Controller
     }
 
     return response()->json([
-      'message' => "You disenroll Event Successfully.."
+      'message' => trans('main.disenrollsucc'),
     ]);
   }
 
@@ -83,6 +83,6 @@ class EventController extends Controller
   {
       $event->delete();
 
-      return JsonResponder::make('Event deleted');
+      return JsonResponder::make(trans('main.eventdel'));    
   }
 }

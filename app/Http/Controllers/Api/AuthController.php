@@ -27,7 +27,6 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-
             'email' => ['required', 'email', 'max:255', 'email'],
             'password' => ['required', 'string', 'max:50', 'min:6'],
             'email' => ['required', 'string', 'max:255', 'email'],
@@ -38,14 +37,14 @@ class AuthController extends Controller
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => 'These credentials do not match our records.',
+                'email' => trans('main.emailfail')
             ]);
         }
 
         $token = $user->createToken($user->id.'-'.time());
 
         return response()->json([
-            'message' => 'user logged successfully',
+            'message' => trans('main.loginsuccess'),
             'access_token' => $token->plainTextToken,
             'user' => $user,
             'token_type' => 'Bearer',
@@ -60,7 +59,7 @@ class AuthController extends Controller
       $token = $user->createToken($user->id.'-'.time());
 
       return response()->json([
-          'message' => 'Registration successfully',
+          'message' => trans('main.register'),
           'access_token' => $token->plainTextToken,
           'user' => $user,
           'token_type' => 'Bearer',
@@ -70,7 +69,7 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json([
-            'message' => 'user info retreived successfully',
+            'message' => trans('main.userinfo'),
             'user' => auth()->user(),
         ]);
     }
@@ -78,7 +77,7 @@ class AuthController extends Controller
     public function verify()
     {
         return response()->json([
-            'message' => 'token is valid',
+            'message' => trans('main.tokenvalid'),
             'valid' => true,
         ]);
     }
@@ -95,7 +94,7 @@ class AuthController extends Controller
         $token = $user->createToken($tokenName);
 
         return response()->json([
-            'message' => 'token refreshed successfully',
+            'message' => trans('main.tokenrefresh'),
             'access_token' => $token->plainTextToken,
             'user' => $user,
             'token_type' => 'Bearer',
@@ -151,14 +150,14 @@ class AuthController extends Controller
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
             // The passwords matches
             return response()->json([
-                'message' => 'Your current password does not matches with the password.',
+                'message' => trans('main.passnotmatch'),
             ]);
         }
 
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
             // Current password and new password same
             return response()->json([
-                'message' => 'New Password cannot be same as your current password.',
+                'message' => trans('main.passcurrent'),
             ]);
         }
 
@@ -171,9 +170,9 @@ class AuthController extends Controller
         $user = Auth::user();
         $user->password = Hash::make($request->get('new-password'));
         $user->save();
-                
+
         return response()->json([
-            'message' => 'success","Password successfully changed!',
+            'message' => trans('main.passchange'),
         ]);
     }
 
@@ -182,7 +181,7 @@ class AuthController extends Controller
         auth()->user()->currentAccessToken()->delete();
 
         return response()->json([
-            'message' => 'logged out successfully',
+            'message' => trans('main.logoutsuccess')
         ]);
     }
 }

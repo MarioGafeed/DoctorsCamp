@@ -32,6 +32,6 @@ class ImagesController extends Controller
   {
       $image->delete();
 
-      return JsonResponder::make('Image deleted');
+      return JsonResponder::make(trans('main.imgdelete'));
   }
 }

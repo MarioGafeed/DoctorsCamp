@@ -14,6 +14,7 @@ class UserCoursesResource extends JsonResource
       return [
         'id'                => $this->id,
         'name'              => $this->name,
+        'category_id'       => $this->category_id,
         'category_name'     => $this->category['title_' . request()->header('accept-language', 'en')],
         // 'category_url'  => route('categories', $this->category->id),
         'progress'          => $user->lessons()->where('course_id', $this->id)->count() .' / '. $this->lessons()->count(),

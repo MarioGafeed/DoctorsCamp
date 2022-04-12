@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Helpers\JsonResponder;
 use App\Http\Interfaces\FaqInterface;
 use App\Http\Requests\FaqsRequest;
 use App\Http\Resources\FaqResource;

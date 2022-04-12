@@ -59,7 +59,7 @@ class SocialAuthController extends Controller
         $token = $user->createToken($user->id.'-'.time());
 
         return response()->json([
-            'message' => 'user logged successfully',
+            'message' => trans('main.loginsuccess'),
             'access_token' => $token->plainTextToken,
             'user' => $user,
             'token_type' => 'Bearer',

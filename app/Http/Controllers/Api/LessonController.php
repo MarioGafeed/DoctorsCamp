@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helpers\JsonResponder;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\LessonInterface;
 use App\Http\Requests\LessonsRequest;
@@ -30,7 +29,7 @@ class LessonController extends Controller
 
           if ( empty( $userLessons->toArray() ) ) {
             return response()->json([
-              'message' => "No lessons.."
+              'message' => trans('main.nolesson'),
             ]);
           }
           else {
@@ -45,7 +44,7 @@ class LessonController extends Controller
 
     if (! $request->user()->lessons->contains($lessonId) && ! is_null($lessonId) ) {
       return response()->json([
-        'message' => "Plz you should finish the prev lesson"
+        'message' => trans('prevlesson'),
       ]);
     }else {
       return new LessonResource($lesson);
@@ -65,7 +64,8 @@ class LessonController extends Controller
       }
 
       return response()->json([
-        'message' => "You start Quiz"
+        'message' => trans('main.qstart'),
+
       ]);
   }
 
@@ -155,11 +155,11 @@ class LessonController extends Controller
       ]);
 
      return response()->json([
-       'message' => "You submitted Quiz successfully your score is: $score%, Congratulation your progress in course: $lessonCourseName is: $userCourseProgress"
+       'message' => trans('main.quizscore'). $score ."%, " . trans('main.courseprogress'). $lessonCourseName . " is: ". $userCourseProgress,
      ]);
    }else {
      return response()->json([
-       'message' => "You submitted Quiz successfully your score is: $score%"
+       'message' => trans('main.quizscore'). $score ."%"
      ]);
    }
   }
@@ -172,7 +172,7 @@ class LessonController extends Controller
         $userLessons = $user->lessons()->where('course_id', $courseId)->with('questions:id,title')->get();
         if ( empty( $userLessons->toArray() ) ) {
           return response()->json([
-            'message' => "No lessons in this Course.."
+            'message' => trans('main.lessonNo'),
           ]);
         }
         else {

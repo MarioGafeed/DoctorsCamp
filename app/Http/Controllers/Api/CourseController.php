@@ -40,7 +40,7 @@ class CourseController extends Controller
 
         if ( empty( $userCourses->toArray() ) ) {
           return response()->json([
-            'message' => "No Courses Completed Found.."
+            'message' => trans('main.coursecomplete'),
           ]);
         }
         else {
@@ -58,7 +58,7 @@ class CourseController extends Controller
 
         if ( empty( $userCourses->toArray() ) ) {
           return response()->json([
-            'message' => "No Courses UnCompleted Found.."
+            'message' => trans('main.courseuncomplete')
           ]);
         }
         else {
@@ -84,7 +84,7 @@ class CourseController extends Controller
       }
 
       return response()->json([
-        'message' => "You enrolled course successfully"
+        'message' => trans('main.courseenroll')
       ]);
     }
     else {
@@ -92,7 +92,7 @@ class CourseController extends Controller
       //   'status' => 'closed',
       // ]);
       return response()->json([
-        'message' => "You enrolled this course before"
+        'message' => trans('main.enrollbefore')
       ]);
     }
   }

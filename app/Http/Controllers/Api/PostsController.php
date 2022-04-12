@@ -56,6 +56,6 @@ class PostsController extends Controller
     {
         $post->delete();
 
-        return JsonResponder::make('Post deleted');
+        return JsonResponder::make(trans('main.postdelete'));
     }
 }

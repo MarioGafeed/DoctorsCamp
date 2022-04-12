@@ -80,7 +80,9 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ar',
+
+    'supported_languages' => ['en' => 'English', 'ar' => 'Arabic'],
 
     /*
     |--------------------------------------------------------------------------
@@ -136,6 +138,9 @@ return [
 
     'providers' => [
 
+
+
+
         /*
          * Laravel Framework Service Providers...
          */
@@ -176,7 +181,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Spatie\Tags\TagsServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,    
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
     ],
 
