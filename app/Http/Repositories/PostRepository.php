@@ -7,6 +7,8 @@ use App\Http\Interfaces\PostInterface;
 use App\Http\Traits\PostTrait;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\user;
+use App\Notifications\PostAddedNotification;
 use Illuminate\Http\UploadedFile;
 
 class PostRepository implements PostInterface
@@ -48,7 +50,7 @@ class PostRepository implements PostInterface
     }
 
     public function store(array $data)
-    {      
+    {
         $data['desc'] = json_encode([
             'en' => $data['desc_en'],
             'ar' => $data['desc_ar'],
@@ -75,15 +77,17 @@ class PostRepository implements PostInterface
 
         $pos->attachTags($tags);
 
+        $pos->fresh();
+
+        // User::where()->each(function($user) use($pos){
+        //     $user->notify(new PostAddedNotification($pos));
+        // });
+
+        User::each(fn ($user) => $user->notify(new PostAddedNotification($pos)) );
+
         return $pos;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $pos = $this->getPostWithCat($id);
@@ -103,12 +107,12 @@ class PostRepository implements PostInterface
         $pos = $this->getPostFirst($id);
         $cats = $this->getAllcategory();
         $tags = $pos->tags->pluck('name')->implode(', ');
-        
+
         $pos['desc_en'] = json_decode($pos->desc)->en;
         $pos['desc_ar'] = json_decode($pos->desc)->ar;
         $pos['content_en'] = json_decode($pos->content)->en;
         $pos['content_ar'] = json_decode($pos->content)->ar;
-  
+
         return view("{$this->viewPath}.edit", [
           'title' => trans('main.edit').' '.trans('main.post').' : '.$pos->title,
           'edit' => $pos,
@@ -171,12 +175,6 @@ class PostRepository implements PostInterface
         }
     }
 
-    /**
-     * Remove the multible resource from storage.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Http\Response
-     */
     public function multi_delete($request)
     {
         if (count($request->selected_data)) {
