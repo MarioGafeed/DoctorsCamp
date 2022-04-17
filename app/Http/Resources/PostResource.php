@@ -8,8 +8,8 @@ class PostResource extends JsonResource
 {
     public function toArray($request)
     {
-      $postComments = $this->comments()->where('user_id', '1')->approved()->orderBy('created_at', 'desc')->get();
-      
+      $postComments = $this->comments()->where('user_id', $this->user->id)->approved()->orderBy('created_at', 'desc')->get();
+
         return [
             'id'           => $this->id,
             'title'        => $this['title_' . request()->header('accept-language', 'en')],
@@ -22,6 +22,7 @@ class PostResource extends JsonResource
             'youtubeURL'   => $this->youtubeURL,
             'image'        => $this->getFirstMediaUrl(),
             'likes_count'  => $this->likes()->count(),
+            'user_like'    => $this->liked($this->user->id),
             'comments_count' => $this->comments()->count(),
             'comments'     => CommentResource::collection($postComments),
             // 'comments'     => $this->comments()->approved()->select('id', 'comment', 'user_id','updated_at')->get(),

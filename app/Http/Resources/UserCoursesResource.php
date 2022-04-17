@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserCoursesResource extends JsonResource
 {
-
     public function toArray($request)
     {
       $user = $request->user();

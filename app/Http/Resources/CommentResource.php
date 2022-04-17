@@ -7,7 +7,6 @@ use App\Models\User;
 
 class CommentResource extends JsonResource
 {
-
     public function toArray($request)
     {
         $user = User::findOrFail($this->user_id)->select('id', 'name')->first();
@@ -15,7 +14,7 @@ class CommentResource extends JsonResource
           'id'             => $this->id,
           'comment'        => $this->comment,
           'author'         => $user->name,
-          'commentable_id' => $this->commentable_id,          
+          'commentable_id' => $this->commentable_id,
           'user_url'       => route('users.show', $user->name),
         ];
     }
