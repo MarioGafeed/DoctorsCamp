@@ -33,7 +33,7 @@ class UsernotificationsController extends Controller
           $notification->markAsRead();
         }
 
-        return redirect($notification->data['link']);
+        // return redirect($notification->data['link']);
       }
     }
 
@@ -44,7 +44,7 @@ class UsernotificationsController extends Controller
 
         if ($notification) {
             $notification->markAsRead();
-            return redirect($notification->data['link']);
+            // return redirect($notification->data['link']);
         }
     }
 
