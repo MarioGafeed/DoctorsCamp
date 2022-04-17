@@ -22,7 +22,7 @@ class PostResource extends JsonResource
             'youtubeURL'   => $this->youtubeURL,
             'image'        => $this->getFirstMediaUrl(),
             'likes_count'  => $this->likes()->count(),
-            'user_like'    => $this->liked($this->user->id),
+            'user_like?'   => $this->liked($this->user->id),
             'comments_count' => $this->comments()->count(),
             'comments'     => CommentResource::collection($postComments),
             // 'comments'     => $this->comments()->approved()->select('id', 'comment', 'user_id','updated_at')->get(),
