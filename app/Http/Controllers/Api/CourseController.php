@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Interfaces\CourseInterface;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\UserCoursesResource;
+use App\Http\Resources\UserCoursesLessonsResource;
 use App\Models\Course;
 use Response;
 
@@ -63,6 +64,24 @@ class CourseController extends Controller
         }
         else {
           return UserCoursesResource::collection($userCourses);
+        }
+      }
+  }
+
+  public function userallcourses(Request $request)
+  {
+    $user = $request->user();
+
+    if ($user !== null) {
+        $userCourses = $user->courses()->with('lessons:id')->get();
+
+        if ( empty( $userCourses->toArray() ) ) {
+          return response()->json([
+            'message' => trans('main.courseuncomplete')
+          ]);
+        }
+        else {
+          return UserCoursesLessonsResource::collection($userCourses);
         }
       }
   }

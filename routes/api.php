@@ -11,6 +11,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
   Route::post('/password/reset', 'AuthController@resetPassword')->name('password.reset');
 
 
+  // Countries
+  Route::get('countries', 'CountryController@index');
   // FAQs
   Route::apiResource('faqs', 'FaqController')->only(['show', 'index']);
   // Categories
@@ -58,6 +60,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
       Route::post('/courses/{course}/enroll', 'CourseController@enroll')->name('user.course.enroll');
       Route::get('/usercompletecourses', 'CourseController@usercompletecourses')->name('user.course.list');
       Route::get('/useruncompletecourses', 'CourseController@useruncompletecourses')->name('user.course.list');
+      Route::get('/userallcourses', 'CourseController@userallcourses')->name('user.course.all');
 
       Route::get('/courses/{course}/lessons', 'LessonController@courseUserLessons')->name('user.course.lessons');
 
