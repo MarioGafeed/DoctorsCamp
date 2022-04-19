@@ -62,6 +62,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
       Route::get('/useruncompletecourses', 'CourseController@useruncompletecourses')->name('user.course.list');
       Route::get('/userallcourses', 'CourseController@userallcourses')->name('user.course.all');
 
+      Route::get('/userquizzes', 'UserLessonController@userquizzes')->name('user.course.all');
+
       Route::get('/courses/{course}/lessons', 'LessonController@courseUserLessons')->name('user.course.lessons');
 
       Route::post('/events/{event}/likes', 'EventLikeController@store')->name('events.likes.store');

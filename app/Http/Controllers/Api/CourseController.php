@@ -77,7 +77,7 @@ class CourseController extends Controller
 
         if ( empty( $userCourses->toArray() ) ) {
           return response()->json([
-            'message' => trans('main.courseuncomplete')
+            'message' => trans('main.courseallcomplete')
           ]);
         }
         else {

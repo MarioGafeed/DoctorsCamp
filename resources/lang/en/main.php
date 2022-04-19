@@ -811,6 +811,8 @@ return [
     'faqs'                         => 'FAQs',
     'coursecomplete'               => 'No Courses Completed Found..',
     'courseuncomplete'             => 'No Courses UnCompleted Found..',
+    'courseallcomplete'            => 'No Courses Found..',
+    'lessonall'                    => 'No Quizzes Found..',
     'courseenroll'                 => 'You enrolled course successfully..',
     'enrollbefore'                 => 'You enrolled this course before..',
     'emailfail'                    => 'These credentials do not match our records..',
