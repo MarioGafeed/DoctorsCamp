@@ -839,6 +839,7 @@ return [
     'eventdel'                     => 'Event deleted..',
     'imgdelete'                    => 'Image deleted..',
     'postdelete'                   => 'Post deleted..',
+    'userupdated'                  => 'Your Info Updated Successfully..',
 
 
 

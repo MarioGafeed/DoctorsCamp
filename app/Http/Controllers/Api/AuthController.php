@@ -69,7 +69,7 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json([
-            'message' => trans('main.userinfo'),
+            'message' => trans('main.userinfo'),            
             'user' => auth()->user(),
         ]);
     }

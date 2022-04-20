@@ -35,6 +35,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
       Route::get('notification/mark-as-unread/{id}', 'UsernotificationsController@unread');
 
       Route::get('me', 'AuthController@me');
+      Route::get('showme', 'UserController@showme');
+      Route::post('updateme', 'UserController@updateme');
       Route::get('verify', 'AuthController@verify');
       Route::post('refresh', 'AuthController@refresh');
       Route::post('logout', 'AuthController@logout');

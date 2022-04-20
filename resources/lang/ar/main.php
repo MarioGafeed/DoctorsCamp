@@ -864,6 +864,7 @@ return [
       'eventdel'                            => 'تم مسح الحدث',
       'imgdelete'                           => 'تم مسح الصورة',
       'postdelete'                          => 'تم مسح المنشور',
+      'userupdated'                         => 'تم تعديل بياناتك بنجاح',
 
 
 ];
