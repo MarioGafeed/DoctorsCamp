@@ -840,6 +840,7 @@ return [
     'imgdelete'                    => 'Image deleted..',
     'postdelete'                   => 'Post deleted..',
     'userupdated'                  => 'Your Info Updated Successfully..',
+    'categorylike'                 => 'You choose favorite categories..',
 
 
 

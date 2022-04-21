@@ -42,10 +42,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
       Route::post('logout', 'AuthController@logout');
       Route::post('changePassword', 'AuthController@changePassword')->name('changePassword');
       Route::apiResource('posts', 'PostsController')->only(['store', 'update', 'destroy']);
-      Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
-      Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
       // Favorite
-      Route::get('/userfavoritecategories', 'UserController@userfavoritecategories');
+      Route::get('/userfavoritecategories', 'CategoryController@userfavoritecategories');
       Route::get('/userfavoriteposts', 'PostsController@userfavoriteposts');
       Route::get('/userfavoritecourses', 'CourseController@userfavoritecourses');
       Route::get('/userfavoriteimages', 'ImagesController@userfavoriteimages');
@@ -84,7 +82,10 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
       Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
       Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
 
-      // Route::apiResource('categories', 'CategoryController');
+      Route::post('/categories/likes', 'CategoryLikeController@store')->name('categories.likes.store');
+      Route::delete('/categories/{category}/likes', 'CategoryLikeController@destroy')->name('categories.likes.destroy');
+
+
       Route::post('/images/{image}/likes', 'ImageLikeController@store')->name('images.likes.store');
       Route::delete('/images/{image}/likes', 'ImageLikeController@destroy')->name('images.likes.destroy');
   });
