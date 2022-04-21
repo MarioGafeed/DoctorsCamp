@@ -17,21 +17,14 @@ class PostRepository implements PostInterface
 
     private $viewPath = 'backend.posts';
 
-    private $postModel;
-
-    private $catModel;
+    private $postModel, $catModel;
 
     public function __construct(Post $post, Category $cat)
     {
         $this->postModel = $post;
         $this->catModel = $cat;
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index($dataTable)
     {
         return $dataTable->render("{$this->viewPath}.index", [

@@ -44,7 +44,12 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
       Route::apiResource('posts', 'PostsController')->only(['store', 'update', 'destroy']);
       Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
       Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
-      // Route::apiResource('categories', 'CategoryController');
+      // Favorite
+      Route::get('/userfavoritecategories', 'UserController@userfavoritecategories');
+      Route::get('/userfavoriteposts', 'PostsController@userfavoriteposts');
+      Route::get('/userfavoritecourses', 'CourseController@userfavoritecourses');
+      Route::get('/userfavoriteimages', 'ImagesController@userfavoriteimages');
+
       // Route::apiResource('questions', 'QuestionController');
       Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
       Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');

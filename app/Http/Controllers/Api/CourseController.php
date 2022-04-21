@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Interfaces\CourseInterface;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\UserCoursesResource;
+use App\Http\Resources\CourseuserResource;
 use App\Http\Resources\UserCoursesLessonsResource;
 use App\Models\Course;
 use Response;
@@ -114,6 +115,15 @@ class CourseController extends Controller
         'message' => trans('main.enrollbefore')
       ]);
     }
+  }
+
+  public function userfavoritecourses(Request $request)
+  {
+    $user = $request->user();
+
+    $userfavoritecourses = Course::whereLikedBy($user->id)->get();
+
+    return CourseuserResource::collection($userfavoritecourses);
   }
 
 }

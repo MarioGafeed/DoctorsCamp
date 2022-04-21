@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Interfaces\PostInterface;
 use App\Http\Requests\PostsRequest;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\PostuserResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -57,5 +58,14 @@ class PostsController extends Controller
         $post->delete();
 
         return JsonResponder::make(trans('main.postdelete'));
+    }
+
+    public function userfavoriteposts(Request $request)
+    {
+      $user = $request->user();
+
+      $userfavoriteposts = Post::whereLikedBy($user->id)->get();
+
+      return PostuserResource::collection($userfavoriteposts);
     }
 }
