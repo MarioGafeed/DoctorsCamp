@@ -35,6 +35,8 @@ class ContactFormController extends Controller
       //     $message->from($request->email);
       //     $message->to('troposal.com@gmail.com', 'Admin')->subject($request->get('subject'));
       // });
-      return response()->json(['success' => 'The email has been sent.']);
+      return response()->json([
+        'message' => trans('main.contactsubmit')
+      ]);
   }
 }

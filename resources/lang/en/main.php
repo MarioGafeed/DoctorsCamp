@@ -842,6 +842,7 @@ return [
     'postdelete'                   => 'Post deleted..',
     'userupdated'                  => 'Your Info Updated Successfully..',
     'categorylike'                 => 'You choose favorite categories..',
+    'contactsubmit'                 => 'Your message has been send successfully, We will reply you soon..',
 
 
 
