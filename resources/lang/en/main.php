@@ -493,6 +493,7 @@ return [
     'send'                => 'Send',
     'login_color'         => 'Login Color',
     'contact-messages'    => 'Contact Us Messages',
+    'subject'             => 'Subject',
     'about_title'         => 'About Title',
     'ourFeats'            => 'Our Features',
     'en-title'            => 'E Title',

@@ -9,6 +9,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
   Route::post('login-social', 'SocialAuthController@login');
   Route::post('/password/email', 'AuthController@sendPasswordResetLinkEmail')->middleware('throttle:5,1')->name('password.email');
   Route::post('/password/reset', 'AuthController@resetPassword')->name('password.reset');
+  // Contact Form
+  Route::post('/contact', 'ContactFormController@contact')->name('guest.contact');
 
 
   // Countries

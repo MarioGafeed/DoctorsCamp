@@ -787,6 +787,7 @@ return [
     'next'                            => 'التالي',
     'message'                         => 'رسالة',
     'messages'                        => 'رسائل',
+    'subject'                         => 'موضوع الرسالة',
     // setting
     'sitename'                        => 'أسم الموقع',
 
