@@ -24,7 +24,8 @@ class UserCoursesLessonsResource extends JsonResource
          'bar'                          => $userCourseRow->pivot->score,
         'user_complete_lessons_count'   => $user->lessons()->where('course_id', $this->id)->count(),
         'course_lessons_count'          => $this->lessons()->count(),
-        'next_lesson'                   => "http://doctorscamp.dwam4j.net/api/lessons/{$nextLesson?->id}",
+        'next_lesson'                   => "{$nextLesson?->id}",
+        // 'next_lesson'                   => "http://doctorscamp.dwam4j.net/api/lessons/{$nextLesson?->id}",
 
         ];
     }
