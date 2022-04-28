@@ -69,7 +69,7 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json([
-            'message' => trans('main.userinfo'),            
+            'message' => trans('main.userinfo'),
             'user' => auth()->user(),
         ]);
     }
@@ -147,7 +147,10 @@ class AuthController extends Controller
   	}
 
     public function changePassword(Request $request) {
-        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+
+        $user = $request->user();
+
+        if (!(Hash::check($request->get('current-password'), $user->password))) {
             // The passwords matches
             return response()->json([
                 'message' => trans('main.passnotmatch'),
@@ -166,8 +169,7 @@ class AuthController extends Controller
             'new-password' => 'required|confirmed',
         ]);
 
-        //Change Password
-        $user = Auth::user();
+        //Change Password        
         $user->password = Hash::make($request->get('new-password'));
         $user->save();
 

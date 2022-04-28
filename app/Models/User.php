@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Models;
 
+use App\Notifications\CustomResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -73,5 +73,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function linkedSocialAccounts()
     {
         return $this->hasMany(LinkedSocialAccount::class);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomResetPasswordNotification($token));
     }
 }
