@@ -8,6 +8,7 @@ use App\Http\Interfaces\PostInterface;
 use App\Http\Requests\PostsRequest;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostuserResource;
+use App\Http\Resources\PostvideoResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,7 @@ class PostsController extends Controller
             // ->orWhere(User::select('name')->get(), 'LIKE', "%$request->keyword%")
             ->get();
       })->whereNotNull('title_ar')
+        ->where('type', 'article')
         ->where('active', 1)
         ->with('user:id,name')
         ->with('category:id,title_en,title_ar')
@@ -34,6 +36,26 @@ class PostsController extends Controller
         ->paginate(10);
 
      return PostResource::collection($posts);
+    }
+
+    public function indexvideo(Request $request)
+    {
+      $posts = Post::when($request->keyword, function ($query) use ($request){
+            $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+            ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+            ->orWhere('desc', 'LIKE', "%$request->keyword%")
+            ->orWhere('keyword', 'LIKE', "%$request->keyword%")
+            // ->orWhere(User::select('name')->get(), 'LIKE', "%$request->keyword%")
+            ->get();
+      })->whereNotNull('title_ar')
+        ->where('type', 'video')
+        ->where('active', 1)
+        ->with('user:id,name')
+        ->with('category:id,title_en,title_ar')
+        ->withCount('comments')
+        ->paginate(10);
+
+     return PostvideoResource::collection($posts);
     }
 
     public function store(PostsRequest $request)
@@ -46,6 +68,11 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         return new PostResource($post);
+    }
+
+    public function showvideo(Post $post)
+    {
+        return new PostvideoResource($post);
     }
 
     public function update(PostsRequest $request, Post $post)
