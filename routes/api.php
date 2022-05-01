@@ -7,7 +7,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
   Route::post('register', 'AuthController@register');
   Route::post('login', 'AuthController@login')->name('user.login');
   Route::post('login-social', 'SocialAuthController@login');
-  Route::post('/password/email', 'AuthController@sendPasswordResetLinkEmail')->middleware('throttle:5,1')->name('password.email');
+  Route::post('/password/email', 'AuthController@forgotPassword')->middleware('throttle:5,1')->name('password.email');
+  Route::post('/verify/pin', 'AuthController@verifyPin')->middleware('throttle:5,1')->name('verify.pin');
   Route::post('/password/reset', 'AuthController@resetPassword')->name('apipassword.reset');
   // Contact Form
   Route::post('/contact', 'ContactFormController@contact')->name('guest.contact');
