@@ -26,7 +26,9 @@ class UserCoursesLessonsResource extends JsonResource
         'course_lessons_count'          => $this->lessons()->count(),
         'next_lesson'                   => "{$nextLesson?->id}",
         // 'next_lesson'                   => "http://doctorscamp.dwam4j.net/api/lessons/{$nextLesson?->id}",
-
+        'user_enroll?'                  => (bool) $this->users()
+                                        ->where('user_id', '=', $user->id)
+                                        ->count(),        
         ];
     }
 }

@@ -6,12 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostvideoResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
       $postComments = $this->comments()->where('user_id', $this->user->id)->approved()->orderBy('created_at', 'desc')->get();
@@ -19,7 +13,7 @@ class PostvideoResource extends JsonResource
         return [
             'id'           => $this->id,
             'title'        => $this['title_' . request()->header('accept-language', 'en')],
-            'keyword'      => $this->keyword,            
+            'keyword'      => $this->keyword,
             'description'  => json_decode($this->desc, true)[request()->header('Accept-Language', 'ar')] ?? null,
             'user_name'    => $this->user->name,
             'category_id'  => $this->category->id,

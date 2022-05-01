@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Interfaces\CourseInterface;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\UserCoursesResource;
 use App\Http\Resources\CourseuserResource;
@@ -85,6 +86,16 @@ class CourseController extends Controller
           return UserCoursesLessonsResource::collection($userCourses);
         }
       }
+  }
+
+  public function userCoursesEnroll(Request $request)
+  {
+    $user = $request->user();
+    $allCourses = Course::where('active', 1)
+    ->with('lessons')
+    ->with('category:id,title_en,title_ar')
+    ->paginate(10);
+    return CourseResource::collection($allCourses);
   }
 
   public function show(Course $course)
