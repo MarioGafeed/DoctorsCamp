@@ -38,8 +38,8 @@ class PostAddedNotification extends Notification implements ShouldQueue
                 'ar' => $this->post['title_ar'],
                 'en' => $this->post['title_en'],
             ],
-            'entity_type'      =>  get_class($this->post), // App/Models/Post
-            'entity_id'        =>  $this->post->id, // 2
+            'entity_type'      =>  'post',
+            'entity_id'        =>  $this->post->id,
         ];
     }
 }
