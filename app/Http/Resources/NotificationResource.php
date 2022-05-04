@@ -8,7 +8,7 @@ class NotificationResource extends JsonResource
 {
     public function toArray($request)
     {
-      return [
+        return [
           'id'                    => $this->id,
           'title'                 => $this->data['title'][request()->header('Accept-Language', 'ar')],
           'description'           => $this->data['description'][request()->header('Accept-Language', 'ar')],

@@ -33,7 +33,6 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('notifications/{type?}', 'UsernotificationsController@index');
-        Route::get('notification/show/{id}', 'UsernotificationsController@show');
         Route::get('notification/mark-as-read/{id}', 'UsernotificationsController@read');
         Route::get('notification/mark-as-unread/{id}', 'UsernotificationsController@unread');
 
