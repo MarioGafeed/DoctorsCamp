@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.5",
         "pyaesone17/active-state": "^1.2",
         "rtconner/laravel-likeable": "^3.2",
+        "setasign/fpdf": "^1.8",
         "spatie/laravel-medialibrary": "^9.0.0",
         "spatie/laravel-permission": "^4.2",
         "spatie/laravel-tags": "^3.1",
