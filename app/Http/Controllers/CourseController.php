@@ -54,7 +54,6 @@ class CourseController extends Controller
     {
         $course = $this->courseInterface->update($request->all(), $id);
 
-
         session()->flash('success', trans('main.updated'));
 
         return redirect()->route('courses.show', [$course->id]);

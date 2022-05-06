@@ -26,6 +26,7 @@ class CourseResource extends JsonResource
           'user_enroll?'  => (bool) $this->users()
                                             ->where('user_id', '=', $user->id)
                                             ->count(),
+          'user_like?'    => $this->liked($user->id),
           'login_url'     => route('user.login'),
           'updated_at'    => (string) $this->updated_at,
           ];

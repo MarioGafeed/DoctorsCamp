@@ -19,7 +19,10 @@ class UserCoursesResource extends JsonResource
         'progress'          => $user->lessons()->where('course_id', $this->id)->count() .' / '. $this->lessons()->count(),
         'image'             => $this->getFirstMediaUrl(),
         'bar'               => $userCourseRow->pivot->score,
-        // 'instractor'    => $this->user,
+        'user_enroll?'  => (bool) $this->users()
+                                          ->where('user_id', '=', $user->id)
+                                          ->count(),
+        'user_like?'    => $this->liked($user->id),
         'updated_at'        => (string) $this->updated_at,
         ];
     }

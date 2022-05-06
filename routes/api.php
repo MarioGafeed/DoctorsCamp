@@ -68,7 +68,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::get('/usercompletecourses', 'CourseController@usercompletecourses')->name('user.course.list');
         Route::get('/useruncompletecourses', 'CourseController@useruncompletecourses')->name('user.course.list');
         Route::get('/userallcourses', 'CourseController@userallcourses')->name('user.course.all');
-        Route::get('/userCoursesEnroll', 'CourseController@userCoursesEnroll')->name('user.coursed.enroll');
+        Route::get('/userCoursesEnroll', 'CourseController@userCoursesEnroll')->name('user.courses.enroll');
 
         Route::get('/userquizzes', 'UserLessonController@userquizzes')->name('user.course.all');
 

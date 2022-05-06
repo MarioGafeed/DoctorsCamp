@@ -91,11 +91,10 @@ class CourseController extends Controller
   public function userCoursesEnroll(Request $request)
   {
     $user = $request->user();
-    $allCourses = Course::where('active', 1)
-    ->with('lessons')
+    $allCoursesEnrolled = Course::with('lessons')
     ->with('category:id,title_en,title_ar')
     ->paginate(10);
-    return CourseResource::collection($allCourses);
+    return CourseResource::collection($allCoursesEnrolled);
   }
 
   public function show(Course $course)
