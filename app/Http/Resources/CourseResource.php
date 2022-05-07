@@ -42,6 +42,7 @@ class CourseResource extends JsonResource
             'users_count'   => $this->users()->count(),
             'image'         => $this->getFirstMediaUrl(),
             'price'         => $this->price,
+            'user_like?'    => $this->liked($user->id),
             'login_url'     => route('user.login'),
             'updated_at'    => (string) $this->updated_at,
             ];
