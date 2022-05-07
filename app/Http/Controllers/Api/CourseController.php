@@ -115,8 +115,17 @@ class CourseController extends Controller
       return new CourseResource($course);
   }
 
-  public function showuser(Course $course)
+  public function showuser(Course $course, Request $request)
   {
+    if (! $request->user()->courses->contains($course->id)) {
+      $request->user()->courses()->attach($course->id);
+
+      foreach ($course->lessons as $lesson) {
+        if (! $request->user()->lessons->contains($lesson->id)) {
+          $request->user()->lessons()->attach($lesson->id);
+        }
+      }
+    }
       return new CourseResource($course);
   }
 
