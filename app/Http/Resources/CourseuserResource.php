@@ -19,8 +19,7 @@ class CourseuserResource extends JsonResource
         'price'         => $this->price,
         'user_enroll?'  => (bool) $this->users()
                                           ->where('user_id', '=', $user->id)
-                                          ->count(),
-        'user_like?'    => $this->liked($user->id),
+                                          ->count(),        
         'login_url'     => route('user.login'),
         ];
     }

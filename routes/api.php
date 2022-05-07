@@ -54,6 +54,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
         Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
         // Route::apiResource('categories', 'CategoryController');
+        Route::get('listcourseswithlikes', 'CourseController@indexcourseswithlikes');
+        Route::get('courseuser/{course}', 'CourseController@showuser');
         Route::apiResource('lessons', 'LessonController');
         Route::apiResource('questions', 'QuestionController');
         Route::get('lesson/{id}/showquestions', 'QuestionController@showLessonQuestions');

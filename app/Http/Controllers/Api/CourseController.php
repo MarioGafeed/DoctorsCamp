@@ -34,6 +34,19 @@ class CourseController extends Controller
       return CourseResource::collection($courses);
   }
 
+  public function indexcourseswithlikes(Request $request)
+  {
+      $courses = Course::when($request->keyword, function ($query) use ($request){
+            $query->orWhere('name', 'LIKE', "%$request->keyword%")->get();
+      })->whereNotNull('name')
+    ->where('active', 1)
+    ->with('lessons')
+    ->with('category:id,title_en,title_ar')
+    ->paginate(10);
+
+    return CourseResource::collection($courses);
+  }
+
   public function usercompletecourses(Request $request)
   {
     $user = $request->user();
@@ -98,6 +111,11 @@ class CourseController extends Controller
   }
 
   public function show(Course $course)
+  {
+      return new CourseResource($course);
+  }
+
+  public function showuser(Course $course)
   {
       return new CourseResource($course);
   }
