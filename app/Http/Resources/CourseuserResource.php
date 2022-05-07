@@ -8,6 +8,8 @@ class CourseuserResource extends JsonResource
 {
     public function toArray($request)
     {
+      $user = $request->user();
+
       return [
         'id'            => $this->id,
         'name'          => $this->name,

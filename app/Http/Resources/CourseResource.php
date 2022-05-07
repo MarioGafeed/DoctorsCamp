@@ -10,8 +10,8 @@ class CourseResource extends JsonResource
     public function toArray($request)
     {
         $user = $request->user();
-
-        if ($user !== null){
+        
+        if ($user !== null){dd('here');
           return [
           'id'            => $this->id,
           'name'          => $this->name,
@@ -42,7 +42,6 @@ class CourseResource extends JsonResource
             'users_count'   => $this->users()->count(),
             'image'         => $this->getFirstMediaUrl(),
             'price'         => $this->price,
-            'user_like?'    => $this->liked($user->id),
             'login_url'     => route('user.login'),
             'updated_at'    => (string) $this->updated_at,
             ];
