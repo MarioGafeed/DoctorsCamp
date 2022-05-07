@@ -20,7 +20,7 @@ class CourseResource extends JsonResource
           'category_name' => $this->category['title_' . request()->header('accept-language', 'en')],
           'lessons'       => $this->lessons()->select('id', 'title', 'myorder')->get(),
           'lessons_count' => $this->lessons()->count(),
-          'users_count'   => $this->users()->count(),
+          'students_count'=> $this->users()->count(),
           'image'         => $this->getFirstMediaUrl(),
           'price'         => $this->price,
           'user_enroll?'  => (bool) $this->users()
@@ -39,9 +39,9 @@ class CourseResource extends JsonResource
             'category_name' => $this->category['title_' . request()->header('accept-language', 'en')],
             'lessons'       => $this->lessons()->select('id', 'title', 'myorder')->get(),
             'lessons_count' => $this->lessons()->count(),
-            'users_count'   => $this->users()->count(),
+            'students_count'=> $this->users()->count(),
             'image'         => $this->getFirstMediaUrl(),
-            'price'         => $this->price,            
+            'price'         => $this->price,
             'login_url'     => route('user.login'),
             'updated_at'    => (string) $this->updated_at,
             ];
