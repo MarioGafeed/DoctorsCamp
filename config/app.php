@@ -182,6 +182,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Tags\TagsServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -236,6 +237,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
         // 'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],

@@ -7,7 +7,9 @@ use App\Models\LinkedSocialAccount;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+// use Socialize;
 use Laravel\Socialite\Facades\Socialite;
+
 use Laravel\Socialite\Two\User as ProviderUser;
 
 class SocialAuthController extends Controller
