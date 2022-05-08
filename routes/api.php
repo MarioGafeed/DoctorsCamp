@@ -51,6 +51,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::get('/userfavoriteimages', 'ImagesController@userfavoriteimages');
 
         // Route::apiResource('questions', 'QuestionController');
+        Route::get('/myposts', 'PostsController@myposts')->name('posts.me');
         Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
         Route::delete('/posts/{post}/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
         // Route::apiResource('categories', 'CategoryController');

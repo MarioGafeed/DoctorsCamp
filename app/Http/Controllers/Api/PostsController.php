@@ -58,6 +58,25 @@ class PostsController extends Controller
      return PostvideoResource::collection($posts);
     }
 
+    public function myposts(Request $request)
+    {
+      $posts = Post::when($request->keyword, function ($query) use ($request){
+            $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+            ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+            ->orWhere('desc', 'LIKE', "%$request->keyword%")
+            ->orWhere('keyword', 'LIKE', "%$request->keyword%")
+            // ->orWhere(User::select('name')->get(), 'LIKE', "%$request->keyword%")
+            ->get();
+      })->whereNotNull('title_ar')
+        ->where('user_id', $request->user()->id)
+        ->with('user:id,name')
+        ->with('category:id,title_en,title_ar')
+        ->withCount('comments')
+        ->paginate(10);
+
+       return PostResource::collection($posts);
+    }
+
     public function store(PostsRequest $request)
     {
         $pos = $this->postInterface->store($request->all());
