@@ -19,7 +19,7 @@ class CommentController extends Controller
 
   public function postComments($postId)
   {
-     return CommentResource::collection(Comment::where('commentable_id', $postId)->with('user')->orderBy('created_at', 'desc')->paginate(10));
+     return CommentResource::collection(Comment::where('commentable_id', $postId)->with('user')->orderBy('created_at', 'desc')->get());
   }
 
   public function store(CommentsRequest $request)
