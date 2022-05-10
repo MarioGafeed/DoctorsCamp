@@ -24,7 +24,7 @@ class PostRepository implements PostInterface
         $this->postModel = $post;
         $this->catModel = $cat;
     }
-    
+
     public function index($dataTable)
     {
         return $dataTable->render("{$this->viewPath}.index", [
@@ -44,11 +44,6 @@ class PostRepository implements PostInterface
 
     public function store(array $data)
     {
-        $data['desc'] = json_encode([
-            'en' => $data['desc_en'],
-            'ar' => $data['desc_ar'],
-        ]);
-
         $data['content'] = json_encode([
             'en' => $data['content_en'],
             'ar' => $data['content_ar'],
@@ -84,10 +79,19 @@ class PostRepository implements PostInterface
     public function show($id)
     {
         $pos = $this->getPostWithCat($id);
-        $pos['desc_en'] = json_decode($pos->desc)->en;
-        $pos['desc_ar'] = json_decode($pos->desc)->ar;
-        $pos['content_en'] = json_decode($pos->content)->en;
-        $pos['content_ar'] = json_decode($pos->content)->ar;
+
+        if ($pos['desc_en'] != null) {
+          $pos['desc_en'] = json_decode($pos->desc)->en;
+        }
+        if ($pos['desc_ar'] != null ) {
+          $pos['desc_ar'] = json_decode($pos->desc)->ar;
+        }
+        if ( $pos['content_en'] != null ) {
+          $pos['content_en'] = json_decode($pos->content)->en;
+        }
+        if ( $pos['content_ar'] != null ) {
+          $pos['content_ar'] = json_decode($pos->content)->ar;
+        }
 
         return view("{$this->viewPath}.show", [
           'title' => trans('main.show').' '.trans('main.post').' : '.$pos->title_ar,
@@ -101,10 +105,18 @@ class PostRepository implements PostInterface
         $cats = $this->getAllcategory();
         $tags = $pos->tags->pluck('name')->implode(', ');
 
-        $pos['desc_en'] = json_decode($pos->desc)->en;
-        $pos['desc_ar'] = json_decode($pos->desc)->ar;
-        $pos['content_en'] = json_decode($pos->content)->en;
-        $pos['content_ar'] = json_decode($pos->content)->ar;
+        if ($pos['desc_en'] != null) {
+          $pos['desc_en'] = json_decode($pos->desc)->en;
+        }
+        if ($pos['desc_ar']) {
+          $pos['desc_ar'] = json_decode($pos->desc)->ar;
+        }
+        if ($pos['content_en']) {
+          $pos['content_en'] = json_decode($pos->content)->en;
+        }
+        if ($pos['content_ar']) {
+          $pos['content_ar'] = json_decode($pos->content)->ar;
+        }
 
         return view("{$this->viewPath}.edit", [
           'title' => trans('main.edit').' '.trans('main.post').' : '.$pos->title,

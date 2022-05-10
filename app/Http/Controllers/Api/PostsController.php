@@ -78,8 +78,7 @@ class PostsController extends Controller
     }
 
     public function store(PostsRequest $request)
-    {
-      dd($request->all());
+    {    
         $pos = $this->postInterface->store($request->all());
 
         return new PostResource($pos);

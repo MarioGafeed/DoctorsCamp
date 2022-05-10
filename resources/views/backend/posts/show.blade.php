@@ -69,6 +69,7 @@
                             {{ $show->user->name }}
                             <br><hr>
                         </div>
+                        @if($show->desc != null)
                         <div class="col-md-6">
                             <strong>{{trans('main.description')}} : (en)</strong>
                             {{ json_decode($show->desc)->en }}
@@ -79,6 +80,7 @@
                             {{ json_decode($show->desc)->ar }}
                             <br><hr>
                         </div>
+                        @endif
                         <div class="col-md-6">
                             <strong>{{trans('main.keyword')}} : </strong>
                             {{ $show->keyword }}

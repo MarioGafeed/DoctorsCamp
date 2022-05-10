@@ -49,7 +49,7 @@ class CategoryRepository implements CategoryInterface
       if ($data['icon']) {
          $data['icon'] = Helper::Upload('categories', $data['icon'], 'checkImages');
        }else {
-         $data['icon'] = "categories/default.ico";
+         $data['icon'] = "categories/default.png";
        }
 
         $cat = Category::create($data);

@@ -21,12 +21,12 @@ class CreatepostsTable extends Migration
             $table->text('title_ar');
             $table->longtext('content')->nullable();
             $table->string('youtubeURL')->nullable();
-            $table->text('desc');
+            $table->text('desc')->nullable();
             $table->text('keyword')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('category_id')->constrained('categories');
             $table->enum('type', ['article', 'video']);
-            $table->boolean('active')->default(fas);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

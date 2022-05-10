@@ -6,21 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PostsRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         $rules = [
@@ -30,14 +21,14 @@ class PostsRequest extends FormRequest
             'category_id' => 'required|exists:categories,id',
             'content_en'  => 'nullable',
             'content_ar'  => 'nullable',
-            'keyword'     => 'required',
-            'desc_ar'     => 'required',
+            'keyword'     => 'nullable',
+            'desc_ar'     => 'nullable',
             'desc_en'     => 'nullable',
-            'active'      => 'required|in:0,1',
+            'active'      => 'nullable|in:0,1',
             'type'        => 'required|in:article,video',
             'image'       => 'required|image',
-            'tags'        => 'required',
-            'tags.*'      => 'required|integer|exists:tags,id',
+            'tags'        => 'nullable',
+            'tags.*'      => 'nullable|integer|exists:tags,id',
         ];
 
         if ($this->method() == 'PATCH') {
