@@ -14,7 +14,9 @@ class UserCoursesLessonsResource extends JsonResource
 
       $currentLesson = $user->lessons()->where('course_id', $this->id)->orderByDesc('lesson_id')->first();
 
-       $currentLessonOrder = Lesson::where('id', $currentLesson->id)->select('myorder')->first();
+       if ($currentLesson->id) {
+         $currentLessonOrder = Lesson::where('id', $currentLesson->id)->select('myorder')->first();
+       }
 
       $nextLesson = Lesson::where('myorder',  $currentLessonOrder->myorder+1)->select('id', 'myorder')->first();
 
@@ -28,7 +30,7 @@ class UserCoursesLessonsResource extends JsonResource
         // 'next_lesson'                   => "http://doctorscamp.dwam4j.net/api/lessons/{$nextLesson?->id}",
         'user_enroll?'                  => (bool) $this->users()
                                         ->where('user_id', '=', $user->id)
-                                        ->count(),        
+                                        ->count(),
         ];
     }
 }
