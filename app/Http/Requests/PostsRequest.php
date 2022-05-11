@@ -25,7 +25,7 @@ class PostsRequest extends FormRequest
             'desc_ar'     => 'nullable',
             'desc_en'     => 'nullable',
             'active'      => 'nullable|in:0,1',
-            'type'        => 'required|in:article,video',
+            'type'        => 'nullable|in:article,video',
             'image'       => 'required|image',
             'tags'        => 'nullable',
             'tags.*'      => 'nullable|integer|exists:tags,id',
