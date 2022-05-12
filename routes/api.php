@@ -31,10 +31,13 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     // images
     Route::apiResource('images', 'ImagesController');
 
+
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('notifications/{type?}', 'UsernotificationsController@index');
         Route::get('notification/mark-as-read/{id}', 'UsernotificationsController@read');
         Route::get('notification/mark-as-unread/{id}', 'UsernotificationsController@unread');
+        // Notifications Test Api Tokens
+        Route::post('token/update', 'UsernotificationsController@update');
 
         Route::get('me', 'AuthController@me');
         Route::get('showme', 'UserController@showme');

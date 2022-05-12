@@ -47,4 +47,16 @@ class UsernotificationsController extends Controller
             'message' => "$notificationTitle marked as unread",
         ]);
     }
+
+    public function update(Request $request)
+    {
+      $user = $request->user();
+      $user->android_token = $request->android_token;
+      $checkUpdate = (bool) $user->save();
+      if ($checkUpdate) {
+        return 1;
+      }else {
+        return 0;
+      }
+    }
 }
