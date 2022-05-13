@@ -23,8 +23,7 @@ class CreateUsersTable extends Migration
             $table->enum('type', ['user', 'admin'])->default('user');
             $table->boolean('active')->default(true);
             $table->foreignId('country_id')->constrained('countries');
-            $table->string('android_token')->nullable();
-            $table->string('ios_token')->nullable();
+            $table->string('fcm_token')->nullable();            
             $table->rememberToken();
             $table->timestamps();
         });

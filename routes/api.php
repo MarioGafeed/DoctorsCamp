@@ -38,6 +38,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::get('notification/mark-as-unread/{id}', 'UsernotificationsController@unread');
         // Notifications Test Api Tokens
         Route::post('token/update', 'UsernotificationsController@update');
+        Route::post('send-notification', 'UsernotificationsController@send');
+
 
         Route::get('me', 'AuthController@me');
         Route::get('showme', 'UserController@showme');
