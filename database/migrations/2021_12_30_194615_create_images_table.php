@@ -17,7 +17,7 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->string('title_en');
             $table->string('title_ar');
-            $table->text('desc');
+            $table->text('desc')->nullable('Description');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();

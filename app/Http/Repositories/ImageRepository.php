@@ -24,11 +24,6 @@ class ImageRepository implements ImageInterface
         $this->catModel = $cat;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($dataTable)
     {
         return $dataTable->render("{$this->viewPath}.index", [
