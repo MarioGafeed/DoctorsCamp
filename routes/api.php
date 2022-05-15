@@ -88,7 +88,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::post('events/enroll/{id}', 'EventController@enroll')->name('user.events.enroll');
         Route::post('events/disenroll/{id}', 'EventController@disenroll')->name('user.events.disenroll');
         Route::get('userevents', 'EventController@userList')->name('user.events.list');
-        Route::apiResource('comments', 'CommentController')->only('store', 'update', 'destroy');
+        Route::apiResource('comments', 'CommentController')->only('store', 'update');
+        Route::post('comment/del/{id}', 'CommentController@destroy');
         // Route::apiResource('categories', 'CategoryController');
         Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
         Route::post('/posts/{post}/del/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
