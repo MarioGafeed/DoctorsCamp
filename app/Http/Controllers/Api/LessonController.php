@@ -80,8 +80,9 @@ class LessonController extends Controller
 
     $validator = Validator::make($request->all(), [
       'answers'   => 'required|array',
-      'answers.*' => 'required|in:1,2,3,4',
+      'answers.*' => 'required|in:0,1,2,3',
     ]);
+    
      if ($validator->fails()) {
        return response()->json($validator->errors());
      }

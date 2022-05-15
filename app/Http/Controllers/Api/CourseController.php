@@ -139,8 +139,8 @@ class CourseController extends Controller
           $request->user()->lessons()->attach($lesson->id);
         }
       }
-      $lessonFirst = $request->user()->lessons->where('course_id', $course->id)->first();
-      $lessonFirst->pivot->status => 'opened';
+      // $lessonFirst = $request->user()->lessons->where('course_id', $course->id)->first();
+      // $lessonFirst->pivot->status => 'opened';
 
       return response()->json([
         'message' => trans('main.courseenroll')
