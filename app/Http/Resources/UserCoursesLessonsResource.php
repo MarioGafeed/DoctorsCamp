@@ -14,7 +14,7 @@ class UserCoursesLessonsResource extends JsonResource
 
       $currentLesson = $user->lessons()->where('course_id', $this->id)->orderByDesc('lesson_id')->first();
 
-       if ($currentLesson->id) {
+       if ($currentLesson->id != null) {
          $currentLessonOrder = Lesson::where('id', $currentLesson->id)->select('myorder')->first();
        }
 
