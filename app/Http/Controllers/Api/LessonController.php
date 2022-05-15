@@ -83,9 +83,9 @@ class LessonController extends Controller
     //   'answers.*' => 'required|in:0,1,2,3',
     // ]);
 
-     if ($validator->fails()) {
-       return response()->json($validator->errors());
-     }
+     // if ($validator->fails()) {
+     //   return response()->json($validator->errors());
+     // }
      // Calculate Score..
      $points = 0;
      // $lesson = Lesson::findOrFail($lesson);
