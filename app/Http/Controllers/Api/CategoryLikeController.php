@@ -11,6 +11,8 @@ class CategoryLikeController extends Controller
 {
   public function store(Request $request)
   {
+    $user = $request->user();
+    
     $validator = Validator::make($request->all(), [
       'categories'   => 'required|array',
       'categories.*' => 'required|in:categories',

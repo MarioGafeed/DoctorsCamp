@@ -134,6 +134,10 @@ class CourseController extends Controller
     if (! $request->user()->courses->contains($course->id)) {
       $request->user()->courses()->attach($course->id);
 
+      $request->user()->courses()->updateExistingPivot([
+        'active' => 1,
+      ]);
+
       foreach ($course->lessons as $lesson) {
         if (! $request->user()->lessons->contains($lesson->id)) {
           $request->user()->lessons()->attach($lesson->id);

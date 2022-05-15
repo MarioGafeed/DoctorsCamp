@@ -78,14 +78,14 @@ class LessonController extends Controller
     //   dd(round($userProgress,2));
     // }
 
-    // $validator = Validator::make($request->all(), [
-    //   'answers'   => 'required|array',
-    //   'answers.*' => 'required|in:0,1,2,3',
-    // ]);
-    //
-    //  if ($validator->fails()) {
-    //    return response()->json($validator->errors());
-    //  }
+    $validator = Validator::make($request->all(), [
+      'answers'   => 'required|array',
+      'answers.*' => 'required|in:0,1,2,3',
+    ]);
+
+     if ($validator->fails()) {
+       return response()->json($validator->errors());
+     }
      // Calculate Score..
      $points = 0;
      // $lesson = Lesson::findOrFail($lesson);
@@ -116,9 +116,9 @@ class LessonController extends Controller
 
      $time_mins = $submitTime->diffInMinutes($starttime);
 
-     // if ($time_mins > $pivotRow->duration_mins) {
-     //   $score = 0;
-     // }
+     if ($time_mins > $pivotRow->duration_mins) {
+       $score = 0;
+     }
      // Update lesson_user Pivot row
      $user->lessons()->updateExistingPivot($lesson->id, [
        'score'            => $score,
