@@ -88,7 +88,7 @@ class EventRepository implements EventInterface
         if (! $event) {
             return back();
         }
-        $event->title_en = $data['title_en'];
+        $event->title_ar = $data['title_ar'];
         $event->title_en = $data['title_en'];
         $event->country_id = $data['country_id'];
         $event->city = $data['city'];
