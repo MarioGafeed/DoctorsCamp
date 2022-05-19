@@ -100,7 +100,7 @@
                             <br><hr>
                         </div>
                         <div class="col-md-6">
-                            <strong>{{trans('main.type')}} : (ar)</strong>
+                            <strong>{{trans('main.type')}} </strong>
                             {{ $show->type }}
                             <br><hr>
                         </div>

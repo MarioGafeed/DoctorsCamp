@@ -49,6 +49,11 @@ class PostRepository implements PostInterface
             'ar' => $data['content_ar'],
         ]);
 
+        $data['desc'] = json_encode([
+            'en' => $data['desc_en'],
+            'ar' => $data['desc_ar'],
+        ]);
+
         $data['user_id'] = auth()->user()->id;
 
         $pos = Post::create($data);
@@ -105,18 +110,15 @@ class PostRepository implements PostInterface
         $cats = $this->getAllcategory();
         $tags = $pos->tags->pluck('name')->implode(', ');
 
-        if ($pos['desc_en'] != null) {
+        if ($pos->desc != null) {
           $pos['desc_en'] = json_decode($pos->desc)->en;
-        }
-        if ($pos['desc_ar']) {
           $pos['desc_ar'] = json_decode($pos->desc)->ar;
         }
-        if ($pos['content_en']) {
+
+        if ($pos->content != null) {
           $pos['content_en'] = json_decode($pos->content)->en;
-        }
-        if ($pos['content_ar']) {
           $pos['content_ar'] = json_decode($pos->content)->ar;
-        }
+        }        
 
         return view("{$this->viewPath}.edit", [
           'title' => trans('main.edit').' '.trans('main.post').' : '.$pos->title,

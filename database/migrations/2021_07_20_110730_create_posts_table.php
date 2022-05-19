@@ -25,7 +25,7 @@ class CreatepostsTable extends Migration
             $table->text('keyword')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('category_id')->constrained('categories');
-            $table->enum('type', ['article', 'video'])->default('article');
+            $table->enum('type', ['article', 'video', 'sound', 'book'])->default('article');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

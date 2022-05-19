@@ -17,8 +17,15 @@
         if ($(this).val() == 'video') {
             $('#video').removeClass('hidden');
             $('#article').addClass('hidden');
-        } else {
+            $('#sound').addClass('hidden');
+        } else if ($(this).val() == 'sound') {
+            $('#article').addClass('hidden');
             $('#video').addClass('hidden');
+            $('#sound').removeClass('hidden');
+        }
+        else {
+            $('#video').addClass('hidden');
+            $('#sound').addClass('hidden');
             $('#article').removeClass('hidden');
         }
     });

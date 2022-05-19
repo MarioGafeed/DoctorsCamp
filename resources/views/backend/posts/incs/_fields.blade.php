@@ -92,8 +92,6 @@
         </div>
     </div>
 
-
-
     <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
         <label class="col-md-2 control-label">{{ trans('main.status') }} <span class="required"></span> </label>
         <div class="col-md-6">
@@ -154,6 +152,8 @@
                 <option></option>
                 <option value="article" {{ getData($data, 'type') == 'article' ? ' selected' : '' }}>{{trans('main.article')}}</option>
                 <option value="video" {{ getData($data, 'type') == 'video' ? ' selected' : '' }}>{{trans('main.youtubeURL')}}</option>
+                <option value="sound" {{ getData($data, 'type') == 'sound' ? ' selected' : '' }}>{{trans('main.soundcloudURL')}}</option>
+                <option value="book" {{ getData($data, 'type') == 'book' ? ' selected' : '' }}>{{trans('main.book')}}</option>
             </select>
             @if ($errors->has('type'))
                 <span class="help-block">
@@ -177,6 +177,20 @@
         </div>
     </div>
 
+    <div  class='form-group hidden' id="sound">
+        <div class="form-group{{ $errors->has('soundcloudURL') ? ' has-error' : '' }}">
+            <label class="col-md-2 control-label">{{ trans('main.soundcloudURL') }}  </label>
+            <div class="col-md-6">
+                <input type="text" name="youtubeURL" value="{{ getData($data, 'youtubeURL') }}" class="form-control" placeholder="{{ trans('main.soundcloudURL') }}" >
+                @if ($errors->has('soundcloudURL'))
+                    <span class="help-block">
+                        <strong class="help-block">{{ $errors->first('soundcloudURL') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+    </div>
+
     <div   class='form-group hidden' id="article" >
         <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
             <label class="col-md-2 control-label">{{ trans('main.content') }} (en) </label>
@@ -188,7 +202,7 @@
                     </span>
                 @endif
             </div>
-        </div>
+      </div>
 
         <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
             <label class="col-md-2 control-label">{{ trans('main.content') }}  (ar)</label>
