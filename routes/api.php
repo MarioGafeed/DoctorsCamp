@@ -20,6 +20,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::apiResource('categories', 'CategoryController')->only(['show', 'index']);
     // Posts
     Route::get('videos', 'PostsController@indexvideo');
+    Route::get('sounds', 'PostsController@indexsound');
     Route::apiResource('posts', 'PostsController')->only(['show', 'index']);
     Route::get('/post/{id}/comments', 'CommentController@postComments');
     // Comments

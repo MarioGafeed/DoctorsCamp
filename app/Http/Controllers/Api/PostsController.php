@@ -58,6 +58,26 @@ class PostsController extends Controller
      return PostvideoResource::collection($posts);
     }
 
+    public function indexsound(Request $request)
+    {
+      $posts = Post::when($request->keyword, function ($query) use ($request){
+            $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+            ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+            ->orWhere('desc', 'LIKE', "%$request->keyword%")
+            ->orWhere('keyword', 'LIKE', "%$request->keyword%")
+            // ->orWhere(User::select('name')->get(), 'LIKE', "%$request->keyword%")
+            ->get();
+      })->whereNotNull('title_ar')
+        ->where('type', 'sound')
+        ->where('active', 1)
+        ->with('user:id,name')
+        ->with('category:id,title_en,title_ar')
+        ->withCount('comments')
+        ->paginate(10);
+
+     return PostvideoResource::collection($posts);
+    }
+
     public function myposts(Request $request)
     {
       $posts = Post::when($request->keyword, function ($query) use ($request){
@@ -78,7 +98,7 @@ class PostsController extends Controller
     }
 
     public function store(PostsRequest $request)
-    {    
+    {
         $pos = $this->postInterface->store($request->all());
 
         return new PostResource($pos);
