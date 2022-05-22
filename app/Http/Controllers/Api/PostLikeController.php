@@ -8,15 +8,12 @@ use Illuminate\Http\Request;
 
 class PostLikeController extends Controller
 {
-  public function store(Request $request, Post $post)
+  public function action(Request $request, Post $post)
   {
+    if ($post->liked()) {
+      return $post->unlike();
+    }else {
       return $post->like();
-  }
-
-  public function destroy(Post $post)
-  {
-      if ($post->liked()) {      
-        return $post->unlike();
-      }
+    }
   }
 }

@@ -58,8 +58,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
 
         // Route::apiResource('questions', 'QuestionController');
         Route::get('/myposts', 'PostsController@myposts')->name('posts.me');
-        Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
-        Route::post('/posts/{post}/del/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
+        Route::post('/posts/{post}/likeaction', 'PostLikeController@action')->name('posts.likes.action');
         // Route::apiResource('categories', 'CategoryController');
         Route::get('listcourseswithlikes', 'CourseController@indexcourseswithlikes');
         Route::get('courseuser/{course}', 'CourseController@showuser');
@@ -71,8 +70,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::post('lesson/startquiz/{id}', 'LessonController@startQuiz');
         Route::post('lesson/submitquiz/{lesson}', 'LessonController@submitQuiz');
 
-        Route::post('/courses/{course}/likes', 'CourseLikeController@store')->name('courses.likes.store');
-        Route::post('/courses/{course}/del/likes', 'CourseLikeController@destroy')->name('courses.likes.destroy');
+        Route::post('/courses/{course}/likeaction', 'CourseLikeController@action')->name('courses.likes.action');
         Route::post('/courses/{course}/enroll', 'CourseController@enroll')->name('user.course.enroll');
         Route::get('/usercompletecourses', 'CourseController@usercompletecourses')->name('user.course.list');
         Route::get('/useruncompletecourses', 'CourseController@useruncompletecourses')->name('user.course.list');
@@ -83,8 +81,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
 
         Route::get('/courses/{course}/lessons', 'LessonController@courseUserLessons')->name('user.course.lessons');
 
-        Route::post('/events/{event}/likes', 'EventLikeController@store')->name('events.likes.store');
-        Route::post('/events/{event}/del/likes', 'EventLikeController@destroy')->name('events.likes.destroy');
+        Route::post('/events/{event}/likeaction', 'EventLikeController@action')->name('events.likes.action');
         Route::apiResource('events', 'EventController');
         Route::post('events/enroll/{id}', 'EventController@enroll')->name('user.events.enroll');
         Route::post('events/disenroll/{id}', 'EventController@disenroll')->name('user.events.disenroll');
@@ -92,13 +89,10 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::apiResource('comments', 'CommentController')->only('store', 'update');
         Route::post('comment/del/{id}', 'CommentController@destroy');
         // Route::apiResource('categories', 'CategoryController');
-        Route::post('/posts/{post}/likes', 'PostLikeController@store')->name('posts.likes.store');
-        Route::post('/posts/{post}/del/likes', 'PostLikeController@destroy')->name('posts.likes.destroy');
 
         Route::post('/categories/likes', 'CategoryLikeController@store')->name('categories.likes.store');
         Route::post('/categories/{category}/del/likes', 'CategoryLikeController@destroy')->name('categories.likes.destroy');
 
-        Route::post('/images/{image}/likes', 'ImageLikeController@store')->name('images.likes.store');
-        Route::post('/images/{image}/del/likes', 'ImageLikeController@destroy')->name('images.likes.destroy');
+        Route::post('/images/{image}/likeaction', 'ImageLikeController@action')->name('images.likes.action');        
     });
 });

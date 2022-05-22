@@ -8,15 +8,12 @@ use Illuminate\Http\Request;
 
 class ImageLikeController extends Controller
 {
-  public function store(Request $request, Image $image)
-  {
-    return $image->like();
-  }
-
-  public function destroy(Image $image)
+  public function action(Request $request, Image $image)
   {
     if ($image->liked()) {
       return $image->unlike();
+    }else {
+      return $image->like();
     }
-  }
+  }  
 }

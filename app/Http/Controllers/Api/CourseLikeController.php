@@ -8,15 +8,12 @@ use Illuminate\Http\Request;
 
 class CourseLikeController extends Controller
 {
-    public function store(Request $request, Course $course)
-    {
-    return $course->like();
-    }
-
-    public function destroy(Course $course)
+    public function action(Request $request, Course $course)
     {
       if ($course->liked()) {
         return $course->unlike();
+      }else {
+        return $course->like();
       }
-    }
+    }    
 }
