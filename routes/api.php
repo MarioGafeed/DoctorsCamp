@@ -30,8 +30,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::get('courses/{course}/certificate', 'CourseCertificateController');
 
     // images
-    Route::apiResource('images', 'ImagesController');
-
+    Route::apiResource('images', 'ImagesController');    
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('notifications/{type?}', 'UsernotificationsController@index');
@@ -93,6 +92,6 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::post('/categories/likes', 'CategoryLikeController@store')->name('categories.likes.store');
         Route::post('/categories/{category}/del/likes', 'CategoryLikeController@destroy')->name('categories.likes.destroy');
 
-        Route::post('/images/{image}/likeaction', 'ImageLikeController@action')->name('images.likes.action');        
+        Route::post('/images/{image}/likeaction', 'ImageLikeController@action')->name('images.likes.action');
     });
 });

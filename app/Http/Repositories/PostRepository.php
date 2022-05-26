@@ -96,7 +96,7 @@ class PostRepository implements PostInterface
         }
         if ( $pos['content_ar'] != null ) {
           $pos['content_ar'] = json_decode($pos->content)->ar;
-        }
+        }    
 
         return view("{$this->viewPath}.show", [
           'title' => trans('main.show').' '.trans('main.post').' : '.$pos->title_ar,
@@ -108,7 +108,7 @@ class PostRepository implements PostInterface
     {
         $pos = $this->getPostFirst($id);
         $cats = $this->getAllcategory();
-        $tags = $pos->tags->pluck('name')->implode(', ');
+        $tags = $pos->tags->pluck('name')->implode(',');
 
         if ($pos->desc != null) {
           $pos['desc_en'] = json_decode($pos->desc)->en;
@@ -118,7 +118,7 @@ class PostRepository implements PostInterface
         if ($pos->content != null) {
           $pos['content_en'] = json_decode($pos->content)->en;
           $pos['content_ar'] = json_decode($pos->content)->ar;
-        }        
+        }
 
         return view("{$this->viewPath}.edit", [
           'title' => trans('main.edit').' '.trans('main.post').' : '.$pos->title,
