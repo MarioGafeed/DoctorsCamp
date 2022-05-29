@@ -19,27 +19,33 @@ class CommentController extends Controller
 
   public function postComments($postId)
   {
-     return CommentResource::collection(Comment::where('commentable_id', $postId)->with('user')->orderBy('created_at', 'desc')->get());
+     return CommentResource::collection(Comment::where('commentable_id', $postId)->with('user')->orderBy('updated_at', 'desc')->approved()->get());
   }
 
   public function store(CommentsRequest $request)
   {
       $comment = $this->commentInterface->store($request->all());
-
       return JsonResponder::make(trans('main.commentcreate'));
   }
 
   public function update(CommentsRequest $request, Comment $comment)
   {
-       $comment->update($request->only('comment'));
-
-       return new CommentResource($comment);
+    if ($comment->user_id == $request->user()->id) {
+      $comment->is_approved = 0;
+      $comment->update($request->only('comment'));
+      return JsonResponder::make(trans('main.commentupdate'));
+    }else {
+      return 0 ;
+    }
   }
 
-  public function destroy(Comment $comment)
+  public function destroy(Comment $comment, Request $request)
   {
+    if ($comment->user_id == $request->user()->id) {
       $comment->delete();
-
       return JsonResponder::make(trans('main.commentdelete'));
+    }else {
+      return 0 ;
+    }
   }
 }

@@ -30,7 +30,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::get('courses/{course}/certificate', 'CourseCertificateController');
 
     // images
-    Route::apiResource('images', 'ImagesController');    
+    Route::apiResource('images', 'ImagesController');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('notifications/{type?}', 'UsernotificationsController@index');
@@ -86,7 +86,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::post('events/disenroll/{id}', 'EventController@disenroll')->name('user.events.disenroll');
         Route::get('userevents', 'EventController@userList')->name('user.events.list');
         Route::apiResource('comments', 'CommentController')->only('store', 'update');
-        Route::post('comment/del/{id}', 'CommentController@destroy');
+        Route::post('comment/del/{comment}', 'CommentController@destroy');
         // Route::apiResource('categories', 'CategoryController');
 
         Route::post('/categories/likes', 'CategoryLikeController@store')->name('categories.likes.store');

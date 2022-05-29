@@ -838,6 +838,7 @@ return [
     'courseprogress'               => 'Congratulation your progress in course: ',
     'lessonNo'                     => 'No lessons in this Course..',
     'commentcreate'                => 'Comment Created, Admin will approve Your comment soon..',
+    'commentupdate'                => 'Comment Updated Successfully, Admin will approve Your comment soon..',
     'commentdelete'                => 'Comment deleted..',
     'eventdel'                     => 'Event deleted..',
     'imgdelete'                    => 'Image deleted..',
