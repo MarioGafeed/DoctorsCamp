@@ -49,11 +49,6 @@ class PostRepository implements PostInterface
             'ar' => $data['content_ar'],
         ]);
 
-        $data['desc'] = json_encode([
-            'en' => $data['desc_en'],
-            'ar' => $data['desc_ar'],
-        ]);
-
         $data['user_id'] = auth()->user()->id;
 
         $pos = Post::create($data);
@@ -96,7 +91,7 @@ class PostRepository implements PostInterface
         }
         if ( $pos['content_ar'] != null ) {
           $pos['content_ar'] = json_decode($pos->content)->ar;
-        }    
+        }
 
         return view("{$this->viewPath}.show", [
           'title' => trans('main.show').' '.trans('main.post').' : '.$pos->title_ar,

@@ -12,7 +12,7 @@ class PostResource extends JsonResource
 
       $tagNames = $this->tags()->pluck('name');
 
-      if ($tagNames != null) {
+      if ($tagNames->toArray() != null) { 
         foreach ($tagNames as $tagName) {
           $tag =  \Spatie\Tags\Tag::where('slug->en', $tagName)->first();
           $tagPosts = \App\Models\Post::withAnyTags([$tag])->get();
