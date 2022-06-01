@@ -16,8 +16,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::get('countries', 'CountryController@index');
     // FAQs
     Route::apiResource('faqs', 'FaqController')->only(['show', 'index']);
-    // Categories
-    Route::apiResource('categories', 'CategoryController')->only(['show', 'index']);
+    // Categories Courses
+    Route::get('categories/courses', 'CategoryController@indexCourses');
     // Posts
     Route::get('videos', 'PostsController@indexvideo');
     Route::get('sounds', 'PostsController@indexsound');
@@ -31,6 +31,11 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
 
     // images
     Route::apiResource('images', 'ImagesController');
+    Route::get('categories/images', 'CategoryController@indexImages');
+
+    Route::get('categories/articles', 'CategoryController@index');
+    Route::get('categories/videos', 'CategoryController@indexVideos');
+    Route::get('categories/sounds', 'CategoryController@indexSounds');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('notifications/{type?}', 'UsernotificationsController@index');

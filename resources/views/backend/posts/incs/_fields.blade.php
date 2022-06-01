@@ -181,7 +181,7 @@
         <div class="form-group{{ $errors->has('soundcloudURL') ? ' has-error' : '' }}">
             <label class="col-md-2 control-label">{{ trans('main.soundcloudURL') }}  </label>
             <div class="col-md-6">
-                <input type="text" name="youtubeURL" value="{{ getData($data, 'youtubeURL') }}" class="form-control" placeholder="{{ trans('main.soundcloudURL') }}" >
+                <input type="text" name="soundcloudURL" value="{{ getData($data, 'soundcloudURL') }}" class="form-control" placeholder="{{ trans('main.soundcloudURL') }}" >
                 @if ($errors->has('soundcloudURL'))
                     <span class="help-block">
                         <strong class="help-block">{{ $errors->first('soundcloudURL') }}</strong>

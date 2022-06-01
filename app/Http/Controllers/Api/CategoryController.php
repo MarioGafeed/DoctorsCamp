@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Interfaces\CategoryInterface;
 use App\Http\Requests\CategoriesRequest;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\CategoryCoursesResource;
+use App\Http\Resources\CategoryImageResource;
+use App\Http\Resources\CategoryVideoResource;
+use App\Http\Resources\CategorySoundResource;
 use App\Http\Resources\CategoryuserResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -24,11 +28,61 @@ class CategoryController extends Controller
              ->get();
        })->whereNotNull('title_ar')
      ->with('posts')
-     ->with('courses')
-     ->with('images')
      ->paginate(10);
 
       return CategoryResource::collection($categories);
+  }
+
+  public function indexVideos(Request $request)
+  {
+       $categories = Category::when($request->keyword, function ($query) use ($request){
+             $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+             ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+             ->get();
+       })->whereNotNull('title_ar')
+     ->with('posts')
+     ->paginate(10);
+
+      return CategoryVideoResource::collection($categories);
+  }
+
+  public function indexSounds(Request $request)
+  {
+       $categories = Category::when($request->keyword, function ($query) use ($request){
+             $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+             ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+             ->get();
+       })->whereNotNull('title_ar')
+     ->with('posts')
+     ->paginate(10);
+
+      return CategorySoundResource::collection($categories);
+  }
+
+  public function indexCourses(Request $request)
+  {
+       $categories = Category::when($request->keyword, function ($query) use ($request){
+             $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+             ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+             ->get();
+       })->whereNotNull('title_ar')
+     ->with('courses')
+     ->paginate(10);
+
+      return CategoryCoursesResource::collection($categories);
+  }
+
+  public function indexImages(Request $request)
+  {
+       $categories = Category::when($request->keyword, function ($query) use ($request){
+             $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+             ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+             ->get();
+       })->whereNotNull('title_ar')
+     ->with('images')
+     ->paginate(10);
+
+      return CategoryImageResource::collection($categories);
   }
 
   public function show(Category $category)

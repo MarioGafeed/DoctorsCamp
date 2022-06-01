@@ -21,6 +21,7 @@ class CreatepostsTable extends Migration
             $table->text('title_ar');
             $table->longtext('content')->nullable();
             $table->string('youtubeURL')->nullable();
+            $table->string('soundcloudURL')->nullable();
             $table->text('desc')->nullable();
             $table->text('keyword')->nullable();
             $table->foreignId('user_id')->constrained('users');
