@@ -15,8 +15,10 @@ class PostResource extends JsonResource
       if ($tagNames->toArray() != null) {
         foreach ($tagNames as $tagName) {
           $tag =  \Spatie\Tags\Tag::where('slug->en', $tagName)->first();
-
-          $tagPosts = \App\Models\Post::withAnyTags([$tag])->get();
+          dd($tag);
+            if ($tag != null) {
+              $tagPosts = \App\Models\Post::withAnyTags([$tag])->get();
+            }
           return [
               'id'           => $this->id,
               'title'        => $this['title_' . request()->header('accept-language', 'en')],
@@ -54,7 +56,6 @@ class PostResource extends JsonResource
              'user_like?'   => $this->liked($this->user->id),
              'comments_count' => $this->comments()->count(),
              'comments'     => CommentResource::collection($postComments),
-             // 'tag_posts'    => TagpostsResource::collection($tagposts),
              // 'comments'     => $this->comments()->approved()->select('id', 'comment', 'user_id','updated_at')->get(),
              // 'comment_author' => $this->comments()->approved()->pivot->user->name,
              'updated_at'   => (string) $this->updated_at,
