@@ -36,6 +36,12 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::get('categories/articles', 'CategoryController@index');
     Route::get('categories/videos', 'CategoryController@indexVideos');
     Route::get('categories/sounds', 'CategoryController@indexSounds');
+    // Route::get('categories', 'CategoryController@index');
+    Route::apiResource('categories', 'CategoryController')->only('index', 'show');
+    Route::get('categories/{category}/showvideo', 'CategoryController@showVideo');
+    Route::get('categories/{category}/showcourse', 'CategoryController@showCourse');
+    Route::get('categories/{category}/showsound', 'CategoryController@showSound');
+    Route::get('categories/{category}/showimage', 'CategoryController@showImage');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('notifications/{type?}', 'UsernotificationsController@index');
@@ -92,7 +98,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::get('userevents', 'EventController@userList')->name('user.events.list');
         Route::apiResource('comments', 'CommentController')->only('store', 'update');
         Route::post('comment/del/{comment}', 'CommentController@destroy');
-        // Route::apiResource('categories', 'CategoryController');
+
 
         Route::post('/categories/likes', 'CategoryLikeController@store')->name('categories.likes.store');
         Route::post('/categories/{category}/del/likes', 'CategoryLikeController@destroy')->name('categories.likes.destroy');

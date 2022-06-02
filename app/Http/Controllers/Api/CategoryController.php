@@ -90,6 +90,26 @@ class CategoryController extends Controller
       return new CategoryResource($category);
   }
 
+  public function showVideo(Category $category)
+  {
+      return new CategoryVideoResource($category);
+  }
+
+  public function showCourse(Category $category)
+  {
+      return new CategoryCoursesResource($category);
+  }
+
+  public function showSound(Category $category)
+  {
+      return new CategorySoundResource($category);
+  }
+
+  public function showImage(Category $category)
+  {
+      return new CategoryImageResource($category);
+  }
+
   public function userfavoritecategories(Request $request)
   {
     $user = $request->user();
