@@ -14,8 +14,8 @@ class PostResource extends JsonResource
 
       if ($tagNames->toArray() != null) {
         foreach ($tagNames as $tagName) {
-          $tag =  \Spatie\Tags\Tag::where('slug->en', $tagName)->first();
-             
+          $tag =  \Spatie\Tags\Tag::where('name->en', $tagName)->first();
+
             if ($tag != null) {
               $tagPosts = \App\Models\Post::withAnyTags([$tag])->get();
               return [
