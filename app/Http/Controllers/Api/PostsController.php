@@ -101,7 +101,8 @@ class PostsController extends Controller
     {
         $pos = $this->postInterface->store($request->all());
 
-        return new PostResource($pos);
+        return JsonResponder::make(trans('main.postcreate'));
+
     }
 
     public function show(Post $post)
@@ -116,14 +117,25 @@ class PostsController extends Controller
 
     public function update(PostsRequest $request, Post $post)
     {
-        return [$request->toArray(), $post->toArray()];
+
+      if ($post->user_id == $request->user()->id) {
+        // $post->update($request->only('post'));
+        $post->update($request->all());
+        return JsonResponder::make(trans('main.postupdate'));
+      }else {
+        return 0 ;
+      }
+
     }
 
-    public function destroy(Post $post)
+    public function destroy(Post $post, Request $request)
     {
+      if ($post->user_id == $request->user()->id) {
         $post->delete();
-
         return JsonResponder::make(trans('main.postdelete'));
+      }else {
+        return 0 ;
+      }
     }
 
     public function userfavoriteposts(Request $request)

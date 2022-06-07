@@ -9,6 +9,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::post('/password/email', 'AuthController@forgotPassword')->middleware('throttle:5,1')->name('password.email');
     Route::post('/verify/pin', 'AuthController@verifyPin')->middleware('throttle:5,1')->name('verify.pin');
     Route::post('/password/reset', 'AuthController@resetPassword')->name('apipassword.reset');
+    Route::get('agreement', 'AuthController@agreement')->name('agreement.show');
     // Contact Form
     Route::post('/contact', 'ContactFormController@contact')->name('guest.contact');
 
@@ -59,7 +60,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::post('refresh', 'AuthController@refresh');
         Route::post('logout', 'AuthController@logout');
         Route::post('changePassword', 'AuthController@changePassword')->name('changePassword');
-        Route::apiResource('posts', 'PostsController')->only(['store', 'update', 'destroy']);
+        Route::apiResource('posts', 'PostsController')->only(['store', 'update']);
+        Route::post('posts/del/{post}', 'PostsController@destroy');
         // Favorite
         Route::get('/userfavoritecategories', 'CategoryController@userfavoritecategories');
         Route::get('/userfavoriteposts', 'PostsController@userfavoriteposts');

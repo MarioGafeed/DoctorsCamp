@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-
+use App\Helpers\JsonResponder;
 use App\Http\Interfaces\UserInterface;
 use App\Http\Requests\UsersRequest;
 use App\Http\Resources\UserResource;
@@ -269,5 +269,10 @@ class AuthController extends Controller
         return response()->json([
             'message' => trans('main.logoutsuccess')
         ]);
+    }
+
+    public function agreement()
+    {
+      return JsonResponder::make(trans('main.agreement'));
     }
 }
