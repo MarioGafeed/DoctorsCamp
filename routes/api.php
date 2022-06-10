@@ -45,6 +45,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::get('categories/{category}/showimage', 'CategoryController@showImage');
 
     Route::middleware('auth:sanctum')->group(function () {
+
         Route::get('notifications/{type?}', 'UsernotificationsController@index');
         Route::get('notification/mark-as-read/{id}', 'UsernotificationsController@read');
         Route::get('notification/mark-as-unread/{id}', 'UsernotificationsController@unread');
@@ -61,6 +62,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::post('logout', 'AuthController@logout');
         Route::post('changePassword', 'AuthController@changePassword')->name('changePassword');
         Route::apiResource('posts', 'PostsController')->only(['store', 'update']);
+        Route::get('post/user', 'PostsController@index');
         Route::post('posts/del/{post}', 'PostsController@destroy');
         // Favorite
         Route::get('/userfavoritecategories', 'CategoryController@userfavoritecategories');

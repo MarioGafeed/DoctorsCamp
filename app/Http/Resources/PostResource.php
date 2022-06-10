@@ -8,6 +8,15 @@ class PostResource extends JsonResource
 {
     public function toArray($request)
     {
+      $mypost = 0 ;
+
+      if ($request->user() != null) {
+        if ($this->user_id == $request->user()->id) {
+          $mypost = 1 ;
+        }
+      }
+
+
       $postComments = $this->comments()->approved()->orderBy('created_at', 'desc')->get();
 
       $tagNames = $this->tags()->pluck('name');
@@ -34,6 +43,7 @@ class PostResource extends JsonResource
                   'comments_count' => $this->comments()->count(),
                   'comments'     => CommentResource::collection($postComments),
                   'tag_posts'    => TagpostsResource::collection($tagPosts),
+                  'mypost'       => $mypost,
                   // 'comments'     => $this->comments()->approved()->select('id', 'comment', 'user_id','updated_at')->get(),
                   // 'comment_author' => $this->comments()->approved()->pivot->user->name,
                   'updated_at'   => (string) $this->updated_at,
@@ -54,6 +64,7 @@ class PostResource extends JsonResource
                   'user_like?'   => $this->liked($this->user->id),
                   'comments_count' => $this->comments()->count(),
                   'comments'     => CommentResource::collection($postComments),
+                  'mypost'       => $mypost,
                   // 'comments'     => $this->comments()->approved()->select('id', 'comment', 'user_id','updated_at')->get(),
                   // 'comment_author' => $this->comments()->approved()->pivot->user->name,
                   'updated_at'   => (string) $this->updated_at,
@@ -76,6 +87,7 @@ class PostResource extends JsonResource
              'user_like?'   => $this->liked($this->user->id),
              'comments_count' => $this->comments()->count(),
              'comments'     => CommentResource::collection($postComments),
+             'mypost'       => $mypost,
              // 'comments'     => $this->comments()->approved()->select('id', 'comment', 'user_id','updated_at')->get(),
              // 'comment_author' => $this->comments()->approved()->pivot->user->name,
              'updated_at'   => (string) $this->updated_at,

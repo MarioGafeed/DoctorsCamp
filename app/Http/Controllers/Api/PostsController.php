@@ -37,6 +37,7 @@ class PostsController extends Controller
 
      return PostResource::collection($posts);
     }
+    
 
     public function indexvideo(Request $request)
     {
