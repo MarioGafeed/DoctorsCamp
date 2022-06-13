@@ -9,12 +9,6 @@ class PostsDataTable extends DataTable
 {
     use BuilderParameters;
 
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
     public function dataTable($query)
     {
         return datatables($query)
@@ -38,12 +32,6 @@ class PostsDataTable extends DataTable
         ->rawColumns(['checkbox', 'show', 'edit', 'delete', 'active']);
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\Post $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query()
     {
         $query = Post::query()->with('category', 'user')->select('posts.*');
@@ -51,11 +39,6 @@ class PostsDataTable extends DataTable
         return $this->applyScopes($query);
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html()
     {
         $html = $this->builder()
@@ -66,11 +49,6 @@ class PostsDataTable extends DataTable
         return $html;
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns()
     {
         return [
@@ -88,7 +66,7 @@ class PostsDataTable extends DataTable
              [
                  'name'       => 'posts.title_en',
                  'data'       => 'title_en',
-                 'title'      => trans('main.titlepcat').' en',
+                 'title'      => trans('main.title').' en',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',
@@ -96,7 +74,7 @@ class PostsDataTable extends DataTable
              [
                  'name'       => 'posts.title_ar',
                  'data'       => 'title_ar',
-                 'title'      => trans('main.titlepcat').' ar',
+                 'title'      => trans('main.title').' ar',
                  'searchable' => true,
                  'orderable'  => true,
                  'width'      => '200px',

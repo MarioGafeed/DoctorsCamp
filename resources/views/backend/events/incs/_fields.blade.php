@@ -70,7 +70,7 @@
    </div>
 
    <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-       <label class="col-md-2 control-label">{{ trans('main.city') }} </label>
+       <label class="col-md-2 control-label">{{ trans('main.city') }} <span class="required"></span> </label>
        <div class="col-md-6">
            <input type="text" name="city" value="{{ getData($data, 'city') }}" class="form-control" placeholder="{{ trans('main.city') }}" >
            @if ($errors->has('city'))
@@ -170,7 +170,7 @@
                 </span>
             @endif
         </div>
-    </div>  
+    </div>
 
 
 </div>

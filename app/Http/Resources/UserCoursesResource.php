@@ -23,7 +23,7 @@ class UserCoursesResource extends JsonResource
                                           ->where('user_id', '=', $user->id)
                                           ->count(),
         'user_like?'    => $this->liked($user->id),
-        'updated_at'        => (string) $this->updated_at,
+        'updated_at'    => (string) $this->updated_at,
         ];
     }
 }
