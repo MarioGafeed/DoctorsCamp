@@ -43,6 +43,11 @@ class ImageRepository implements ImageInterface
 
     public function store(array $data)
     {
+      $data['desc'] = json_encode([
+          'en' => $data['desc_en'],
+          'ar' => $data['desc_ar'],
+      ]);
+
         $data['user_id'] = auth()->user()->id;
 
         $image = Image::create($data);
@@ -57,6 +62,9 @@ class ImageRepository implements ImageInterface
     {
         $image = $this->getImageWithCat($id);
 
+        $image['desc_en'] = json_decode($image->desc)->en;
+        $image['desc_ar'] = json_decode($image->desc)->ar;
+
         return view("{$this->viewPath}.show", [
         'title' => trans('main.show').' '.trans('main.image').' : '.$image->title_ar,
         'show' => $image,
@@ -67,6 +75,9 @@ class ImageRepository implements ImageInterface
     {
         $image = $this->getImageFirst($id);
         $categories = $this->getAllcategory();
+
+        $image['desc_en'] = json_decode($image->desc)->en;
+        $image['desc_ar'] = json_decode($image->desc)->ar;
 
         return view("{$this->viewPath}.edit", [
         'title' => trans('main.edit').' '.trans('main.image').' : '.$image->title,
@@ -81,6 +92,10 @@ class ImageRepository implements ImageInterface
         if (! $image) {
             return back();
         }
+        $image->desc = json_encode([
+        'en' => $data['desc_en'],
+        'ar' => $data['desc_ar'],
+      ]);
         $image->title_en = $data['title_en'];
         $image->title_ar = $data['title_ar'];
         $image->category_id = $data['category_id'];

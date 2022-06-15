@@ -3,6 +3,24 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function () {
+
+
+  // if (\Request::header('Authorization')){
+  //   Route::middleware('auth:sanctum')->group(function () {
+  //     Route::apiResource('images', 'ImagesController');
+  //   });
+  // }
+
+    $middleware = ['api'];
+      if (\Request::header('Authorization')){
+        $middleware = array_merge(['auth:sanctum']);
+        Route::group(['middleware' => $middleware], function () {
+          Route::apiResource('images', 'ImagesController');
+          Route::apiResource('posts', 'PostsController')->only(['show', 'index']);
+          Route::get('videos', 'PostsController@indexvideo');
+          Route::get('sounds', 'PostsController@indexsound');
+        });
+  }else {
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login')->name('user.login');
     Route::post('login-social', 'SocialAuthController@login');
@@ -43,6 +61,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::get('categories/{category}/showcourse', 'CategoryController@showCourse');
     Route::get('categories/{category}/showsound', 'CategoryController@showSound');
     Route::get('categories/{category}/showimage', 'CategoryController@showImage');
+  }
+
 
     Route::middleware('auth:sanctum')->group(function () {
 
@@ -67,6 +87,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         // Favorite
         Route::get('/userfavoritecategories', 'CategoryController@userfavoritecategories');
         Route::get('/userfavoriteposts', 'PostsController@userfavoriteposts');
+        Route::get('/userfavoritevideos', 'PostsController@userfavoritevideos');
+        Route::get('/userfavoritesounds', 'PostsController@userfavoritesounds');
         Route::get('/userfavoritecourses', 'CourseController@userfavoritecourses');
         Route::get('/userfavoriteimages', 'ImagesController@userfavoriteimages');
 

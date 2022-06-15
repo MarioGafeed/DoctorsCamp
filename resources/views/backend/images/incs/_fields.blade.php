@@ -73,4 +73,28 @@
        </div>
    </div>
 
+   <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
+       <label class="col-md-2 control-label">{{ trans('main.description') }} (en)</label>
+       <div class="col-md-6">
+           <textarea type="text" name="desc_en" value="{{ getData($data, 'desc_en') }}" class="form-control" placeholder="{{ trans('main.desc') }}" ></textarea>
+           @if ($errors->has('desc'))
+               <span class="help-block">
+                   <strong class="help-block">{{ $errors->first('desc') }}</strong>
+               </span>
+           @endif
+       </div>
+   </div>
+
+   <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
+       <label class="col-md-2 control-label">{{ trans('main.description') }}  (ar)</label>
+       <div class="col-md-6">
+           <textarea type="text" name="desc_ar" value="{{ getData($data, 'desc_ar') }}" class="form-control" placeholder="{{ trans('main.desc') }}" ></textarea>
+           @if ($errors->has('desc'))
+               <span class="help-block">
+                   <strong class="help-block">{{ $errors->first('desc') }}</strong>
+               </span>
+           @endif
+       </div>
+   </div>
+
 </div>

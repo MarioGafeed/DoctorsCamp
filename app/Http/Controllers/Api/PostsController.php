@@ -37,7 +37,7 @@ class PostsController extends Controller
 
      return PostResource::collection($posts);
     }
-    
+
 
     public function indexvideo(Request $request)
     {
@@ -143,7 +143,25 @@ class PostsController extends Controller
     {
       $user = $request->user();
 
-      $userfavoriteposts = Post::whereLikedBy($user->id)->get();
+      $userfavoriteposts = Post::where('type', 'article')->whereLikedBy($user->id)->get();
+
+      return PostuserResource::collection($userfavoriteposts);
+    }
+
+    public function userfavoritevideos(Request $request)
+    {
+      $user = $request->user();
+
+      $userfavoriteposts = Post::where('type', 'video')->whereLikedBy($user->id)->get();
+
+      return PostuserResource::collection($userfavoriteposts);
+    }
+
+    public function userfavoritesounds(Request $request)
+    {
+      $user = $request->user();
+
+      $userfavoriteposts = Post::where('type', 'sound')->whereLikedBy($user->id)->get();
 
       return PostuserResource::collection($userfavoriteposts);
     }

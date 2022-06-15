@@ -17,7 +17,7 @@ class Image extends Model implements HasMedia
     use Likeable;
 
     protected $fillable = [
-        'category_id', 'user_id', 'title_en', 'title_ar',
+        'category_id', 'user_id', 'title_en', 'title_ar', 'desc'
     ];
 
     public function category()
