@@ -288,6 +288,26 @@
                 </ul>
             </li>
 
+            <li class="nav-item  {{ active_route('files.*') }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                  <i class="fa fa-file" aria-hidden="true"></i>
+                    <span class="title">{{ trans('main.files') }}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item {{ active_route('files.create') }}">
+                        <a href="{{ route('files.create') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.add') }} {{ trans('main.file') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ active_route('files.index') }}">
+                        <a href="{{ route('files.index') }}" class="nav-link ">
+                            <span class="title">{{ trans('main.show-all') }} {{ trans('main.files') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
 
 
             <!-- Add Site Seeting   (Mario Added)

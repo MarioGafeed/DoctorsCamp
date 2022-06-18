@@ -72,5 +72,9 @@ Route::middleware(\App\Http\Middleware\LangMiddleware::class)->group(function ()
    Route::resource('faqs', 'FaqController');
    Route::post('faqs/multi_delete', 'FaqController@multi_delete')->name('faqs.multi_delete');
 
-
+   // PDF And Files Uploade
+   Route::get('/files', 'FileUploadController@index')->name('files.index');
+   Route::get('/files/add', 'FileUploadController@create')->name('files.create');
+   Route::post('/files/add', 'FileUploadController@store')->name('files.store');
+   Route::get('/files/{file}/delete', 'FileUploadController@destroy')->name('files.destroy');
 });

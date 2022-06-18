@@ -848,6 +848,8 @@ return [
     'userupdated'                  => 'Your Info Updated Successfully..',
     'categorylike'                 => 'You choose favorite categories..',
     'contactsubmit'                => 'Your message has been send successfully, We will reply you soon..',
+    'addfile'                      => 'Add New File',
+    'size'                         => 'Size(B)',
     'agreement'                    => 'Together to Heal: A service concerned with providing medical training and health support to those who have suffered from poverty, and caring for the displaced from their countries. It is a non-sectarian association that exists to provide health support in Egypt and refugees residing in all countries of the world. If you make a registration, you agree that you renounce fanaticism and promote the thought of affection, mercy and brotherhood among all peoples,  and that you wish to help the refugees at the health and development level and to implant lofty spiritual values among them, and any violation of public morals in any way, so the authority can turn your account status into inactive without Forewarning or warning.',
 
 

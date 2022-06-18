@@ -33,7 +33,7 @@ class QuestionRepository implements QuestionInterface
       $lessons = $this->getAllLessons();
 
       return view("{$this->viewPath}.create", [
-        'title' => trans('main.add').' '.trans('main.lessons'),
+        'title' => trans('main.add').' '.trans('main.questions'),
         'lessons' => $lessons,
     ]);
     }

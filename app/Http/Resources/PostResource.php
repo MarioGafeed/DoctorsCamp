@@ -100,7 +100,7 @@ class PostResource extends JsonResource
                     'image'        => $this->getFirstMediaUrl(),
                     'likes_count'  => $this->likes()->count(),
                     'comments_count' => $this->comments()->count(),
-                    'comments'     => CommentResource::collection($postComments),                  
+                    'comments'     => CommentResource::collection($postComments),
                     'mypost'       => $mypost,
                     'updated_at'   => (string) $this->updated_at,
                 ];
@@ -139,8 +139,7 @@ class PostResource extends JsonResource
              'category_name'=> $this->category['title_' . request()->header('accept-language', 'en')],
              // 'youtubeURL'   => $this->youtubeURL,
              'image'        => $this->getFirstMediaUrl(),
-             'likes_count'  => $this->likes()->count(),
-             'user_like?'   => $this->liked($user->id),
+             'likes_count'  => $this->likes()->count(),             
              'comments_count' => $this->comments()->count(),
              'comments'     => CommentResource::collection($postComments),
              'mypost'       => $mypost,

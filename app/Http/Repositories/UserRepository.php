@@ -45,7 +45,7 @@ class UserRepository implements UserInterface
     public function store(array $data)
     {
         $data['password'] = Hash::make($data['password']);
-
+        
         $user = User::create($data);
 
         if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
