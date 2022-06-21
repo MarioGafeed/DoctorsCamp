@@ -21,12 +21,25 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
           Route::get('sounds', 'PostsController@indexsound');
           // Contact Form
           Route::post('/contact', 'ContactFormController@contact')->name('guest.contact');
+          Route::get('agreement', 'AuthController@agreement')->name('agreement.show');
           Route::apiResource('faqs', 'FaqController')->only(['show', 'index']);
           // Categories Courses
           Route::get('categories/courses', 'CategoryController@indexCourses');
           // Comments
           Route::apiResource('comments', 'CommentController')->only(['index']);
           Route::get('/post/{id}/comments', 'CommentController@postComments');
+          // images
+          Route::apiResource('images', 'ImagesController');
+          Route::get('categories/images', 'CategoryController@indexImages');
+          Route::get('categories/articles', 'CategoryController@index');
+          Route::get('categories/videos', 'CategoryController@indexVideos');
+          Route::get('categories/sounds', 'CategoryController@indexSounds');
+          // Route::get('categories', 'CategoryController@index');
+          Route::apiResource('categories', 'CategoryController')->only('index', 'show');
+          Route::get('categories/{category}/showvideo', 'CategoryController@showVideo');
+          Route::get('categories/{category}/showcourse', 'CategoryController@showCourse');
+          Route::get('categories/{category}/showsound', 'CategoryController@showSound');
+          Route::get('categories/{category}/showimage', 'CategoryController@showImage');
         });
   }else {
     Route::post('register', 'AuthController@register');
@@ -37,7 +50,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::post('/password/reset', 'AuthController@resetPassword')->name('apipassword.reset');
     // Contact Form
     Route::post('/contact', 'ContactFormController@contact')->name('guest.contact');
-    Route::get('agreement', 'AuthController@agreement')->name('agreement.show');
+
 
     // Countries
     Route::get('countries', 'CountryController@index');
