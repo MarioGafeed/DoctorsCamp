@@ -26,6 +26,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
           Route::get('categories/courses', 'CategoryController@indexCourses');
           // Comments
           Route::apiResource('comments', 'CommentController')->only(['index']);
+          Route::get('/post/{id}/comments', 'CommentController@postComments');
         });
   }else {
     Route::post('register', 'AuthController@register');
@@ -47,8 +48,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     // Posts
     Route::get('videos', 'PostsController@indexvideo');
     Route::get('sounds', 'PostsController@indexsound');
-    Route::apiResource('posts', 'PostsController')->only(['show', 'index']);
     Route::get('/post/{id}/comments', 'CommentController@postComments');
+    Route::apiResource('posts', 'PostsController')->only(['show', 'index']);
     // Comments
     Route::apiResource('comments', 'CommentController')->only(['index']);
     // Courses
