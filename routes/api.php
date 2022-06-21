@@ -41,6 +41,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
           Route::get('categories/{category}/showcourse', 'CategoryController@showCourse');
           Route::get('categories/{category}/showsound', 'CategoryController@showSound');
           Route::get('categories/{category}/showimage', 'CategoryController@showImage');
+          Route::apiResource('courses', 'CourseController');
+          Route::get('courses/{course}/certificate', 'CourseCertificateController');
         });
   }else {
     Route::post('register', 'AuthController@register');
@@ -68,7 +70,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::apiResource('comments', 'CommentController')->only(['index']);
     // Courses
     Route::apiResource('courses', 'CourseController');
-    Route::get('courses/{course}/certificate', 'CourseCertificateController');
+    // Route::get('courses/{course}/certificate', 'CourseCertificateController');
 
     // images
     Route::apiResource('images', 'ImagesController');
