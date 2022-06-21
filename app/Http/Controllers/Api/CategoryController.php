@@ -68,15 +68,15 @@ class CategoryController extends Controller
 
   public function indexCourses(Request $request)
   {
-       $categories = Category::when($request->keyword, function ($query) use ($request){
-             $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
-             ->orWhere('title_en', 'LIKE', "%$request->keyword%")
-             ->get();
-       })->whereNotNull('title_ar')
-     ->with('courses')
-     ->paginate();
+      $categories = Category::when($request->keyword, function ($query) use ($request){
+            $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+            ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+            ->get();
+      })->whereNotNull('title_ar')
+    ->with('courses')
+    ->paginate(10);
 
-      return CategoryCoursesResource::collection($categories);
+     return CategoryCoursesResource::collection($categories);
   }
 
   public function indexImages(Request $request)

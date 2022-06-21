@@ -31,7 +31,7 @@ class CourseResource extends JsonResource
                                             ->where('user_id', '=', $user->id)
                                             ->count(),
           'user_like?'    => $this->liked($user->id),
-          'login_url'     => route('user.login'),
+          // 'login_url'     => route('user.login'),
           'updated_at'    => (string) $this->updated_at,
           ];
         }else {
@@ -47,7 +47,6 @@ class CourseResource extends JsonResource
             'image'         => $this->getFirstMediaUrl(),
             'price'         => $this->price,
             'language'      => 'عربي',
-            'login_url'     => route('user.login'),
             'updated_at'    => (string) $this->updated_at,
             ];
         }
