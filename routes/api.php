@@ -36,6 +36,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
           Route::get('categories/sounds', 'CategoryController@indexSounds');
           // Route::get('categories', 'CategoryController@index');
           Route::apiResource('categories', 'CategoryController')->only('index', 'show');
+          // Categories Courses
+          Route::get('categories/courses', 'CategoryController@indexCourses');
           Route::get('categories/{category}/showvideo', 'CategoryController@showVideo');
           Route::get('categories/{category}/showcourse', 'CategoryController@showCourse');
           Route::get('categories/{category}/showsound', 'CategoryController@showSound');
