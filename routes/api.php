@@ -43,6 +43,9 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
           Route::get('categories/{category}/showimage', 'CategoryController@showImage');
           Route::apiResource('courses', 'CourseController');
           Route::get('courses/{course}/certificate', 'CourseCertificateController');
+          // EventS
+          Route::apiResource('events', 'EventController')->only('show');
+
         });
   }else {
     Route::post('register', 'AuthController@register');
@@ -85,6 +88,8 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::get('categories/{category}/showcourse', 'CategoryController@showCourse');
     Route::get('categories/{category}/showsound', 'CategoryController@showSound');
     Route::get('categories/{category}/showimage', 'CategoryController@showImage');
+    // EventS
+    Route::apiResource('events', 'EventController')->only('show');
   }
 
 
@@ -142,7 +147,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::get('/courses/{course}/lessons', 'LessonController@courseUserLessons')->name('user.course.lessons');
 
         Route::post('/events/{event}/likeaction', 'EventLikeController@action')->name('events.likes.action');
-        Route::apiResource('events', 'EventController');
+        // Route::apiResource('events', 'EventController');
         Route::post('events/enroll/{id}', 'EventController@enroll')->name('user.events.enroll');
         Route::post('events/disenroll/{id}', 'EventController@disenroll')->name('user.events.disenroll');
         Route::get('userevents', 'EventController@userList')->name('user.events.list');
