@@ -11,12 +11,21 @@ class CommentResource extends JsonResource
     {
         $user = User::findOrFail($this->user_id);
 
+        $mycomment = 0 ;
+
+        if ($request->user() != null) {
+          if ($this->user_id == $request->user()->id) {
+            $mycomment = 1 ;
+          }
+        }
+
         return [
           'id'             => $this->id,
           'comment'        => $this->comment,
           'author'         => $user->name,
           'author_image'   => $user->getFirstMediaUrl(),
-          'commentable_id' => $this->commentable_id,          
+          'mycomment'      => $mycomment,
+          'commentable_id' => $this->commentable_id,
         ];
     }
 }
