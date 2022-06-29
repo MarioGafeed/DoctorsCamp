@@ -21,7 +21,6 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
           Route::get('sounds', 'PostsController@indexsound');
           // Contact Form
           Route::post('/contact', 'ContactFormController@contact')->name('guest.contact');
-          Route::get('agreement', 'AuthController@agreement')->name('agreement.show');
           Route::apiResource('faqs', 'FaqController')->only(['show', 'index']);
           // Categories Courses
           Route::get('categories/courses', 'CategoryController@indexCourses');
@@ -48,6 +47,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
 
         });
   }else {
+    Route::get('agreement', 'AuthController@agreement')->name('agreement.show');
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login')->name('user.login');
     Route::post('login-social', 'SocialAuthController@login');

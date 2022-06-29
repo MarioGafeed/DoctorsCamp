@@ -9,6 +9,7 @@ use App\Http\Requests\PostsRequest;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostuserResource;
 use App\Http\Resources\PostvideoResource;
+use App\Http\Resources\PostSoundResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -76,7 +77,7 @@ class PostsController extends Controller
         ->withCount('comments')
         ->paginate(10);
 
-     return PostvideoResource::collection($posts);
+     return PostSoundResource::collection($posts);
     }
 
     public function myposts(Request $request)
@@ -118,15 +119,13 @@ class PostsController extends Controller
 
     public function update(PostsRequest $request, Post $post)
     {
-
       if ($post->user_id == $request->user()->id) {
-        // $post->update($request->only('post'));
+        
         $post->update($request->all());
         return JsonResponder::make(trans('main.postupdate'));
       }else {
         return 0 ;
       }
-
     }
 
     public function destroy(Post $post, Request $request)
