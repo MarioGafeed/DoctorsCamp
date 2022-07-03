@@ -43,7 +43,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
           Route::apiResource('courses', 'CourseController');
           Route::get('courses/{course}/certificate', 'CourseCertificateController');
           // EventS
-          Route::apiResource('events', 'EventController')->only('show');
+          Route::apiResource('events', 'EventController');
 
         });
   }else {
@@ -89,7 +89,9 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::get('categories/{category}/showsound', 'CategoryController@showSound');
     Route::get('categories/{category}/showimage', 'CategoryController@showImage');
     // EventS
-    Route::apiResource('events', 'EventController')->only('show');
+    Route::apiResource('events', 'EventController')
+
+    ;
   }
 
 
@@ -159,5 +161,7 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
         Route::post('/categories/{category}/del/likes', 'CategoryLikeController@destroy')->name('categories.likes.destroy');
 
         Route::post('/images/{image}/likeaction', 'ImageLikeController@action')->name('images.likes.action');
+
+
     });
 });
