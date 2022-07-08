@@ -57,7 +57,6 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     // Contact Form
     Route::post('/contact', 'ContactFormController@contact')->name('guest.contact');
 
-
     // Countries
     Route::get('countries', 'CountryController@index');
     // FAQs
