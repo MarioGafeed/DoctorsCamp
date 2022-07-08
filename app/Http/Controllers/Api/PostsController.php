@@ -120,7 +120,7 @@ class PostsController extends Controller
     public function update(PostsRequest $request, Post $post)
     {
       if ($post->user_id == $request->user()->id) {
-        
+
         $post->update($request->all());
         return JsonResponder::make(trans('main.postupdate'));
       }else {
