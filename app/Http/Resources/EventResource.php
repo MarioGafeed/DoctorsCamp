@@ -19,7 +19,7 @@ class EventResource extends JsonResource
           'start_date' => $this->start_date,
           'end_date'   => $this->end_date,
           'likes_count'=> $this->likes()->count(),
-          'user_like?' => $this->liked($user->id),
+          'user_like?' => $this->liked($user->id),          
           'user_enroll?'  => (bool) $this->users()
                                             ->where('user_id', '=', $user->id)
                                             ->count(),
