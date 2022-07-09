@@ -45,6 +45,10 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
           // EventS
           Route::apiResource('events', 'EventController');
 
+          // PDF Files
+          Route::get('pdffiles', 'FileUploadController@index');
+          Route::get('pdffiles/{file}/show', 'FileUploadController@show');
+
         });
   }else {
     Route::get('agreement', 'AuthController@agreement')->name('agreement.show');
@@ -88,9 +92,11 @@ Route::middleware(\App\Http\Middleware\LangApiMiddleware::class)->group(function
     Route::get('categories/{category}/showsound', 'CategoryController@showSound');
     Route::get('categories/{category}/showimage', 'CategoryController@showImage');
     // EventS
-    Route::apiResource('events', 'EventController')
+    Route::apiResource('events', 'EventController');
 
-    ;
+    // PDF Files
+    Route::get('pdffiles', 'FileUploadController@index');
+    Route::get('pdffiles/{file}/show', 'FileUploadController@show');
   }
 
 
