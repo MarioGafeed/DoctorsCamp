@@ -6,24 +6,15 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CategoriesRequest extends FormRequest
 {
-    /**
-     * Determine if the categories is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
-        return [
+        $rules = [
             'title_en'        => 'nullable|string|max:50|unique:categories',
             'title_ar'        => 'required|string|max:50|unique:categories',
             'keyword'         => 'nullable',
@@ -35,10 +26,13 @@ class CategoriesRequest extends FormRequest
             'icon'            => 'required|mimes:icon,png|max:100',
         ];
 
-        if (in_array($this->method(), ['PUT', 'PATCH'])) {
-            $return['icon'] = 'nullable|mimes:ico|max:0.5,'.$this->route()->parameter('category').',id';
-        return $return;
-      }
+        if ($this->method() == 'PATCH') {
+            $rules['title_en'] = 'sometimes|nullable|string|max:50|unique:categories';
+            $rules['title_ar'] = 'sometimes|nullable|string|max:50|unique:categories';
+            $rules['icon'] = 'sometimes|mimes:icon,png|max:100';
+        }
+
+        return $rules;
     }
 
     public function attributes()
