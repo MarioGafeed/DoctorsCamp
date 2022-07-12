@@ -27,8 +27,8 @@ class CategoriesRequest extends FormRequest
         ];
 
         if ($this->method() == 'PATCH') {
-            $rules['title_en'] = 'sometimes|nullable|string|max:50|unique:categories';
-            $rules['title_ar'] = 'sometimes|nullable|string|max:50|unique:categories';
+            $rules['title_en'] = 'sometimes|nullable|string|max:50';
+            $rules['title_ar'] = 'sometimes|nullable|string|max:50';
             $rules['icon'] = 'sometimes|mimes:icon,png|max:100';
         }
 
