@@ -17,9 +17,16 @@ class ImagesController extends Controller
   {
   }
 
-  public function index()
+  public function index(Request $request)
   {
-      $images = Image::with('media')->paginate(10);
+    $images = Image::when($request->keyword, function ($query) use ($request){
+          $query->orWhere('title_ar', 'LIKE', "%$request->keyword%")
+          ->orWhere('title_en', 'LIKE', "%$request->keyword%")
+          ->orWhere('desc', 'LIKE', "%$request->keyword%")
+          ->get();
+    })->whereNotNull('title_ar')
+      ->with('user:id,name')
+      ->paginate(10);
 
       return ImageResource::collection($images);
   }
